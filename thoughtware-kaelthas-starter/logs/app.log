@@ -4652,3 +4652,891 @@ io.thoughtware.core.exception.ApplicationException: script file not found,module
 2024-09-26 16:12:14.561 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
 2024-09-26 16:12:14.561 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
 2024-09-26 16:12:14.561 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:03:54.328 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:03:54.338 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 22840 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:03:54.338 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:03:55.215 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:03:55.352 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:03:55.354 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:03:56.378 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:03:56.386 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:03:56.386 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:03:56.386 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:03:56.488 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:03:56.488 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2112 ms
+2024-09-26 18:03:57.964 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:03:58.317 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:03:58.396 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:03:58.397 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:03:58.398 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:03:58.631 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:03:58.794 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:03:58.861 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:03:58.875 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:03:58.875 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:03:58.875 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:03:58.876 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:03:58.876 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:03:58.876 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:03:58.876 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4f3cd6f1
+2024-09-26 18:03:58.915 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:03:58.924 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:03:58.924 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:03:58.925 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:03:58.928 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:03:58.932 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:03:59.242 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:03:59.247 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$cd86982a.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:03:59.251 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.248 seconds (JVM running for 6.368)
+2024-09-26 18:06:43.629 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:06:43.631 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:06:43.650 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:06:43.650 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:06:43.651 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:06:43.651 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:06:46.752 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:06:46.766 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 24644 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:06:46.766 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:06:47.568 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:06:47.691 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:06:47.692 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:06:48.596 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:06:48.603 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:06:48.603 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:06:48.603 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:06:48.700 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:06:48.701 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1903 ms
+2024-09-26 18:06:50.185 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:06:50.501 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:06:50.576 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:06:50.576 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:06:50.578 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:06:50.787 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:06:50.926 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:06:50.974 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:06:50.981 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:06:50.981 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:06:50.982 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:06:50.982 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:06:50.982 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:06:50.982 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:06:50.982 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4f3cd6f1
+2024-09-26 18:06:51.022 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:06:51.031 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:06:51.032 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:06:51.032 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:06:51.036 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:06:51.042 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:06:51.311 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:06:51.317 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$cd86982a.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:06:51.321 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 4.856 seconds (JVM running for 5.428)
+2024-09-26 18:11:45.044 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:11:45.047 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:11:45.068 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:11:45.068 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:11:45.068 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:11:45.068 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:13:56.458 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:13:56.469 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 23696 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:13:56.469 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:13:57.869 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:13:57.997 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:13:57.998 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:13:58.947 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:13:58.956 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:13:58.956 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:13:58.956 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:13:59.057 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:13:59.057 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2557 ms
+2024-09-26 18:14:00.450 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:14:00.788 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:14:00.862 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:14:00.862 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:14:00.863 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:14:01.064 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:14:01.211 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:14:01.259 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:14:01.267 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:14:01.267 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:14:01.267 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:14:01.268 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:14:01.268 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:14:01.268 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:14:01.268 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@6c097c50
+2024-09-26 18:14:01.309 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:14:01.317 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:14:01.318 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:14:01.318 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:14:01.322 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:14:01.327 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:14:02.131 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:14:02.137 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$992d5a15.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:14:02.140 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.962 seconds (JVM running for 6.532)
+2024-09-26 18:14:10.646 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:14:10.649 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:14:10.668 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:14:10.668 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:14:10.668 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:14:10.668 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:23:00.115 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:23:00.128 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 22400 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:23:00.128 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:23:01.036 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:23:01.191 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:23:01.192 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:23:02.222 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:23:02.230 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:23:02.230 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:23:02.230 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:23:02.335 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:23:02.335 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2171 ms
+2024-09-26 18:23:03.783 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:23:04.116 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:23:04.194 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:23:04.194 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:23:04.195 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:23:04.424 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:23:04.577 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:23:04.630 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:23:04.639 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:23:04.639 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:23:04.640 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:23:04.640 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:23:04.640 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:23:04.640 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:23:04.641 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2d7df0d0
+2024-09-26 18:23:04.680 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:23:04.688 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:23:04.689 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:23:04.689 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:23:04.693 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:23:04.698 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:23:04.983 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:23:04.988 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$da49e142.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:23:04.992 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.18 seconds (JVM running for 6.306)
+2024-09-26 18:25:43.963 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:25:43.966 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:25:43.987 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:25:43.988 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:25:43.988 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:25:43.988 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:25:47.666 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:25:47.675 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 10424 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:25:47.676 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:25:48.523 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:25:48.664 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:25:48.665 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:25:49.632 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:25:49.641 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:25:49.641 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:25:49.641 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:25:49.739 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:25:49.739 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2029 ms
+2024-09-26 18:25:51.133 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:25:51.456 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:25:51.533 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:25:51.533 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:25:51.534 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:25:51.740 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:25:51.883 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:25:51.939 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:25:51.947 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:25:51.947 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:25:51.947 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:25:51.948 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:25:51.948 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:25:51.948 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:25:51.948 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2d7df0d0
+2024-09-26 18:25:51.985 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:25:51.994 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:25:51.995 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:25:51.995 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:25:51.999 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:25:52.004 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:25:52.284 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:25:52.289 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$da49e142.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:25:52.292 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 4.902 seconds (JVM running for 5.656)
+2024-09-26 18:28:38.420 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:28:38.423 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:28:38.444 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:28:38.444 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:28:38.444 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:28:38.444 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:28:42.379 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:28:42.387 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 12604 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:28:42.388 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:28:43.206 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:28:43.341 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:28:43.342 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:28:44.310 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:28:44.326 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:28:44.326 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:28:44.327 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:28:44.429 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:28:44.429 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2008 ms
+2024-09-26 18:28:45.984 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:28:46.319 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:28:46.397 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:28:46.397 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:28:46.398 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:28:46.622 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:28:46.778 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:28:46.827 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:28:46.834 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:28:46.834 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:28:46.835 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:28:46.835 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:28:46.835 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:28:46.835 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:28:46.836 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2d7df0d0
+2024-09-26 18:28:46.880 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:28:46.888 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:28:46.889 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:28:46.889 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:28:46.893 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:28:46.897 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:28:47.191 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:28:47.197 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$da49e142.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:28:47.200 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.135 seconds (JVM running for 5.795)
+2024-09-26 18:29:32.897 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26 18:29:32.897 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-09-26 18:29:32.899 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-09-26 18:29:33.050 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/inTrigger/findTriggerPage,remote:192.168.10.24
+2024-09-26 18:29:33.081 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/medium/getMediumAllList,remote:192.168.10.24
+2024-09-26 18:29:33.629 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetItem/findItemList,remote:192.168.10.24
+2024-09-26 18:29:33.629 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetItem/findItemList,remote:192.168.10.24
+2024-09-26 18:29:33.642 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetMonitor/findMonitorPage,remote:192.168.10.24
+2024-09-26 18:29:45.782 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetMonitor/createMonitor,remote:192.168.10.24
+2024-09-26 18:29:45.805 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetMonitor/findMonitorPage,remote:192.168.10.24
+2024-09-26 18:30:46.297 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:30:46.299 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:30:46.323 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:30:46.323 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:30:46.323 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:30:46.323 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:30:50.231 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:30:50.243 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 6460 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:30:50.244 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:30:51.080 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:30:51.219 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:30:51.220 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:30:52.178 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:30:52.192 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:30:52.192 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:30:52.192 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:30:52.295 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:30:52.295 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2018 ms
+2024-09-26 18:30:53.819 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:30:54.199 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:30:54.290 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:30:54.290 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:30:54.291 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:30:54.567 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:30:54.730 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:30:54.793 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:30:54.803 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:30:54.803 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:30:54.803 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:30:54.805 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:30:54.805 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:30:54.805 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:30:54.805 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@36987af5
+2024-09-26 18:30:54.855 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:30:54.865 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:30:54.866 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:30:54.866 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:30:54.873 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:30:54.878 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:30:55.242 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:30:55.247 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$fe6323ad.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:30:55.250 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.316 seconds (JVM running for 5.969)
+2024-09-26 18:31:09.168 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:31:09.170 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:31:09.191 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:31:09.191 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:31:09.191 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:31:09.191 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:31:39.874 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:31:39.885 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 15424 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:31:39.885 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:31:40.681 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:31:40.806 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:31:40.807 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:31:41.765 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:31:41.772 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:31:41.773 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:31:41.773 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:31:41.866 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:31:41.866 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1949 ms
+2024-09-26 18:31:43.232 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:31:43.557 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:31:43.631 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:31:43.632 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:31:43.632 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:31:43.831 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:31:43.976 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:31:44.026 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:31:44.033 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:31:44.034 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:31:44.034 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:31:44.035 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:31:44.035 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:31:44.035 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:31:44.035 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2d7df0d0
+2024-09-26 18:31:44.073 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:31:44.081 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:31:44.082 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:31:44.082 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:31:44.086 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:31:44.091 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:31:44.360 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:31:44.365 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$da49e142.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:31:44.368 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 4.777 seconds (JVM running for 5.342)
+2024-09-26 18:32:31.476 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:32:31.479 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:32:31.494 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:32:31.494 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:32:31.494 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:32:31.494 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:32:52.802 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:32:52.815 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 21520 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:32:52.816 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:32:53.645 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:32:53.773 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:32:53.774 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:32:54.690 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:32:54.697 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:32:54.698 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:32:54.698 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:32:54.800 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:32:54.800 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1952 ms
+2024-09-26 18:32:56.195 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:32:56.503 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:32:56.576 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:32:56.577 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:32:56.578 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:32:56.787 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:32:56.930 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:32:56.980 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:32:56.987 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:32:56.987 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:32:56.987 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:32:56.988 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:32:56.988 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:32:56.988 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:32:56.988 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@7d527572
+2024-09-26 18:32:57.031 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:32:57.041 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:32:57.042 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:32:57.043 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:32:57.050 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:32:57.057 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:32:57.333 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:32:57.339 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$1e1fb63b.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:32:57.342 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 4.818 seconds (JVM running for 5.374)
+2024-09-26 18:33:02.945 [pool-11-thread-1] ERROR o.s.s.support.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "io.thoughtware.kaelthas.switchs.model.SwitchMonitor.getInternetItemId()" is null
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService.executeSwitchHost(SwitchHostService.java:39)
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService$$FastClassBySpringCGLIB$$cd863ea6.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService$$EnhancerBySpringCGLIB$$4c426eee.executeSwitchHost(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-09-26 18:33:20.910 [pool-11-thread-1] ERROR o.s.s.support.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "io.thoughtware.kaelthas.switchs.model.SwitchMonitor.getInternetItemId()" is null
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService.executeSwitchHost(SwitchHostService.java:39)
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService$$FastClassBySpringCGLIB$$cd863ea6.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService$$EnhancerBySpringCGLIB$$4c426eee.executeSwitchHost(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-09-26 18:33:48.061 [pool-11-thread-1] ERROR o.s.s.support.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "io.thoughtware.kaelthas.switchs.model.SwitchMonitor.getInternetItemId()" is null
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService.executeSwitchHost(SwitchHostService.java:39)
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService$$FastClassBySpringCGLIB$$cd863ea6.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at io.thoughtware.kaelthas.switchs.service.SwitchHostService$$EnhancerBySpringCGLIB$$4c426eee.executeSwitchHost(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-09-26 18:33:54.503 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:33:54.505 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:33:54.525 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:33:54.525 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:33:54.526 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:33:54.526 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:34:24.574 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:34:24.588 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 4284 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:34:24.588 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:34:25.393 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:34:25.529 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:34:25.530 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:34:26.783 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:34:26.792 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:34:26.792 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:34:26.793 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:34:26.894 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:34:26.894 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2272 ms
+2024-09-26 18:34:30.708 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:34:30.720 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 13296 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:34:30.720 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:34:31.543 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:34:31.685 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:34:31.686 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:34:33.163 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:34:33.183 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:34:33.184 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:34:33.184 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:34:33.304 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:34:33.305 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2553 ms
+2024-09-26 18:34:34.759 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:34:35.087 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:34:35.163 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:34:35.164 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:34:35.165 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:34:35.389 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:34:35.536 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:34:35.586 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:34:35.593 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:34:35.594 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:34:35.594 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:34:35.594 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:34:35.595 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:34:35.595 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:34:35.595 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2d7df0d0
+2024-09-26 18:34:35.636 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:34:35.646 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:34:35.646 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:34:35.647 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:34:35.651 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:34:35.656 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:34:35.930 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:34:35.935 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$da49e142.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:34:35.939 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.508 seconds (JVM running for 6.055)
+2024-09-26 18:36:27.101 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:36:27.103 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:36:27.125 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:36:27.125 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:36:27.125 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:36:27.125 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-26 18:36:31.257 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-26 18:36:31.267 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 25100 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-26 18:36:31.267 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-26 18:36:32.073 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-26 18:36:32.198 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-26 18:36:32.198 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-26 18:36:33.146 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-26 18:36:33.154 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:36:33.155 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-26 18:36:33.155 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-26 18:36:33.255 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-26 18:36:33.255 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1955 ms
+2024-09-26 18:36:34.615 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-26 18:36:34.941 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-26 18:36:35.018 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-26 18:36:35.018 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-26 18:36:35.019 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-26 18:36:35.228 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-26 18:36:35.371 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-26 18:36:35.420 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-26 18:36:35.427 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-26 18:36:35.428 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-26 18:36:35.428 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-26 18:36:35.428 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-26 18:36:35.428 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-26 18:36:35.428 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-26 18:36:35.428 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2d7df0d0
+2024-09-26 18:36:35.469 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-26 18:36:35.479 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-26 18:36:35.480 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-26 18:36:35.480 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-26 18:36:35.484 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-26 18:36:35.490 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-26 18:36:35.759 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-26 18:36:35.764 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$da49e142.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-26 18:36:35.767 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 4.803 seconds (JVM running for 5.556)
+2024-09-26 18:37:05.367 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-09-26 18:37:05.369 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:37:05.390 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-09-26 18:37:05.390 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-09-26 18:37:05.391 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-09-26 18:37:05.391 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.

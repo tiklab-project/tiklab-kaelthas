@@ -1,24 +1,56 @@
-package com.io.thoughtware;
+package io.thoughtware.kaelthas.switchs.service;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.snmp4j.*;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import io.thoughtware.kaelthas.history.model.History;
+import io.thoughtware.kaelthas.switchs.dao.SwitchHostDao;
+import io.thoughtware.kaelthas.switchs.model.SwitchMonitor;
+import org.snmp4j.CommunityTarget;
+import org.snmp4j.PDU;
+import org.snmp4j.Snmp;
+import org.snmp4j.TransportMapping;
 import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.smi.*;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
-import org.snmp4j.smi.UdpAddress;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-public class SnmpPortInfoToJson {
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
+import java.util.LinkedList;
+import java.util.List;
+
+@Component
+public class SwitchHostService {
+
+    @Autowired
+    private SwitchHostDao switchHostDao;
+
+    private static final List<History> historyList = new LinkedList<>();
+
+    //使用定时任务获取配置信息,使用配置信息获取指标数据
+    @Scheduled(cron = "0/10 * * * * * ")
+    public void executeSwitchHost() {
+        //获取配置的信息,监控项的信息
+        List<SwitchMonitor> hostList = switchHostDao.findSwitchList();
+
+        for (SwitchMonitor switchMonitor : hostList) {
+
+            if ("301".equals(switchMonitor.getInternetItemId())) {
+                findInternetStatus(switchMonitor);
+            }
+        }
+
+    }
+
+    private static void findInternetStatus(SwitchMonitor switchMonitor) {
         try {
             // 创建 TransportMapping 实例
             TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping();
             transport.listen();
 
             // 设置目标（交换机的 IP 地址、端口号和社区名）
-            Address targetAddress = GenericAddress.parse("udp:172.10.1.1/161");
+            Address targetAddress = GenericAddress.parse("udp:" + switchMonitor.getIp() + "/" + switchMonitor.getPort());
             CommunityTarget target = new CommunityTarget();
             target.setCommunity(new OctetString("public"));
             target.setAddress(targetAddress);
@@ -76,7 +108,7 @@ public class SnmpPortInfoToJson {
                         portInfo.put("status", status);
 
                         // 将当前端口信息加入 JSON 数组
-                        portArray.put(portInfo);
+                        portArray.add(portInfo);
 
                         // 更新 PDU 以获取下一个端口
                         pduDescr.setRequestID(null);
@@ -89,16 +121,13 @@ public class SnmpPortInfoToJson {
                     }
                 }
             }
-            snmp.close();
 
-            System.out.println(portArray.toString(4));  // 格式化输出，缩进4个空格
+            snmp.close();
+            System.out.println(portArray);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
-
     }
+
 }

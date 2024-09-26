@@ -1,7 +1,7 @@
-package io.thoughtware.kealthas.switchs.model;
+package io.thoughtware.kaelthas.switchs.model;
 
 import io.thoughtware.core.page.Page;
-public class SwitchHost {
+public class SwitchMonitor {
 
     /**
      * id
@@ -11,7 +11,7 @@ public class SwitchHost {
     /**
      * 数据源id
      */
-    private String kuId;
+    private String internetId;
 
     /**
      * 监控项名称
@@ -32,7 +32,7 @@ public class SwitchHost {
     /**
      * dbitem表的id
      */
-    private String kuItemId;
+    private String internetItemId;
 
     /**
      * 模板复制的时候使用,将本表的监控项复制一份出来
@@ -77,12 +77,12 @@ public class SwitchHost {
         this.id = id;
     }
 
-    public String getKuId() {
-        return kuId;
+    public String getInternetId() {
+        return internetId;
     }
 
-    public void setKuId(String kuId) {
-        this.kuId = kuId;
+    public void setInternetId(String internetId) {
+        this.internetId = internetId;
     }
 
     public String getName() {
@@ -109,12 +109,12 @@ public class SwitchHost {
         this.status = status;
     }
 
-    public String getKuItemId() {
-        return kuItemId;
+    public String getInternetItemId() {
+        return internetItemId;
     }
 
-    public void setKuItemId(String kuItemId) {
-        this.kuItemId = kuItemId;
+    public void setInternetItemId(String internetItemId) {
+        this.internetItemId = internetItemId;
     }
 
     public String getMonitorId() {
@@ -196,5 +196,4 @@ public class SwitchHost {
     public void setPageParam(Page pageParam) {
         this.pageParam = pageParam;
     }
-
 }
