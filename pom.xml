@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.thoughtware</groupId>
+        <artifactId>thoughtware-dependencies</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>thoughtware-kaelthas</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+    <version>1.0.1-SNAPSHOT</version>
+
+    <modules>
+        <module>thoughtware-kaelthas-api</module>
+        <module>thoughtware-kaelthas-server</module>
+        <module>thoughtware-kaelthas-starter</module>
+        <module>thoughtware-kaelthas-agent</module>
+    </modules>
+
+    <properties>
+
+        <!--thoughtware-->
+        <thoughtware-dal.version>1.0.0</thoughtware-dal.version>
+        <thoughtware-core.version>1.0.0</thoughtware-core.version>
+        <thoughtware-toolkit.version>1.0.0</thoughtware-toolkit.version>
+        <thoughtware-rpc.version>1.0.0</thoughtware-rpc.version>
+        <thoughtware-dss.version>1.0.0</thoughtware-dss.version>
+        <thoughtware-dsm.version>1.0.0</thoughtware-dsm.version>
+        <thoughtware-dcs.version>1.0.0</thoughtware-dcs.version>
+        <thoughtware-dfs.version>1.0.0</thoughtware-dfs.version>
+        <thoughtware-codegen.version>1.0.0</thoughtware-codegen.version>
+        <thoughtware-gateway.version>1.0.1-SNAPSHOT</thoughtware-gateway.version>
+        <thoughtware-openapi.version>1.0.0-SNAPSHOT</thoughtware-openapi.version>
+
+        <thoughtware-user.version>1.0.1-SNAPSHOT</thoughtware-user.version>
+        <thoughtware-message.version>1.0.1-SNAPSHOT</thoughtware-message.version>
+        <thoughtware-security.version>1.0.1-SNAPSHOT</thoughtware-security.version>
+        <thoughtware-todotask.version>1.0.1-SNAPSHOT</thoughtware-todotask.version>
+        <thoughtware-licence.version>1.0.1-SNAPSHOT</thoughtware-licence.version>
+        <thoughtware-privilege.version>1.0.1-SNAPSHOT</thoughtware-privilege.version>
+        <thoughtware-eam.version>1.0.1-SNAPSHOT</thoughtware-eam.version>
+
+        <thoughtware-postgresql.version>1.0.3-SNAPSHOT</thoughtware-postgresql.version>
+        <thoughtware-jdk.version>1.0.0</thoughtware-jdk.version>
+        <thoughtware-spotbugs.version>1.0.0</thoughtware-spotbugs.version>
+        <thoughtware-opensca.version>1.0.0</thoughtware-opensca.version>
+        <thoughtware-install-starter.version>1.0.2-SNAPSHOT</thoughtware-install-starter.version>
+
+        <!--other-->
+        <commons-lang3.version>3.10</commons-lang3.version>
+        <jsch.version>0.2.7</jsch.version>
+        <quartz.version>2.3.2</quartz.version>
+        <quartz-spring-boot.version>3.1.1</quartz-spring-boot.version>
+        <tomcat-annotations-api.version>9.0.54</tomcat-annotations-api.version>
+        <commons-compress>1.21</commons-compress>
+        <junit.junit.version>4.13.1</junit.junit.version>
+
+
+    </properties>
+
+</project>

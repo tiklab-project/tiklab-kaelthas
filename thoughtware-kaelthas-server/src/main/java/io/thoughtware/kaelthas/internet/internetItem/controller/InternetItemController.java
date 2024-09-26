@@ -1,0 +1,30 @@
+package io.thoughtware.kaelthas.internet.internetItem.controller;
+
+import io.thoughtware.core.Result;
+import io.thoughtware.kaelthas.internet.internetItem.model.InternetItem;
+import io.thoughtware.kaelthas.internet.internetItem.service.InternetItemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RequestMapping("/internetItem")
+@RestController
+public class InternetItemController {
+
+    @Autowired
+    private InternetItemService internetItemService;
+
+    /**
+     * 根据类型查询对应的item
+     */
+    @RequestMapping(value = "/findItemList",method = RequestMethod.POST)
+    public Result<?> findItemList(@RequestBody InternetItem internetItem){
+        List<InternetItem> itemList = internetItemService.findItemList(internetItem);
+        return Result.ok(itemList);
+    }
+
+}

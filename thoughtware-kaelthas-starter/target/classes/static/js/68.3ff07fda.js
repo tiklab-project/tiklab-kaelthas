@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[68],{1129:function(e,n,o){"use strict";o.r(n);var t=o(0),c=o.n(t),r=o(63);n.default=Object(r.h)((function(){return c.a.createElement("div",{__source:{fileName:"D:\\code\\companycode\\xmonitor\\thoughtware-kaelthas-ui\\src\\setting\\MonitorItem\\components\\MonitorItem.js",lineNumber:6,columnNumber:9}})}))}}]);
