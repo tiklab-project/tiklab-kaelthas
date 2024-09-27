@@ -26,6 +26,9 @@ import io.thoughtware.kaelthas.common.util.SqlUtil;
 import io.thoughtware.kaelthas.host.trigger.model.Trigger;
 import io.thoughtware.kaelthas.host.trigger.service.TriggerService;
 import io.thoughtware.kaelthas.common.util.ConversionDateUtil;
+import io.thoughtware.kaelthas.internet.internetGraphics.model.InternetGraphics;
+import io.thoughtware.kaelthas.internet.internetGraphics.service.InternetGraphicsService;
+import io.thoughtware.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
 import io.thoughtware.kaelthas.kubernetes.kubernetesGraphics.entity.KuGraphics;
 import io.thoughtware.kaelthas.kubernetes.kubernetesGraphics.service.KuGraphicsService;
 import io.thoughtware.kaelthas.kubernetes.kubernetesGraphicsMonitor.model.KuGraphicsMonitor;
@@ -83,6 +86,9 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Autowired
     private KuGraphicsMonitorService kuGraphicsMonitorService;
+
+    @Autowired
+    private InternetGraphicsService internetGraphicsService;
 
     @Override
     public Pagination<History> findInformationPage(History history) {
@@ -244,18 +250,6 @@ public class HistoryServiceImpl implements HistoryService {
         } else {
 
             List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 4);
-
-            /*List<History> histories = historyMultiDao.findHistoryByFifteenTime(history);
-
-            List<List<History>> list1 = histories
-                    .stream()
-                    .collect(Collectors.groupingBy(History::getMonitorId))
-                    .values()
-                    .stream()
-                    .map(list -> list.stream()
-                            .sorted(Comparator.comparing(History::getGatherTime))
-                            .collect(Collectors.toList())
-                    ).toList();*/
 
             //2.根据查询出的图表,分别查询出图表中对应的监控项数据
             for (Graphics graphics : graphicsList) {
@@ -496,7 +490,9 @@ public class HistoryServiceImpl implements HistoryService {
 
         String hostId = history.getHostId();
         //查询最近五分钟有没有这个主机的数据,如果没有的话就说明这个主机没有数据上报,修改状态为不可用
-        List<History> histories = historyDao.findHistoryByCondition(hostId);
+        String beforeTime = ConversionDateUtil.findLocalDateTime(2, 5, null);
+        String nowTime = ConversionDateUtil.findLocalDateTime(2, 0, null);
+        List<History> histories = historyDao.findHistoryByCondition(history,beforeTime,nowTime);
 
         if (histories.isEmpty()) {
             //修改主机状态为2
@@ -924,7 +920,11 @@ public class HistoryServiceImpl implements HistoryService {
     public void findHistoryByDb(DbInfo dbInfo) {
         try {
             //查询出如果有数据的话修改状态为1,否则为0
-            List<History> historyByCondition = historyDao.findHistoryByCondition(dbInfo.getId());
+            History history = new History();
+            history.setHostId(dbInfo.getId());
+            String beforeTime = ConversionDateUtil.findLocalDateTime(2, 5, null);
+            String nowTime = ConversionDateUtil.findLocalDateTime(2, 0, null);
+            List<History> historyByCondition = historyDao.findHistoryByCondition(history,beforeTime,nowTime);
             if (historyByCondition.isEmpty()) {
                 dbInfo.setUsability(0);
             } else {
@@ -1067,5 +1067,243 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<History> findKuHistoryByHostId(String kuId, String beforeTime) {
         return historyDao.findKuHistoryByHostId(kuId,beforeTime);
+    }
+
+    @Override
+    public List<List<History>> findInGraphicsLine(History history) {
+        //根据id查询图形列表
+        List<InternetGraphics> graphicsList = internetGraphicsService.findGraphicsList(history.getHostId());
+
+        List<List<History>> resList = new ArrayList<>();
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime beginLocalTime = LocalDateTime.parse(history.getBeginTime(), dateTimeFormatter);
+        LocalDateTime endLocalTime = LocalDateTime.parse(history.getEndTime(), dateTimeFormatter);
+        long minutes = Duration.between(beginLocalTime, endLocalTime).toMinutes();
+
+        if (minutes <= 5) {
+            List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 1);
+
+            //2.根据查询出的图表,分别查询出图表中对应的监控项数据
+            for (InternetGraphics graphics : graphicsList) {
+                //查询出每个图表下的监控项
+                List<InGraphicsMonitor> graphicsMonitors = internetGraphicsService.findGraphicsMonitors(graphics.getId());
+                if (graphicsMonitors.isEmpty()) {
+                    continue;
+                }
+                //根据监控项的ids查询监控项的数据
+                //查询每条监控项的数据集合
+                List<History> list = new LinkedList<>();
+                for (InGraphicsMonitor graphicsMonitor : graphicsMonitors) {
+
+                    List<History> reportList = new LinkedList<>();
+                    History history1 = new History();
+                    history.setMonitorId(graphicsMonitor.getMonitorId());
+                    List<History> historyList = historyDao.findHistoryByInMonitorId(history);
+
+                    history1.setGraphicsName(graphicsMonitor.getGraphicsName());
+                    if (!historyList.isEmpty()) {
+                        history1.setName(historyList.get(0).getMonitorName());
+//                        setTriggerService(historyList, history1);
+                    }
+
+                    for (String string : xTime) {
+                        History history3 = new History();
+                        history3.setGatherTime(string);
+                        history3.setReportData("null");
+                        for (History history2 : historyList) {
+                            if (string.equals(history2.getGatherTime())) {
+                                history3.setReportData(history2.getReportData());
+                            }
+                        }
+                        reportList.add(history3);
+                    }
+                    List<String> stringList2 = reportList.stream().sorted(Comparator.comparing(History::getGatherTime)).map(History::getReportData).toList();
+                    history1.setData(stringList2);
+                    history1.setDataTimes(xTime);
+                    if (StringUtils.isNotBlank(history1.getName())) {
+                        list.add(history1);
+                    }
+                }
+                if (!list.isEmpty()) {
+                    resList.add(list);
+                }
+            }
+        } else if (minutes <= 60) {
+            List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 2);
+
+            //2.根据查询出的图表,分别查询出图表中对应的监控项数据
+            for (InternetGraphics graphics : graphicsList) {
+                //查询出每个图表下的监控项
+                List<InGraphicsMonitor> graphicsMonitors = internetGraphicsService.findGraphicsMonitors(graphics.getId());
+                if (graphicsMonitors.isEmpty()) {
+                    continue;
+                }
+                //查询每条监控项的数据集合
+                List<History> list = new LinkedList<>();
+                for (InGraphicsMonitor graphicsMonitor : graphicsMonitors) {
+
+                    List<History> reportList = new LinkedList<>();
+                    History history1 = new History();
+                    history.setMonitorId(graphicsMonitor.getMonitorId());
+                    List<History> historyList = historyMultiDao.findInHistoryByOneTime(history);
+
+                    history1.setGraphicsName(graphicsMonitor.getGraphicsName());
+                    if (!historyList.isEmpty()) {
+                        history1.setName(historyList.get(0).getMonitorName());
+//                        setTriggerService(historyList, history1);
+                    }
+
+                    for (String string : xTime) {
+                        History history3 = new History();
+                        history3.setGatherTime(string);
+                        history3.setReportData("null");
+                        for (History history2 : historyList) {
+                            if (string.equals(history2.getGatherTime())) {
+                                history3.setReportData(history2.getReportData());
+                            }
+                        }
+                        reportList.add(history3);
+                    }
+                    List<String> stringList2 = reportList.stream().sorted(Comparator.comparing(History::getGatherTime)).map(History::getReportData).toList();
+                    history1.setData(stringList2);
+                    history1.setDataTimes(xTime);
+                    if (StringUtils.isNotBlank(history1.getName())) {
+                        list.add(history1);
+                    }
+                }
+                if (!list.isEmpty()) {
+                    resList.add(list);
+                }
+            }
+        } else if (minutes <= 720) {
+            List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 3);
+
+            //2.根据查询出的图表,分别查询出图表中对应的监控项数据
+            for (InternetGraphics graphics : graphicsList) {
+                //查询出每个图表下的监控项
+                List<InGraphicsMonitor> graphicsMonitors = internetGraphicsService.findGraphicsMonitors(graphics.getId());
+                //根据监控项的ids查询监控项的数据
+                //查询每条监控项的数据集合
+                List<History> list = new LinkedList<>();
+
+                for (InGraphicsMonitor graphicsMonitor : graphicsMonitors) {
+
+                    List<History> reportList = new LinkedList<>();
+                    History history1 = new History();
+                    history.setMonitorId(graphicsMonitor.getMonitorId());
+                    List<History> historyList = historyMultiDao.findInHistoryByFiveTime(history);
+
+                    history1.setGraphicsName(graphicsMonitor.getGraphicsName());
+
+                    if (!historyList.isEmpty()) {
+                        history1.setName(historyList.get(0).getMonitorName());
+//                        setTriggerService(historyList, history1);
+                        for (String string : xTime) {
+                            History history3 = new History();
+                            history3.setGatherTime(string);
+                            history3.setReportData("null");
+                            for (History history2 : historyList) {
+                                if (string.equals(history2.getGatherTime())) {
+                                    history3.setReportData(history2.getReportData());
+                                }
+                            }
+                            reportList.add(history3);
+                        }
+                    } else {
+                        continue;
+                    }
+
+                    List<String> stringList2 = reportList.stream().sorted(Comparator.comparing(History::getGatherTime)).map(History::getReportData).toList();
+                    history1.setData(stringList2);
+                    history1.setDataTimes(xTime);
+                    if (StringUtils.isNotBlank(history1.getName())) {
+                        list.add(history1);
+                    }
+                }
+                if (!list.isEmpty()) {
+                    resList.add(list);
+                }
+            }
+        } else {
+
+            List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 4);
+
+            //2.根据查询出的图表,分别查询出图表中对应的监控项数据
+            for (InternetGraphics graphics : graphicsList) {
+                //查询出每个图表下的监控项
+                List<InGraphicsMonitor> graphicsMonitorList = internetGraphicsService.findGraphicsMonitors(graphics.getId());
+                //根据监控项的ids查询监控项的数据
+                //查询每条监控项的数据集合
+                List<History> list = new LinkedList<>();
+
+                for (InGraphicsMonitor inGraphicsMonitor : graphicsMonitorList) {
+
+                    List<History> reportList = new LinkedList<>();
+                    History history1 = new History();
+                    history.setMonitorId(inGraphicsMonitor.getMonitorId());
+                    List<History> historyList = historyMultiDao.findInHistoryByFifteenTime(history);
+
+                    history1.setGraphicsName(inGraphicsMonitor.getGraphicsName());
+                    if (!historyList.isEmpty()) {
+                        history1.setName(historyList.get(0).getMonitorName());
+//                        setTriggerService(historyList, history1);
+                    }
+
+                    for (String string : xTime) {
+                        History history3 = new History();
+                        history3.setGatherTime(string);
+                        history3.setReportData("null");
+                        for (History history2 : historyList) {
+                            if (string.equals(history2.getGatherTime())) {
+                                history3.setReportData(history2.getReportData());
+                            }
+                        }
+                        reportList.add(history3);
+                    }
+                    List<String> stringList2 = reportList.stream().sorted(Comparator.comparing(History::getGatherTime)).map(History::getReportData).toList();
+                    history1.setData(stringList2);
+                    history1.setDataTimes(xTime);
+                    if (StringUtils.isNotBlank(history1.getName())) {
+                        list.add(history1);
+                    }
+                }
+                if (!list.isEmpty()) {
+                    resList.add(list);
+                }
+            }
+        }
+        return resList;
+    }
+
+    /**
+     * 查询出网络的详情页
+     */
+    @Override
+    public Map<String, Object> findInternetOverview(String internetId) {
+
+        Map<String,Object> map = new HashMap<>();
+
+        //将端口状态的信息转换成list放到map中
+        History history = new History();
+        history.setHostId(internetId);
+        history.setMonitorId("301");
+        List<History> list = historyDao.findHistoryByCondition(history,null,null);
+        if (!list.isEmpty()) {
+            String reportData = list.get(0).getReportData();
+            List<Map<String, Object>> mapList = JSON.parseObject(reportData, List.class);
+            map.put("podInfo",mapList);
+        }
+
+        History history2 = new History();
+        history2.setHostId(internetId);
+        history2.setMonitorId("304");
+        List<History> list2 = historyDao.findHistoryByCondition(history2,null,null);
+        if (!list2.isEmpty()) {
+            String reportData = list2.get(0).getReportData();
+            Map map1 = JSON.parseObject(reportData, Map.class);
+            map.put("systemInfo",map1);
+        }
+        return map;
     }
 }

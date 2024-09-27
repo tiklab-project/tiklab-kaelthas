@@ -21,6 +21,7 @@ public class InternetItemServiceImpl implements InternetItemService {
     public List<InternetItem> findItemList(InternetItem internetItem) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InternetItemEntity.class)
                 .eq("internetType", internetItem.getInternetType())
+                .eq("isOptional",internetItem.getIsOptional())
                 .get();
         List<InternetItemEntity> entityList = internetItemDao.findItemList(queryCondition);
 

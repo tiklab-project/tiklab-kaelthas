@@ -6,6 +6,8 @@ import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.smi.*;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +52,11 @@ public class SnmpTraffic {
 //                        i + 1, downlink, uplink);
             }
 
-            System.out.println("inOctetsSum = " + inOctetsSum);
-            System.out.println("outOctetsSum = " + outOctetsSum);
+            BigDecimal divide = new BigDecimal(inOctetsSum).divide(new BigDecimal(1000000000),2, RoundingMode.HALF_DOWN);
+            BigDecimal divide2 = new BigDecimal(outOctetsSum).divide(new BigDecimal(1000000000),2, RoundingMode.HALF_DOWN);
+
+            System.out.println("inOctetsSum = " + divide);
+            System.out.println("outOctetsSum = " + divide2);
 
             snmp.close();
 

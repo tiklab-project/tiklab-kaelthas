@@ -35,6 +35,11 @@ public class InternetItem {
      */
     private Integer reportType;
 
+    /**
+     * 数据是否能够被监控项使用
+     */
+    private Integer isOptional;
+
     private Page paramPage = new Page();
 
     public String getId() {
@@ -83,6 +88,14 @@ public class InternetItem {
 
     public void setReportType(Integer reportType) {
         this.reportType = reportType;
+    }
+
+    public Integer getIsOptional() {
+        return isOptional;
+    }
+
+    public void setIsOptional(Integer isOptional) {
+        this.isOptional = isOptional;
     }
 
     public Page getParamPage() {

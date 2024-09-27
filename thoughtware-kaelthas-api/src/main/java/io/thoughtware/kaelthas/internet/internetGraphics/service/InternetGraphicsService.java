@@ -3,6 +3,7 @@ package io.thoughtware.kaelthas.internet.internetGraphics.service;
 
 import io.thoughtware.core.page.Pagination;
 import io.thoughtware.kaelthas.internet.internetGraphics.model.InternetGraphics;
+import io.thoughtware.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface InternetGraphicsService {
     List<InternetGraphics> findGraphicsList(String internetId);
 
     void deleteGraphicsByInId(String id);
+
+    List<InGraphicsMonitor> findGraphicsMonitors(String id);
 }

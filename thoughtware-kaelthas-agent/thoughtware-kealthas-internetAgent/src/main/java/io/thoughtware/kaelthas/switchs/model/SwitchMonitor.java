@@ -196,4 +196,26 @@ public class SwitchMonitor {
     public void setPageParam(Page pageParam) {
         this.pageParam = pageParam;
     }
+
+    @Override
+    public String toString() {
+        return "SwitchMonitor{" +
+                "id='" + id + '\'' +
+                ", internetId='" + internetId + '\'' +
+                ", name='" + name + '\'' +
+                ", retentionTime=" + retentionTime +
+                ", status=" + status +
+                ", internetItemId='" + internetItemId + '\'' +
+                ", monitorId='" + monitorId + '\'' +
+                ", nameSpace='" + nameSpace + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", podName='" + podName + '\'' +
+                ", nodeName='" + nodeName + '\'' +
+                ", ip='" + ip + '\'' +
+                ", port=" + port +
+                ", apiToken='" + apiToken + '\'' +
+                ", expression='" + expression + '\'' +
+                ", pageParam=" + pageParam +
+                '}';
+    }
 }

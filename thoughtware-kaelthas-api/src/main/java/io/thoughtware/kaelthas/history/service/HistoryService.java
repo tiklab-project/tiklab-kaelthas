@@ -43,4 +43,8 @@ public interface HistoryService {
     List<History> findDbHistoryByHostId(String hostId,String beforeTime);
 
     List<History> findKuHistoryByHostId(String kuId, String beforeTime);
+
+    List<List<History>> findInGraphicsLine(History history);
+
+    Map<String, Object> findInternetOverview(String internetId);
 }

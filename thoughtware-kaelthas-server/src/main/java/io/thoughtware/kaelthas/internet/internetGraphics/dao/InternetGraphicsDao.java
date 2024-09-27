@@ -6,6 +6,7 @@ import io.thoughtware.dal.jpa.criterial.condition.DeleteCondition;
 import io.thoughtware.dal.jpa.criterial.condition.QueryCondition;
 import io.thoughtware.kaelthas.internet.internetGraphics.entity.InternetGraphicsEntity;
 import io.thoughtware.kaelthas.internet.internetGraphics.model.InternetGraphics;
+import io.thoughtware.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -58,5 +59,20 @@ public class InternetGraphicsDao {
 
     public void deleteGraphicsByInId(DeleteCondition deleteCondition) {
         jpaTemplate.delete(deleteCondition);
+    }
+
+    public List<InGraphicsMonitor> findGraphicsMonitors(String id) {
+        String sql = """
+                SELECT mt.name as graphicsName,mgm.*
+                FROM mtc_internet_graphics mt
+                JOIN mtc_internet_graphics_monitor mgm
+                ON mt.id = mgm.graphics_id
+                """;
+
+        if (StringUtils.isNotBlank(id)) {
+            sql = sql.concat("\nwhere mt.id = '" + id + "'");
+        }
+
+        return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(InGraphicsMonitor.class));
     }
 }

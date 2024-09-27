@@ -63,48 +63,6 @@ public class HistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }
 
-
-    public List<History> findInformationByMonitorId(History history) {
-        String sql = "select * from mtc_history \n";
-
-        if (StringUtils.isNotBlank(history.getHostId())) {
-            sql = sql.concat(" where host_id = '" + history.getHostId() + "'");
-        }
-
-        sql = sql.concat(" and report_type in('1','3','4')");
-
-        if (StringUtils.isNotBlank(history.getDataCategories())) {
-            sql = sql.concat(" and data_categories = '" + history.getDataCategories() + "'");
-        }
-
-        if (history.getMonitorIdList() != null && !history.getMonitorIdList().isEmpty()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < history.getMonitorIdList().size(); i++) {
-                stringBuilder.append("'").append(history.getMonitorIdList().get(i)).append("'");
-                if (i != history.getMonitorIdList().size() - 1) {
-                    stringBuilder.append(",");
-                }
-            }
-            sql = sql.concat(" and monitor_id in (" + stringBuilder + ")");
-        } else {
-            if (StringUtils.isNotBlank(history.getDataCate())) {
-                sql = sql.concat(" and data_categories = '" + history.getDataCate() + "'");
-            }
-        }
-
-        if (StringUtils.isNotBlank(history.getBeginTime())) {
-            sql = sql.concat(" and gather_time >= '" + history.getBeginTime() + "'");
-        }
-
-        if (StringUtils.isNotBlank(history.getEndTime())) {
-            sql = sql.concat(" and gather_time <= '" + history.getEndTime() + "'");
-        }
-
-        sql = sql.concat(" order by gather_time desc");
-
-        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
-    }
-
     public List<History> findInformationToGatherTime(String hostId, String beforeDateTime) {
         String sql = """
                 SELECT mh.*,mki.report_type as reportType
@@ -133,19 +91,27 @@ public class HistoryDao {
     }
 
 
-    public List<History> findHistoryByCondition(String hostId) {
-        String beforeTime = ConversionDateUtil.findLocalDateTime(2, 5, null);
-        String nowTime = ConversionDateUtil.findLocalDateTime(2, 0, null);
+    public List<History> findHistoryByCondition(History history, String beforeTime, String nowTime) {
 
-        String sql = "select * from mtc_history";
+        String sql = "select * from mtc_history where 1=1";
 
-        sql = sql.concat(" where host_id = '" + hostId + "'");
+        if (StringUtils.isNotBlank(history.getHostId())) {
+            sql = sql.concat(" and host_id = '" + history.getHostId() + "'");
+        }
 
-        sql = sql.concat(" and gather_time >= '" + beforeTime + "'");
+        if (StringUtils.isNotBlank(history.getMonitorId())) {
+            sql = sql.concat(" and monitor_id = '" + history.getMonitorId() + "'");
+        }
 
-        sql = sql.concat(" and gather_time <= '" + nowTime + "'");
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and gather_time >= '" + beforeTime + "'");
+        }
 
-        sql = sql.concat(" limit 1");
+        if (StringUtils.isNotBlank(nowTime)) {
+            sql = sql.concat(" and gather_time <= '" + nowTime + "'");
+        }
+
+        sql = sql.concat(" order by gather_time desc limit 1");
 
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
 
@@ -339,6 +305,37 @@ public class HistoryDao {
         }
 
         sql = sql.concat(" and mdi.report_type != 2 order by mh.gather_time desc limit 28");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
+    }
+
+    public List<History> findHistoryByInMonitorId(History history) {
+        String sql = """
+                select mkm.name monitorName,mki.expression,mh.*
+                from mtc_internet_monitor mkm
+                JOIN mtc_internet_item mki
+                ON mkm.internet_item_id = mki.id
+                LEFT JOIN mtc_history mh
+                ON mh.monitor_id = mkm.id
+                """;
+
+        if (StringUtils.isNotBlank(history.getBeginTime())) {
+            sql = sql.concat(" and mh.gather_time >= '" + history.getBeginTime() + "'");
+        }
+
+        if (StringUtils.isNotBlank(history.getEndTime())) {
+            sql = sql.concat(" and mh.gather_time <= '" + history.getEndTime() + "'");
+        }
+
+        if (StringUtils.isNotBlank(history.getHostId())) {
+            sql = sql.concat(" where mkm.internet_id = '" + history.getHostId() + "'");
+        }
+
+        if (StringUtils.isNotBlank(history.getMonitorId())) {
+            sql = sql.concat(" and mkm.id = '" + history.getMonitorId() + "'");
+        }
+
+        sql = sql.concat(" order by mh.gather_time desc");
 
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }

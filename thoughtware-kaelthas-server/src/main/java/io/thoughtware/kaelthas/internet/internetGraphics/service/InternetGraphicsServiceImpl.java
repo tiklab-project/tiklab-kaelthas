@@ -9,6 +9,7 @@ import io.thoughtware.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.thoughtware.kaelthas.internet.internetGraphics.dao.InternetGraphicsDao;
 import io.thoughtware.kaelthas.internet.internetGraphics.entity.InternetGraphicsEntity;
 import io.thoughtware.kaelthas.internet.internetGraphics.model.InternetGraphics;
+import io.thoughtware.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
 import io.thoughtware.kaelthas.internet.internetGraphicsMonitor.service.InGraphicsMonitorService;
 import io.thoughtware.toolkit.beans.BeanMapper;
 import org.apache.commons.lang3.StringUtils;
@@ -102,5 +103,10 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
                 .eq("internetId", id)
                 .get();
         internetGraphicsDao.deleteGraphicsByInId(deleteCondition);
+    }
+
+    @Override
+    public List<InGraphicsMonitor> findGraphicsMonitors(String id) {
+        return internetGraphicsDao.findGraphicsMonitors(id);
     }
 }

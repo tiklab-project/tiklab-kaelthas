@@ -42,6 +42,9 @@ public class InternetItemEntity {
     @Column(name = "report_type")
     private Integer reportType;
 
+    @Column(name = "is_optional")
+    private Integer isOptional;
+
     public String getId() {
         return id;
     }
@@ -88,5 +91,13 @@ public class InternetItemEntity {
 
     public void setReportType(Integer reportType) {
         this.reportType = reportType;
+    }
+
+    public Integer getIsOptional() {
+        return isOptional;
+    }
+
+    public void setIsOptional(Integer isOptional) {
+        this.isOptional = isOptional;
     }
 }

@@ -26,4 +26,13 @@ public class SwitchHostDao {
                 """;
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(SwitchMonitor.class));
     }
+
+    public List<SwitchMonitor> findAllInternetList(){
+        String sql = """
+                SELECT *
+                FROM mtc_internet
+                LIMIT 100
+                """;
+        return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(SwitchMonitor.class));
+    }
 }

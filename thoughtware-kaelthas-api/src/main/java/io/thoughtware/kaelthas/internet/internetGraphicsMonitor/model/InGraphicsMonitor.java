@@ -15,6 +15,8 @@ public class InGraphicsMonitor {
 
     private String monitorId;
 
+    private String graphicsName;
+
     public String getId() {
         return id;
     }
@@ -39,4 +41,11 @@ public class InGraphicsMonitor {
         this.monitorId = monitorId;
     }
 
+    public String getGraphicsName() {
+        return graphicsName;
+    }
+
+    public void setGraphicsName(String graphicsName) {
+        this.graphicsName = graphicsName;
+    }
 }

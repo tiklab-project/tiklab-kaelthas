@@ -3,8 +3,10 @@ package io.thoughtware.kaelthas.switchs.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import io.thoughtware.kaelthas.history.model.History;
+import io.thoughtware.kaelthas.history.service.HistoryService;
 import io.thoughtware.kaelthas.switchs.dao.SwitchHostDao;
 import io.thoughtware.kaelthas.switchs.model.SwitchMonitor;
+import io.thoughtware.kaelthas.switchs.utils.ConversionAllTypeUtil;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
@@ -17,6 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,25 +31,126 @@ public class SwitchHostService {
     @Autowired
     private SwitchHostDao switchHostDao;
 
+    @Autowired
+    private HistoryService historyService;
+
     private static final List<History> historyList = new LinkedList<>();
 
     //使用定时任务获取配置信息,使用配置信息获取指标数据
-    @Scheduled(cron = "0/10 * * * * * ")
+    @Scheduled(cron = "0/60 * * * * * ")
     public void executeSwitchHost() {
         //获取配置的信息,监控项的信息
+        String dataTimeNow = ConversionAllTypeUtil.getDataTimeNow();
+
         List<SwitchMonitor> hostList = switchHostDao.findSwitchList();
 
         for (SwitchMonitor switchMonitor : hostList) {
+            History history = new History();
+            history.setHostId(switchMonitor.getId());
+            history.setMonitorId(switchMonitor.getMonitorId());
+            history.setGatherTime(dataTimeNow);
 
-            if ("301".equals(switchMonitor.getInternetItemId())) {
-                findInternetStatus(switchMonitor);
+            switch (switchMonitor.getInternetItemId()){
+                case "301":
+                    findInternetStatus(switchMonitor,history);
+                    break;
+                case "302":
+                    findInOctets(switchMonitor,history);
+                    break;
+                case "303":
+                    findOutOctets(switchMonitor,history);
+                    break;
             }
+        }
+
+        if (historyList.size() > 5) {
+            List<History> list = new LinkedList<>(historyList);
+            historyService.insertForList(list);
+            historyList.clear();
         }
 
     }
 
-    private static void findInternetStatus(SwitchMonitor switchMonitor) {
+    private void findOutOctets(SwitchMonitor switchMonitor, History history) {
         try {
+
+            TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping();
+            transport.listen();
+
+            Address targetAddress = GenericAddress.parse("udp:"+switchMonitor.getIp()+"/"+switchMonitor.getPort());
+            CommunityTarget target = new CommunityTarget();
+            target.setCommunity(new OctetString("public"));
+            target.setAddress(targetAddress);
+            target.setRetries(2);
+            target.setTimeout(1500);
+            target.setVersion(SnmpConstants.version1);
+
+            Snmp snmp = new Snmp(transport);
+
+            long inOctetsSum = 0;
+
+            List<Long> inOctetsList = getInOctets(snmp, target);
+
+            for (int i = 0; i < inOctetsList.size(); i++) {
+                long inOctets = inOctetsList.get(i);
+
+                inOctetsSum += inOctets;
+
+            }
+
+            snmp.close();
+
+            BigDecimal divide = new BigDecimal(inOctetsSum).divide(new BigDecimal(1000000000),2, RoundingMode.FLOOR);
+
+            history.setReportData(divide.toString());
+            historyList.add(history);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void findInOctets(SwitchMonitor switchMonitor, History history) {
+        try {
+
+            TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping();
+            transport.listen();
+
+            Address targetAddress = GenericAddress.parse("udp:"+switchMonitor.getIp()+"/"+switchMonitor.getPort());
+            CommunityTarget target = new CommunityTarget();
+            target.setCommunity(new OctetString("public"));
+            target.setAddress(targetAddress);
+            target.setRetries(2);
+            target.setTimeout(1500);
+            target.setVersion(SnmpConstants.version1);
+
+            Snmp snmp = new Snmp(transport);
+
+            long outOctetsSum = 0;
+
+            List<Long> outOctetsList = getOutOctets(snmp, target);
+
+            for (int i = 0; i < outOctetsList.size(); i++) {
+
+                long outOctets = outOctetsList.get(i);
+
+                outOctetsSum += outOctets;
+
+            }
+            BigDecimal divide = new BigDecimal(outOctetsSum).divide(new BigDecimal(1000000000),2, RoundingMode.FLOOR);
+
+            history.setReportData(divide.toString());
+
+            snmp.close();
+            historyList.add(history);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void findInternetStatus(SwitchMonitor switchMonitor, History history) {
+        try {
+
             // 创建 TransportMapping 实例
             TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping();
             transport.listen();
@@ -123,11 +229,68 @@ public class SwitchHostService {
             }
 
             snmp.close();
-            System.out.println(portArray);
-
+            history.setReportData(portArray.toString());
+            historyList.add(history);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private static List<Long> getInOctets(Snmp snmp, CommunityTarget target) throws Exception {
+        List<Long> inOctetsList = new ArrayList<>();
+        PDU pdu = new PDU();
+        pdu.add(new VariableBinding(new OID("1.3.6.1.2.1.2.2.1.10"))); // ifInOctets OID
+        pdu.setType(PDU.GETNEXT);
+
+        boolean hasNext = true;
+        while (hasNext) {
+            ResponseEvent event = snmp.send(pdu, target);
+            PDU response = event.getResponse();
+
+            if (response == null) {
+                break;
+            } else {
+                VariableBinding vb = response.get(0);
+                OID nextOid = vb.getOid();
+
+                if (nextOid.startsWith(new OID("1.3.6.1.2.1.2.2.1.10"))) {
+                    inOctetsList.add(vb.getVariable().toLong());
+                    pdu.set(0, new VariableBinding(nextOid));
+                } else {
+                    hasNext = false;
+                }
+            }
+        }
+        return inOctetsList;
+    }
+
+    private static List<Long> getOutOctets(Snmp snmp, CommunityTarget target) throws Exception {
+        List<Long> outOctetsList = new ArrayList<>();
+        PDU pdu = new PDU();
+        pdu.add(new VariableBinding(new OID("1.3.6.1.2.1.2.2.1.16"))); // ifOutOctets OID
+        pdu.setType(PDU.GETNEXT);
+
+        boolean hasNext = true;
+        while (hasNext) {
+            ResponseEvent event = snmp.send(pdu, target);
+            PDU response = event.getResponse();
+
+            if (response == null) {
+                break;
+            } else {
+                VariableBinding vb = response.get(0);
+                OID nextOid = vb.getOid();
+
+                if (nextOid.startsWith(new OID("1.3.6.1.2.1.2.2.1.16"))) {
+                    outOctetsList.add(vb.getVariable().toLong());
+                    pdu.set(0, new VariableBinding(nextOid));
+                } else {
+                    hasNext = false;
+                }
+            }
+        }
+        return outOctetsList;
     }
 
 }
