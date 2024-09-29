@@ -47,4 +47,10 @@ public interface HistoryService {
     List<List<History>> findInGraphicsLine(History history);
 
     Map<String, Object> findInternetOverview(String internetId);
+
+    List<History> findInHistoryByHostId(String internetId, String beforeTime);
+
+    List<History> findInternetToGatherTime(String internetId, String beforeTime);
+
+    List<History> findHistoryByHostId(String id,String beforeTime);
 }

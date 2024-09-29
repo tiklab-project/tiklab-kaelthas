@@ -19,4 +19,6 @@ public interface InTriggerService {
 
     //根据网络id查询出网络下的触发器集合
     List<String> findTriggerByInId(String internetId);
+
+    List<InTrigger> findLikeTrigger(String hostId, String expression);
 }

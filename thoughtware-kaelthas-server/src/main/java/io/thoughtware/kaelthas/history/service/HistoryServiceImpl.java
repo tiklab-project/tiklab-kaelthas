@@ -29,6 +29,8 @@ import io.thoughtware.kaelthas.common.util.ConversionDateUtil;
 import io.thoughtware.kaelthas.internet.internetGraphics.model.InternetGraphics;
 import io.thoughtware.kaelthas.internet.internetGraphics.service.InternetGraphicsService;
 import io.thoughtware.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
+import io.thoughtware.kaelthas.internet.internetTrigger.model.InTrigger;
+import io.thoughtware.kaelthas.internet.internetTrigger.service.InTriggerService;
 import io.thoughtware.kaelthas.kubernetes.kubernetesGraphics.entity.KuGraphics;
 import io.thoughtware.kaelthas.kubernetes.kubernetesGraphics.service.KuGraphicsService;
 import io.thoughtware.kaelthas.kubernetes.kubernetesGraphicsMonitor.model.KuGraphicsMonitor;
@@ -89,6 +91,9 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Autowired
     private InternetGraphicsService internetGraphicsService;
+
+    @Autowired
+    private InTriggerService inTriggerService;
 
     @Override
     public Pagination<History> findInformationPage(History history) {
@@ -1002,6 +1007,72 @@ public class HistoryServiceImpl implements HistoryService {
         }
     }
 
+    //部分触发告警的数据变颜色,在前端提示出来
+    private void InternetColorLine(List<History> histories, History information) {
+        //根据监控项查询监控项的阈值
+        String expression = histories.get(0).getExpression();
+        if (StringUtils.isBlank(expression)) {
+            return;
+        }
+        //根据表达式查询触发器表达式
+        List<InTrigger> triggerList = inTriggerService.findLikeTrigger(histories.get(0).getHostId(), expression);
+
+        if (!triggerList.isEmpty()) {
+            String triggerExe = triggerList.get(0).getExpression();
+            if (StringUtils.isNotBlank(triggerExe)) {
+                //遍历所有合适的触发器,将多条件的触发器进行拆解
+                List<Map<String, String>> mapList = new LinkedList<>();
+                for (InTrigger trigger : triggerList) {
+                    //触发器中有&&和||的匹配符,需要根据这两类进行分隔
+                    if (StringUtils.isNotBlank(trigger.getExpression())) {
+                        String[] conditions = trigger.getExpression().split("(&&|\\|\\|)");
+                        for (String condition : conditions) {
+                            if (condition.contains(expression)) {
+                                Map<String, String> map = new HashMap<>();
+                                if (StringUtils.isBlank(condition)) {
+                                    // 添加空值检查
+                                    return;
+                                }
+
+                                Pattern pattern = Pattern.compile("\\{\\{(.+?)\\}\\}");
+                                Matcher matcher = pattern.matcher(condition);
+
+                                while (matcher.find()) {
+                                    map.put("expression", matcher.group(1));
+                                }
+
+                                Pattern pattern2 = Pattern.compile("\\[(.+?)]");
+                                Matcher matcher2 = pattern2.matcher(condition);
+
+                                while (matcher2.find()) {
+                                    map.put("value", matcher2.group(1));
+                                }
+
+                                String substring = condition.substring(condition.indexOf("}}") + 2);
+                                String substring1 = substring.substring(0, substring.indexOf("[")).trim();
+                                map.put("operator", substring1);
+                                map.put("problem", trigger.getDescribe());
+                                mapList.add(map);
+                            }
+                        }
+                    }
+                }
+
+                information.setMapList(mapList);
+                //获取[]中的值
+                String value1 = ConversionScriptsUtils.getValue(triggerExe);
+
+                //获取表达式关系,>,>=,<,<=,=,!=
+                String substring = triggerExe.substring(triggerExe.indexOf("}}") + 2);
+                String substring1 = substring.substring(0, substring.indexOf("["));
+
+                information.setReportData(value1);
+                information.setExpression(substring1);
+                information.setProblem(triggerList.get(0).getDescribe());
+            }
+        }
+    }
+
     @Override
     public Map<String, Object> findKuOverviewTotal(String kuId) {
         Map<String, Object> map = new HashMap<>();
@@ -1104,7 +1175,7 @@ public class HistoryServiceImpl implements HistoryService {
                     history1.setGraphicsName(graphicsMonitor.getGraphicsName());
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-//                        setTriggerService(historyList, history1);
+                        InternetColorLine(historyList, history1);
                     }
 
                     for (String string : xTime) {
@@ -1151,7 +1222,7 @@ public class HistoryServiceImpl implements HistoryService {
                     history1.setGraphicsName(graphicsMonitor.getGraphicsName());
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-//                        setTriggerService(historyList, history1);
+                        InternetColorLine(historyList, history1);
                     }
 
                     for (String string : xTime) {
@@ -1198,7 +1269,7 @@ public class HistoryServiceImpl implements HistoryService {
 
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-//                        setTriggerService(historyList, history1);
+                        InternetColorLine(historyList, history1);
                         for (String string : xTime) {
                             History history3 = new History();
                             history3.setGatherTime(string);
@@ -1247,7 +1318,7 @@ public class HistoryServiceImpl implements HistoryService {
                     history1.setGraphicsName(inGraphicsMonitor.getGraphicsName());
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-//                        setTriggerService(historyList, history1);
+                        InternetColorLine(historyList, history1);
                     }
 
                     for (String string : xTime) {
@@ -1305,5 +1376,20 @@ public class HistoryServiceImpl implements HistoryService {
             map.put("systemInfo",map1);
         }
         return map;
+    }
+
+    @Override
+    public List<History> findInHistoryByHostId(String internetId, String beforeTime) {
+        return historyDao.findInHistoryByHostId(internetId,beforeTime);
+    }
+
+    @Override
+    public List<History> findInternetToGatherTime(String internetId, String beforeTime) {
+        return historyDao.findInternetToGatherTime(internetId,beforeTime);
+    }
+
+    @Override
+    public List<History> findHistoryByHostId(String id,String beforeTime) {
+        return historyDao.findHistoryByHostId(id,beforeTime);
     }
 }

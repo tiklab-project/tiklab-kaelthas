@@ -20,7 +20,5 @@ public interface DbTriggerService {
 
     List<DbTrigger> findListByDbId(String hostId);
 
-    void insertAlarmForDbTrigger(List<History> histories);
-
     List<DbTrigger> findLikeTrigger(String hostId, String expression);
 }

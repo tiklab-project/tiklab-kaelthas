@@ -60,4 +60,12 @@ public class InTriggerDao {
     public List<InTriggerEntity> findTriggerByInId(QueryCondition queryCondition) {
         return jpaTemplate.findList(queryCondition, InTriggerEntity.class);
     }
+
+    public List<InTriggerEntity> findTriggerAll() {
+        return jpaTemplate.findAll(InTriggerEntity.class);
+    }
+
+    public List<InTriggerEntity> findLikeTrigger(QueryCondition queryCondition) {
+        return jpaTemplate.findList(queryCondition,InTriggerEntity.class);
+    }
 }

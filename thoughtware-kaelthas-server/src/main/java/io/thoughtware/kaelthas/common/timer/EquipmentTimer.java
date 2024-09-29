@@ -8,6 +8,8 @@ import io.thoughtware.kaelthas.history.model.History;
 import io.thoughtware.kaelthas.history.service.HistoryService;
 import io.thoughtware.kaelthas.host.host.model.Host;
 import io.thoughtware.kaelthas.host.host.service.HostService;
+import io.thoughtware.kaelthas.internet.internet.model.Internet;
+import io.thoughtware.kaelthas.internet.internet.service.InternetService;
 import io.thoughtware.kaelthas.kubernetes.kubernetesInfo.model.Kubernetes;
 import io.thoughtware.kaelthas.kubernetes.kubernetesInfo.service.KubernetesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class EquipmentTimer {
 
     @Autowired
     private KubernetesService kubernetesService;
+
+    @Autowired
+    private InternetService internetService;
 
     //定时扫描主机的状态
     @Scheduled(cron = "0 0/5 * * * ? ")
@@ -76,6 +81,28 @@ public class EquipmentTimer {
                 kubernetes.setUsability(1);
             }
             kubernetesService.updateKbInfo(kubernetes);
+        }
+    }
+
+    @Scheduled(cron = "0 0/5 * * * ?")
+    public void scanInternet(){
+        List<Internet> internetList = internetService.findAll();
+
+        if (internetList.isEmpty()) {
+            return;
+        }
+
+        String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
+
+        for (Internet internet : internetList) {
+
+            List<History> historyList = historyService.findHistoryByHostId(internet.getId(),beforeTime);
+            if (historyList.isEmpty()) {
+                internet.setUsability(0);
+            }else {
+                internet.setUsability(1);
+            }
+            internetService.updateInternet(internet);
         }
     }
 }

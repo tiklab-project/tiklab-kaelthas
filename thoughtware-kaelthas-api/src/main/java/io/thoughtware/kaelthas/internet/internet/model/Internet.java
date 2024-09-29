@@ -64,6 +64,10 @@ public class Internet {
      */
     private Integer port;
 
+    private Integer alarmNum;
+
+    private String message;
+
     //分页参数
     private Page paramPage = new Page();
 
@@ -137,6 +141,22 @@ public class Internet {
 
     public void setColor(Integer color) {
         this.color = color;
+    }
+
+    public Integer getAlarmNum() {
+        return alarmNum;
+    }
+
+    public void setAlarmNum(Integer alarmNum) {
+        this.alarmNum = alarmNum;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Page getParamPage() {

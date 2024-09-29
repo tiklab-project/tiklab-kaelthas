@@ -7,6 +7,8 @@ import io.thoughtware.dal.jpa.criterial.condition.QueryCondition;
 import io.thoughtware.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.thoughtware.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.thoughtware.kaelthas.alarm.entity.AlarmEntity;
+import io.thoughtware.kaelthas.internet.internet.model.Internet;
+import io.thoughtware.kaelthas.internet.internet.service.InternetService;
 import io.thoughtware.kaelthas.kubernetes.kubernetesInfo.model.Kubernetes;
 import io.thoughtware.kaelthas.kubernetes.kubernetesInfo.service.KubernetesService;
 import io.thoughtware.message.message.model.SendMessageNotice;
@@ -20,7 +22,6 @@ import io.thoughtware.kaelthas.alarm.dao.AlarmDao;
 import io.thoughtware.kaelthas.alarm.model.Alarm;
 import io.thoughtware.kaelthas.host.host.model.Host;
 import io.thoughtware.kaelthas.host.host.service.HostService;
-import io.thoughtware.kaelthas.host.messages.service.MessageService;
 import io.thoughtware.kaelthas.common.util.ConversionDateUtil;
 import io.thoughtware.kaelthas.host.triggerMedium.service.TriggerMediumService;
 import org.apache.commons.lang3.StringUtils;
@@ -43,9 +44,6 @@ public class AlarmServiceImpl implements AlarmService {
     TriggerMediumService triggerMediumService;
 
     @Autowired
-    MessageService messageService;
-
-    @Autowired
     SendMessageNoticeService sendMessageNoticeService;
 
     @Autowired
@@ -56,6 +54,9 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Autowired
     private KubernetesService kubernetesService;
+
+    @Autowired
+    private InternetService internetService;
 
     @Value(value = "${base.url}")
     private String baseUrl;
@@ -170,6 +171,47 @@ public class AlarmServiceImpl implements AlarmService {
             //发送消息的模块,进行消息发送
             Map<String, Object> map1 = new HashMap<>();
             map1.put("hostName", kuInfoById.getName());
+            map1.put("alarmInformation", map.getSendMessage());
+            sendMessage(map1);
+        } else {
+            //查询出已经存在的数据,根据当前时间计算出告警时长
+            AlarmEntity alarm1 = alarmList.get(0);
+            String gatherTime = alarm1.getAlertTime();
+
+            if (StringUtils.isBlank(gatherTime)) {
+                alarm1.setDuration("没有数据,无法计算时间");
+            } else {
+                //计算出相差的年月日时分秒
+                String string = ConversionDateUtil.formatToDateTime(gatherTime);
+                alarm1.setDuration(string);
+            }
+            //修改时间
+            alarmDao.updateAlarm(alarm1);
+        }
+    }
+
+    @Override
+    public void createAlarmForInternet(Alarm alarm) {
+        AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
+        Internet internetById = internetService.findInternetById(alarm.getHostId());
+        alarmEntity.setIp(internetById.getIp());
+        alarmEntity.setHostName(internetById.getName());
+        //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
+        QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
+                .eq("triggerId", alarm.getTriggerId())
+                .eq("hostId", alarm.getHostId())
+                .eq("status", 2)
+                .get();
+
+        List<AlarmEntity> alarmList = alarmDao.findListByHisId(queryCondition);
+
+        if (alarmList == null || alarmList.isEmpty()) {
+            String alarmId = alarmDao.createAlarm(alarmEntity);
+            Alarm map = BeanMapper.map(alarmEntity, Alarm.class);
+            map.setId(alarmId);
+            //发送消息的模块,进行消息发送
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("hostName", internetById.getName());
             map1.put("alarmInformation", map.getSendMessage());
             sendMessage(map1);
         } else {

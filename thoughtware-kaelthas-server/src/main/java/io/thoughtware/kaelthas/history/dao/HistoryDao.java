@@ -339,4 +339,70 @@ public class HistoryDao {
 
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }
+
+    public List<History> findInHistoryByHostId(String internetId, String beforeTime) {
+
+        String sql = """
+                SELECT mh.*,mdi.expression
+                FROM mtc_internet_monitor mdm
+                JOIN mtc_internet_item mdi
+                ON mdm.internet_item_id = mdi.id
+                LEFT JOIN mtc_history mh
+                ON mdm.id = mh.monitor_id
+                """;
+
+        if (StringUtils.isNotBlank(internetId)) {
+            sql = sql.concat(" where mh.host_id = '" + internetId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time > '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" and mdi.report_type = 1 order by mh.gather_time desc limit 2");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
+    }
+
+    public List<History> findInternetToGatherTime(String internetId, String beforeTime) {
+        String sql = """
+                SELECT mh.*,mdi.expression
+                FROM mtc_internet_monitor mdm
+                JOIN mtc_internet_item mdi
+                ON mdm.internet_item_id = mdi.id
+                LEFT JOIN mtc_history mh
+                ON mdm.id = mh.monitor_id
+                """;
+
+        if (StringUtils.isNotBlank(internetId)) {
+            sql = sql.concat(" where mh.host_id = '" + internetId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time > '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" and mdi.report_type = 1 order by mh.gather_time desc limit 2");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
+    }
+
+    public List<History> findHistoryByHostId(String id, String beforeTime) {
+        String sql = """
+                SELECT *
+                FROM mtc_history where 1=1
+                """;
+
+        if (StringUtils.isNotBlank(id)) {
+            sql = sql.concat(" and host_id = '" + id + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and gather_time >= '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" limit 1");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
+    }
 }

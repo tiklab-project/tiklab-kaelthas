@@ -43,16 +43,7 @@ public class InternetServiceImpl implements InternetService{
 
     @Override
     public Pagination<Internet> findInternetPage(Internet internet) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(InternetEntity.class)
-                .eq("id", internet.getId())
-                .like("name", internet.getName())
-                .pagination(internet.getParamPage())
-                .get();
-
-        Pagination<InternetEntity> pagination = internetDao.findInternetPage(queryCondition);
-
-        List<Internet> internets = BeanMapper.mapList(pagination.getDataList(), Internet.class);
-        return PaginationBuilder.build(pagination,internets);
+        return internetDao.findInternetPage(internet);
     }
 
     @Override
@@ -109,5 +100,11 @@ public class InternetServiceImpl implements InternetService{
     public Internet findInternetById(String id) {
         InternetEntity internetEntity = internetDao.findInternetById(id);
         return BeanMapper.map(internetEntity,Internet.class);
+    }
+
+    @Override
+    public List<Internet> findAll() {
+        List<InternetEntity> entityList = internetDao.findAll();
+        return BeanMapper.mapList(entityList,Internet.class);
     }
 }

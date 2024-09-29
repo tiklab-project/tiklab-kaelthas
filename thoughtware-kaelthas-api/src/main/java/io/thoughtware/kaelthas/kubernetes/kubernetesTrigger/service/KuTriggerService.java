@@ -21,6 +21,4 @@ public interface KuTriggerService {
 
     //根据kuId查询触发器信息
     List<KuTrigger> findKuTriggerByKuId(String id);
-
-    void createAlarmByTrigger(List<History> list);
 }

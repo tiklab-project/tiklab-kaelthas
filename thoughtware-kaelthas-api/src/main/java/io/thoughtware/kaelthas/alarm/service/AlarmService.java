@@ -36,4 +36,6 @@ public interface AlarmService {
     void createAlarmByDbMonitor(Alarm alarm);
 
     void createAlarmForKubernetes(Alarm alarm);
+
+    void createAlarmForInternet(Alarm alarm);
 }
