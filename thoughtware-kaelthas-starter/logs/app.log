@@ -3999,3 +3999,207 @@ io.thoughtware.core.exception.ApplicationException: script file not found,module
 2024-09-29 16:55:39.041 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
 2024-09-29 16:55:39.041 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
 2024-09-29 16:55:39.041 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-09-29 16:55:41.037 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-09-29 16:55:41.049 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 12664 (D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\thoughtware-kaelthas)
+2024-09-29 16:55:41.049 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-09-29 16:55:41.831 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.thoughtware.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-09-29 16:55:41.960 [main] INFO  io.thoughtware.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-09-29 16:55:41.961 [main] INFO  i.thoughtware.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\thoughtware-kaelthas\thoughtware-kaelthas-starter
+2024-09-29 16:55:42.852 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-09-29 16:55:42.865 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-29 16:55:42.865 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-29 16:55:42.866 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-09-29 16:55:42.960 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-09-29 16:55:42.960 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1879 ms
+2024-09-29 16:55:44.325 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-09-29 16:55:44.643 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-09-29 16:55:44.717 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-09-29 16:55:44.718 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-09-29 16:55:44.719 [main] INFO  i.t.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-09-29 16:55:44.918 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-09-29 16:55:45.059 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-09-29 16:55:45.112 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-09-29 16:55:45.119 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-09-29 16:55:45.119 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-09-29 16:55:45.119 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-09-29 16:55:45.120 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-09-29 16:55:45.120 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-09-29 16:55:45.120 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-09-29 16:55:45.120 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4609fe9d
+2024-09-29 16:55:45.156 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-29 16:55:45.171 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-29 16:55:45.172 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-09-29 16:55:45.172 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-09-29 16:55:45.176 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-09-29 16:55:45.181 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-09-29 16:55:45.447 [main] WARN  io.thoughtware.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-09-29 16:55:45.452 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.thoughtware.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.thoughtware.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:43)
+	at io.thoughtware.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.thoughtware.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$14d684d.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.thoughtware.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-09-29 16:55:45.455 [main] INFO  i.thoughtware.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 4.708 seconds (JVM running for 5.298)
+2024-09-29 16:55:57.482 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-29 16:55:57.483 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-09-29 16:55:57.484 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-09-29 16:55:57.516 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.528 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/0.fce0e9550b18d632c40e.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.535 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/5.cf99ec81d2fa7e49a96f.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.539 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/main.65dc126ff9ca6dc6dbd4.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.557 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/chunk-antIcon.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.570 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/chunk-thoughtware-eam-ui.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.578 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/chunk-antdUI.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.615 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/chunk-rcomponent.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.744 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/main.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.835 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/13.6617db661449f88149d5.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.835 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/15.0d5dbca54bab3ffe7974.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.861 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/15.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.861 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/13.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.885 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/logo.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.951 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.951 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.982 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/authConfig/getAuthConfig,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:57.998 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/81.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.013 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/80.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.046 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/qywechat.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.046 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/tiklab.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.046 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/ldap.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.046 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/eam-enhancements.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.046 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/dingding.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:58.047 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.394 [http-nio-8080-exec-4] INFO  i.t.r.transport.tcp.transport.netty.NettyClient - netty client started on:127.0.0.1:5030
+2024-09-29 16:55:59.549 [Thread-7] INFO  org.ehcache.core.EhcacheManager - Cache 'g1' created in EhcacheManager.
+2024-09-29 16:55:59.551 [Thread-7] INFO  org.ehcache.core.EhcacheManager - Cache 'dcs1' created in EhcacheManager.
+2024-09-29 16:55:59.555 [Thread-7] INFO  i.t.rpc.server.protocol.rpc.RpcProtocolHandler - rpc handle success,rpcId:1825160388-1,tenant:default,url:io.thoughtware.dcs.common.cache.CacheAction/put,source:192.168.10.24,costTime:114
+2024-09-29 16:55:59.555 [Thread-7] INFO  i.t.rpc.server.protocol.rpc.RpcProtocolHandler - rpc server,msg response body，length:19
+2024-09-29 16:55:59.563 [Thread-8] INFO  i.t.rpc.client.invoker.rpc.RpcInvokerHandler - rpc invoke,receive message,rpcId:1825160388-1,time:2024-09-29 16:55:59.563
+2024-09-29 16:55:59.563 [http-nio-8080-exec-4] INFO  i.t.rpc.client.proxy.ClientInvocationHandler - rpc invoke success,rpcId:1825160388-1,tenant:null,url:io.thoughtware.dcs.common.cache.CacheAction/put,target:127.0.0.1:5030,costTime:200,time:2024-09-29 16:55:59.563
+2024-09-29 16:55:59.588 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/eam/auth/login,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.608 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/applyAuth/findUserApplyAuth,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.616 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.622 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/authConfig/getAuthConfig,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.635 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/8.300ebfe919b7f6825adf.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.635 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/kaelthas.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.639 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/vip-dark.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.639 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/images/menu-black.png,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.643 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/67.0978faea8ac0e620061a.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.660 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/8.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.660 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/67.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.696 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/3.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.703 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/message/messageItem/findMessageItemPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.703 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/appLink/findAppLinkList,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.752 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.768 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.793 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.810 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.826 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:55:59.833 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:01.050 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/42.2076331b0f679978e8e4.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:01.063 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/42.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:01.108 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/dbInfo/findDbInfoPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:01.813 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/hostList/findHostPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:02.578 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/46.fb06d069c157afebdcca.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:02.591 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/46.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:02.625 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/kubernetes/findKbInfoPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:03.118 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/21.f3f2db52740ddb6be2ab.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:03.135 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/21.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:03.169 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:04.313 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/16.bd3e2bb2e72389a807dd.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:04.339 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/16.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:04.352 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/20.60607926646ae6e58d68.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:04.363 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/updateInternet,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:04.363 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/20.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:04.959 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/history/findInternetOverview,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:05.944 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/7.31f538ff37f863f84f5c.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:05.952 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/39.61e5d86b45dd02212cf4.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:05.971 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/39.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:05.980 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/7.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:05.992 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/6.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:06.084 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/history/findInGraphicsLine,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.066 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/4.a42108be544bd18460e8.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.067 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/62.f97ec7a96689407794d0.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.076 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/4.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.076 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/62.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.115 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/alarm/findAlarmPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.804 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/61.7f8c7b6ca121ada2d909.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.811 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/61.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.820 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/18.66fbbe6139b1f662a476.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.828 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/18.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.884 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetItem/findItemList,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.885 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetItem/findItemList,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:07.896 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetMonitor/findMonitorPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:08.297 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/48.71a106b4f65f98d313f0.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:08.304 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/48.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:08.312 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/css/49.992b426eeccfac2ea141.css,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:08.327 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/js/49.21623730.js,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:10.324 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/history/findInternetOverview,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:10.351 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:12.297 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:13.790 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:14.545 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:29.757 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:29.766 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:29.776 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:29.813 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:29.824 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:29.831 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:34.888 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/updateInternet,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:35.478 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/history/findInternetOverview,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:36.056 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:38.493 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/updateInternet,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:38.977 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/history/findInternetOverview,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:41.311 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/history/findInGraphicsLine,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:43.012 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/alarm/findAlarmPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:44.043 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetItem/findItemList,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:44.043 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetItem/findItemList,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:44.053 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internetMonitor/findMonitorPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:48.606 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:49.295 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:52.641 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:54.250 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/kubernetes/findKbInfoPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:56.203 [http-nio-8080-exec-6] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:57.027 [http-nio-8080-exec-5] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:57.672 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:58.576 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/internet/findInternetPage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:59.739 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:59.748 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:59.755 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:59.814 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:59.823 [http-nio-8080-exec-9] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:56:59.832 [http-nio-8080-exec-4] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:57:30.308 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:57:30.309 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:57:30.320 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:57:30.323 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:57:30.334 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:57:30.334 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:58:00.337 [http-nio-8080-exec-8] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:58:00.337 [http-nio-8080-exec-3] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:58:00.346 [http-nio-8080-exec-1] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:58:00.350 [http-nio-8080-exec-7] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:58:00.353 [http-nio-8080-exec-10] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
+2024-09-29 16:58:00.353 [http-nio-8080-exec-2] INFO  io.thoughtware.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:0:0:0:0:0:0:0:1
