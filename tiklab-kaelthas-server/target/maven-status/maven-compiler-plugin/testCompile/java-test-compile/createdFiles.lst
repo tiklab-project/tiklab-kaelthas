@@ -1,0 +1,8 @@
+io\tiklab\kaelthas\PostgreSQLJDBCExample.class
+io\tiklab\kaelthas\Test.class
+io\tiklab\kaelthas\EntityConversion.class
+io\tiklab\kaelthas\LowercaseToUppercase.class
+io\tiklab\kaelthas\TestJDBCSQL.class
+io\tiklab\kaelthas\TestScan.class
+io\tiklab\kaelthas\MySQLConnectionTest.class
+io\tiklab\kaelthas\JsonTest.class
