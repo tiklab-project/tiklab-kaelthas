@@ -140,11 +140,6 @@ public class HostServiceImpl implements HostService {
             HostEntity hostEntity = BeanMapper.map(host, HostEntity.class);
             hostEntity.setUpdateTime(ConversionDateUtil.date(9));
             hostDao.updateHost(hostEntity);
-
-            Dynamic dynamic = new Dynamic();
-            dynamic.setName("修改主机" + host.getName());
-            dynamic.setUpdateTime(ConversionDateUtil.date(9));
-            dynamicService.createDynamic(dynamic);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

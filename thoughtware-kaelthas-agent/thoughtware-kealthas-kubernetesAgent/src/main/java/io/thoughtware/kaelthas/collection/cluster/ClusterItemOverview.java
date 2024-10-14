@@ -21,8 +21,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 @Component
 public class ClusterItemOverview {
@@ -32,8 +30,6 @@ public class ClusterItemOverview {
 
     @Autowired
     private HistoryService historyService;
-
-    ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
 
     @Scheduled(cron = "0 */5 * * * * ")
     public void getClusterOverview() {
@@ -48,22 +44,11 @@ public class ClusterItemOverview {
 
         List<KubernetesMonitor> monitorList = getKubernetesMonitors(kuMonitors);
 
-        // 创建并行任务列表
-        //List<CompletableFuture<History>> futures = new ArrayList<>();
-
         for (KubernetesMonitor kubernetesMonitor : monitorList) {
-
-            /*CompletableFuture<History> future = CompletableFuture.supplyAsync(() -> getHistory(kubernetesMonitor), service);
-            futures.add(future);*/
 
             History history = getHistory(kubernetesMonitor);
             list.add(history);
         }
-
-        /*List<History> list = futures
-                .stream()
-                .map(CompletableFuture::join)
-                .toList();*/
 
         historyService.insertForList(list);
 

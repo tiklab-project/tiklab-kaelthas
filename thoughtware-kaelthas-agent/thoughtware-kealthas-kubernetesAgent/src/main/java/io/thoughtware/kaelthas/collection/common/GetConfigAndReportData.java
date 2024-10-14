@@ -22,9 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PreDestroy;
 import java.util.*;
-import java.util.concurrent.*;
 
 @Component
 public class GetConfigAndReportData {
@@ -37,10 +35,8 @@ public class GetConfigAndReportData {
     @Autowired
     private HistoryService historyService;
 
-    ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
-
     //定时拉取配置信息,并采集指定的数据
-    @Scheduled(cron = "0/20 * * * * ? ")
+    @Scheduled(cron = "0/30 * * * * ? ")
     public void getKubernetesInfo() throws ApiException {
 
         List<KubernetesMonitor> monitorList = kuMonitorService.findKuAndMonitor();
@@ -49,39 +45,15 @@ public class GetConfigAndReportData {
             return;
         }
 
-        // 创建并行任务列表
-        //List<CompletableFuture<History>> futures = new ArrayList<>();
-
         for (KubernetesMonitor kubernetesMonitor : monitorList) {
             History history = getHistory(kubernetesMonitor);
             historyList.add(history);
         }
 
-        /*// 收集所有case分支的结果
-        List<History> results = futures.stream()
-                .map(CompletableFuture::join) // 等待所有任务完成
-                .toList();
-
-        // 收集处理后的数据
-        historyList.addAll(results);*/
-
-        if (historyList.size() > 300) {
+        if (historyList.size() > 30) {
             List<History> list = new LinkedList<>(historyList);
             historyService.insertForList(list);
             historyList.clear();
-        }
-    }
-
-    // 应用关闭时要确保线程池关闭
-    @PreDestroy
-    public void shutdownThreadPool() {
-        executor.shutdown();
-        try {
-            if (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            executor.shutdownNow();
         }
     }
 

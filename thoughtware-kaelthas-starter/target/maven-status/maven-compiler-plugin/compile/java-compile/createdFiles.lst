@@ -1,0 +1,5 @@
+io\thoughtware\kaelthas\starter\KaelthasApplication.class
+io\thoughtware\kaelthas\starter\config\KaelthasOpenApiAutoConfiguration.class
+io\thoughtware\kaelthas\starter\config\KaelthasGatewayAutoConfiguration.class
+io\thoughtware\kaelthas\starter\config\KaelthasAutoConfiguration.class
+io\thoughtware\kaelthas\starter\config\KaelthasDsmAutoConfiguration.class

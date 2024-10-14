@@ -1,0 +1,6 @@
+com\io\kubernetescollection\KubernetesCpuMetrics.class
+com\io\kubernetescollection\KubernetesMetricsFetcher.class
+com\io\kubernetescollection\KubernetesApplicationTests.class
+com\io\kubernetescollection\PodMetricsFetcher.class
+com\io\kubernetescollection\KubernetesMetrics.class
+com\io\kubernetescollection\PodMetricsFetcher$1.class

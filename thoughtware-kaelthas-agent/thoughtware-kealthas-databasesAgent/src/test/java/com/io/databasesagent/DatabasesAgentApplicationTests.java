@@ -3,6 +3,10 @@ package com.io.databasesagent;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 class DatabasesAgentApplicationTests {
 
@@ -17,16 +21,21 @@ class DatabasesAgentApplicationTests {
         String password = "darth2020";
 
         try (Connection connection = DriverManager.getConnection(connStr, username, password);
-             PreparedStatement statement = connection.prepareStatement("SELECT tup_inserted as count FROM pg_stat_database WHERE datname = 'postgres'");
+             PreparedStatement statement = connection.prepareStatement("SELECT 12 as item, deadlocks as count FROM pg_stat_database WHERE datname = 'postgres'\n" +
+                     "union all\n" +
+                     "SELECT 13 as item, deadlocks as count FROM pg_stat_database WHERE datname = 'postgres'");
              ResultSet resultSet = statement.executeQuery()) {
-            String string = null;
+            List<Map<String, String>> list = new LinkedList<>();
             // 处理查询结果
             while (resultSet.next()) {
                 // 假设查询结果包含一个名为 "column_name" 的列
-                string = resultSet.getString("count");
+                Map<String, String> map = new HashMap<>();
+                map.put("item", resultSet.getString("item"));
+                map.put("count", resultSet.getString("count"));
+                list.add(map);
             }
 
-            System.out.println("string = " + string);
+            System.out.println("list = " + list);
 
         } catch (SQLException e) {
             e.printStackTrace();

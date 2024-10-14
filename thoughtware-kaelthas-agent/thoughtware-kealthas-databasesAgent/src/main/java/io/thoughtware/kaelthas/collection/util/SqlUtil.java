@@ -1,7 +1,9 @@
 package io.thoughtware.kaelthas.collection.util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class SqlUtil {
 
@@ -37,5 +39,29 @@ public class SqlUtil {
 
         // 将日期格式化为字符串
         return currentDate.format(formatter);
+    }
+
+    public static String date(int type) {
+        switch (type) {
+            case 2 -> {
+                return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            }
+            case 3 -> {
+                return new SimpleDateFormat("HH:mm:ss").format(new Date());
+            }
+            case 4 -> {
+                String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                return "[" + format + "]" + "  ";
+            }
+            case 5 -> {
+                return new SimpleDateFormat("HH:mm").format(new Date());
+            }
+            case 6 -> {
+                return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
+            }
+            default -> {
+                return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            }
+        }
     }
 }

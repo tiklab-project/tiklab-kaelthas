@@ -137,28 +137,6 @@ class KubernetesApplicationTests {
     }
 
     @Test
-    void random() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println((int) Math.round(Math.random() * 6));
-        }
-    }
-
-    @Test
-    void currentDateExample() {
-        // 获取当前日期
-        LocalDateTime currentDate = LocalDateTime.now();
-
-        // 定义日期格式
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        // 将日期格式化为字符串
-        String formattedDate = currentDate.format(formatter);
-
-        // 打印结果
-        System.out.println("当前日期: " + formattedDate);
-    }
-
-    @Test
     void getPodMetricsList() {
 
         String apiServerUrl = "https://172.11.1.40:6443";

@@ -1,0 +1,5 @@
+io\thoughtware\kaelthas\switchs\dao\SwitchHostDao.class
+io\thoughtware\kaelthas\switchs\utils\ConversionAllTypeUtil.class
+io\thoughtware\kaelthas\switchs\service\SwitchHostService.class
+io\thoughtware\kaelthas\switchs\model\SwitchMonitor.class
+io\thoughtware\kaelthas\switchs\service\SwitchOverviewService.class

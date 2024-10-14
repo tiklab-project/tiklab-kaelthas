@@ -921,26 +921,6 @@ public class HistoryServiceImpl implements HistoryService {
         return resList;
     }
 
-    @Override
-    public void findHistoryByDb(DbInfo dbInfo) {
-        try {
-            //查询出如果有数据的话修改状态为1,否则为0
-            History history = new History();
-            history.setHostId(dbInfo.getId());
-            String beforeTime = ConversionDateUtil.findLocalDateTime(2, 5, null);
-            String nowTime = ConversionDateUtil.findLocalDateTime(2, 0, null);
-            List<History> historyByCondition = historyDao.findHistoryByCondition(history,beforeTime,nowTime);
-            if (historyByCondition.isEmpty()) {
-                dbInfo.setUsability(0);
-            } else {
-                dbInfo.setUsability(1);
-            }
-            dbInfoService.updateDbInfo(dbInfo);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     //部分触发告警的数据变颜色,在前端提示出来
     private void setTriggerService(List<History> histories, History information) {
         //根据监控项查询监控项的阈值

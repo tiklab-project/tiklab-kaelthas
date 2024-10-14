@@ -1,0 +1,3 @@
+io\thoughtware\kaelthas\collection\service\pgsql\PgsqlService.class
+io\thoughtware\kaelthas\collection\util\SqlUtil.class
+io\thoughtware\kaelthas\collection\service\mysql\MysqlService.class

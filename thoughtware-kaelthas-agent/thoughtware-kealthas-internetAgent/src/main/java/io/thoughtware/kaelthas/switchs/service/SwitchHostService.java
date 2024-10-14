@@ -37,7 +37,7 @@ public class SwitchHostService {
     private static final List<History> historyList = new LinkedList<>();
 
     //使用定时任务获取配置信息,使用配置信息获取指标数据
-    @Scheduled(cron = "0/60 * * * * * ")
+    @Scheduled(cron = "* 1/1 * * * * ")
     public void executeSwitchHost() {
         //获取配置的信息,监控项的信息
         String dataTimeNow = ConversionAllTypeUtil.getDataTimeNow();

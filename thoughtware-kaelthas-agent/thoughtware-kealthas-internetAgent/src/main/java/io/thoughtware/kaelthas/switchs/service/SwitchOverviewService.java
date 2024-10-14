@@ -35,7 +35,7 @@ public class SwitchOverviewService {
 
     private static final List<History> historyList = new LinkedList<>();
 
-    @Scheduled(cron = "0/10 * * * * *")
+    @Scheduled(cron = "0/30 * * * * *")
     public void executeOverview() throws IOException {
         //查询出网络列表
         String dataTimeNow = ConversionAllTypeUtil.getDataTimeNow();

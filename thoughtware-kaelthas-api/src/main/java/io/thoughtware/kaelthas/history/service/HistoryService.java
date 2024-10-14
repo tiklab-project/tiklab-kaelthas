@@ -34,8 +34,6 @@ public interface HistoryService {
     //k8s监控
     List<List<History>> findKuGraphicsLine(History history);
 
-    void findHistoryByDb(DbInfo dbInfo);
-
     Map<String,Object> findKuOverviewTotal(String kuId);
 
     List<History> findHistoryByGatherTime(String hostId, String beforeTime);
