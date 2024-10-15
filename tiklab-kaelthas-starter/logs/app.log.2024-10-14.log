@@ -1,0 +1,356 @@
+2024-10-14 17:49:53.214 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-14 17:49:53.222 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 13524 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-14 17:49:53.222 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-14 17:49:54.644 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+2024-10-14 17:49:54.648 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2024-10-14 17:49:54.662 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:610)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:311)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:207)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:175)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+Caused by: java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:199)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:55)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:696)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1024)
+	at org.springframework.context.annotation.ConfigurationClassParser.processInterfaces(ConfigurationClassParser.java:386)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:332)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:600)
+	... 20 common frames omitted
+2024-10-14 17:51:45.335 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-14 17:51:45.348 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 25528 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-14 17:51:45.350 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-14 17:51:46.262 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+2024-10-14 17:51:46.266 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2024-10-14 17:51:46.284 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:610)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:311)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:207)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:175)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+Caused by: java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:199)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:55)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:696)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1024)
+	at org.springframework.context.annotation.ConfigurationClassParser.processInterfaces(ConfigurationClassParser.java:386)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:332)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:600)
+	... 20 common frames omitted
+2024-10-14 17:52:58.619 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-14 17:52:58.627 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 14408 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-14 17:52:58.627 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-14 17:52:58.966 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+2024-10-14 17:52:58.968 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2024-10-14 17:52:58.980 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:610)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:311)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:207)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:175)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+Caused by: java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:199)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:55)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:696)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1024)
+	at org.springframework.context.annotation.ConfigurationClassParser.processInterfaces(ConfigurationClassParser.java:386)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:332)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:600)
+	... 20 common frames omitted
+2024-10-14 17:54:04.509 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-14 17:54:04.520 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 25716 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-14 17:54:04.520 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-14 17:54:05.438 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+2024-10-14 17:54:05.441 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2024-10-14 17:54:05.450 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [io.tiklab.kaelthas.starter.config.KaelthasAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:610)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:311)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:207)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:175)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+Caused by: java.io.FileNotFoundException: class path resource [io/tiklab/security/logging/service/LoggingTemplateService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:199)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:55)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:696)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1024)
+	at org.springframework.context.annotation.ConfigurationClassParser.processInterfaces(ConfigurationClassParser.java:386)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:332)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:304)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:600)
+	... 20 common frames omitted
+2024-10-14 17:54:59.249 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-14 17:54:59.256 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 1892 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-14 17:54:59.257 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-14 17:55:00.738 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.tiklab.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-10-14 17:55:00.869 [main] INFO  io.tiklab.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-10-14 17:55:00.870 [main] INFO  io.tiklab.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter
+2024-10-14 17:55:01.777 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-10-14 17:55:01.785 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-14 17:55:01.786 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-10-14 17:55:01.786 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-10-14 17:55:01.874 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-10-14 17:55:01.874 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2586 ms
+2024-10-14 17:55:03.175 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-10-14 17:55:03.485 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-10-14 17:55:03.563 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-10-14 17:55:03.564 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-10-14 17:55:03.565 [main] INFO  io.tiklab.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-10-14 17:55:03.759 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-10-14 17:55:03.909 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-10-14 17:55:03.961 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-10-14 17:55:03.969 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-10-14 17:55:03.969 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-10-14 17:55:03.970 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-10-14 17:55:03.970 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-10-14 17:55:03.970 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-10-14 17:55:03.970 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-10-14 17:55:03.970 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@69e91dc1
+2024-10-14 17:55:04.005 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-14 17:55:04.013 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-10-14 17:55:04.013 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-10-14 17:55:04.013 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-10-14 17:55:04.017 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-10-14 17:55:04.021 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-10-14 17:55:04.296 [main] WARN  io.tiklab.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-10-14 17:55:04.302 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.tiklab.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.tiklab.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:44)
+	at io.tiklab.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$1a31be14.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-10-14 17:55:04.306 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 5.324 seconds (JVM running for 5.965)
+2024-10-14 17:55:09.155 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-10-14 17:55:09.156 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-10-14 17:55:09.181 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-10-14 17:55:09.182 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-10-14 17:55:09.182 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-10-14 17:55:09.182 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2024-10-14 18:13:45.453 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-14 18:13:45.465 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 7840 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-14 18:13:45.465 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-14 18:13:46.442 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.tiklab.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-10-14 18:13:46.590 [main] INFO  io.tiklab.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-10-14 18:13:46.591 [main] INFO  io.tiklab.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter
+2024-10-14 18:13:47.713 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-10-14 18:13:47.725 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-14 18:13:47.725 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-10-14 18:13:47.726 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-10-14 18:13:47.866 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-10-14 18:13:47.866 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2360 ms
+2024-10-14 18:13:49.530 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-10-14 18:13:49.947 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-10-14 18:13:50.042 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-10-14 18:13:50.043 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-10-14 18:13:50.043 [main] INFO  io.tiklab.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-10-14 18:13:50.341 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-10-14 18:13:50.634 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-10-14 18:13:50.709 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-10-14 18:13:50.721 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-10-14 18:13:50.722 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-10-14 18:13:50.722 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-10-14 18:13:50.723 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-10-14 18:13:50.723 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-10-14 18:13:50.723 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-10-14 18:13:50.723 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@5da96b6c
+2024-10-14 18:13:50.767 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-14 18:13:50.780 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-10-14 18:13:50.781 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-10-14 18:13:50.781 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-10-14 18:13:50.786 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-10-14 18:13:50.793 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-10-14 18:13:51.152 [main] WARN  io.tiklab.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-10-14 18:13:51.161 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.tiklab.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.tiklab.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:44)
+	at io.tiklab.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$e5c680e4.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-10-14 18:13:51.166 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 6.03 seconds (JVM running for 13.962)
+2024-10-14 18:33:06.505 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-14 18:33:06.506 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-10-14 18:33:06.509 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2024-10-14 18:33:06.685 [http-nio-8080-exec-4] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:192.168.10.24
+2024-10-14 18:33:06.685 [http-nio-8080-exec-3] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:192.168.10.24
+2024-10-14 18:33:06.742 [http-nio-8080-exec-6] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/authConfig/getAuthConfig,remote:192.168.10.24
+2024-10-14 18:33:06.815 [http-nio-8080-exec-7] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:192.168.10.24
+2024-10-14 18:33:08.537 [http-nio-8080-exec-9] INFO  i.t.r.transport.tcp.transport.netty.NettyClient - netty client started on:127.0.0.1:5030
+2024-10-14 18:33:08.744 [Thread-136] INFO  org.ehcache.core.EhcacheManager - Cache 'g1' created in EhcacheManager.
+2024-10-14 18:33:08.746 [Thread-136] INFO  org.ehcache.core.EhcacheManager - Cache 'dcs1' created in EhcacheManager.
+2024-10-14 18:33:08.749 [Thread-136] INFO  i.t.rpc.server.protocol.rpc.RpcProtocolHandler - rpc handle success,rpcId:110643509-1,tenant:default,url:io.tiklab.dcs.common.cache.CacheAction/put,source:192.168.10.24,costTime:157
+2024-10-14 18:33:08.749 [Thread-136] INFO  i.t.rpc.server.protocol.rpc.RpcProtocolHandler - rpc server,msg response body，length:18
+2024-10-14 18:33:08.752 [Thread-137] INFO  io.tiklab.rpc.client.invoker.rpc.RpcInvokerHandler - rpc invoke,receive message,rpcId:110643509-1,time:2024-10-14 18:33:08.752
+2024-10-14 18:33:08.753 [http-nio-8080-exec-9] INFO  io.tiklab.rpc.client.proxy.ClientInvocationHandler - rpc invoke success,rpcId:110643509-1,tenant:null,url:io.tiklab.dcs.common.cache.CacheAction/put,target:127.0.0.1:5030,costTime:253,time:2024-10-14 18:33:08.753
+2024-10-14 18:33:08.775 [http-nio-8080-exec-9] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/eam/auth/login,remote:192.168.10.24
+2024-10-14 18:33:08.797 [http-nio-8080-exec-1] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/applyAuth/findUserApplyAuth,remote:192.168.10.24
+2024-10-14 18:33:08.813 [http-nio-8080-exec-2] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/version/getVersion,remote:192.168.10.24
+2024-10-14 18:33:08.820 [http-nio-8080-exec-3] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/authConfig/getAuthConfig,remote:192.168.10.24
+2024-10-14 18:33:08.902 [http-nio-8080-exec-7] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/appLink/findAppLinkList,remote:192.168.10.24
+2024-10-14 18:33:08.909 [http-nio-8080-exec-6] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/message/messageItem/findMessageItemPage,remote:192.168.10.24
+2024-10-14 18:33:12.252 [http-nio-8080-exec-9] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/hostList/findHostPage,remote:192.168.10.24
+2024-10-14 18:33:13.102 [http-nio-8080-exec-2] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:192.168.10.24
+2024-10-14 18:33:13.118 [http-nio-8080-exec-5] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:192.168.10.24
+2024-10-14 18:33:13.147 [http-nio-8080-exec-3] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:192.168.10.24
+2024-10-14 18:33:13.166 [http-nio-8080-exec-6] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/home/findAlarmTypeNum,remote:192.168.10.24
+2024-10-14 18:33:13.177 [http-nio-8080-exec-8] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/home/findTypeDistribution,remote:192.168.10.24
+2024-10-14 18:33:13.192 [http-nio-8080-exec-7] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/home/findHostUsage,remote:192.168.10.24
+2024-10-14 18:33:13.726 [http-nio-8080-exec-9] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/hostList/findHostPage,remote:192.168.10.24
+2024-10-14 18:33:14.266 [http-nio-8080-exec-10] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/dbInfo/findDbInfoPage,remote:192.168.10.24
+2024-10-14 18:33:14.718 [http-nio-8080-exec-4] INFO  io.tiklab.gateway.GatewayFilter - request success,request url:/kubernetes/findKbInfoPage,remote:192.168.10.24
