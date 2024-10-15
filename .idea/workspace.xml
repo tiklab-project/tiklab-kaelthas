@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="db54527e-4452-43f2-b0a1-ec9ebeda671e" name="Changes" comment="仓库名称修改" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\development\apache-maven-3.9.5\respository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../development/apache-maven-3.9.5" />
+        <option name="userSettingsFile" value="D:\development\apache-maven-3.9.5\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2mbHGlteqY93l4DJroQdKS3exk9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/code/companycode/xmonitor/tiklab-kaelthas-ee",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.4269275",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.thoughtware.kaelthas.switchs.utils" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="KaelthasApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="tiklab-kaelthas-starter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.tiklab.kaelthas.starter.KaelthasApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.tiklab.kaelthas.starter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.KaelthasApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="db54527e-4452-43f2-b0a1-ec9ebeda671e" name="Changes" comment="" />
+      <created>1700133773411</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700133773411</updated>
+      <workItem from="1727338262441" duration="82000" />
+      <workItem from="1727338349848" duration="1714000" />
+      <workItem from="1727340977006" duration="3479000" />
+      <workItem from="1727345764404" duration="354000" />
+      <workItem from="1727346126205" duration="23134000" />
+      <workItem from="1727426215261" duration="3992000" />
+      <workItem from="1727571553604" duration="23706000" />
+      <workItem from="1728546044751" duration="11000" />
+      <workItem from="1728898753231" duration="51000" />
+      <workItem from="1728898953232" duration="3092000" />
+      <workItem from="1728955375786" duration="3608000" />
+      <workItem from="1728981841013" duration="1252000" />
+      <workItem from="1728983106606" duration="1256000" />
+    </task>
+    <task id="LOCAL-00001" summary="11">
+      <option name="closed" value="true" />
+      <created>1727338288036</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727338288036</updated>
+    </task>
+    <task id="LOCAL-00002" summary="11">
+      <option name="closed" value="true" />
+      <created>1727338418928</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727338418928</updated>
+    </task>
+    <task id="LOCAL-00003" summary="网络状态">
+      <option name="closed" value="true" />
+      <created>1727347097818</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727347097818</updated>
+    </task>
+    <task id="LOCAL-00004" summary="网络数据采集上报和展示">
+      <option name="closed" value="true" />
+      <created>1727431725810</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727431725810</updated>
+    </task>
+    <task id="LOCAL-00005" summary="网络数据采集上报和展示">
+      <option name="closed" value="true" />
+      <created>1727431788553</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1727431788553</updated>
+    </task>
+    <task id="LOCAL-00006" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727600335514</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727600335514</updated>
+    </task>
+    <task id="LOCAL-00007" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727600352453</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1727600352453</updated>
+    </task>
+    <task id="LOCAL-00008" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727601516500</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727601516500</updated>
+    </task>
+    <task id="LOCAL-00009" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727601557963</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727601557963</updated>
+    </task>
+    <task id="LOCAL-00010" summary="依赖修改,名称修改">
+      <option name="closed" value="true" />
+      <created>1728900205636</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1728900205636</updated>
+    </task>
+    <task id="LOCAL-00011" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1728956323128</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1728956323128</updated>
+    </task>
+    <task id="LOCAL-00012" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1728972285247</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728972285247</updated>
+    </task>
+    <task id="LOCAL-00013" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1728983942932</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728983942932</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="11" />
+    <MESSAGE value="网络状态" />
+    <MESSAGE value="网络数据采集上报和展示" />
+    <MESSAGE value="网络告警实现" />
+    <MESSAGE value="依赖修改,名称修改" />
+    <MESSAGE value="仓库名称修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="仓库名称修改" />
+  </component>
+</project>
