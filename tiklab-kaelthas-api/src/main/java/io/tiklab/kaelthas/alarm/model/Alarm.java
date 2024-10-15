@@ -2,7 +2,6 @@ package io.tiklab.kaelthas.alarm.model;
 
 import io.tiklab.core.page.Page;
 import io.tiklab.toolkit.beans.annotation.Mapper;
-import io.tiklab.core.BaseModel;
 import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
@@ -13,7 +12,7 @@ import io.tiklab.kaelthas.host.trigger.model.Trigger;
 
 @Join
 @Mapper
-public class Alarm extends BaseModel {
+public class Alarm {
 
     private String id;
 

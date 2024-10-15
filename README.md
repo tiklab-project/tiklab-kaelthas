@@ -3,19 +3,28 @@
     <a href="https://kaelthas.tiklab.net/" target="_blank"><img alt="Kaelthas" src="assets/kaelthasLOGO.png"></a><br>Kaelthas
 </h1>
 
-<div align="center">
+[//]: # (<div align="center">)
 
-![Coverage Status](https://coveralls.io/repos/github/owner/repo/badge.svg)
-![npm](https://img.shields.io/npm/dw/package-name)
-![Dependencies](https://img.shields.io/depfu/owner/repo)
-![License](https://img.shields.io/github/license/owner/repo)
-![Version](https://img.shields.io/github/v/release/owner/repo)
-![](https://img.shields.io/badge/React-%5E17.0.2-brightgreen)
-![](https://img.shields.io/badge/Express-%5E4.17.2-yellow)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[//]: # ()
+[//]: # (![Coverage Status]&#40;https://coveralls.io/repos/github/owner/repo/badge.svg&#41;)
 
+[//]: # (![npm]&#40;https://img.shields.io/npm/dw/package-name&#41;)
 
-</div>
+[//]: # (![Dependencies]&#40;https://img.shields.io/depfu/owner/repo&#41;)
+
+[//]: # (![License]&#40;https://img.shields.io/github/license/owner/repo&#41;)
+
+[//]: # (![Version]&#40;https://img.shields.io/github/v/release/owner/repo&#41;)
+
+[//]: # (![]&#40;https://img.shields.io/badge/React-%5E17.0.2-brightgreen&#41;)
+
+[//]: # (![]&#40;https://img.shields.io/badge/Express-%5E4.17.2-yellow&#41;)
+
+[//]: # ([![All Contributors]&#40;https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square&#41;]&#40;#contributors-&#41;)
+
+[//]: # ()
+[//]: # ()
+[//]: # (</div>)
 
 **Kaelthas**是一个开源免费的监控系统，可以监控从简单的独立应用程序到大型环境的任何内容，其功能包括：
 
