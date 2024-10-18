@@ -17,6 +17,9 @@ public class DbTriggerMediumEntity {
     @Column(name = "medium_id")
     private String mediumId;
 
+    @Column(name = "db_id")
+    private String dbId;
+
     public String getId() {
         return id;
     }
@@ -39,5 +42,13 @@ public class DbTriggerMediumEntity {
 
     public void setMediumId(String mediumId) {
         this.mediumId = mediumId;
+    }
+
+    public String getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(String dbId) {
+        this.dbId = dbId;
     }
 }

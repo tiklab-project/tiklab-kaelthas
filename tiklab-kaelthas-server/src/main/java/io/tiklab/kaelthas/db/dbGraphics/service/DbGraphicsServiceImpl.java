@@ -1,7 +1,9 @@
 package io.tiklab.kaelthas.db.dbGraphics.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
@@ -10,13 +12,14 @@ import io.tiklab.kaelthas.db.dbGraphics.dao.DbGraphicsDao;
 import io.tiklab.kaelthas.db.dbGraphics.entity.DbGraphicsEntity;
 import io.tiklab.kaelthas.db.dbGraphics.model.DbGraphics;
 import io.tiklab.kaelthas.db.dbGraphicsMonitor.service.DbGraphicsMonitorService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DbGraphicsServiceImpl implements DbGraphicsService{
+public class DbGraphicsServiceImpl implements DbGraphicsService {
 
     @Autowired
     private DbGraphicsDao dbGraphicsDao;
@@ -44,7 +47,7 @@ public class DbGraphicsServiceImpl implements DbGraphicsService{
 
             DbDynamic dbDynamic = new DbDynamic();
             dbDynamic.setDbId(dbGraphics.getDbId());
-            dbDynamic.setName("创建图形———"+dbGraphics.getName());
+            dbDynamic.setName("创建图形———" + dbGraphics.getName());
 
             dbDynamicService.createDbDynamic(dbDynamic);
             return graphicsId;
@@ -60,7 +63,7 @@ public class DbGraphicsServiceImpl implements DbGraphicsService{
             dbGraphicsDao.deleteGraphics(id);
 
             //再去删除关联表
-            graphicsMonitorService.deleteByCation(id,null);
+            graphicsMonitorService.deleteByCation(id, null, null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -71,10 +74,10 @@ public class DbGraphicsServiceImpl implements DbGraphicsService{
         if (dbGraphics.getMonitorIds().isEmpty()) {
             DbGraphicsEntity entity = BeanMapper.map(dbGraphics, DbGraphicsEntity.class);
             dbGraphicsDao.updateGraphics(entity);
-        }else {
+        } else {
             try {
                 //首先,将原来的关联关系删除,再添加新的
-                graphicsMonitorService.deleteByCation(dbGraphics.getId(),null);
+                graphicsMonitorService.deleteByCation(dbGraphics.getId(), null, null);
                 //添加新的关联关系
                 graphicsMonitorService.createGraphicsMonitor(dbGraphics);
             } catch (Exception e) {
@@ -95,6 +98,18 @@ public class DbGraphicsServiceImpl implements DbGraphicsService{
                 .get();
         List<DbGraphicsEntity> entityList = dbGraphicsDao.findDbGraphicsList(queryCondition);
 
-        return BeanMapper.mapList(entityList,DbGraphics.class);
+        return BeanMapper.mapList(entityList, DbGraphics.class);
+    }
+
+    @Override
+    public void deleteByDbId(String dbId) {
+        if (StringUtils.isBlank(dbId)) {
+            return;
+        }
+        DeleteCondition deleteCondition = DeleteBuilders
+                .createDelete(DbGraphicsEntity.class)
+                .eq("dbId", dbId)
+                .get();
+        dbGraphicsDao.deleteByDbId(deleteCondition);
     }
 }

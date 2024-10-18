@@ -4,6 +4,9 @@ import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
+import io.tiklab.kaelthas.db.dbGraphics.service.DbGraphicsService;
+import io.tiklab.kaelthas.db.dbGraphicsMonitor.service.DbGraphicsMonitorService;
+import io.tiklab.kaelthas.db.dbTriggerMedium.service.DbTriggerMediumService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.db.database.dao.DbInfoDao;
 import io.tiklab.kaelthas.db.database.entity.DbInfoEntity;
@@ -41,6 +44,15 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
     @Autowired
     private DbDynamicService dbDynamicService;
 
+    @Autowired
+    private DbGraphicsService dbGraphicsService;
+
+    @Autowired
+    private DbGraphicsMonitorService dbGraphicsMonitorService;
+
+    @Autowired
+    private DbTriggerMediumService dbTriggerMediumService;
+
     @Override
     public Pagination<DbInfo> findDbInfoPage(DbInfo dbInfo) {
         return dbInfoDao.findDbInfoPage(dbInfo);
@@ -58,7 +70,7 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
             String dbId = dbInfoDao.createDbInfo(dbInfoEntity);
 
             dbDynamic.setDbId(dbId);
-            dbDynamic.setName("创建主机---" + dbInfo.getName());
+            dbDynamic.setName("创建数据库---" + dbInfo.getName());
             dbDynamicService.createDbDynamic(dbDynamic);
             return dbId;
         } catch (Exception e) {
@@ -76,12 +88,31 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
 
     @Override
     public void deleteDbInfo(String id) {
-        dbInfoDao.deleteDbInfo(id);
+        try {
+            //删除数据库信息
+            dbInfoDao.deleteDbInfo(id);
+
+            //删除监控项
+            dbMonitorService.deleteByDbId(id);
+            //删除触发器
+            dbTriggerService.deleteByDbId(id);
+            //删除图形
+            dbGraphicsService.deleteByDbId(id);
+            //删除图形与监控项关联表
+            dbGraphicsMonitorService.deleteByCation(null,null,id);
+            //删除触发器和告警类型关联表
+            dbTriggerMediumService.deleteByDbId(id);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public DbInfo findDbInfoById(String id) {
+
         DbInfoEntity dbInfoById = dbInfoDao.findDbInfoById(id);
+
         //查询出数据库下监控项,触发器和告警的数量
         List<DbMonitor> dbMonitorList = dbMonitorService.findMonitorNum(id);
 

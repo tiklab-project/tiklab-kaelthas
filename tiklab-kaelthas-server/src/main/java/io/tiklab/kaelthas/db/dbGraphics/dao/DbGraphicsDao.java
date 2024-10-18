@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.db.dbGraphics.dao;
 
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
+import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.kaelthas.db.dbGraphics.entity.DbGraphicsEntity;
 import io.tiklab.kaelthas.db.dbGraphics.model.DbGraphics;
@@ -28,11 +29,11 @@ public class DbGraphicsDao {
                 """;
 
         if (StringUtils.isNotBlank(dbGraphics.getDbId())) {
-            sql = sql.concat(" and db_id = '" + dbGraphics.getDbId() + "'");
+            sql = sql.concat(" and mdg.db_id = '" + dbGraphics.getDbId() + "'");
         }
 
         if (StringUtils.isNotBlank(dbGraphics.getName())) {
-            sql = sql.concat(" and name like '%" + dbGraphics.getName()+"%'");
+            sql = sql.concat(" and mdg.name like '%" + dbGraphics.getName()+"%'");
         }
 
         sql = sql.concat("\nGROUP BY mdg.id");
@@ -53,5 +54,9 @@ public class DbGraphicsDao {
 
     public void updateGraphics(DbGraphicsEntity entity) {
         jpaTemplate.update(entity);
+    }
+
+    public void deleteByDbId(DeleteCondition deleteCondition) {
+        jpaTemplate.delete(deleteCondition);
     }
 }

@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.db.dbTrigger.dao;
 
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
+import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.kaelthas.db.dbTrigger.entity.DbTriggerEntity;
 import io.tiklab.kaelthas.db.dbTrigger.model.DbTrigger;
@@ -57,5 +58,9 @@ public class DbTriggerDao {
 
     public List<DbTriggerEntity> findAllTrigger() {
         return jpaTemplate.findAll(DbTriggerEntity.class);
+    }
+
+    public void deleteByDbId(DeleteCondition deleteCondition) {
+        jpaTemplate.delete(deleteCondition);
     }
 }

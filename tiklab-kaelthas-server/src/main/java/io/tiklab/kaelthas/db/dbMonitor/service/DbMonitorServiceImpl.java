@@ -2,7 +2,9 @@ package io.tiklab.kaelthas.db.dbMonitor.service;
 
 import io.tiklab.core.page.Pagination;
 import io.tiklab.core.page.PaginationBuilder;
+import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
@@ -12,6 +14,7 @@ import io.tiklab.kaelthas.db.dbGraphicsMonitor.service.DbGraphicsMonitorService;
 import io.tiklab.kaelthas.db.dbMonitor.dao.DbMonitorDao;
 import io.tiklab.kaelthas.db.dbMonitor.entity.DbMonitorEntity;
 import io.tiklab.kaelthas.db.dbMonitor.model.DbMonitor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +71,7 @@ public class DbMonitorServiceImpl implements DbMonitorService {
             //删除监控项
             dbMonitorDao.deleteDbMonitor(id);
             //删除图表与监控项关联表的信息
-            dbGraphicsMonitorService.deleteByCation(null, id);
+            dbGraphicsMonitorService.deleteByCation(null, id,null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -102,5 +105,18 @@ public class DbMonitorServiceImpl implements DbMonitorService {
                 .get();
         List<DbMonitorEntity> dbMonitorEntityList = dbMonitorDao.findMonitorNum(queryCondition);
         return BeanMapper.mapList(dbMonitorEntityList, DbMonitor.class);
+    }
+
+    @Override
+    public void deleteByDbId(String id) {
+        if (StringUtils.isBlank(id)) {
+            return;
+        }
+
+        DeleteCondition deleteCondition = DeleteBuilders.createDelete(DbMonitorEntity.class)
+                .eq("dbId", id)
+                .get();
+
+        dbMonitorDao.deleteByDbId(deleteCondition);
     }
 }

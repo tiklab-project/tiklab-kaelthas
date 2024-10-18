@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="db54527e-4452-43f2-b0a1-ec9ebeda671e" name="Changes" comment="仓库名称修改">
+      <change afterPath="$PROJECT_DIR$/tiklab-kaelthas-starter/logs/app.log.2024-10-16.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tiklab-kaelthas-starter/logs/app.log.2024-10-17.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbGraphics/service/DbGraphicsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbGraphics/service/DbGraphicsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/model/DbGraphicsMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/model/DbGraphicsMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/service/DbGraphicsMonitorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/service/DbGraphicsMonitorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbMonitor/service/DbMonitorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbMonitor/service/DbMonitorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbTrigger/service/DbTriggerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbTrigger/service/DbTriggerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/model/DbTriggerMedium.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/model/DbTriggerMedium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/service/DbTriggerMediumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/service/DbTriggerMediumService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/host/monitor/service/HostMonitorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/host/monitor/service/HostMonitorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/host/trigger/service/TriggerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-api/src/main/java/io/tiklab/kaelthas/host/trigger/service/TriggerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/common/timer/EquipmentTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/common/timer/EquipmentTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/common/websocket/ServerSocketConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/common/websocket/ServerSocketConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/database/service/DbInfoInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/database/service/DbInfoInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphics/dao/DbGraphicsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphics/dao/DbGraphicsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphics/service/DbGraphicsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphics/service/DbGraphicsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/entity/DbGraphicsMonitorEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/entity/DbGraphicsMonitorEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/service/DbGraphicsMonitorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbGraphicsMonitor/service/DbGraphicsMonitorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbMonitor/dao/DbMonitorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbMonitor/dao/DbMonitorDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbMonitor/service/DbMonitorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbMonitor/service/DbMonitorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTrigger/dao/DbTriggerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTrigger/dao/DbTriggerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTrigger/service/DbTriggerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTrigger/service/DbTriggerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/dao/DbTriggerMediumDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/dao/DbTriggerMediumDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/entity/DbTriggerMediumEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/entity/DbTriggerMediumEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/service/DbTriggerMediumServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/db/dbTriggerMedium/service/DbTriggerMediumServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/history/service/HistoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/history/service/HistoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/host/controller/HostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/host/controller/HostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/host/service/HostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/host/service/HostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/monitor/dao/HostMonitorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/monitor/dao/HostMonitorDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/monitor/service/HostMonitorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/monitor/service/HostMonitorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/trigger/dao/TriggerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/trigger/dao/TriggerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/trigger/service/TriggerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-server/src/main/java/io/tiklab/kaelthas/host/trigger/service/TriggerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-starter/logs/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/css/0.a5254100d25737ee28ef.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/css/5.ecb50ded4932f49c87d4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/11.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/12.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/13.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/14.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/15.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/16.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/17.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/18.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/19.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/20.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/21.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/22.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/23.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/24.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/25.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/26.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/27.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/28.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/29.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/3.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/30.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/31.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/32.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/33.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/34.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/35.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/36.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/37.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/38.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/39.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/4.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/40.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/41.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/42.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/43.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/44.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/45.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/46.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/47.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/48.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/49.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/50.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/51.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/52.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/53.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/54.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/55.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/56.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/57.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/58.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/59.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/6.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/60.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/61.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/62.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/63.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/64.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/65.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/66.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/67.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/68.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/69.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/7.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/70.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/71.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/72.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/73.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/74.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/75.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/76.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/77.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/78.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/79.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/8.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/80.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/81.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/82.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/83.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/9.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/chunk-antIcon.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/chunk-antdUI.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/chunk-rcomponent.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/src/main/resources/static/js/chunk-tiklab-eam-ui.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/css/0.a5254100d25737ee28ef.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/css/5.ecb50ded4932f49c87d4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/11.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/12.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/13.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/14.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/15.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/16.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/17.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/18.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/19.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/20.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/21.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/22.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/23.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/24.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/25.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/26.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/27.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/28.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/29.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/3.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/30.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/31.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/32.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/33.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/34.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/35.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/36.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/37.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/38.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/39.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/4.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/40.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/41.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/42.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/43.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/44.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/45.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/46.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/47.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/48.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/49.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/50.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/51.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/52.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/53.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/54.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/55.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/56.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/57.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/58.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/59.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/6.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/60.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/61.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/62.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/63.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/64.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/65.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/66.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/67.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/68.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/69.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/7.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/70.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/71.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/72.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/73.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/74.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/75.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/76.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/77.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/78.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/79.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/8.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/80.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/81.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/82.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/83.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/9.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/chunk-antIcon.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/chunk-antdUI.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/chunk-rcomponent.e4c6334c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiklab-kaelthas-starter/target/classes/static/js/chunk-tiklab-eam-ui.e4c6334c.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\development\apache-maven-3.9.5\respository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../development/apache-maven-3.9.5" />
+        <option name="userSettingsFile" value="D:\development\apache-maven-3.9.5\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2mbHGlteqY93l4DJroQdKS3exk9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/code/companycode/xmonitor/tiklab-kaelthas",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.4269275",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.thoughtware.kaelthas.switchs.utils" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="KaelthasApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="tiklab-kaelthas-starter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.tiklab.kaelthas.starter.KaelthasApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.tiklab.kaelthas.starter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.KaelthasApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="db54527e-4452-43f2-b0a1-ec9ebeda671e" name="Changes" comment="" />
+      <created>1700133773411</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700133773411</updated>
+      <workItem from="1727338262441" duration="82000" />
+      <workItem from="1727338349848" duration="1714000" />
+      <workItem from="1727340977006" duration="3479000" />
+      <workItem from="1727345764404" duration="354000" />
+      <workItem from="1727346126205" duration="23134000" />
+      <workItem from="1727426215261" duration="3992000" />
+      <workItem from="1727571553604" duration="23706000" />
+      <workItem from="1728546044751" duration="11000" />
+      <workItem from="1728898753231" duration="51000" />
+      <workItem from="1728898953232" duration="3092000" />
+      <workItem from="1728955375786" duration="3608000" />
+      <workItem from="1728981841013" duration="1252000" />
+      <workItem from="1728983106606" duration="1256000" />
+      <workItem from="1729040798380" duration="26000" />
+      <workItem from="1729040831071" duration="18754000" />
+    </task>
+    <task id="LOCAL-00001" summary="11">
+      <option name="closed" value="true" />
+      <created>1727338288036</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727338288036</updated>
+    </task>
+    <task id="LOCAL-00002" summary="11">
+      <option name="closed" value="true" />
+      <created>1727338418928</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727338418928</updated>
+    </task>
+    <task id="LOCAL-00003" summary="网络状态">
+      <option name="closed" value="true" />
+      <created>1727347097818</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727347097818</updated>
+    </task>
+    <task id="LOCAL-00004" summary="网络数据采集上报和展示">
+      <option name="closed" value="true" />
+      <created>1727431725810</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727431725810</updated>
+    </task>
+    <task id="LOCAL-00005" summary="网络数据采集上报和展示">
+      <option name="closed" value="true" />
+      <created>1727431788553</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1727431788553</updated>
+    </task>
+    <task id="LOCAL-00006" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727600335514</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727600335514</updated>
+    </task>
+    <task id="LOCAL-00007" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727600352453</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1727600352453</updated>
+    </task>
+    <task id="LOCAL-00008" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727601516500</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727601516500</updated>
+    </task>
+    <task id="LOCAL-00009" summary="网络告警实现">
+      <option name="closed" value="true" />
+      <created>1727601557963</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727601557963</updated>
+    </task>
+    <task id="LOCAL-00010" summary="依赖修改,名称修改">
+      <option name="closed" value="true" />
+      <created>1728900205636</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1728900205636</updated>
+    </task>
+    <task id="LOCAL-00011" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1728956323128</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1728956323128</updated>
+    </task>
+    <task id="LOCAL-00012" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1728972285247</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728972285247</updated>
+    </task>
+    <task id="LOCAL-00013" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1728983942932</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728983942932</updated>
+    </task>
+    <task id="LOCAL-00014" summary="仓库名称修改">
+      <option name="closed" value="true" />
+      <created>1729040917089</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1729040917089</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="11" />
+    <MESSAGE value="网络状态" />
+    <MESSAGE value="网络数据采集上报和展示" />
+    <MESSAGE value="网络告警实现" />
+    <MESSAGE value="依赖修改,名称修改" />
+    <MESSAGE value="仓库名称修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="仓库名称修改" />
+  </component>
+</project>

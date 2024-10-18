@@ -18,6 +18,8 @@ public class DbGraphicsMonitor {
 
     private String graphicsName;
 
+    private String dbId;
+
     public String getId() {
         return id;
     }
@@ -48,5 +50,13 @@ public class DbGraphicsMonitor {
 
     public void setGraphicsName(String graphicsName) {
         this.graphicsName = graphicsName;
+    }
+
+    public String getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(String dbId) {
+        this.dbId = dbId;
     }
 }

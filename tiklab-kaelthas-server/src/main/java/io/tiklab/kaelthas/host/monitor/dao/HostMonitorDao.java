@@ -70,7 +70,7 @@ public class HostMonitorDao {
         return jpaTemplate.findAll(MonitorItemEntity.class);
     }
 
-    public void deleteMonitorByIds(DeleteCondition deleteCondition) {
+    public void deleteByHostId(DeleteCondition deleteCondition) {
         jpaTemplate.delete(deleteCondition);
     }
 

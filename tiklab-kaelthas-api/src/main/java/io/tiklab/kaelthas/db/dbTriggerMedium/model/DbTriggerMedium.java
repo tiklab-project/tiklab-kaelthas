@@ -10,11 +10,11 @@ public class DbTriggerMedium {
 
     private String id;
 
-
     private String triggerId;
 
-
     private String mediumId;
+
+    private String dbId;
 
     public String getId() {
         return id;
@@ -40,4 +40,11 @@ public class DbTriggerMedium {
         this.mediumId = mediumId;
     }
 
+    public String getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(String dbId) {
+        this.dbId = dbId;
+    }
 }

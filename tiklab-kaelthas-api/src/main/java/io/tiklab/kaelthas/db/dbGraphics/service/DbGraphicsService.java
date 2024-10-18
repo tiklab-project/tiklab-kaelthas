@@ -25,4 +25,6 @@ public interface DbGraphicsService {
 
     //根据dbId查询出图形列表
     List<DbGraphics> findDbGraphicsList(String hostId);
+
+    void deleteByDbId(String dbId);
 }

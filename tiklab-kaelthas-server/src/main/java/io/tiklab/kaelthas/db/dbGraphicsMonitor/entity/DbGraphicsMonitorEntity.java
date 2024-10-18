@@ -17,6 +17,9 @@ public class DbGraphicsMonitorEntity {
     @Column(name = "monitor_id")
     private String monitorId;
 
+    @Column(name = "db_id")
+    private String dbId;
+
     public String getId() {
         return id;
     }
@@ -39,5 +42,13 @@ public class DbGraphicsMonitorEntity {
 
     public void setMonitorId(String monitorId) {
         this.monitorId = monitorId;
+    }
+
+    public String getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(String dbId) {
+        this.dbId = dbId;
     }
 }

@@ -21,4 +21,6 @@ public interface DbTriggerService {
     List<DbTrigger> findListByDbId(String hostId);
 
     List<DbTrigger> findLikeTrigger(String hostId, String expression);
+
+    void deleteByDbId(String id);
 }

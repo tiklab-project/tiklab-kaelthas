@@ -133,7 +133,7 @@ public class HistoryServiceImpl implements HistoryService {
                     List<History> historyList = historyDao.findHistoryByMonitorId(history);
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-                        setThreshold(historyList, history1, history);
+                        setThreshold(historyList, history1);
                         for (String string : xTime) {
                             History history3 = new History();
                             history3.setGatherTime(string);
@@ -178,7 +178,7 @@ public class HistoryServiceImpl implements HistoryService {
                     List<History> historyList = historyMultiDao.findHistoryByOneTime(history);
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-                        setThreshold(historyList, history1, history);
+                        setThreshold(historyList, history1);
                         for (String string : xTime) {
                             History history3 = new History();
                             history3.setGatherTime(string);
@@ -225,7 +225,7 @@ public class HistoryServiceImpl implements HistoryService {
                     List<History> historyList = historyMultiDao.findHistoryByFiveTime(history);
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-                        setThreshold(historyList, history1, history);
+                        setThreshold(historyList, history1);
                         for (String string : xTime) {
                             History history3 = new History();
                             history3.setGatherTime(string);
@@ -271,7 +271,7 @@ public class HistoryServiceImpl implements HistoryService {
                     List<History> historyList = historyMultiDao.findHistoryByFifteenTime(history);
                     if (!historyList.isEmpty()) {
                         history1.setName(historyList.get(0).getMonitorName());
-                        setThreshold(historyList, history1, history);
+                        setThreshold(historyList, history1);
                         for (String string : xTime) {
                             History history3 = new History();
                             history3.setGatherTime(string);
@@ -303,11 +303,15 @@ public class HistoryServiceImpl implements HistoryService {
         return resList;
     }
 
-    private void setThreshold(List<History> histories, History information, History history) {
+    private void setThreshold(List<History> histories, History information) {
+
         //根据监控项查询监控项的阈值
         String expression = histories.get(0).getExpression();
+        if (StringUtils.isBlank(expression)) {
+            return;
+        }
         //根据表达式查询触发器表达式
-        List<Trigger> triggerList = triggerService.findLikeTrigger(histories.get(0).getHostId(), expression, history.getTriggerId());
+        List<Trigger> triggerList = triggerService.findLikeTrigger(histories.get(0).getHostId(), expression);
 
         if (!triggerList.isEmpty()) {
             String triggerExe = triggerList.get(0).getExpression();
@@ -321,7 +325,7 @@ public class HistoryServiceImpl implements HistoryService {
                         for (String condition : conditions) {
                             if (condition.contains(expression)) {
                                 Map<String, String> map = new HashMap<>();
-                                if (condition == null) {
+                                if (StringUtils.isBlank(condition)) {
                                     // 添加空值检查
                                     return;
                                 }

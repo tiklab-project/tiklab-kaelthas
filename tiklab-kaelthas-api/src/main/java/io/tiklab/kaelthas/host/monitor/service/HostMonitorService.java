@@ -33,7 +33,7 @@ public interface HostMonitorService {
     @FindAll
     List<MonitorItem> findMonitorItemAll();
 
-    void deleteMonitorByIds(String[] ids);
+    void deleteByHostId(String hostId);
 
     List<HostMonitor> findMonitorByHostId(String hostId);
 

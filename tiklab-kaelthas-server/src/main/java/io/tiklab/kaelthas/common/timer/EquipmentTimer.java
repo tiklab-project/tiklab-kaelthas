@@ -62,12 +62,30 @@ public class EquipmentTimer {
                     stringBuilder.append(",");
                 }
             }
-            updateSql = "update mtc_host set usability = 0 where id in ("+stringBuilder+")";
+            updateSql = "update mtc_host set usability = 0 where id in ("+stringBuilder+");";
         }else {
             //主机分为两类,有数据的和没有数据的都需要进行状态更新
             List<String> resultIds = histories.stream().map(History::getId).toList();
+            StringBuilder stringBuilder1 = new StringBuilder();
+            for (int i = 0; i < resultIds.size(); i++) {
+                stringBuilder1.append("'").append(resultIds.get(i).concat("'"));
+                if (i != resultIds.size() - 1) {
+                    stringBuilder1.append(",");
+                }
+            }
+            updateSql = "update mtc_host set usability = 1 where id in ("+stringBuilder1+");";
+            hostIds.removeAll(resultIds);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < hostIds.size(); i++) {
+                stringBuilder.append("'").append(hostIds.get(i).concat("'"));
+                if (i != hostIds.size() - 1) {
+                    stringBuilder.append(",");
+                }
+            }
+            updateSql = updateSql.concat("\nupdate mtc_host set usability = 0 where id in ("+stringBuilder+");");
+        }
 
-        }*/
+        equipmentDao.updateBySQL(updateSql);*/
 
         for (Host host : allHost) {
             //查询五分钟内是否有数据

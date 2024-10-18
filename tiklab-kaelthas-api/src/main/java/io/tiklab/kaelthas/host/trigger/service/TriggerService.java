@@ -31,13 +31,13 @@ public interface TriggerService {
 
     void deleteByMonitor(String monitorId);
 
-    void deleteByMonitorIds(String[] monitorIds);
+    void deleteByHostId(String hostId);
 
     List<Trigger> findTriggerListById(String hostId);
 
     void insertAlarmForTrigger(List<History> entityList);
 
-    List<Trigger> findLikeTrigger(String hostId, String expression,String triggerId);
+    List<Trigger> findLikeTrigger(String hostId, String expression);
 
     //查询触发器的数量
     Long findTriggerAllNum();

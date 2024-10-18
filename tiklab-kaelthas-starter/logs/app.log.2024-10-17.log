@@ -1,0 +1,70 @@
+2024-10-17 09:02:17.430 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2024-10-17 09:02:17.448 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Starting KaelthasApplication using Java 17.0.9 on DESKTOP-QSSU4I0 with PID 26636 (D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter\target\classes started by admin in D:\code\companycode\xmonitor\tiklab-kaelthas)
+2024-10-17 09:02:17.448 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - No active profile set, falling back to default profiles: default
+2024-10-17 09:02:19.859 [main] INFO  o.s.c.annotation.ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'io.tiklab.rpc.boot.starter.config.RpcServerAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2024-10-17 09:02:20.001 [main] INFO  io.tiklab.rpc.common.support.NetworkUtils - get ip adress,costTime:0
+2024-10-17 09:02:20.002 [main] INFO  io.tiklab.toolkit.context.AppHomeConfiguration - APP_HOME:D:\code\companycode\xmonitor\tiklab-kaelthas\tiklab-kaelthas-starter
+2024-10-17 09:02:21.068 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2024-10-17 09:02:21.076 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-10-17 09:02:21.076 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-10-17 09:02:21.077 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2024-10-17 09:02:21.188 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-10-17 09:02:21.188 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3704 ms
+2024-10-17 09:02:22.597 [main] INFO  i.t.r.b.starter.config.RpcServerAutoConfiguration - rpc server started on 127.0.0.1:8080
+2024-10-17 09:02:22.929 [main] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty server starting on port:5030
+2024-10-17 09:02:23.019 [main] INFO  i.t.d.b.starter.config.DcsServerAutoConfiguration - dcs server started on 127.0.0.1:5030
+2024-10-17 09:02:23.020 [nioEventLoopGroup-2-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - netty started succefully.
+2024-10-17 09:02:23.021 [main] INFO  io.tiklab.postgresql.config.ExecPostgresqlScript - postgresql type local
+2024-10-17 09:02:23.252 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-10-17 09:02:23.414 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-10-17 09:02:23.481 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2024-10-17 09:02:23.492 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2024-10-17 09:02:23.492 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2024-10-17 09:02:23.492 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2024-10-17 09:02:23.493 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2024-10-17 09:02:23.493 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2024-10-17 09:02:23.493 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2024-10-17 09:02:23.493 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@34ae4fd9
+2024-10-17 09:02:23.530 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-10-17 09:02:23.539 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2024-10-17 09:02:23.539 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2024-10-17 09:02:23.539 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2024-10-17 09:02:23.545 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-10-17 09:02:23.549 [main] INFO  i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database...
+2024-10-17 09:02:23.871 [main] WARN  io.tiklab.dsm.config.SQLFileParser - sql script file name invalid,file name:test.sql
+2024-10-17 09:02:23.884 [main] ERROR i.t.dsm.boot.starter.config.DsmAutoConfiguration - init database failed.
+io.tiklab.core.exception.ApplicationException: script file not found,module:message,version:1.0.9
+	at io.tiklab.dsm.config.DsmConfigParser.parse(DsmConfigParser.java:44)
+	at io.tiklab.dsm.DsmProcessor.process(DsmProcessor.java:67)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.process(DsmAutoConfiguration.java:68)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:48)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration.onApplicationEvent(DsmAutoConfiguration.java:16)
+	at io.tiklab.dsm.boot.starter.config.DsmAutoConfiguration$$EnhancerBySpringCGLIB$$c0702a05.onApplicationEvent(<generated>)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:938)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at io.tiklab.kaelthas.starter.KaelthasApplication.main(KaelthasApplication.java:14)
+2024-10-17 09:02:23.888 [main] INFO  io.tiklab.kaelthas.starter.KaelthasApplication - Started KaelthasApplication in 6.791 seconds (JVM running for 14.772)
+2024-10-17 09:34:56.344 [Thread-1] INFO  i.t.r.transport.tcp.transport.netty.NettyServer - jvm destroy,clear resource on port:0...
+2024-10-17 09:34:56.348 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-10-17 09:34:56.383 [SpringApplicationShutdownHook] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2024-10-17 09:34:56.383 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2024-10-17 09:34:56.383 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2024-10-17 09:34:56.383 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.

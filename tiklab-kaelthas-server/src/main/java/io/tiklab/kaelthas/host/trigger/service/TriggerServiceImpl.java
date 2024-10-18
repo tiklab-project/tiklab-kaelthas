@@ -195,9 +195,12 @@ public class TriggerServiceImpl implements TriggerService {
     }
 
     @Override
-    public void deleteByMonitorIds(String[] monitorIds) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(TriggerEntity.class).in("monitorId", monitorIds).get();
-        triggerDao.deleteByMonitorIds(deleteCondition);
+    public void deleteByHostId(String hostId) {
+        DeleteCondition deleteCondition = DeleteBuilders
+                .createDelete(TriggerEntity.class)
+                .eq("hostId", hostId)
+                .get();
+        triggerDao.deleteByHostId(deleteCondition);
     }
 
     @Override
@@ -415,12 +418,10 @@ public class TriggerServiceImpl implements TriggerService {
     }
 
     @Override
-    public List<Trigger> findLikeTrigger(String hostId, String expression, String triggerId) {
+    public List<Trigger> findLikeTrigger(String hostId, String expression) {
         QueryCondition queryCondition = QueryBuilders.createQuery(TriggerEntity.class)
                 .eq("hostId", hostId)
-                .eq("id", triggerId)
                 .like("expression", expression)
-                .order(new Order("severityLevel", OrderTypeEnum.asc))
                 .get();
 
         List<TriggerEntity> entityList = triggerDao.findLikeTrigger(queryCondition);

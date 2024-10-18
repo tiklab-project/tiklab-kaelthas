@@ -29,4 +29,6 @@ public interface DbMonitorService {
 
     //根据dbId查询监控项的数量
     List<DbMonitor> findMonitorNum(String dbId);
+
+    void deleteByDbId(String id);
 }

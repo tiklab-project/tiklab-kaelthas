@@ -3,6 +3,7 @@ package io.tiklab.kaelthas.db.dbMonitor.dao;
 
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
+import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.kaelthas.db.dbMonitor.entity.DbMonitorEntity;
 import io.tiklab.kaelthas.db.dbMonitor.model.DbMonitor;
@@ -52,5 +53,9 @@ public class DbMonitorDao {
 
     public List<DbMonitorEntity> findMonitorNum(QueryCondition queryCondition) {
         return jpaTemplate.findList(queryCondition,DbMonitorEntity.class);
+    }
+
+    public void deleteByDbId(DeleteCondition deleteCondition) {
+        jpaTemplate.delete(deleteCondition);
     }
 }

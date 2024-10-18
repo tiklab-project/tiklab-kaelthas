@@ -3,7 +3,9 @@ package io.tiklab.kaelthas.db.dbTrigger.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.tiklab.core.page.Pagination;
+import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.collection.util.SqlUtil;
 import io.tiklab.kaelthas.common.util.StringUtil;
@@ -53,9 +55,6 @@ public class DbTriggerServiceImpl implements DbTriggerService {
     private AlarmService alarmService;
 
     @Autowired
-    private DbMonitorService dbMonitorService;
-
-    @Autowired
     private DbDynamicService dbDynamicService;
 
     @Override
@@ -69,8 +68,10 @@ public class DbTriggerServiceImpl implements DbTriggerService {
             DbTriggerEntity entity = BeanMapper.map(dbTrigger, DbTriggerEntity.class);
             String dbTriggerId = dbTriggerDao.createDbTrigger(entity);
 
+            dbTrigger.setId(dbTriggerId);
+
             //将选择的告警类型,分别插入到中间表中
-            dbTriggerMediumService.createTriggerMedium(dbTriggerId, dbTrigger.getMediumType());
+            dbTriggerMediumService.createTriggerMedium(dbTrigger);
 
             DbDynamic dbDynamic = new DbDynamic();
             dbDynamic.setDbId(dbTrigger.getDbId());
@@ -101,7 +102,8 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         if (dbTrigger.getMediumType() != null && !dbTrigger.getMediumType().isEmpty()) {
             //将之前的的关联删除,将修改后的进行添加
             dbTriggerMediumService.deleteByTriggerId(dbTrigger.getId());
-            dbTriggerMediumService.createTriggerMedium(dbTrigger.getId(), dbTrigger.getMediumType());
+
+            dbTriggerMediumService.createTriggerMedium(dbTrigger);
         }
     }
 
@@ -349,4 +351,14 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         return BeanMapper.mapList(dbTriggerEntityList, DbTrigger.class);
     }
 
+    @Override
+    public void deleteByDbId(String id) {
+        if (StringUtils.isBlank(id)) {
+            return;
+        }
+        DeleteCondition deleteCondition = DeleteBuilders.createDelete(DbTriggerEntity.class)
+                .eq("dbId", id)
+                .get();
+        dbTriggerDao.deleteByDbId(deleteCondition);
+    }
 }

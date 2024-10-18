@@ -50,7 +50,7 @@ public class TriggerDao {
         jpaTemplate.delete(deleteCondition);
     }
 
-    public void deleteByMonitorIds(DeleteCondition deleteCondition) {
+    public void deleteByHostId(DeleteCondition deleteCondition) {
         jpaTemplate.delete(deleteCondition);
     }
 

@@ -19,4 +19,8 @@ public class DbTriggerMediumDao {
     public void deleteByTriggerId(DeleteCondition deleteCondition) {
         jpaTemplate.delete(deleteCondition);
     }
+
+    public void deleteByDbId(DeleteCondition deleteCondition) {
+        jpaTemplate.delete(deleteCondition);
+    }
 }

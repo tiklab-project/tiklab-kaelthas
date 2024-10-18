@@ -60,8 +60,9 @@ public class HostController {
      * 根据id删除主机
      */
     @RequestMapping(value = "/deleteHostById",method = RequestMethod.POST)
-    public void deleteHostById(@NotNull String id){
+    public Result<?> deleteHostById(@NotNull String id){
         hostService.deleteHostById(id);
+        return Result.ok();
     }
 
     /**

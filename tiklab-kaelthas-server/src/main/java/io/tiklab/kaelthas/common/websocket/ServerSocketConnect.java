@@ -2,7 +2,6 @@ package io.tiklab.kaelthas.common.websocket;
 
 import com.alibaba.fastjson.JSONArray;
 import io.tiklab.rpc.common.context.RpcTenantHolder;
-import io.tiklab.kaelthas.db.dbTrigger.service.DbTriggerService;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.host.host.service.HostService;
@@ -34,12 +33,9 @@ public class ServerSocketConnect {
     @Autowired
     HostService hostService;
 
-    @Autowired
-    private DbTriggerService dbTriggerService;
-
     private static final List<History> historyList = new ArrayList<>();
 
-    private static final int BATCH_SIZE = 100;
+    private static final int BATCH_SIZE = 1000;
 
     public final ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -65,9 +61,9 @@ public class ServerSocketConnect {
                             //不断读取客户端数据
                             String read;
                             while ((read = bufferedReader.readLine()) != null) {
-                                //System.err.println("服务端收到的信息:" + read);
+
                                 List<History> entityList = JSONArray.parseArray(read, History.class);
-                                //System.err.println(entityList);
+
                                 if (entityList == null || entityList.isEmpty()) {
                                     return;
                                 }
@@ -89,12 +85,7 @@ public class ServerSocketConnect {
                                         triggerService.insertAlarmForTrigger(histories);
                                     });
 
-                                    /*saveDataService.submit(() ->{
-                                        dbTriggerService.insertAlarmForDbTrigger(histories);
-                                    });*/
-
                                 }
-                                //saveDataService.shutdown();
                             }
                             clientConnectSocket.close();
                         } catch (Exception e) {

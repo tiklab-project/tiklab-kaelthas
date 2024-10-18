@@ -102,7 +102,6 @@ public class HostServiceImpl implements HostService {
     public String createHost(Host host) {
         String date = ConversionDateUtil.date(9);
         host.setCreateTime(date);
-        host.setUsability(2);
         host.setColor((int) Math.round(Math.random() * 5));
         HostEntity hostEntity = BeanMapper.map(host, HostEntity.class);
 
@@ -182,29 +181,16 @@ public class HostServiceImpl implements HostService {
 
     @Override
     public void deleteHostById(String id) {
-        //根据主机id查询出监控项id
-        HostMonitor hostMonitor = new HostMonitor();
-        hostMonitor.setHostId(id);
-        List<HostMonitor> allMonitor = monitorService.findAllMonitor(hostMonitor);
-
-        String[] monitorIds = allMonitor.stream().map(HostMonitor::getId).toArray(String[]::new);
 
         try {
-            Host host = this.findOneHost(id);
-
-            Dynamic dynamic = new Dynamic();
-            dynamic.setName("删除主机" + host.getName());
-            dynamic.setUpdateTime(ConversionDateUtil.date(9));
-            dynamicService.createDynamic(dynamic);
 
             //删除主机
             hostDao.deleteHostById(id);
 
             //删除主机下图形与监控项关联的信息,先根据主机id查询出图形的ids,根据图形的ids删除关联表信息
             List<Graphics> graphicsList = graphicsService.findInformationByGraphics(id);
-            List<String> stringList = graphicsList.stream().map(Graphics::getMonitorId).toList();
+            List<String> stringList = graphicsList.stream().map(Graphics::getId).toList();
             graphicsMonitorService.deleteByGraphicsIds(stringList);
-
 
             //删除图表和删除模板关联
             graphicsService.deleteGraphicsByHostId(id);
@@ -215,15 +201,12 @@ public class HostServiceImpl implements HostService {
 
             hostRecentService.deleteByHostId(id);
 
-            if (monitorIds.length != 0) {
-                //删除主机下的监控项
-                monitorService.deleteMonitorByIds(monitorIds);
+            //删除主机下的触发器
+            triggerService.deleteByHostId(id);
 
-                //删除主机下的触发器和触发器表达式
-                triggerService.deleteByMonitorIds(monitorIds);
+            //删除监控项
+            monitorService.deleteByHostId(id);
 
-                triggerExpressionService.deleteByMonitorIds(monitorIds);
-            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -361,8 +344,8 @@ public class HostServiceImpl implements HostService {
         Long hostCount = hostDao.findHostCount();
         //异常主机数量
         Long hostUsability = hostDao.findHostAbnormal();
-        map.put("hostCount",hostCount);
-        map.put("hostAbnormal",hostUsability);
+        map.put("hostCount", hostCount);
+        map.put("hostAbnormal", hostUsability);
         return map;
     }
 }

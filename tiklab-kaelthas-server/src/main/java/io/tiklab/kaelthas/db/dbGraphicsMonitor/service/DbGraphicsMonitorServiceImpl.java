@@ -20,20 +20,25 @@ public class DbGraphicsMonitorServiceImpl implements DbGraphicsMonitorService{
     private DbGraphicsMonitorDao dbGraphicsMonitorDao;
 
     @Override
-    public void deleteByCation(String graphicsId, String monitorId) {
+    public void deleteByCation(String graphicsId, String monitorId,String dbId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(DbGraphicsMonitorEntity.class)
                 .eq("graphicsId", graphicsId)
                 .eq("monitorId",monitorId)
+                .eq("dbId",dbId)
                 .get();
         dbGraphicsMonitorDao.deleteByGraphicsId(deleteCondition);
     }
 
     @Override
     public void createGraphicsMonitor(DbGraphics dbGraphics) {
+        if (dbGraphics.getMonitorIds().isEmpty()) {
+            return;
+        }
         for (String monitorId : dbGraphics.getMonitorIds()) {
             DbGraphicsMonitorEntity dbGraphicsMonitorEntity = new DbGraphicsMonitorEntity();
             dbGraphicsMonitorEntity.setGraphicsId(dbGraphics.getId());
             dbGraphicsMonitorEntity.setMonitorId(monitorId);
+            dbGraphicsMonitorEntity.setDbId(dbGraphics.getDbId());
             dbGraphicsMonitorDao.createGraphicsMonitor(dbGraphicsMonitorEntity);
         }
     }

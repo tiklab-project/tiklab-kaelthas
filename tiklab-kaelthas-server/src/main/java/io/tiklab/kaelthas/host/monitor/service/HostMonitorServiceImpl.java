@@ -301,11 +301,11 @@ public class HostMonitorServiceImpl implements HostMonitorService {
      * 根据监控项ids删除数据
      */
     @Override
-    public void deleteMonitorByIds(String[] ids) {
+    public void deleteByHostId(String hostId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(HostMonitorEntity.class)
-                .in("id", ids)
+                .eq("hostId", hostId)
                 .get();
-        hostMonitorDao.deleteMonitorByIds(deleteCondition);
+        hostMonitorDao.deleteByHostId(deleteCondition);
     }
 
     @Override
