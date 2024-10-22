@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.history.dao.HistoryDao;
 import io.tiklab.kaelthas.history.dao.HistoryMultiDao;
 import io.tiklab.kaelthas.db.database.model.DbInfo;
@@ -501,7 +502,7 @@ public class HistoryServiceImpl implements HistoryService {
         //查询最近五分钟有没有这个主机的数据,如果没有的话就说明这个主机没有数据上报,修改状态为不可用
         String beforeTime = ConversionDateUtil.findLocalDateTime(2, 5, null);
         String nowTime = ConversionDateUtil.findLocalDateTime(2, 0, null);
-        List<History> histories = historyDao.findHistoryByCondition(history,beforeTime,nowTime);
+        List<History> histories = historyDao.findHistoryByCondition(history, beforeTime, nowTime);
 
         if (histories.isEmpty()) {
             //修改主机状态为2
@@ -1085,8 +1086,11 @@ public class HistoryServiceImpl implements HistoryService {
             List<List<String>> listList = new LinkedList<>();
             Set<String> stringSet = new HashSet<>();
 
-            if (StringUtils.isNotBlank(history.getReportData())) {
+            if (StringUtils.isNotBlank(history.getReportData()) && !"null".equals(history.getReportData())) {
                 List<Map<String, String>> mapList = JSON.parseObject(history.getReportData(), List.class);
+                if (mapList.isEmpty()) {
+                    continue;
+                }
                 for (Map<String, String> stringMap : mapList) {
                     List<String> list1 = new LinkedList<>();
                     for (Map.Entry<String, String> entry : stringMap.entrySet()) {
@@ -1115,13 +1119,13 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public List<History> findDbHistoryByHostId(String hostId,String beforeTime) {
-        return historyDao.findDbHistoryByHostId(hostId,beforeTime);
+    public List<History> findDbHistoryByHostId(String hostId, String beforeTime) {
+        return historyDao.findDbHistoryByHostId(hostId, beforeTime);
     }
 
     @Override
     public List<History> findKuHistoryByHostId(String kuId, String beforeTime) {
-        return historyDao.findKuHistoryByHostId(kuId,beforeTime);
+        return historyDao.findKuHistoryByHostId(kuId, beforeTime);
     }
 
     @Override
@@ -1337,43 +1341,48 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public Map<String, Object> findInternetOverview(String internetId) {
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
         //将端口状态的信息转换成list放到map中
         History history = new History();
         history.setHostId(internetId);
         history.setMonitorId("301");
-        List<History> list = historyDao.findHistoryByCondition(history,null,null);
+        List<History> list = historyDao.findHistoryByCondition(history, null, null);
         if (!list.isEmpty()) {
             String reportData = list.get(0).getReportData();
             List<Map<String, Object>> mapList = JSON.parseObject(reportData, List.class);
-            map.put("podInfo",mapList);
+            map.put("podInfo", mapList);
         }
 
         History history2 = new History();
         history2.setHostId(internetId);
         history2.setMonitorId("304");
-        List<History> list2 = historyDao.findHistoryByCondition(history2,null,null);
+        List<History> list2 = historyDao.findHistoryByCondition(history2, null, null);
         if (!list2.isEmpty()) {
             String reportData = list2.get(0).getReportData();
             Map map1 = JSON.parseObject(reportData, Map.class);
-            map.put("systemInfo",map1);
+            map.put("systemInfo", map1);
         }
         return map;
     }
 
     @Override
     public List<History> findInHistoryByHostId(String internetId, String beforeTime) {
-        return historyDao.findInHistoryByHostId(internetId,beforeTime);
+        return historyDao.findInHistoryByHostId(internetId, beforeTime);
     }
 
     @Override
     public List<History> findInternetToGatherTime(String internetId, String beforeTime) {
-        return historyDao.findInternetToGatherTime(internetId,beforeTime);
+        return historyDao.findInternetToGatherTime(internetId, beforeTime);
     }
 
     @Override
-    public List<History> findHistoryByHostId(String id,String beforeTime) {
-        return historyDao.findHistoryByHostId(id,beforeTime);
+    public List<History> findHistoryByHostId(String id, String beforeTime) {
+        return historyDao.findHistoryByHostId(id, beforeTime);
+    }
+
+    @Override
+    public List<History> findHistoryByHostIds( String beforeTime) {
+        return historyDao.findHistoryByHostIds(beforeTime);
     }
 }

@@ -28,7 +28,7 @@ public class MysqlService {
     @Autowired
     private HistoryService historyService;
 
-    @Scheduled(cron = "0/30 * * * * ? ")
+    @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbMysql() {
         String dataTimeNow = SqlUtil.getDataTimeNow();
 

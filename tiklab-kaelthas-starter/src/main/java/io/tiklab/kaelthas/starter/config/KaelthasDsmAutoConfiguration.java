@@ -81,13 +81,10 @@ public class KaelthasDsmAutoConfiguration {
                 "xmonitor_1.0.8"
         });
         dsmConfig.newVersion("1.0.9", new String[]{
-                "message_1.0.9",
+                //"message_1.0.9",
                 "xmonitor_1.0.1",
                 "xmonitor_1.0.2",
                 "xmonitor_1.0.3",
-                "xmonitor_1.0.9",
-                "xmonitor_1.1.0",
-                "xmonitor_1.1.1"
         });
 
         dsmConfig.newVersion("1.1.1",new String[]{

@@ -80,7 +80,7 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
 
     @Override
     public void deleteByKuId(String id) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(KubernetesEntity.class)
+        DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuGraphicsEntity.class)
                 .eq("kuId", id)
                 .get();
         kuGraphicsDao.deleteByKuId(deleteCondition);

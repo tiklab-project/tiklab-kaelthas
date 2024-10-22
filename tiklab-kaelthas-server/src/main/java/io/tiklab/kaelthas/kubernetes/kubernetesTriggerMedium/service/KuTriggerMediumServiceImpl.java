@@ -23,7 +23,7 @@ public class KuTriggerMediumServiceImpl implements KuTriggerMediumService{
         }
         Object[] array = stringList.toArray();
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuTriggerMediumEntity.class)
-                .eq("triggerId", array)
+                .in("triggerId", array)
                 .get();
         kuTriggerMediumDao.deleteByTriggerIds(deleteCondition);
     }

@@ -51,4 +51,6 @@ public interface HistoryService {
     List<History> findInternetToGatherTime(String internetId, String beforeTime);
 
     List<History> findHistoryByHostId(String id,String beforeTime);
+
+    List<History> findHistoryByHostIds(String beforeTime);
 }

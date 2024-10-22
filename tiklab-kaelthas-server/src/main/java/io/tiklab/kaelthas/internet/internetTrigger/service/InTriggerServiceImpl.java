@@ -127,7 +127,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         return entityList.stream().map(InTriggerEntity::getId).toList();
     }
 
-    @Scheduled(cron = "* */2 * * * * ")
+    @Scheduled(cron = "0 0/2 * * * ? ")
     public void TimerInTrigger() {
         List<InTriggerEntity> inTriggerEntityList = inTriggerDao.findTriggerAll();
 

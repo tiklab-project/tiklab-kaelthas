@@ -13,7 +13,7 @@ import io.tiklab.kaelthas.collection.dao.KuCollectionDao;
 import io.tiklab.kaelthas.collection.utils.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KubernetesMonitor;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ public class ClusterItemOverview {
     @Autowired
     private HistoryService historyService;
 
-    @Scheduled(cron = "0 */5 * * * * ")
+    @Scheduled(cron = "30 0/5 * * * ? ")
     public void getClusterOverview() {
         //获取所有的k8s信息,将集群的基本信息进行收集
-        List<KubernetesMonitor> kuMonitors = kuCollectionDao.findKuMonitor();
+        List<KuMonitor> kuMonitors = kuCollectionDao.findKuMonitor();
 
         if (kuMonitors.isEmpty()) {
             return;
@@ -42,11 +42,11 @@ public class ClusterItemOverview {
 
         List<History> list  = new LinkedList<>();
 
-        List<KubernetesMonitor> monitorList = getKubernetesMonitors(kuMonitors);
+        List<KuMonitor> monitorList = getKubernetesMonitors(kuMonitors);
 
-        for (KubernetesMonitor kubernetesMonitor : monitorList) {
+        for (KuMonitor kuMonitor : monitorList) {
 
-            History history = getHistory(kubernetesMonitor);
+            History history = getHistory(kuMonitor);
             list.add(history);
         }
 
@@ -55,12 +55,12 @@ public class ClusterItemOverview {
     }
 
     @NotNull
-    private static List<KubernetesMonitor> getKubernetesMonitors(List<KubernetesMonitor> kuMonitors) {
-        List<KubernetesMonitor> monitorList = new LinkedList<>();
+    private static List<KuMonitor> getKubernetesMonitors(List<KuMonitor> kuMonitors) {
+        List<KuMonitor> monitorList = new LinkedList<>();
 
         for (int i = 1; i < 22; i++) {
-            for (KubernetesMonitor kuMonitor : kuMonitors) {
-                KubernetesMonitor monitor = new KubernetesMonitor();
+            for (KuMonitor kuMonitor : kuMonitors) {
+                KuMonitor monitor = new KuMonitor();
                 monitor.setKuId(kuMonitor.getId());
                 monitor.setName(kuMonitor.getName());
                 monitor.setIp(kuMonitor.getIp());
@@ -73,10 +73,10 @@ public class ClusterItemOverview {
         return monitorList;
     }
 
-    private static History getHistory(KubernetesMonitor kubernetesMonitor) {
+    private static History getHistory(KuMonitor kuMonitor) {
         try {
-            String token = kubernetesMonitor.getApiToken(); // 替换为你的 Token
-            String apiServerUrl = "https://" + kubernetesMonitor.getIp() + ":" + kubernetesMonitor.getPort(); // 替换为你的 API Server 地址
+            String token = kuMonitor.getApiToken(); // 替换为你的 Token
+            String apiServerUrl = "https://" + kuMonitor.getIp() + ":" + kuMonitor.getPort(); // 替换为你的 API Server 地址
 
             // 配置 ApiClient
             ApiClient client = new ClientBuilder()
@@ -94,10 +94,10 @@ public class ClusterItemOverview {
             CoreV1Api api = new CoreV1Api();
             AppsV1Api appsV1Api = new AppsV1Api();
             History history = new History();
-            history.setHostId(kubernetesMonitor.getKuId());
-            history.setMonitorId(kubernetesMonitor.getKuItemId());
+            history.setHostId(kuMonitor.getKuId());
+            history.setMonitorId(kuMonitor.getKuItemId());
             history.setGatherTime(ConversionAllTypeUtil.getDataTimeNow());
-            getClusterData(kubernetesMonitor, history, api, appsV1Api);
+            getClusterData(kuMonitor, history, api, appsV1Api);
             return history;
         } catch (ApiException e) {
             throw new RuntimeException(e);
@@ -105,8 +105,8 @@ public class ClusterItemOverview {
     }
 
 
-    private static void getClusterData(KubernetesMonitor kubernetesMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) throws ApiException {
-        switch (kubernetesMonitor.getKuItemId()) {
+    private static void getClusterData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) throws ApiException {
+        switch (kuMonitor.getKuItemId()) {
             case "1":
                 try {
                     V1NodeList nodeList = api.listNode(null, null, null, null, null, null, null, null, null, null);

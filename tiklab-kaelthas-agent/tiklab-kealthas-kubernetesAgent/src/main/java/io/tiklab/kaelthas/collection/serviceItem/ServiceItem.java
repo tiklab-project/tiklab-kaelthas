@@ -9,7 +9,7 @@ import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.openapi.models.V1ServiceList;
 import io.tiklab.kaelthas.collection.utils.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.history.model.History;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KubernetesMonitor;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -18,8 +18,8 @@ import java.util.*;
 
 public class ServiceItem {
 
-    public static void getNServiceReportData(KubernetesMonitor kubernetesMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) {
-        String params = ConversionAllTypeUtil.getParamValue(kubernetesMonitor.getExpression());
+    public static void getNServiceReportData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) {
+        String params = ConversionAllTypeUtil.getParamValue(kuMonitor.getExpression());
         if (StringUtils.isBlank(params)) {
             return;
         }
@@ -31,7 +31,7 @@ public class ServiceItem {
         }
 
 
-        switch (kubernetesMonitor.getKuItemId()){
+        switch (kuMonitor.getKuItemId()){
             case "201":
 
                 try {

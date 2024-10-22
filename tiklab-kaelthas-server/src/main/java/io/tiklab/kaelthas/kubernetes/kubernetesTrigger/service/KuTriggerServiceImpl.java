@@ -122,7 +122,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         return BeanMapper.mapList(kuTriggerByKuId, KuTrigger.class);
     }
 
-    @Scheduled(cron = "* */2 * * * * ")
+    @Scheduled(cron = "0 0/2 * * * ? ")
     public void TimerKuTrigger() {
         List<KuTriggerEntity> kuTriggerEntityList = kuTriggerDao.findAllTrigger();
         if (kuTriggerEntityList.isEmpty()) {
@@ -206,7 +206,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
                 alarm.setHostId(trigger.getKuId());
                 alarm.setTriggerId(trigger.getId());
                 alarm.setSendMessage(trigger.getDescribe());
-                alarm.setMachineType(2);
+                alarm.setMachineType(3);
                 alarm.setSeverityLevel(trigger.getSeverityLevel());
                 alarmService.createAlarmForKubernetes(alarm);
             }

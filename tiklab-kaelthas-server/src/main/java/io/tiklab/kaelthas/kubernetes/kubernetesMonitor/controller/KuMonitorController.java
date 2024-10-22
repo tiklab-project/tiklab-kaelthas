@@ -2,7 +2,7 @@ package io.tiklab.kaelthas.kubernetes.kubernetesMonitor.controller;
 
 import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KubernetesMonitor;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
 import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.service.KuMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +24,8 @@ public class KuMonitorController {
      * 分页查询监控表
      */
     @RequestMapping(value = "/findKuMonitorPage",method = RequestMethod.POST)
-    public Result<?> findKuMonitorPage(@RequestBody KubernetesMonitor kubernetesMonitor){
-        Pagination<KubernetesMonitor> pagination = kuMonitorService.findKuMonitorPage(kubernetesMonitor);
+    public Result<?> findKuMonitorPage(@RequestBody KuMonitor kuMonitor){
+        Pagination<KuMonitor> pagination = kuMonitorService.findKuMonitorPage(kuMonitor);
         return Result.ok(pagination);
     }
 
@@ -33,8 +33,8 @@ public class KuMonitorController {
      * 创建监控项
      */
     @RequestMapping(value = "/createKuMonitor",method = RequestMethod.POST)
-    public Result<String> createKuMonitor(@RequestBody KubernetesMonitor kubernetesMonitor){
-        String id = kuMonitorService.createKuMonitor(kubernetesMonitor);
+    public Result<String> createKuMonitor(@RequestBody KuMonitor kuMonitor){
+        String id = kuMonitorService.createKuMonitor(kuMonitor);
         return Result.ok(id);
     }
 
@@ -51,14 +51,14 @@ public class KuMonitorController {
      * 修改监控项
      */
     @RequestMapping(value = "/updateKuMonitor",method = RequestMethod.POST)
-    public Result<?> updateKuMonitor(@RequestBody KubernetesMonitor kubernetesMonitor){
-        kuMonitorService.updateKuMonitor(kubernetesMonitor);
+    public Result<?> updateKuMonitor(@RequestBody KuMonitor kuMonitor){
+        kuMonitorService.updateKuMonitor(kuMonitor);
         return Result.ok();
     }
 
     @RequestMapping(value = "/findAllKuMonitor",method = RequestMethod.POST)
-    public Result<List<KubernetesMonitor>> findAllKuMonitor(){
-        List<KubernetesMonitor> kubernetesMonitorList = kuMonitorService.findAllKuMonitor();
-        return Result.ok(kubernetesMonitorList);
+    public Result<List<KuMonitor>> findAllKuMonitor(@NotNull String kuId){
+        List<KuMonitor> kuMonitorList = kuMonitorService.findAllKuMonitor(kuId);
+        return Result.ok(kuMonitorList);
     }
 }

@@ -405,4 +405,16 @@ public class HistoryDao {
 
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }
+
+    public List<History> findHistoryByHostIds(String beforeTime) {
+
+        String sql = """
+                SELECT distinct host_id
+                FROM mtc_history where 1=1
+                """;
+
+        sql = sql.concat(" and gather_time >= '" + beforeTime + "'");
+
+        return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(History.class));
+    }
 }

@@ -6,12 +6,12 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.kubernetes.kubernetesGraphicsMonitor.service.KuGraphicsMonitorService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.toolkit.join.JoinTemplate;
-import io.tiklab.kaelthas.kubernetes.kubernetesInfo.entity.KubernetesEntity;
 import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.dao.KuMonitorDao;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.entity.KubernetesMonitorEntity;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KubernetesMonitor;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.entity.KuMonitorEntity;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,56 +26,65 @@ public class KuMonitorServiceImpl implements KuMonitorService{
     @Autowired
     private KuMonitorDao kuMonitorDao;
 
+    @Autowired
+    private KuGraphicsMonitorService kuGraphicsMonitorService;
+
     @Override
-    public Pagination<KubernetesMonitor> findKuMonitorPage(KubernetesMonitor kubernetesMonitor) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(KubernetesMonitorEntity.class)
-                .eq("kuId", kubernetesMonitor.getKuId())
-                .like("name", kubernetesMonitor.getName())
-                .pagination(kubernetesMonitor.getPageParam())
+    public Pagination<KuMonitor> findKuMonitorPage(KuMonitor kuMonitor) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(KuMonitorEntity.class)
+                .eq("kuId", kuMonitor.getKuId())
+                .like("name", kuMonitor.getName())
+                .pagination(kuMonitor.getPageParam())
                 .get();
 
-        Pagination<KubernetesMonitorEntity> pagination = kuMonitorDao.findKuMonitorPage(queryCondition);
+        Pagination<KuMonitorEntity> pagination = kuMonitorDao.findKuMonitorPage(queryCondition);
 
-        List<KubernetesMonitor> kubernetesMonitorList = BeanMapper.mapList(pagination.getDataList(), KubernetesMonitor.class);
+        List<KuMonitor> kuMonitorList = BeanMapper.mapList(pagination.getDataList(), KuMonitor.class);
 
-        joinTemplate.joinQuery(kubernetesMonitorList);
+        joinTemplate.joinQuery(kuMonitorList);
 
-        return PaginationBuilder.build(pagination, kubernetesMonitorList);
+        return PaginationBuilder.build(pagination, kuMonitorList);
     }
 
     @Override
-    public String createKuMonitor(KubernetesMonitor kubernetesMonitor) {
-        KubernetesMonitorEntity entity = BeanMapper.map(kubernetesMonitor, KubernetesMonitorEntity.class);
+    public String createKuMonitor(KuMonitor kuMonitor) {
+        KuMonitorEntity entity = BeanMapper.map(kuMonitor, KuMonitorEntity.class);
         return kuMonitorDao.createKuMonitor(entity);
     }
 
     @Override
     public void deleteKuMonitor(String id) {
-        kuMonitorDao.deleteKuMonitor(id);
+        try {
+            //删除监控项的同时将关联表的信息删除
+            kuMonitorDao.deleteKuMonitor(id);
+            kuGraphicsMonitorService.deleteByCondition(null,id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void updateKuMonitor(KubernetesMonitor kubernetesMonitor) {
-        KubernetesMonitorEntity entity = BeanMapper.map(kubernetesMonitor, KubernetesMonitorEntity.class);
+    public void updateKuMonitor(KuMonitor kuMonitor) {
+        KuMonitorEntity entity = BeanMapper.map(kuMonitor, KuMonitorEntity.class);
         kuMonitorDao.updateKuMonitor(entity);
     }
 
     @Override
-    public List<KubernetesMonitor> findAllKuMonitor() {
-        return kuMonitorDao.findAllKuMonitor();
+    public List<KuMonitor> findAllKuMonitor(String kuId) {
+        return kuMonitorDao.findAllKuMonitor(kuId);
     }
 
     /**
      * 查询k8s下的集群和监控项信息
      */
     @Override
-    public List<KubernetesMonitor> findKuAndMonitor() {
+    public List<KuMonitor> findKuAndMonitor() {
         return kuMonitorDao.findKuAndMonitor();
     }
 
     @Override
     public void deleteByKuId(String id) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(KubernetesEntity.class)
+        DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuMonitorEntity.class)
                 .eq("kuId", id)
                 .get();
         kuMonitorDao.deleteByKuId(deleteCondition);

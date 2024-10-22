@@ -26,7 +26,7 @@ public class PgsqlService {
     @Autowired
     private HistoryService historyService;
 
-    @Scheduled(cron = "* 1/1 * * * ? ")
+    @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbAim() {
         String dataTimeNow = SqlUtil.date(9);
 

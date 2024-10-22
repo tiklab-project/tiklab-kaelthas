@@ -222,20 +222,20 @@ ALTER TABLE "mtc_db_trigger_medium" ADD CONSTRAINT "mtc_trigger_medium_copy1_pke
 
 
 
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('3', 'systems.db.UpdatedRowsTrend', '每秒修改行数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('5', 'systems.db.ReturnedRowsTrend', '返回行数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('6', 'systems.db.RolledBackTransactionsTrend', '每秒回滚事务数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('7', 'systems.db.CommittedTransactionsTrend', '每秒提交事务数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('8', 'systems.db.ConflictsTrend', '事务冲突数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('9', 'systems.db.CacheHitRate', '缓存命中率', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('10', 'systems.db.ActiveSessions', '活动会话数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('11', 'systems.db.IdleSessions', '空闲会话数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('12', 'systems.db.DeadlocksTrend', '僵直趋势', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('13', 'systems.db.TemporaryFilesTrend', '临时文件趋势', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('14', 'systems.db.Locks', '锁数量', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('4', 'systems.db.FetchedRowsTrend', '每秒读取行数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('2', 'systems.db.DeletedRowsTrend', '每秒删除行数', 1, 'Postgresql');
-INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('1', 'systems.db.InsertedRowsTrend', '每秒插入行数', 1, 'Postgresql');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('3', 'systems.db.UpdatedRowsTrend', '每秒修改行数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('5', 'systems.db.ReturnedRowsTrend', '返回行数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('6', 'systems.db.RolledBackTransactionsTrend', '每秒回滚事务数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('7', 'systems.db.CommittedTransactionsTrend', '每秒提交事务数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('8', 'systems.db.ConflictsTrend', '事务冲突数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('9', 'systems.db.CacheHitRate', '缓存命中率', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('10', 'systems.db.ActiveSessions', '活动会话数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('11', 'systems.db.IdleSessions', '空闲会话数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('12', 'systems.db.DeadlocksTrend', '僵直趋势', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('13', 'systems.db.TemporaryFilesTrend', '临时文件趋势', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('14', 'systems.db.Locks', '锁数量', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('4', 'systems.db.FetchedRowsTrend', '每秒读取行数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('2', 'systems.db.DeletedRowsTrend', '每秒删除行数', 1, 'PostgreSQL');
+INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('1', 'systems.db.InsertedRowsTrend', '每秒插入行数', 1, 'PostgreSQL');
 INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('103', 'systems.mysql.UpdatedRowsTrend', '每秒修改行数', 1, 'MYSQL');
 INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('105', 'systems.mysql.ReturnedRowsTrend', '返回行数', 1, 'MYSQL');
 INSERT INTO "mtc_db_item" ("id", "expression", "describe", "data_type", "db_type") VALUES ('106', 'systems.mysql.RolledBackTransactionsTrend', '每秒回滚事务数', 1, 'MYSQL');

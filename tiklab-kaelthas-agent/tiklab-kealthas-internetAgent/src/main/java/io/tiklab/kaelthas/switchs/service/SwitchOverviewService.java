@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 采集交换机的状态信息
+ */
 @Component
 public class SwitchOverviewService {
 
@@ -35,7 +38,7 @@ public class SwitchOverviewService {
 
     private static final List<History> historyList = new LinkedList<>();
 
-    @Scheduled(cron = "0/30 * * * * *")
+    @Scheduled(cron = "30 0/5 * * * ? ")
     public void executeOverview() throws IOException {
         //查询出网络列表
         String dataTimeNow = ConversionAllTypeUtil.getDataTimeNow();

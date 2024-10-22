@@ -1,24 +1,4 @@
-/*
- Navicat Premium Dump SQL
 
- Source Server         : 172.10.1.10
- Source Server Type    : PostgreSQL
- Source Server Version : 150000 (150000)
- Source Host           : 172.10.1.10:5432
- Source Catalog        : throughtware_xmonitor_ce
- Source Schema         : public
-
- Target Server Type    : PostgreSQL
- Target Server Version : 150000 (150000)
- File Encoding         : 65001
-
- Date: 29/09/2024 16:21:29
-*/
-
-
--- ----------------------------
--- Table structure for mtc_alarm
--- ----------------------------
 CREATE TABLE "mtc_alarm" (
                              "id" varchar(128) COLLATE "pg_catalog"."default" NOT NULL,
                              "host_id" varchar(128) COLLATE "pg_catalog"."default",
@@ -101,9 +81,11 @@ COMMENT ON COLUMN "mtc_db_graphics"."db_id" IS 'dbid';
 CREATE TABLE "mtc_db_graphics_monitor" (
                                            "id" varchar(20) COLLATE "pg_catalog"."default" NOT NULL,
                                            "graphics_id" varchar(20) COLLATE "pg_catalog"."default",
-                                           "monitor_id" varchar(20) COLLATE "pg_catalog"."default"
+                                           "monitor_id" varchar(20) COLLATE "pg_catalog"."default",
+                                           "db_id" varchar(32) COLLATE "pg_catalog"."default"
 )
 ;
+COMMENT ON COLUMN "mtc_db_graphics_monitor"."db_id" IS '数据库id';
 
 -- ----------------------------
 -- Table structure for mtc_db_info
@@ -214,11 +196,13 @@ COMMENT ON TABLE "mtc_db_trigger" IS '数据库的触发器表';
 CREATE TABLE "mtc_db_trigger_medium" (
                                          "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
                                          "trigger_id" varchar(32) COLLATE "pg_catalog"."default",
-                                         "medium_id" varchar(32) COLLATE "pg_catalog"."default"
+                                         "medium_id" varchar(32) COLLATE "pg_catalog"."default",
+                                         "db_id" varchar(32) COLLATE "pg_catalog"."default"
 )
 ;
 COMMENT ON COLUMN "mtc_db_trigger_medium"."trigger_id" IS '触发器id';
 COMMENT ON COLUMN "mtc_db_trigger_medium"."medium_id" IS '媒介id';
+COMMENT ON COLUMN "mtc_db_trigger_medium"."db_id" IS '数据库id';
 COMMENT ON TABLE "mtc_db_trigger_medium" IS '触发器和媒介中间表';
 
 -- ----------------------------
@@ -775,10 +759,10 @@ COMMENT ON TABLE "mtc_medium" IS '媒介表';
 -- Table structure for mtc_message
 -- ----------------------------
 CREATE TABLE "mtc_message" (
-                               "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-                               "medium_id" varchar(32) COLLATE "pg_catalog"."default",
-                               "alarm_id" varchar(32) COLLATE "pg_catalog"."default",
-                               "information" varchar(128) COLLATE "pg_catalog"."default",
+                               "id" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+                               "medium_id" varchar(255) COLLATE "pg_catalog"."default",
+                               "alarm_id" varchar(255) COLLATE "pg_catalog"."default",
+                               "information" varchar(255) COLLATE "pg_catalog"."default",
                                "send_time" timestamp(6)
 )
 ;

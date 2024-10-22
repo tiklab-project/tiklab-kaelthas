@@ -15,7 +15,8 @@ server:
 jdbc:
   driverClassName: org.postgresql.Driver
 #  url: jdbc:postgresql://172.13.1.27:5432/xmonitor_ee?stringtype=unspecified
-  url: jdbc:postgresql://172.10.1.10:5432/throughtware_xmonitor_ce?stringtype=unspecified
+#  url: jdbc:postgresql://172.10.1.10:5432/throughtware_xmonitor_ce?stringtype=unspecified
+  url: jdbc:postgresql://172.10.1.10:5432/xmonitor_test6?stringtype=unspecified
   username: postgres
   password: darth2020
 

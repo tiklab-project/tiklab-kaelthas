@@ -1,26 +1,26 @@
 package io.tiklab.kaelthas.kubernetes.kubernetesMonitor.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KubernetesMonitor;
 
 import java.util.List;
 
-@JoinProvider(model = KubernetesMonitor.class)
+@JoinProvider(model = KuMonitor.class)
 public interface KuMonitorService {
 
-    Pagination<KubernetesMonitor> findKuMonitorPage(KubernetesMonitor kubernetesMonitor);
+    Pagination<KuMonitor> findKuMonitorPage(KuMonitor kuMonitor);
 
 
-    String createKuMonitor(KubernetesMonitor kubernetesMonitor);
+    String createKuMonitor(KuMonitor kuMonitor);
 
     void deleteKuMonitor(String id);
 
-    void updateKuMonitor(KubernetesMonitor kubernetesMonitor);
+    void updateKuMonitor(KuMonitor kuMonitor);
 
-    List<KubernetesMonitor> findAllKuMonitor();
+    List<KuMonitor> findAllKuMonitor(String kuId);
 
-    List<KubernetesMonitor> findKuAndMonitor();
+    List<KuMonitor> findKuAndMonitor();
 
     void deleteByKuId(String id);
 }

@@ -9,7 +9,7 @@ import io.kubernetes.client.openapi.models.V1NodeCondition;
 import io.kubernetes.client.openapi.models.V1PodList;
 import io.tiklab.kaelthas.collection.utils.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.history.model.History;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KubernetesMonitor;
+import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class NodeItem {
-    public static void getNodeReportData(KubernetesMonitor kubernetesMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) {
+    public static void getNodeReportData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) {
 
-        String nodeName = ConversionAllTypeUtil.getParamValue(kubernetesMonitor.getExpression());
+        String nodeName = ConversionAllTypeUtil.getParamValue(kuMonitor.getExpression());
         if (StringUtils.isBlank(nodeName)) {
             return;
         }
 
-        switch (kubernetesMonitor.getKuItemId()) {
+        switch (kuMonitor.getKuItemId()) {
             case "101":
                 try {
                     V1PodList podList = api.listPodForAllNamespaces(null, null, null, null, null, "node=" + nodeName, null, null, null, null);

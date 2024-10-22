@@ -117,7 +117,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         return BeanMapper.mapList(listByDbId, DbTrigger.class);
     }
 
-    @Scheduled(cron = "* */2 * * * * ")
+    @Scheduled(cron = "0 0/2 * * * ? ")
     public void TimerTrigger() {
         //获取所有数据库下的触发器
         List<DbTriggerEntity> triggerList = dbTriggerDao.findAllTrigger();
@@ -306,7 +306,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);
 
-            //将表达式中的
+            //将表达式替换成值
             String value = conversionScriptsUtils.replaceValue(dbTriggerEntity.getExpression(), jsonObject);
 
             //查看这个表达式当中有没有没有被替换掉的表达式,如果有的话就不进行运算了,没有才进行运算
