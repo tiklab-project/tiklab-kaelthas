@@ -63,7 +63,8 @@ public class KaelthasGatewayAutoConfiguration {
                         ".ftl",
                         ".map",
                         ".gz",
-                        "svg"
+                        "svg",
+                        ".txt"
                 })
                 .ignoreUrls(new String[]{
                         "/",

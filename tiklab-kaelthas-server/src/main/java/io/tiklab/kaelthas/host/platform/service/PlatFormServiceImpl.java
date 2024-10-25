@@ -1,10 +1,16 @@
 package io.tiklab.kaelthas.host.platform.service;
 
+import io.tiklab.core.exception.ApplicationException;
 import io.tiklab.licence.appauth.service.ApplyAuthService;
 import io.tiklab.licence.licence.service.VersionService;
 import io.tiklab.message.message.service.MessageNoticeService;
 import io.tiklab.message.setting.service.MessageSendTypeService;
+import io.tiklab.product.product.model.Product;
+import io.tiklab.product.product.model.ProductQuery;
+import io.tiklab.product.product.service.ProductService;
 import io.tiklab.rpc.annotation.Exporter;
+import io.tiklab.rpc.annotation.Reference;
+import io.tiklab.rpc.common.context.RpcTenantHolder;
 import io.tiklab.security.backups.service.BackupsDbService;
 import io.tiklab.user.orga.service.OrgaService;
 import io.tiklab.user.user.service.UserService;
@@ -15,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -70,18 +77,6 @@ public class PlatFormServiceImpl implements PlatFormService {
         map.put("release",versionService.getVersion().getRelease());
         map.put("expired",versionService.getVersion().getExpired());
         map.put("authNumber",applyAuthService.findApplyAuthNumber());
-
-        //项目需要查询的数据
-        /*Map<String,Integer> templateMap = templateService.findTemplateNum();
-
-        //查询主机当中的数据
-        Map<String,Integer> hostMap = hostService.findHostNumber();
-
-        platForm.setTemplateNum(templateMap.get("tempNum"));
-        platForm.setTemplateMonitorNum(templateMap.get("monitorNum"));
-
-        platForm.setHostNum(hostMap.get("hostNum"));
-        platForm.setHostMonitorNum(hostMap.get("hostNum"));*/
 
         return map;
     }

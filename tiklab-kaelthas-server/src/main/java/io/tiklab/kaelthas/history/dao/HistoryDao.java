@@ -214,7 +214,7 @@ public class HistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }
 
-    public List<History> findKuOverviewTotal(List<String> list, String kuId) {
+    public List<History> findKuOverviewTotal(List<String> list, String kuId,String beforeTime,String nowDate) {
 
         String sql = """
                 SELECT mh.*,mki.name,mki.report_type as reportType
@@ -234,6 +234,9 @@ public class HistoryDao {
                 stringBuilder.append(",");
             }
         }
+
+        sql = sql.concat(" and mh.gather_time BETWEEN '" + beforeTime + "' and '"+nowDate+"'");
+
         sql = sql.concat(" and mh.monitor_id in (" + stringBuilder + ")");
 
         sql = sql.concat(" ORDER BY mh.gather_time DESC LIMIT 21");

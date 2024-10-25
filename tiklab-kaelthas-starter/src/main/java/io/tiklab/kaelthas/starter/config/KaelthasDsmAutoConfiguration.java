@@ -87,6 +87,10 @@ public class KaelthasDsmAutoConfiguration {
                 "xmonitor_1.0.3",
         });
 
+        dsmConfig.newVersion("1.1.0", new String[]{
+                "user_1.1.0"
+        });
+
         dsmConfig.newVersion("1.1.1",new String[]{
                 "user_1.1.1",
         });

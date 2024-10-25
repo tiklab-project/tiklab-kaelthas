@@ -1060,12 +1060,16 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public Map<String, Object> findKuOverviewTotal(String kuId) {
+
+        String nowDate = ConversionDateUtil.date(9);
+        String beforeTime = ConversionDateUtil.findLocalDateTime(0, 1, null);
+
         Map<String, Object> map = new HashMap<>();
         List<String> list = new ArrayList<>();
         for (int i = 1; i < 22; i++) {
             list.add(String.valueOf(i));
         }
-        List<History> entityList = historyDao.findKuOverviewTotal(list, kuId);
+        List<History> entityList = historyDao.findKuOverviewTotal(list, kuId,beforeTime,nowDate);
         List<History> entities = entityList.stream().filter(h -> h.getReportType() == 1).collect(Collectors.groupingBy(
                         History::getMonitorId,
                         Collectors.maxBy(Comparator.comparing(History::getGatherTime))
@@ -1343,11 +1347,14 @@ public class HistoryServiceImpl implements HistoryService {
 
         Map<String, Object> map = new HashMap<>();
 
+        String nowDate = ConversionDateUtil.date(9);
+        String beforeTime = ConversionDateUtil.findLocalDateTime(0, 1, null);
+
         //将端口状态的信息转换成list放到map中
         History history = new History();
         history.setHostId(internetId);
         history.setMonitorId("301");
-        List<History> list = historyDao.findHistoryByCondition(history, null, null);
+        List<History> list = historyDao.findHistoryByCondition(history, beforeTime, nowDate);
         if (!list.isEmpty()) {
             String reportData = list.get(0).getReportData();
             List<Map<String, Object>> mapList = JSON.parseObject(reportData, List.class);
@@ -1357,7 +1364,7 @@ public class HistoryServiceImpl implements HistoryService {
         History history2 = new History();
         history2.setHostId(internetId);
         history2.setMonitorId("304");
-        List<History> list2 = historyDao.findHistoryByCondition(history2, null, null);
+        List<History> list2 = historyDao.findHistoryByCondition(history2, beforeTime, nowDate);
         if (!list2.isEmpty()) {
             String reportData = list2.get(0).getReportData();
             Map map1 = JSON.parseObject(reportData, Map.class);

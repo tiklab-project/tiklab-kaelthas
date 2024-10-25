@@ -55,3 +55,6 @@ INSERT INTO "mtc_graphics_monitor" ("id", "monitor_id", "graphics_id") VALUES ('
 INSERT INTO "mtc_graphics_monitor" ("id", "monitor_id", "graphics_id") VALUES ('130f9992c836', '8ebc59175e63', '920fa6e3d052');
 INSERT INTO "mtc_graphics_monitor" ("id", "monitor_id", "graphics_id") VALUES ('eb2a8090265f', '42edaa37f802', '920fa6e3d052');
 INSERT INTO "mtc_graphics_monitor" ("id", "monitor_id", "graphics_id") VALUES ('51e854023d4d', '7e5a32a01f54', '33079a8a71a6');
+
+
+CREATE INDEX idx_host_monitor_time ON mtc_history (host_id, monitor_id, gather_time);

@@ -103,6 +103,16 @@
             <artifactId>tiklab-install-starter</artifactId>
             <version>${tiklab-install-starter.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-product-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-licence-cloud-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
 
