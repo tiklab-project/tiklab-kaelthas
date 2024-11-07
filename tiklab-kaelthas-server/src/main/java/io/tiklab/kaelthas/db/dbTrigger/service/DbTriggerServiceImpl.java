@@ -7,14 +7,12 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.collection.util.SqlUtil;
+import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
 import io.tiklab.kaelthas.common.util.StringUtil;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
-import io.tiklab.kaelthas.db.dbMonitor.model.DbMonitor;
-import io.tiklab.kaelthas.db.dbMonitor.service.DbMonitorService;
 import io.tiklab.kaelthas.db.dbTrigger.dao.DbTriggerDao;
 import io.tiklab.kaelthas.db.dbTrigger.entity.DbTriggerEntity;
 import io.tiklab.kaelthas.db.dbTrigger.model.DbTrigger;
@@ -31,8 +29,6 @@ import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -144,7 +140,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         String flag;
 
         Alarm alarm = new Alarm();
-        alarm.setAlertTime(SqlUtil.getDataTimeNow());
+        alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
 
         if (StringUtils.isBlank(dbTriggerEntity.getExpression())) {
             return;
@@ -212,7 +208,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
 
             Alarm alarm = new Alarm();
 
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
@@ -272,7 +268,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         String flag;
 
         Alarm alarm = new Alarm();
-        alarm.setAlertTime(SqlUtil.getDataTimeNow());
+        alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
         if (StringUtils.isBlank(dbTriggerEntity.getExpression())) {
             return;
         }

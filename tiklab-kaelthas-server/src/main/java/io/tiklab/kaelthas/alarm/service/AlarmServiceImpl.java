@@ -86,10 +86,10 @@ public class AlarmServiceImpl implements AlarmService {
             Alarm map = BeanMapper.map(alarmEntity, Alarm.class);
             map.setId(alarmId);
             //发送消息的模块,进行消息发送
-            /*Map<String, Object> map1 = new HashMap<>();
+            Map<String, Object> map1 = new HashMap<>();
             map1.put("hostName", host.getName());
             map1.put("alarmInformation", map.getSendMessage());
-            sendMessage(map1);*/
+            sendMessage(map1);
         } else {
             //查询出已经存在的数据,根据当前时间计算出告警时长
             AlarmEntity alarm1 = alarmList.get(0);

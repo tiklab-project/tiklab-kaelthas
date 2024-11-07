@@ -1,6 +1,6 @@
 package io.tiklab.kaelthas.collection.service.mysql;
 
-import io.tiklab.kaelthas.collection.util.SqlUtil;
+import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.db.database.service.DbInfoService;
@@ -30,7 +30,7 @@ public class MysqlService {
 
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbMysql() {
-        String dataTimeNow = SqlUtil.getDataTimeNow();
+        String dataTimeNow = AgentSqlUtil.getDataTimeNow();
 
         //查询mysql下的监控项
         List<DbMonitor> dbMonitorList = dbInfoService.findMysqlItemList();
@@ -58,7 +58,7 @@ public class MysqlService {
                     // 假设查询结果包含一个名为 "column_name" 的列
                     string = resultSet.getString("version");
                 }
-                Double version = SqlUtil.parseVersionToNumber(string);
+                Double version = AgentSqlUtil.parseVersionToNumber(string);
                 for (int i = 0; i < value.size(); i++) {
                     String sqlString = getSQLString(value.get(i), version);
                     sqlList.add(sqlString);

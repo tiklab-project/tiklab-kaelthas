@@ -21,7 +21,7 @@ jdbc:
   password: darth2020
 
 #plugin config
-DATA_HOME: /opt/tiklab/xmonitor-ee
+DATA_HOME: /opt/thoughtware/xmonitor-ee
 
 plugin:
   path: ${DATA_HOME}/plugin

@@ -3,14 +3,13 @@ package io.tiklab.kaelthas.internet.internetTrigger.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.tiklab.core.page.Pagination;
-import io.tiklab.core.page.PaginationBuilder;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.collection.util.SqlUtil;
+import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
 import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
 import io.tiklab.kaelthas.common.util.ConversionDateUtil;
 import io.tiklab.kaelthas.common.util.StringUtil;
@@ -28,8 +27,6 @@ import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -155,7 +152,7 @@ public class InTriggerServiceImpl implements InTriggerService {
             String flag;
 
             Alarm alarm = new Alarm();
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
 
             if (StringUtils.isBlank(trigger.getExpression())) {
                 return;
@@ -217,7 +214,7 @@ public class InTriggerServiceImpl implements InTriggerService {
 
             Alarm alarm = new Alarm();
 
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
@@ -275,7 +272,7 @@ public class InTriggerServiceImpl implements InTriggerService {
             String flag;
 
             Alarm alarm = new Alarm();
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
             if (StringUtils.isBlank(trigger.getExpression())) {
                 return;
             }

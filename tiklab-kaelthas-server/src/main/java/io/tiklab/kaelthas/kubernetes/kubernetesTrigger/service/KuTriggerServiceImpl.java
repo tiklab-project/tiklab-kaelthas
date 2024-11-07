@@ -7,7 +7,7 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.collection.util.SqlUtil;
+import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
 import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
 import io.tiklab.kaelthas.common.util.ConversionDateUtil;
 import io.tiklab.kaelthas.alarm.model.Alarm;
@@ -148,7 +148,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
             String flag;
 
             Alarm alarm = new Alarm();
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
             if (StringUtils.isBlank(trigger.getExpression())) {
                 return;
             }
@@ -222,7 +222,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
             String flag;
 
             Alarm alarm = new Alarm();
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
 
             if (StringUtils.isBlank(trigger.getExpression())) {
                 return;
@@ -280,7 +280,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         try {
             Alarm alarm = new Alarm();
 
-            alarm.setAlertTime(SqlUtil.getDataTimeNow());
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 

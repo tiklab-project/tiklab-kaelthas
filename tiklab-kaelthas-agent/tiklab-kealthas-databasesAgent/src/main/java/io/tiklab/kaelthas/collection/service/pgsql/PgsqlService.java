@@ -1,7 +1,7 @@
 package io.tiklab.kaelthas.collection.service.pgsql;
 
 
-import io.tiklab.kaelthas.collection.util.SqlUtil;
+import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.db.database.service.DbInfoService;
@@ -28,7 +28,7 @@ public class PgsqlService {
 
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbAim() {
-        String dataTimeNow = SqlUtil.date(9);
+        String dataTimeNow = AgentSqlUtil.date(9);
 
         List<DbMonitor> dbMonitorList = dbInfoService.findUsableDbInfoList();
 

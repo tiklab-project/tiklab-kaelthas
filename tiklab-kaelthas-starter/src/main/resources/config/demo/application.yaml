@@ -1,8 +1,8 @@
 app:
-  name: tiklab-xmonitor-ee
+  name: kaelthas
 
 APP_HOME: ${APP_HOME}
-application: xmonitor-ee
+application: kaelthas
 
 server:
   port: 8080
