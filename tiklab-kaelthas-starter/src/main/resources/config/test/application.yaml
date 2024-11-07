@@ -1,6 +1,6 @@
 app:
-  name: tiklab-kaelthas-ee
-  version: ee
+  name: tiklab-kaelthas-ce
+  version: ce
 
 APP_HOME: ${APP_HOME}
 application: kaelthas
