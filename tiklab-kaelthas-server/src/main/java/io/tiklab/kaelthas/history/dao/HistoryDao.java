@@ -239,7 +239,7 @@ public class HistoryDao {
 
         sql = sql.concat(" and mh.monitor_id in (" + stringBuilder + ")");
 
-        sql = sql.concat(" ORDER BY mh.gather_time DESC LIMIT 21");
+        sql = sql.concat(" ORDER BY mh.gather_time DESC LIMIT 22");
 
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }

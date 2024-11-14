@@ -2,7 +2,7 @@ package io.tiklab.kaelthas.collection.dao;
 
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.kaelthas.collection.entity.vo.DbMonitorVo;
-import io.tiklab.kaelthas.collection.entity.vo.HistoryVo;
+import io.tiklab.kaelthas.collection.entity.vo.DbHistoryVo;
 import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +34,16 @@ public class DbSqlDao {
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(DbMonitorVo.class));
     }
 
-    public void insertForList(List<HistoryVo> entityList) {
+    public void insertForList(List<DbHistoryVo> entityList) {
         List<Map<String, Object>> mapList = getMapList(entityList);
         String historySql = AgentSqlUtil.getBatchInsertSql("mtc_history", mapList);
 
         jpaTemplate.getJdbcTemplate().execute(historySql);
-        List<HistoryVo> list1 = new ArrayList<>();
-        List<HistoryVo> list5 = new ArrayList<>();
-        List<HistoryVo> list15 = new ArrayList<>();
+        List<DbHistoryVo> list1 = new ArrayList<>();
+        List<DbHistoryVo> list5 = new ArrayList<>();
+        List<DbHistoryVo> list15 = new ArrayList<>();
 
-        for (HistoryVo information : entityList) {
+        for (DbHistoryVo information : entityList) {
             String gatherTime = information.getGatherTime();
 
             //判断是否能插入到一分钟的表当中
@@ -83,7 +83,7 @@ public class DbSqlDao {
 
     }
 
-    private static List<Map<String, Object>> getMapList(List<HistoryVo> entityList) {
+    private static List<Map<String, Object>> getMapList(List<DbHistoryVo> entityList) {
         return entityList.stream().map(history -> {
             Map<String, Object> map = new HashMap<>();
             String uuid = RandomStringUtils.randomAlphanumeric(12);

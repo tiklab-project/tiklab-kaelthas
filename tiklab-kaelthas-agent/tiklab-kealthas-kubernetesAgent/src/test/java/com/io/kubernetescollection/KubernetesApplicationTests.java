@@ -621,19 +621,25 @@ class KubernetesApplicationTests {
             V1PodList podList = api.listPodForAllNamespaces(null, null, null, null, null, null, null, null, null, null);
             List<V1Pod> pods = podList.getItems();
 
-            int notRunningCount = 0;
+
+            Map<String,Object> map = new HashMap<>();
+            map.put("name","Pod Status Not Running");
+
+            List<Object> list = new LinkedList<>();
 
             for (V1Pod pod : pods) {
                 String podName = pod.getMetadata().getName();
-                String podNamespace = pod.getMetadata().getNamespace();
                 String phase = pod.getStatus().getPhase();
 
                 // 统计非 Running 状态的 Pod
                 if (!"Running".equalsIgnoreCase(phase)) {
-                    notRunningCount++;
-                    System.out.println("Pod: " + podName + " in Namespace: " + podNamespace + " is in Phase: " + phase);
+                    list.add(phase);
+                    list.add(podName);
+                    //System.out.println("Pod: " + podName + "Phase: " + phase);
                 }
             }
+            map.put("data",list);
+            System.out.println(list);
 
         } catch (ApiException e) {
             e.printStackTrace();

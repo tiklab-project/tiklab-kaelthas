@@ -148,12 +148,11 @@ public class TemplateServiceImpl implements TemplateService {
             //hostId,templateId,查询模板中监控项ids,然后delete from host_monitor where host_id = 1001 and template_id in ('2001','2002');
 
             HostMonitor hostMonitor = new HostMonitor();
-            hostMonitor.setTemplateId(hostTemplate.getTemplateId());
-            hostMonitor.setHostId(hostTemplate.getHostId());
+            hostMonitor.setHostId(hostTemplate.getTemplateId());
 
             //根据模板id查询出模板下监控项的ids
-            Pagination<HostMonitor> monitorByTemplateId = hostMonitorService.findMonitorByTemplateId(hostMonitor);
-            List<String> stringList = monitorByTemplateId.getDataList().stream().map(HostMonitor::getId).toList();
+            List<HostMonitor> monitorByTemplateId = hostMonitorService.findCondition(hostMonitor);
+            List<String> stringList = monitorByTemplateId.stream().map(HostMonitor::getId).toList();
             //根据模板下的ids和主机id查询出主机下引用的监控项ids,将主机下的ids进行删除
             HostMonitor hostMonitor2 = new HostMonitor();
             hostMonitor2.setHostId(hostTemplate.getHostId());
@@ -162,6 +161,18 @@ public class TemplateServiceImpl implements TemplateService {
             String[] strings = condition.stream().map(HostMonitor::getId).toList().toArray(new String[0]);
             //删除图表与监控项关联信息
             graphicsMonitorService.deleteByMonitorIds(strings);
+
+            String deleteSql = "";
+            //拼接SQL
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < stringList.size(); i++) {
+                builder.append("'").append(stringList.get(i)).append("'");
+                if (i != stringList.size() - 1) {
+                    builder.append(",");
+                }
+            }
+
+            deleteSql = "("+builder+")";
 
             for (String string : stringList) {
                 HostMonitor hostMonitor1 = new HostMonitor();

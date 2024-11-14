@@ -31,7 +31,7 @@ public class ClusterItemOverview {
     @Autowired
     private HistoryService historyService;
 
-    @Scheduled(cron = "30 0/5 * * * ? ")
+    @Scheduled(cron = "0 0/5 * * * ? ")
     public void getClusterOverview() {
         //获取所有的k8s信息,将集群的基本信息进行收集
         List<KuMonitor> kuMonitors = kuCollectionDao.findKuMonitor();
@@ -58,7 +58,7 @@ public class ClusterItemOverview {
     private static List<KuMonitor> getKubernetesMonitors(List<KuMonitor> kuMonitors) {
         List<KuMonitor> monitorList = new LinkedList<>();
 
-        for (int i = 1; i < 22; i++) {
+        for (int i = 1; i < 23; i++) {
             for (KuMonitor kuMonitor : kuMonitors) {
                 KuMonitor monitor = new KuMonitor();
                 monitor.setKuId(kuMonitor.getId());
@@ -444,6 +444,31 @@ public class ClusterItemOverview {
                         list21.add(map);
                     }
                     history.setReportData(JSON.toJSONString(list21));
+                } catch (ApiException e) {
+                    break;
+                }
+                break;
+            case "22":
+                try {
+
+                    // 获取所有命名空间中的 Pod
+                    V1PodList podList = api.listPodForAllNamespaces(null, null, null, null, null, null, null, null, null, null);
+                    List<V1Pod> pods = podList.getItems();
+
+                    List<Object> list22 = new LinkedList<>();
+
+                    for (V1Pod pod : pods) {
+                        String podName = pod.getMetadata().getName();
+                        String phase = pod.getStatus().getPhase();
+
+                        // 统计非 Running 状态的 Pod
+                        if (!"Running".equalsIgnoreCase(phase)) {
+                            list22.add(phase);
+                            list22.add(podName);
+                        }
+                    }
+                    history.setReportData(JSON.toJSONString(list22));
+
                 } catch (ApiException e) {
                     break;
                 }

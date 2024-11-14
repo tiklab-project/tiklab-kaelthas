@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Join
 @Mapper
-public class HistoryVo {
+public class DbHistoryVo {
 
     private String id;
 
@@ -87,7 +87,7 @@ public class HistoryVo {
 
     private String problem;
 
-    public HistoryVo() {
+    public DbHistoryVo() {
     }
 
     public String getDataCate() {

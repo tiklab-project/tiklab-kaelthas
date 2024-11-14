@@ -1066,7 +1066,7 @@ public class HistoryServiceImpl implements HistoryService {
 
         Map<String, Object> map = new HashMap<>();
         List<String> list = new ArrayList<>();
-        for (int i = 1; i < 22; i++) {
+        for (int i = 1; i < 23; i++) {
             list.add(String.valueOf(i));
         }
         List<History> entityList = historyDao.findKuOverviewTotal(list, kuId,beforeTime,nowDate);
@@ -1090,9 +1090,12 @@ public class HistoryServiceImpl implements HistoryService {
             List<List<String>> listList = new LinkedList<>();
             Set<String> stringSet = new HashSet<>();
 
-            if (StringUtils.isNotBlank(history.getReportData()) && !"null".equals(history.getReportData())) {
+            if (!Objects.isNull(history.getReportData()) && !"null".equals(history.getReportData())) {
                 List<Map<String, String>> mapList = JSON.parseObject(history.getReportData(), List.class);
                 if (mapList.isEmpty()) {
+                    objectMap.put("name", history.getName());
+                    objectMap.put("data", listList);
+                    objectList.add(objectMap);
                     continue;
                 }
                 for (Map<String, String> stringMap : mapList) {
