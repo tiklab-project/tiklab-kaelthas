@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[84],{1145:function(e,n,t){"use strict";t.r(n);var o=t(0),i=t.n(o),c=t(63);n.default=Object(c.h)((function(){return i.a.createElement("div",{__source:{fileName:"D:\\code\\companycode\\xmonitor\\kaelthas-ui\\tiklab-kaelthas-ui\\src\\setting\\MonitorItem\\components\\MonitorItem.js",lineNumber:6,columnNumber:9}})}))}}]);

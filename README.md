@@ -1,11 +1,11 @@
-
 <h1 align="center" style="border-bottom: none">
-    <a href="https://kaelthas.tiklab.net/" target="_blank"><img alt="Kaelthas" src="assets/kaelthasLOGO.png"></a><br>Kaelthas
+    <a href="https://kaelthas.tiklab.net/" target="_blank"><img alt="Kaelthas" src="assets/kaelthasLOGO.png"></a><br>
 </h1>
 
 [//]: # (<div align="center">)
 
 [//]: # ()
+
 [//]: # (![Coverage Status]&#40;https://coveralls.io/repos/github/owner/repo/badge.svg&#41;)
 
 [//]: # (![npm]&#40;https://img.shields.io/npm/dw/package-name&#41;)
@@ -23,11 +23,19 @@
 [//]: # ([![All Contributors]&#40;https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square&#41;]&#40;#contributors-&#41;)
 
 [//]: # ()
+
 [//]: # ()
+
 [//]: # (</div>)
 
-在监控领域，已经存在Zabbix、Nagios、Prometheus 和 SwkingWalking等工具帮助企业管理复杂的基础设施并保持系统稳定。下面推荐一款监控工具 - kaelthas，它涵盖了服务器和主机监控、数据库监控等多个方向的监控，并且开源免费，操作简单。
+<div align="center" style="font-size: 36px">
+<span  style="font-weight: bold">
+    Kaelthas
+</span>
+</div>
 
+监控工具帮助企业管理复杂的基础设施并保持系统稳定。常见的监控工具有Zabbix、Prometheus、SwkingWalking等工具。下面推荐一款开源免费，操作简单的监控工具 -
+kaelthas。
 ﻿
 
 ### 主要功能
@@ -60,10 +68,10 @@ kaelthas已有的监控模块有 主机监控、数据库监控、k8s监控和�
 
 数据库类型：
 
-| 监控类型 | 含义                          |
-| -------- | ----------------------------- |
-| MYSQL    | 针对MYSQL数据库进行的数据监控 |
-| pgsql    | 针对pgsql数据库类型的监控     |
+| 监控类型  | 含义                |
+|-------|-------------------|
+| MYSQL | 针对MYSQL数据库进行的数据监控 |
+| pgsql | 针对pgsql数据库类型的监控   |
 
 ﻿
 
@@ -247,15 +255,15 @@ Agent是一个放置在电脑主机或者是服务器的一个运行程序，目
 
 - 权限控制
 
-​     应用级权限，系统级权限，项目级权限，全方面保护应用的安全。
+​ 应用级权限，系统级权限，项目级权限，全方面保护应用的安全。
 
 - 日志审计
 
-​     实时记录任何变动，追溯到个人操作。
+​ 实时记录任何变动，追溯到个人操作。
 
 - 自动备份与恢复
 
-​     数据误删，数据损害，定时备份，实时恢复。
+​ 数据误删，数据损害，定时备份，实时恢复。
 
 ﻿
 
