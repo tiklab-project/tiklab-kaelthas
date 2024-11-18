@@ -1,5 +1,6 @@
 <h1 align="center" style="border-bottom: none">
     <a href="https://kaelthas.tiklab.net/" target="_blank"><img alt="Kaelthas" src="assets/kaelthasLOGO.png"></a><br>
+    Kaelthas
 </h1>
 
 [//]: # (<div align="center">)
@@ -25,12 +26,6 @@
 [//]: # ()
 
 [//]: # (</div>)
-
-<div align="center" style="font-size: 36px">
-    <span  style="font-weight: bold">
-        Kaelthas
-    </span>
-</div>
 
 监控工具帮助企业管理复杂的基础设施并保持系统稳定。常见的监控工具有Zabbix、Prometheus、SwkingWalking等工具。下面推荐一款开源免费，操作简单的监控工具 -
 kaelthas。
