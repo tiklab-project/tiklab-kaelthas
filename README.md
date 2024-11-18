@@ -321,4 +321,4 @@ cd tiklab-kaelthas
 
 邮箱: [tiklab@163.com](https://gitee.com/link?target=mailto%3Atiklab%40163.com)
 
-**立即体验 Kaelthas，解锁高效的自动化构建、测试和部署流程！**
+**立即体验 Kaelthas，解锁高效稳定监控！**
