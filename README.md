@@ -1,6 +1,6 @@
 <h1 align="center" style="border-bottom: none">
     <a href="https://kaelthas.tiklab.net/" target="_blank"><img alt="Kaelthas" src="assets/kaelthasLOGO.png"></a><br>
-    Kaelthas
+Kaelthas
 </h1>
 
 [//]: # (<div align="center">)
