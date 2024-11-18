@@ -2,17 +2,16 @@ package io.tiklab.kaelthas.host.trigger.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.tiklab.core.order.Order;
-import io.tiklab.core.order.OrderTypeEnum;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.core.page.PaginationBuilder;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
+import io.tiklab.kaelthas.common.util.StringUtil;
 import io.tiklab.rpc.annotation.Exporter;
 import io.tiklab.toolkit.beans.BeanMapper;
-import io.tiklab.kaelthas.db.dbTrigger.service.DbTriggerService;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
@@ -30,7 +29,9 @@ import io.tiklab.kaelthas.host.trigger.model.Trigger;
 import io.tiklab.kaelthas.host.triggerExpression.service.TriggerExpressionService;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.host.triggerMedium.service.TriggerMediumService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
@@ -78,9 +79,6 @@ public class TriggerServiceImpl implements TriggerService {
 
     @Autowired
     HostService hostService;
-
-    @Autowired
-    private DbTriggerService dbTriggerService;
 
 
     /**
@@ -213,22 +211,11 @@ public class TriggerServiceImpl implements TriggerService {
     /**
      * 根据传递过来的主机id和监控项id进行判断,将一部分插入告警表当中
      */
-    @Override
-    public void insertAlarmForTrigger(List<History> entityList) {
-
-        Alarm alarm = new Alarm();
-        ScriptEngine engine;
-        try {
-            engine = conversionScriptsUtils.getScriptEngine();
-        } catch (ScriptException e) {
-            throw new RuntimeException(e);
-        }
-
-        Object[] array = entityList.stream().map(History::getHostId).distinct().toArray();
+    @Scheduled(cron = "0 0/2 * * * ? ")
+    public void insertAlarmForTrigger() {
 
         //将符合条件的触发器全部拉进来,进行判断(当前主机下根据当前监控项创建的触发器)
         QueryCondition queryCondition = QueryBuilders.createQuery(TriggerEntity.class)
-                .in("hostId", array)
                 .eq("state", 1)
                 .get();
         List<TriggerEntity> triggers = triggerDao.findTriggerByHostIdAndMonitorId(queryCondition);
@@ -238,38 +225,245 @@ public class TriggerServiceImpl implements TriggerService {
         }
 
         for (TriggerEntity trigger : triggers) {
-            int isTriggerNum = 1;
+            //三种触发方式
+            switch (trigger.getScheme()) {
+                case 1:
+                    getLastValueTrigger(trigger);
+                    break;
+                case 2:
+                    getAvgValueTrigger(trigger);
+                    break;
+                case 3:
+                    getPercentValueTrigger(trigger);
+                    break;
+            }
+                /*int isTriggerNum = 1;
 
-            if (entityList.isEmpty()) {
-                isTriggerNum = 0;
-            } else {
+                if (entityList.isEmpty()) {
+                    isTriggerNum = 0;
+                } else {
 
-                alarm.setAlertTime(entityList.get(entityList.size() - 1).getGatherTime());
 
-                //查询当前时间区间的最后一个值进行判断
-                isTriggerNum = getIsTriggerNum(entityList, trigger, engine, isTriggerNum);
+                    alarm.setAlertTime(ConversionDateUtil.date(9));
 
-                //平均值计算
-                isTriggerNum = getIsTriggerNum(trigger, trigger.getHostId(), engine, isTriggerNum);
+                    //查询当前时间区间的最后一个值进行判断
+                    isTriggerNum = getIsTriggerNum(entityList, trigger, engine, isTriggerNum);
 
-                //触发的数据超过一定百分比后进行告警
-                isTriggerNum = getTriggerNum(trigger, trigger.getHostId(), engine, isTriggerNum);
+                    //平均值计算
+                    isTriggerNum = getIsTriggerNum(trigger, trigger.getHostId(), engine, isTriggerNum);
+
+                    //触发的数据超过一定百分比后进行告警
+                    isTriggerNum = getTriggerNum(trigger, trigger.getHostId(), engine, isTriggerNum);
+                }
+
+                //如果为1的话进行插入
+                if (isTriggerNum == 1) {
+                    //将这个时间记录到告警表当中,以后告警表计算的告警持续时间都是使用这个字段
+                    alarm.setStatus(2);
+                    alarm.setHostId(trigger.getHostId());
+                    alarm.setTriggerId(trigger.getId());
+                    alarm.setSendMessage(trigger.getDescribe());
+                    alarm.setSeverityLevel(trigger.getSeverityLevel());
+                    alarm.setMachineType(1);
+                    //插入到告警表当中
+                    alarmService.createAlarm(alarm);
+                }*/
+        }
+
+
+    }
+
+    private void getPercentValueTrigger(TriggerEntity trigger) {
+        try {
+            String flag;
+
+            Alarm alarm = new Alarm();
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
+
+            if (StringUtils.isBlank(trigger.getExpression())) {
+                return;
             }
 
-            //如果为1的话进行插入
-            if (isTriggerNum == 1) {
-                //将这个时间记录到告警表当中,以后告警表计算的告警持续时间都是使用这个字段
+            ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
+
+            String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
+            List<History> informationList = historyService.findByHostTrigger(trigger.getHostId(), beforeTime);
+
+            if (informationList.isEmpty()) {
+                return;
+            }
+
+            //根据监控项id进行分组,然后进行计算平均值
+            Collection<List<History>> values1 = informationList.stream().collect(Collectors.groupingBy(History::getMonitorId)).values();
+            String avgNumber = StringUtil.getAvgNumber(values1);
+
+            JSONObject jsonObject = JSONObject.parseObject(avgNumber);
+
+            String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
+
+            Set<String> functionList = conversionScriptsUtils.getFunctionList(string);
+
+            if (functionList.isEmpty()) {
+
+                try {
+                    Object eval = engine.eval(string);
+                    flag = JSON.toJSONString(eval);
+
+                } catch (ScriptException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                flag = "true";
+            }
+
+            //如果触发成功的话进行插入操作
+            if ("true".equals(flag)) {
                 alarm.setStatus(2);
                 alarm.setHostId(trigger.getHostId());
                 alarm.setTriggerId(trigger.getId());
                 alarm.setSendMessage(trigger.getDescribe());
-                alarm.setSeverityLevel(trigger.getSeverityLevel());
                 alarm.setMachineType(1);
-                //插入到告警表当中
+                alarm.setSeverityLevel(trigger.getSeverityLevel());
                 alarmService.createAlarm(alarm);
             }
+
+        } catch (ScriptException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void getAvgValueTrigger(TriggerEntity trigger) {
+        try {
+
+            String flag;
+
+            Alarm alarm = new Alarm();
+
+            alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
+
+            ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
+
+            String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
+
+            List<History> informationList = historyService.findByHostTrigger(trigger.getHostId(), beforeTime);
+
+            Collection<List<History>> values = informationList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values();
+
+            if (values.isEmpty()) {
+                return;
+            }
+
+            String strJson = StringUtil.getAvgNumber(values);
+            JSONObject jsonObject = JSONObject.parseObject(strJson);
+
+            //将表达式替换成值,然后进行运算
+            String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
+
+            //查看这个表达式当中有没有没有被替换掉的表达式,如果有的话就不进行运算了,没有才进行运算
+            Set<String> functionList = conversionScriptsUtils.getFunctionList(string);
+
+            if (functionList.isEmpty()) {
+                try {
+                    Object eval = engine.eval(string);
+                    String jsonString = JSON.toJSONString(eval);
+                    if ("true".equals(jsonString)) {
+                        flag = "true";
+                    } else {
+                        flag = "false";
+                    }
+                } catch (ScriptException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                flag = "false";
+            }
+
+            if ("true".equals(flag)) {
+                alarm.setStatus(2);
+                alarm.setHostId(trigger.getHostId());
+                alarm.setTriggerId(trigger.getId());
+                alarm.setSendMessage(trigger.getDescribe());
+                alarm.setMachineType(1);
+                alarm.setSeverityLevel(trigger.getSeverityLevel());
+                alarmService.createAlarm(alarm);
+            }
+
+        } catch (ScriptException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void getLastValueTrigger(TriggerEntity trigger) {
+        String flag;
+
+        Alarm alarm = new Alarm();
+        alarm.setAlertTime(AgentSqlUtil.getDataTimeNow());
+        if (StringUtils.isBlank(trigger.getExpression())) {
+            return;
         }
 
+        String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
+
+        //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
+        List<History> historyList = historyService.findByHostTrigger(trigger.getHostId(), beforeTime);
+
+        if (historyList.isEmpty()) {
+            return;
+        }
+
+        //将数据进行处理,取最后一个值
+        List<History> list = historyList.stream()
+                .collect(Collectors.toMap(
+                        History::getMonitorId, // 根据 id 去重
+                        history -> history, // 保留对象
+                        (existing, replacement) -> replacement // 如果 id 相同，保留后者
+                ))
+                .values().stream().toList();
+
+        //将触发器的表达式和数值进行替换,看是否能够进行触发
+        try {
+
+            ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
+
+            //将数据换成JSON的字符串
+            String json = StringUtil.getString(list);
+
+            //将字符串转换成JSON
+            JSONObject jsonObject = JSONObject.parseObject(json);
+
+            //将表达式替换成值
+            String value = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
+
+            //查看这个表达式当中有没有没有被替换掉的表达式,如果有的话就不进行运算了,没有才进行运算
+            Set<String> functionList = conversionScriptsUtils.getFunctionList(value);
+
+            if (functionList.isEmpty()) {
+                try {
+
+                    Object eval = engine.eval(value);
+                    flag = JSON.toJSONString(eval);
+
+                } catch (ScriptException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                flag = "true";
+            }
+
+            //如果触发成功的话进行插入操作
+            if ("true".equals(flag)) {
+                alarm.setStatus(2);
+                alarm.setHostId(trigger.getHostId());
+                alarm.setTriggerId(trigger.getId());
+                alarm.setSendMessage(trigger.getDescribe());
+                alarm.setMachineType(1);
+                alarm.setSeverityLevel(trigger.getSeverityLevel());
+                alarmService.createAlarm(alarm);
+            }
+
+        } catch (ScriptException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private int getTriggerNum(TriggerEntity trigger, String hostId, ScriptEngine engine, int isTriggerNum) {

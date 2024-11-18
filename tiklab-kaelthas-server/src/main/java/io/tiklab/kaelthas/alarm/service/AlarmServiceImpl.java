@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 @Service
@@ -68,42 +69,46 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     public void createAlarm(Alarm alarm) {
-        AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
-        Host host = hostService.findHostById(alarm.getHostId());
-        alarmEntity.setIp(host.getIp());
-        alarmEntity.setHostName(host.getName());
-        //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
-        QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
-                .eq("triggerId", alarm.getTriggerId())
-                .eq("hostId", alarm.getHostId())
-                .eq("status", 2)
-                .get();
+        try {
+            AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
+            Host host = hostService.findHostById(alarm.getHostId());
+            alarmEntity.setIp(host.getIp());
+            alarmEntity.setHostName(host.getName());
+            //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
+            QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
+                    .eq("triggerId", alarm.getTriggerId())
+                    .eq("hostId", alarm.getHostId())
+                    .eq("status", 2)
+                    .get();
 
-        List<AlarmEntity> alarmList = alarmDao.findListByHisId(queryCondition);
+            List<AlarmEntity> alarmList = alarmDao.findListByHisId(queryCondition);
 
-        if (alarmList == null || alarmList.isEmpty()) {
-            String alarmId = alarmDao.createAlarm(alarmEntity);
-            Alarm map = BeanMapper.map(alarmEntity, Alarm.class);
-            map.setId(alarmId);
-            //发送消息的模块,进行消息发送
-            Map<String, Object> map1 = new HashMap<>();
-            map1.put("hostName", host.getName());
-            map1.put("alarmInformation", map.getSendMessage());
-            sendMessage(map1);
-        } else {
-            //查询出已经存在的数据,根据当前时间计算出告警时长
-            AlarmEntity alarm1 = alarmList.get(0);
-            String gatherTime = alarm1.getAlertTime();
-
-            if (StringUtils.isBlank(gatherTime)) {
-                alarm1.setDuration("没有数据,无法计算时间");
+            if (alarmList == null || alarmList.isEmpty()) {
+                String alarmId = alarmDao.createAlarm(alarmEntity);
+                Alarm map = BeanMapper.map(alarmEntity, Alarm.class);
+                map.setId(alarmId);
+                //发送消息的模块,进行消息发送
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("hostName", host.getName());
+                map1.put("alarmInformation", map.getSendMessage());
+                sendMessage(map1);
             } else {
-                //计算出相差的年月日时分秒
-                String string = ConversionDateUtil.formatToDateTime(gatherTime);
-                alarm1.setDuration(string);
+                //查询出已经存在的数据,根据当前时间计算出告警时长
+                AlarmEntity alarm1 = alarmList.get(0);
+                String gatherTime = alarm1.getAlertTime();
+
+                if (StringUtils.isBlank(gatherTime)) {
+                    alarm1.setDuration("没有数据,无法计算时间");
+                } else {
+                    //计算出相差的年月日时分秒
+                    String string = ConversionDateUtil.formatToDateTime(gatherTime);
+                    alarm1.setDuration(string);
+                }
+                //修改时间
+                alarmDao.updateAlarm(alarm1);
             }
-            //修改时间
-            alarmDao.updateAlarm(alarm1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

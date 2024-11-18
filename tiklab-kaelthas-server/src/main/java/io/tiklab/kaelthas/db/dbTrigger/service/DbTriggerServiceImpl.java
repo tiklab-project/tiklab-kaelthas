@@ -116,7 +116,10 @@ public class DbTriggerServiceImpl implements DbTriggerService {
     @Scheduled(cron = "0 0/2 * * * ? ")
     public void TimerTrigger() {
         //获取所有数据库下的触发器
-        List<DbTriggerEntity> triggerList = dbTriggerDao.findAllTrigger();
+        QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
+                .eq("state", 1)
+                .get();
+        List<DbTriggerEntity> triggerList = dbTriggerDao.findAllTrigger(queryCondition);
 
         for (DbTriggerEntity dbTriggerEntity : triggerList) {
             //三种触发方式

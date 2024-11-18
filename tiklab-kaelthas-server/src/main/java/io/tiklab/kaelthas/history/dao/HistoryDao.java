@@ -420,4 +420,28 @@ public class HistoryDao {
 
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(History.class));
     }
+
+    public List<History> findByHostTrigger(String hostId, String beforeTime) {
+
+        String sql = """
+                SELECT mh.*,mdi.data_type as reportType,mdm.expression
+                FROM mtc_history mh
+                JOIN mtc_host_monitor mdm
+                ON mh.monitor_id = mdm.id
+                JOIN mtc_item mdi
+                ON mdm.monitor_item_id = mdi.id
+                """;
+
+        if (StringUtils.isNotBlank(hostId)) {
+            sql = sql.concat(" where mh.host_id = '" + hostId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time >= '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" order by mh.gather_time desc");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
+    }
 }

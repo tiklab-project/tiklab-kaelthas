@@ -20,18 +20,16 @@
 
 [//]: # (![]&#40;https://img.shields.io/badge/Express-%5E4.17.2-yellow&#41;)
 
-[//]: # ([![All Contributors]&#40;https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square&#41;]&#40;#contributors-&#41;)
-
-[//]: # ()
+[//]: # ([![All Contributors]&#40;https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square&#41;]&#40;#contributors-&#41;)
 
 [//]: # ()
 
 [//]: # (</div>)
 
 <div align="center" style="font-size: 36px">
-<span  style="font-weight: bold">
-    Kaelthas
-</span>
+    <span  style="font-weight: bold">
+        Kaelthas
+    </span>
 </div>
 
 监控工具帮助企业管理复杂的基础设施并保持系统稳定。常见的监控工具有Zabbix、Prometheus、SwkingWalking等工具。下面推荐一款开源免费，操作简单的监控工具 -
@@ -95,7 +93,7 @@ k8s监控是对k8s集群的监控，目前主要有两个个大类来进行监�
 
 ﻿
 
-##### 监控配置
+##### 1.2 监控配置
 
 配置是Agent需要采集数据的信息、上报后哪些需要告警、图形如何展示等一系列的配置，包含了配置监控项、触发器、图形等配置，用于Agent的数据上报、触发告警、图形展示等。
 
@@ -247,6 +245,12 @@ Agent是一个放置在电脑主机或者是服务器的一个运行程序，目
 
 可以查看到源码，能够与kaelthas共同成长。
 
+- 开源地址
+
+Gitee： https://gitee.com/tiklab-project/tiklab-kaelthas
+
+GitHub： https://github.com/tiklab-project/tiklab-kaelthas
+
 ﻿
 
 ##### 安全可靠
@@ -267,16 +271,59 @@ Agent是一个放置在电脑主机或者是服务器的一个运行程序，目
 
 ﻿
 
-### 立即使用
+## 安装
 
-- 演示
+### 系统要求
 
-演示地址，https://kaelthas.tiklab.net/demo﻿
+- Java 16+
+- Maven 3.4+
 
-- 下载
+### 克隆仓库
 
-私有部署下载，https://download.tiklab.net/kaelthas﻿
+```
+git clone https://github.com/tiklab-project/tiklab-kaelthas.git
+cd tiklab-kaelthas
+```
 
-- 使用[﻿](https://download.tiklab.net/kaelthas)﻿
+### 构建项目
 
-公有云使用，https://tiklab.net/
+**配置MAVEN仓库**
+
+配置maven的setrings.xml文件的远程仓库为以下内容
+
+```
+<mirror>
+    <id>hadess</id>
+    <name>hadess</name>
+    <url>https://mirror.tiklab.net/repository/tiklab-maven</url>  
+    <mirrorOf>*</mirrorOf>
+</mirror>
+```
+
+**构建**
+
+- **MAC系统**：mvn clean package -P system-mac,env-dev
+- **Linux系统**：mvn clean package -P system-linux,env-dev
+- **Windows系统**：mvn clean package -P system-windows,env-dev
+
+### 使用示例
+
+1. 使用java编译工具运行KaelthasApplication。
+2. 打开浏览器，访问 [http://localhost:8080](https://gitee.com/link?target=http%3A%2F%2Flocalhost%3A8090)
+3. 登录信息，用户名：admin 密码：123456
+
+### 贡献
+
+我们欢迎社区的贡献！如果你有好的建议或发现了问题，请通过以下方式联系我：
+
+[联系我们](https://gitee.com/link?target=https%3A%2F%2Ftiklab.net%2Faccount%2FworkOrder%2Fadd)
+
+邮箱: [tiklab@163.com](https://gitee.com/link?target=mailto%3Atiklab%40163.com)
+
+如需了解更多信息，请访问我们的官方网站或加入我们的社区讨论：
+
+[官方网站](https://gitee.com/link?target=https%3A%2F%2Fwww.tiklab.net)
+
+邮箱: [tiklab@163.com](https://gitee.com/link?target=mailto%3Atiklab%40163.com)
+
+**立即体验 Kaelthas，解锁高效的自动化构建、测试和部署流程！**

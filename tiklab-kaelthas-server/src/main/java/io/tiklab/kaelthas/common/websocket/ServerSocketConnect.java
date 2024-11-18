@@ -35,7 +35,7 @@ public class ServerSocketConnect {
 
     private static final List<History> historyList = new ArrayList<>();
 
-    private static final int BATCH_SIZE = 1000;
+    private static final int BATCH_SIZE = 10;
 
     public final ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -80,10 +80,10 @@ public class ServerSocketConnect {
                                         historyService.insertForList(histories);
                                     });
 
-                                    //查看数据是否经过触发器生成告警数据
+                                    /*//查看数据是否经过触发器生成告警数据
                                     saveDataService.submit(() -> {
                                         triggerService.insertAlarmForTrigger(histories);
-                                    });
+                                    });*/
 
                                 }
                             }

@@ -47,7 +47,7 @@ public class AlarmDao {
             sql = sql.concat(" and severity_level = '" + alarm.getSeverityLevel() + "'");
         }
 
-        if (alarm.getMachineType() != null){
+        if (alarm.getMachineType() != null) {
             sql = sql.concat(" and machine_type = " + alarm.getMachineType());
         }
 
@@ -57,11 +57,7 @@ public class AlarmDao {
     }
 
     public String createAlarm(AlarmEntity alarmEntity) {
-        try {
-            return jpaTemplate.save(alarmEntity, String.class);
-        } catch (DataAccessException e) {
-            throw new RuntimeException(e);
-        }
+        return jpaTemplate.save(alarmEntity, String.class);
     }
 
     public List<AlarmEntity> findListByHisId(QueryCondition queryCondition) {

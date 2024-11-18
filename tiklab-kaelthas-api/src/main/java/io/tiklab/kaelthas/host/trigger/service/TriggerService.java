@@ -35,7 +35,7 @@ public interface TriggerService {
 
     List<Trigger> findTriggerListById(String hostId);
 
-    void insertAlarmForTrigger(List<History> entityList);
+    //void insertAlarmForTrigger(List<History> entityList);
 
     List<Trigger> findLikeTrigger(String hostId, String expression);
 

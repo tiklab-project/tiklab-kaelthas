@@ -56,8 +56,8 @@ public class DbTriggerDao {
         return jpaTemplate.findList(queryCondition,DbTriggerEntity.class);
     }
 
-    public List<DbTriggerEntity> findAllTrigger() {
-        return jpaTemplate.findAll(DbTriggerEntity.class);
+    public List<DbTriggerEntity> findAllTrigger(QueryCondition queryCondition) {
+        return jpaTemplate.findList(queryCondition,DbTriggerEntity.class);
     }
 
     public void deleteByDbId(DeleteCondition deleteCondition) {

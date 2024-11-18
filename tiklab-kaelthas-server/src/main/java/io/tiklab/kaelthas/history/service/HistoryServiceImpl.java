@@ -1395,4 +1395,9 @@ public class HistoryServiceImpl implements HistoryService {
     public List<History> findHistoryByHostIds( String beforeTime) {
         return historyDao.findHistoryByHostIds(beforeTime);
     }
+
+    @Override
+    public List<History> findByHostTrigger(String hostId, String beforeTime) {
+        return historyDao.findByHostTrigger(hostId, beforeTime);
+    }
 }

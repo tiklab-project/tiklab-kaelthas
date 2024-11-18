@@ -36,7 +36,7 @@ public interface HistoryService {
 
     Map<String,Object> findKuOverviewTotal(String kuId);
 
-    List<History> findHistoryByGatherTime(String hostId, String beforeTime);
+    List<History> findHistoryByGatherTime(String dbId, String beforeTime);
 
     List<History> findDbHistoryByHostId(String hostId,String beforeTime);
 
@@ -53,4 +53,7 @@ public interface HistoryService {
     List<History> findHistoryByHostId(String id,String beforeTime);
 
     List<History> findHistoryByHostIds(String beforeTime);
+
+    //查询出指定主机下的监控数据,用于触发器使用
+    List<History> findByHostTrigger(String hostId, String beforeTime);
 }
