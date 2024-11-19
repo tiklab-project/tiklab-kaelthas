@@ -208,9 +208,7 @@ public class TriggerServiceImpl implements TriggerService {
         return BeanMapper.mapList(triggerList, Trigger.class);
     }
 
-    /**
-     * 根据传递过来的主机id和监控项id进行判断,将一部分插入告警表当中
-     */
+
     @Scheduled(cron = "0 0/2 * * * ? ")
     public void insertAlarmForTrigger() {
 

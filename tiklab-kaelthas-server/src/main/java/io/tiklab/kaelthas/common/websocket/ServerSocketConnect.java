@@ -35,7 +35,7 @@ public class ServerSocketConnect {
 
     private static final List<History> historyList = new ArrayList<>();
 
-    private static final int BATCH_SIZE = 10;
+    private static final int BATCH_SIZE = 1000;
 
     public final ExecutorService executorService = Executors.newCachedThreadPool();
 
