@@ -8,7 +8,6 @@ import io.tiklab.kaelthas.alarm.entity.AlarmEntity;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -31,8 +30,12 @@ public class AlarmDao {
                 """;
 
 
-        if (StringUtils.isNotBlank(alarm.getHostName())) {
-            sql = sql.concat(" and host_name like '%" + alarm.getHostName() + "%'");
+        if (StringUtils.isNotBlank(alarm.getName())) {
+            sql = sql.concat(" and name like '%" + alarm.getName() + "%'");
+        }
+
+        if (StringUtils.isNotBlank(alarm.getIp())) {
+            sql = sql.concat(" and ip like '%" + alarm.getIp() + "%'");
         }
 
         if (alarm.getStatus() != null) {
@@ -44,7 +47,7 @@ public class AlarmDao {
         }
 
         if (alarm.getSeverityLevel() != null) {
-            sql = sql.concat(" and severity_level = '" + alarm.getSeverityLevel() + "'");
+            sql = sql.concat(" and severity_level = " + alarm.getSeverityLevel());
         }
 
         if (alarm.getMachineType() != null) {
@@ -142,5 +145,9 @@ public class AlarmDao {
         List<Map<String, Object>> maps = jpaTemplate.getJdbcTemplate().queryForList(sql);
 
         return maps;
+    }
+
+    public List<AlarmEntity> findAlarmNumByCondition(QueryCondition queryCondition) {
+        return jpaTemplate.findList(queryCondition,AlarmEntity.class);
     }
 }

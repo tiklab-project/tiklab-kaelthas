@@ -38,4 +38,6 @@ public interface AlarmService {
     void createAlarmForKubernetes(Alarm alarm);
 
     void createAlarmForInternet(Alarm alarm);
+
+    Map<String,Integer> findAlarmNumByCondition(Alarm alarm);
 }

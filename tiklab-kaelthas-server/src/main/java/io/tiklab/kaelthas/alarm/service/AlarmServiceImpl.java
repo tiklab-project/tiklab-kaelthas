@@ -73,7 +73,7 @@ public class AlarmServiceImpl implements AlarmService {
             AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
             Host host = hostService.findHostById(alarm.getHostId());
             alarmEntity.setIp(host.getIp());
-            alarmEntity.setHostName(host.getName());
+            alarmEntity.setName(host.getName());
             //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
             QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
                     .eq("triggerId", alarm.getTriggerId())
@@ -118,7 +118,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
         DbInfo dbInfo = dbInfoService.findDbInfoById(alarm.getHostId());
         alarmEntity.setIp(dbInfo.getIp());
-        alarmEntity.setHostName(dbInfo.getName());
+        alarmEntity.setName(dbInfo.getName());
         //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
         QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
                 .eq("triggerId", alarm.getTriggerId())
@@ -159,7 +159,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
         Kubernetes kuInfoById = kubernetesService.findKuInfoById(alarm.getHostId());
         alarmEntity.setIp(kuInfoById.getIp());
-        alarmEntity.setHostName(kuInfoById.getName());
+        alarmEntity.setName(kuInfoById.getName());
         //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
         QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
                 .eq("triggerId", alarm.getTriggerId())
@@ -200,7 +200,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
         Internet internetById = internetService.findInternetById(alarm.getHostId());
         alarmEntity.setIp(internetById.getIp());
-        alarmEntity.setHostName(internetById.getName());
+        alarmEntity.setName(internetById.getName());
         //插入之前应该查询是否已经存在数据,如果存在数据的话就修改告警持续时间
         QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
                 .eq("triggerId", alarm.getTriggerId())
@@ -306,5 +306,18 @@ public class AlarmServiceImpl implements AlarmService {
         String beforeTime = ConversionDateUtil.findLocalDateTime(0, 240, null);
         List<Map<String, Object>> typeDistribution = alarmDao.findTypeDistribution(beforeTime);
         return typeDistribution;
+    }
+
+    @Override
+    public Map<String,Integer> findAlarmNumByCondition(Alarm alarm) {
+        Map<String,Integer> map = new HashMap<>();
+
+        QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
+                .eq("hostId", alarm.getHostId())
+                .eq("status", 2)
+                .get();
+        List<AlarmEntity> alarmEntityList = alarmDao.findAlarmNumByCondition(queryCondition);
+        map.put("alarmNum",alarmEntityList.size());
+        return map;
     }
 }

@@ -18,7 +18,7 @@ public class Alarm {
 
     private String hostId;
 
-    private String hostName;
+    private String name;
 
     private String ip;
 
@@ -80,12 +80,12 @@ public class Alarm {
         this.hostId = hostId;
     }
 
-    public String getHostName() {
-        return hostName;
+    public String getName() {
+        return name;
     }
 
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIp() {

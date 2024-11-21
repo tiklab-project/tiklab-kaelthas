@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/alarm")
 public class AlarmController {
@@ -35,5 +37,14 @@ public class AlarmController {
         alarmService.updateAlarm(alarm);
     }
 
+
+    /**
+     * 根据条件查询未解决告警数量
+     */
+    @RequestMapping(value = "/findAlarmNumByCondition",method = RequestMethod.POST)
+    public Result<?> findAlarmNumByCondition(@RequestBody Alarm alarm){
+        Map<String,Integer> map = alarmService.findAlarmNumByCondition(alarm);
+        return Result.ok(map);
+    }
 
 }

@@ -40,8 +40,8 @@ public class AlarmEntity {
     @Column(name = "ip")
     private String ip;
 
-    @Column(name = "host_name")
-    private String hostName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "severity_level")
     private Integer severityLevel;
@@ -134,12 +134,12 @@ public class AlarmEntity {
         this.ip = ip;
     }
 
-    public String getHostName() {
-        return hostName;
+    public String getName() {
+        return name;
     }
 
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getSeverityLevel() {
