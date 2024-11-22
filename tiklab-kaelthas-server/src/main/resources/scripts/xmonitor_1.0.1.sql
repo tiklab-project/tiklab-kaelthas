@@ -11,7 +11,7 @@ CREATE TABLE "mtc_alarm" (
                              "resolution_time" timestamp(6),
                              "machine_type" int2,
                              "ip" varchar(64) COLLATE "pg_catalog"."default",
-                             "host_name" varchar(64) COLLATE "pg_catalog"."default",
+                             "name" varchar(64) COLLATE "pg_catalog"."default",
                              "severity_level" int2
 )
 ;
