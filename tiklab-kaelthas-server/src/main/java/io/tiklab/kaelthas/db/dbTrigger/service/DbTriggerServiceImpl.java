@@ -113,7 +113,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         return BeanMapper.mapList(listByDbId, DbTrigger.class);
     }
 
-    @Scheduled(cron = "0 0/2 * * * ? ")
+    @Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerTrigger() {
         //获取所有数据库下的触发器
         QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)

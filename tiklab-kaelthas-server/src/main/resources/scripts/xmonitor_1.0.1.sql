@@ -26,7 +26,7 @@ COMMENT ON COLUMN "mtc_alarm"."is_send" IS '消息是否发送成功（1，成�
 COMMENT ON COLUMN "mtc_alarm"."resolution_time" IS '解决告警的时间';
 COMMENT ON COLUMN "mtc_alarm"."machine_type" IS '机器类型,(1,主机,2.数据库)';
 COMMENT ON COLUMN "mtc_alarm"."ip" IS '主机ip';
-COMMENT ON COLUMN "mtc_alarm"."host_name" IS '设备名称';
+COMMENT ON COLUMN "mtc_alarm"."name" IS '设备名称';
 COMMENT ON COLUMN "mtc_alarm"."severity_level" IS '告警等级';
 COMMENT ON TABLE "mtc_alarm" IS '告警表';
 
@@ -945,6 +945,15 @@ ALTER TABLE "mtc_graphics" ADD CONSTRAINT "graphics_pkey" PRIMARY KEY ("id");
 -- Primary Key structure for table mtc_graphics_monitor
 -- ----------------------------
 ALTER TABLE "mtc_graphics_monitor" ADD CONSTRAINT "graphics_list_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table mtc_history
+-- ----------------------------
+CREATE INDEX "idx_host_monitor_time" ON "mtc_history" USING btree (
+    "host_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
+    "monitor_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
+    "gather_time" "pg_catalog"."timestamp_ops" ASC NULLS LAST
+    );
 
 -- ----------------------------
 -- Primary Key structure for table mtc_history

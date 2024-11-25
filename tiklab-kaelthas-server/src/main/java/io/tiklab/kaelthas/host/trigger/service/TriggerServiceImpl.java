@@ -209,7 +209,7 @@ public class TriggerServiceImpl implements TriggerService {
     }
 
 
-    @Scheduled(cron = "0 0/2 * * * ? ")
+    @Scheduled(cron = "0 0/5 * * * ? ")
     public void insertAlarmForTrigger() {
 
         //将符合条件的触发器全部拉进来,进行判断(当前主机下根据当前监控项创建的触发器)
