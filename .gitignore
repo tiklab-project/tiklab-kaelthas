@@ -32,8 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 Icon/
-tiklab-kaelthas-ee-starter/plugin
 kaelthas-ee-log
-tiklab-kaelthas-ee-starter/embbed
-tiklab-kaelthas-ee-starter/logs
 logs
+
+tiklab-kaelthas-starter/embbed
