@@ -122,7 +122,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         return BeanMapper.mapList(kuTriggerByKuId, KuTrigger.class);
     }
 
-    @Scheduled(cron = "0 0/2 * * * ? ")
+    @Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerKuTrigger() {
         List<KuTriggerEntity> kuTriggerEntityList = kuTriggerDao.findAllTrigger();
         if (kuTriggerEntityList.isEmpty()) {
