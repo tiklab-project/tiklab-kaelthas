@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.trigger.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 主机下的触发器,用于触发告警
+ */
 @Entity
 @Table(name = "mtc_trigger")
 public class TriggerEntity {
@@ -38,18 +41,33 @@ public class TriggerEntity {
     @Column(name = "monitor_id")
     private String monitorId;
 
+    /**
+     * 废弃字段,消息类型,现在使用id关联中间表,因为有可能有多个消息发送渠道
+     */
     @Column(name = "medium_type")
     private Integer mediumType;
 
+    /**
+     * 触发器表达式,写法{{监控项表达式}},>=,[0],例如{{system.memory.used}}>[6]是已用内存超过6G
+     */
     @Column(name = "expression")
     private String expression;
 
+    /**
+     * 触发器的类型(1.最近值判断,2.平均值判断,3.百分比判断)
+     */
     @Column(name = "scheme")
     private Integer scheme;
 
+    /**
+     * 时间范畴,只有平均值判断和百分比判断的时候才有,单位为分钟,拉取指定分钟内的数据进行触发器操作
+     */
     @Column(name = "range_time")
     private Integer rangeTime;
 
+    /**
+     * 百分比,触发器的数据达到查询数据的百分比触发
+     */
     @Column(name = "percentage")
     private Integer percentage;
 

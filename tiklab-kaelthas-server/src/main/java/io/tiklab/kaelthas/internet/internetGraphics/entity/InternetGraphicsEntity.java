@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.internet.internetGraphics.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 网络监控的图形表
+ */
 @Entity
 @Table(name = "mtc_internet_graphics")
 public class InternetGraphicsEntity {

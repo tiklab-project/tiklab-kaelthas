@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.db.dbDynamic.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 监控数据库的动态信息表
+ */
 @Entity
 @Table(name = "mtc_db_dynamic")
 public class DbDynamicEntity {
@@ -11,12 +14,21 @@ public class DbDynamicEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 检控数据库的id
+     */
     @Column(name = "db_id")
     private String dbId;
 
+    /**
+     * 动态信息
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * 动态时间
+     */
     @Column(name = "time")
     private String time;
 

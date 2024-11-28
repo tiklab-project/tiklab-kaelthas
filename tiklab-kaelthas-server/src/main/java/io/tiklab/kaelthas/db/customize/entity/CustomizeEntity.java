@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.db.customize.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 自定义SQL存储表（属于自定义功能，暂时没有开发）
+ */
 @Entity
 @Table(name = "mtc_customize_sql")
 public class CustomizeEntity {
@@ -11,15 +14,19 @@ public class CustomizeEntity {
     @Column(name = "id")
     private String id;
 
+    //监控数据库的id
     @Column(name = "db_id")
     private String dbId;
 
+    //条件表达式
     @Column(name = "expression")
     private String expression;
 
+    //自定义SQL
     @Column(name = "statement_sql")
     private String statementSql;
 
+    //描述
     @Column(name = "describe")
     private String describe;
 

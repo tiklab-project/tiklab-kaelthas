@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.db.dbGraphics.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 监控数据库的图形信息存储表
+ */
 @Entity
 @Table(name = "mtc_db_graphics")
 public class DbGraphicsEntity {
@@ -11,12 +14,21 @@ public class DbGraphicsEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 监控数据库下图形的名称
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * 图形描述
+     */
     @Column(name = "describe")
     private String describe;
 
+    /**
+     * 监控数据库id
+     */
     @Column(name = "db_id")
     private String dbId;
 

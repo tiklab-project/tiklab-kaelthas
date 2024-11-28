@@ -1,6 +1,9 @@
 package io.tiklab.kaelthas.collection.entity.vo;
 import io.tiklab.core.page.Page;
 
+/**
+ * 监控项的返回类型
+ */
 public class DbMonitorVo {
 
     private String id;

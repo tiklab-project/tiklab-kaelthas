@@ -22,6 +22,7 @@ public class PgsqlService {
     @Autowired
     private DbSqlDao dbSqlDao;
 
+    //定时拉取pgsql的数据,执行SQL进行数据上报
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbAim() {
         String dataTimeNow = AgentSqlUtil.date(9);
@@ -67,6 +68,7 @@ public class PgsqlService {
         }
     }
 
+    //根据不同的监控项生成指定的SQL
     private String getPgSQLString(DbMonitorVo DbMonitorVo) {
         String sql = null;
         switch (DbMonitorVo.getMonitorItemId()) {
@@ -158,6 +160,7 @@ public class PgsqlService {
         return sql;
     }
 
+    //将拼接的SQL进行执行,查询出批量的数据
     private List<DbHistoryVo> getReportNum(String dataTimeNow, DbMonitorVo DbMonitorVo, String sql) {
 
         List<DbHistoryVo> list = new LinkedList<>();

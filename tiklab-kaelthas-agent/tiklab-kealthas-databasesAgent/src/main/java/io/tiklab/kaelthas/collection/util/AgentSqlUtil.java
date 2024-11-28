@@ -7,6 +7,7 @@ import java.util.*;
 
 public class AgentSqlUtil {
 
+    //返回版本号
     public static Double parseVersionToNumber(String versionString) {
         if (versionString == null || versionString.isEmpty()) {
             return 0.0;
@@ -65,6 +66,7 @@ public class AgentSqlUtil {
         }
     }
 
+    //拼接插入的SQL
     public static String getBatchInsertSql(String tableName, List<Map<String, Object>> dataList) {
         StringBuffer sb = new StringBuffer();
         StringBuilder valueSb = new StringBuilder();

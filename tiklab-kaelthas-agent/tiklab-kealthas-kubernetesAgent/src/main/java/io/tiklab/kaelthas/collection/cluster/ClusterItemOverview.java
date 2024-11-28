@@ -22,6 +22,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * 获取概况页的信息
+ */
 @Component
 public class ClusterItemOverview {
 
@@ -31,6 +34,7 @@ public class ClusterItemOverview {
     @Autowired
     private HistoryService historyService;
 
+    //定时采集k8s的信息,用于概况页面展示
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void getClusterOverview() {
         //获取所有的k8s信息,将集群的基本信息进行收集
@@ -54,6 +58,7 @@ public class ClusterItemOverview {
 
     }
 
+    //模拟监控项的id(1-22),采集指定的监控项
     @NotNull
     private static List<KuMonitor> getKubernetesMonitors(List<KuMonitor> kuMonitors) {
         List<KuMonitor> monitorList = new LinkedList<>();
@@ -73,6 +78,7 @@ public class ClusterItemOverview {
         return monitorList;
     }
 
+    //使用拉取的k8s信息通过k8s的api来采集指标数据
     private static History getHistory(KuMonitor kuMonitor) {
         try {
             String token = kuMonitor.getApiToken(); // 替换为你的 Token
@@ -105,6 +111,7 @@ public class ClusterItemOverview {
     }
 
 
+    //根据监控的类型来采集指定的数据
     private static void getClusterData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) throws ApiException {
         switch (kuMonitor.getKuItemId()) {
             case "1":
@@ -476,6 +483,7 @@ public class ClusterItemOverview {
         }
     }
 
+    //进行单位的转化
     private static long convertMemoryToMi(String memoryStr) {
         if (memoryStr.endsWith("Ki")) {
             return Long.parseLong(memoryStr.replace("Ki", "")) / 1024;
@@ -489,6 +497,7 @@ public class ClusterItemOverview {
         }
     }
 
+    //进行单位的转换
     private static int parseMemoryValue(String memoryStr) {
         if (memoryStr == null || memoryStr.isEmpty()) {
             return 0;
@@ -506,6 +515,7 @@ public class ClusterItemOverview {
         return value;
     }
 
+    //获取指标Deployment Status
     @NotNull
     private static Map<String, String> getStringStringMap(V1Deployment deployment, String namespace) {
         Map<String, String> map = new HashMap<>();
@@ -526,6 +536,7 @@ public class ClusterItemOverview {
         return map;
     }
 
+    //获取指标Node Status
     @NotNull
     private static List<Map<String, String>> getMapList(V1NodeList nodeList) {
         List<Map<String, String>> list = new ArrayList<>();

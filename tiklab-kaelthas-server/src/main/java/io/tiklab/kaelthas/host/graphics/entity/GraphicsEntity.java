@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.graphics.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 主机的图形表
+ */
 @Entity
 @Table(name = "mtc_graphics")
 public class GraphicsEntity {
@@ -11,21 +14,39 @@ public class GraphicsEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 图形名称(监控展示的时候会有显示
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * 图形描述
+     */
     @Column(name = "describe")
     private String describe;
 
+    /**
+     * 宽度,废弃字段,暂时没有使用
+     */
     @Column(name = "width")
     private String width;
 
+    /**
+     * 高度,废弃字段,暂时没有使用
+     */
     @Column(name = "height")
     private String height;
 
+    /**
+     * 主机id
+     */
     @Column(name = "host_id")
     private String hostId;
 
+    /**
+     * 来源(1.主机,2.模板),当前主机的图形只有在主机当中才能创建
+     */
     @Column(name = "source")
     private Integer source;
 

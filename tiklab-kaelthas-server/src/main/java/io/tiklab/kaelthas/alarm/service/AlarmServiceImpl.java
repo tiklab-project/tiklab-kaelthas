@@ -67,6 +67,7 @@ public class AlarmServiceImpl implements AlarmService {
         return alarmDao.findAlarmPage(alarm);
     }
 
+    //主机创建告警
     @Override
     public void createAlarm(Alarm alarm) {
         try {
@@ -113,6 +114,7 @@ public class AlarmServiceImpl implements AlarmService {
 
     }
 
+    //数据库监控创建告警
     @Override
     public void createAlarmByDbMonitor(Alarm alarm) {
         AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
@@ -154,6 +156,7 @@ public class AlarmServiceImpl implements AlarmService {
         }
     }
 
+    //k8s监控创建告警
     @Override
     public void createAlarmForKubernetes(Alarm alarm) {
         AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
@@ -195,6 +198,7 @@ public class AlarmServiceImpl implements AlarmService {
         }
     }
 
+    //网络设备触发之后发送告警消息
     @Override
     public void createAlarmForInternet(Alarm alarm) {
         AlarmEntity alarmEntity = BeanMapper.map(alarm, AlarmEntity.class);
@@ -236,6 +240,7 @@ public class AlarmServiceImpl implements AlarmService {
         }
     }
 
+    //发送企业微信消息
     private void sendMessage(Map<String, Object> map) {
         SendMessageNotice dispatchNotice = new SendMessageNotice();
         dispatchNotice.setId("b2ffa783e5a2");

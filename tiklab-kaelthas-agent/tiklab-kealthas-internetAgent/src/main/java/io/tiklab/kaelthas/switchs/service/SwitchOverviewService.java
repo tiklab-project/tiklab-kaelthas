@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 采集交换机的状态信息
+ * 采集网络的状态信息,用于网络当中的概况页信息展示
  */
 @Component
 public class SwitchOverviewService {
@@ -38,9 +38,11 @@ public class SwitchOverviewService {
 
     private static final List<History> historyList = new LinkedList<>();
 
+    //定时执行采集网络的指标
     @Scheduled(cron = "30 0/5 * * * ? ")
     public void executeOverview() throws IOException {
-        //查询出网络列表
+
+        //查询出网络列表,用于数据的采集和上报
         String dataTimeNow = ConversionAllTypeUtil.getDataTimeNow();
 
         List<SwitchMonitor> hostList = switchHostDao.findAllInternetList();
@@ -60,6 +62,7 @@ public class SwitchOverviewService {
 
     }
 
+    //获取端口的状态信息
     private void findPortStatus(SwitchMonitor switchMonitor, String dataTimeNow) {
         try {
             History history = new History();
@@ -169,6 +172,7 @@ public class SwitchOverviewService {
         }
     }
 
+    //获取设备型号的信息
     private static String findDeviceModel(Snmp snmp, CommunityTarget target) throws IOException {
 
         // 3. 发送 SNMP 请求并处理响应
@@ -187,6 +191,7 @@ public class SwitchOverviewService {
 
     }
 
+    //获取网络设备的描述信息
     public static void findDescription(SwitchMonitor switchMonitor, String dataTimeNow) throws IOException {
         JSONObject jsonObject = new JSONObject();
 

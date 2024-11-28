@@ -14,7 +14,7 @@ public class KuCollectionDao {
     @Autowired
     private JpaTemplate jpaTemplate;
 
-
+    //查询k8s的设备信息,之后填充监控项的信息
     public List<KuMonitor> findKuMonitor(){
         String sql = """
                 SELECT *

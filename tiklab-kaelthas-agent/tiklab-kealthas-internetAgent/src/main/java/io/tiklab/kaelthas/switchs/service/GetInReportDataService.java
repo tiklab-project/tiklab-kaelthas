@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 定时采集网络道德信息
+ */
 @Component
 public class GetInReportDataService {
 
@@ -50,6 +53,7 @@ public class GetInReportDataService {
             history.setMonitorId(switchMonitor.getMonitorId());
             history.setGatherTime(dataTimeNow);
 
+            //当前的三个监控项
             switch (switchMonitor.getInternetItemId()){
                 case "301":
                     findInternetStatus(switchMonitor,history);

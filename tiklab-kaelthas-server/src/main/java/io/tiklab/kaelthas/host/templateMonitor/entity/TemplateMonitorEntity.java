@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.templateMonitor.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 废弃表,模板下的监控项
+ */
 @Entity
 @Table(name = "mtc_template_monitor")
 public class TemplateMonitorEntity {
@@ -35,6 +38,9 @@ public class TemplateMonitorEntity {
     @Column(name = "monitor_status")
     private Integer monitorStatus;
 
+    /**
+     * 废弃字段,监控项监控数据是否成功
+     */
     @Column(name = "information")
     private String information;
 

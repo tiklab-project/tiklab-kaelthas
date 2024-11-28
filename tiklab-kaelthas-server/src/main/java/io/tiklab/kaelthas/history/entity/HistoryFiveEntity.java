@@ -11,65 +11,26 @@ public class HistoryFiveEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * (监控主机的id,监控数据库的id,监控k8s的id和监控网络的id上报到数据存储使用的字段),只不过字段是hostId
+     */
     @Column(name = "host_id")
     private String hostId;
 
+    /**
+     * 监控项的id(也是上报数据监控项的id,主机监控,数据库监控,k8s监控和网络监控 的监控项id)
+     */
     @Column(name = "monitor_id")
     private String monitorId;
 
-    @Column(name = "monitor_name")
-    private String monitorName;
-
-    @Column(name = "gather_time")
-    private String gatherTime;
-
+    /**
+     * 上报的数据
+     */
     @Column(name = "report_data")
     private String reportData;
 
-    @Column(name = "source")
-    private Integer source;
-
-    @Column(name = "monitor_item_id")
-    private String monitorItemId;
-
-    @Column(name = "interval_time")
-    private String intervalTime;
-
-    @Column(name = "data_categories")
-    private String dataCategories;
-
-    @Column(name = "data_subclass")
-    private String dataSubclass;
-
-    @Column(name = "report_type")
-    private Integer reportType;
-
-    @Column(name = "expression")
-    private String expression;
-
-    public String getExpression() {
-        return expression;
-    }
-
-    public void setExpression(String expression) {
-        this.expression = expression;
-    }
-
-    public Integer getReportType() {
-        return reportType;
-    }
-
-    public void setReportType(Integer reportType) {
-        this.reportType = reportType;
-    }
-
-    public String getDataCategories() {
-        return dataCategories;
-    }
-
-    public void setDataCategories(String dataCategories) {
-        this.dataCategories = dataCategories;
-    }
+    @Column(name = "gather_time")
+    private String gatherTime;
 
     public String getId() {
         return id;
@@ -95,14 +56,6 @@ public class HistoryFiveEntity {
         this.monitorId = monitorId;
     }
 
-    public String getGatherTime() {
-        return gatherTime;
-    }
-
-    public void setGatherTime(String gatherTime) {
-        this.gatherTime = gatherTime;
-    }
-
     public String getReportData() {
         return reportData;
     }
@@ -111,43 +64,11 @@ public class HistoryFiveEntity {
         this.reportData = reportData;
     }
 
-    public Integer getSource() {
-        return source;
+    public String getGatherTime() {
+        return gatherTime;
     }
 
-    public void setSource(Integer source) {
-        this.source = source;
-    }
-
-    public String getMonitorItemId() {
-        return monitorItemId;
-    }
-
-    public void setMonitorItemId(String monitorItemId) {
-        this.monitorItemId = monitorItemId;
-    }
-
-    public String getIntervalTime() {
-        return intervalTime;
-    }
-
-    public void setIntervalTime(String intervalTime) {
-        this.intervalTime = intervalTime;
-    }
-
-    public String getDataSubclass() {
-        return dataSubclass;
-    }
-
-    public void setDataSubclass(String dataSubclass) {
-        this.dataSubclass = dataSubclass;
-    }
-
-    public String getMonitorName() {
-        return monitorName;
-    }
-
-    public void setMonitorName(String monitorName) {
-        this.monitorName = monitorName;
+    public void setGatherTime(String gatherTime) {
+        this.gatherTime = gatherTime;
     }
 }

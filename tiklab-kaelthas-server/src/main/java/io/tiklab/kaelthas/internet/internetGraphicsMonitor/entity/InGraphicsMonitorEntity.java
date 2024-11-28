@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.internet.internetGraphicsMonitor.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 网络监控下的图形和监控项关联表
+ */
 @Entity
 @Table(name = "mtc_internet_graphics_monitor")
 public class InGraphicsMonitorEntity {
@@ -11,9 +14,15 @@ public class InGraphicsMonitorEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 图形id
+     */
     @Column(name = "graphics_id")
     private String graphicsId;
 
+    /**
+     * 监控项id
+     */
     @Column(name = "monitor_id")
     private String monitorId;
 

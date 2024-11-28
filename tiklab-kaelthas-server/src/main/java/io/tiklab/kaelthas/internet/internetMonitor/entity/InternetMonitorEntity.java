@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.internet.internetMonitor.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 网络监控的监控项
+ */
 @Entity
 @Table(name = "mtc_internet_monitor")
 public class InternetMonitorEntity {

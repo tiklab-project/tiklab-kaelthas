@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.graphicsMonitor.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 图形和监控项的关联表(中间表)
+ */
 @Entity
 @Table(name = "mtc_graphics_monitor")
 public class GraphicsMonitorEntity {
@@ -11,9 +14,15 @@ public class GraphicsMonitorEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 监控项id
+     */
     @Column(name = "monitor_id")
     private String monitorId;
 
+    /**
+     * 图形的id
+     */
     @Column(name = "graphics_id")
     private String graphicsId;
 

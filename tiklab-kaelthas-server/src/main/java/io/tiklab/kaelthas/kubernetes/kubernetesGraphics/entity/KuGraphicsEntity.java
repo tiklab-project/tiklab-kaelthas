@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.kubernetes.kubernetesGraphics.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * k8s监控中的图形
+ */
 @Entity
 @Table(name = "mtc_ku_graphics")
 public class KuGraphicsEntity {

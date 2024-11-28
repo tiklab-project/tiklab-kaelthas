@@ -3,6 +3,9 @@ package io.tiklab.kaelthas.host.dynamic.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 主机的动态信息表,之前在首页上展示的最近主机,页面没有展示,已经废弃了
+ */
 @Entity
 @Table(name = "mtc_dynamic")
 public class DynamicEntity {
@@ -12,14 +15,21 @@ public class DynamicEntity {
     @Column(name = "id")
     private String id;
 
-
+    /**
+     * 动态名称
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * 主机id
+     */
     @Column(name = "host_id")
     private String hostId;
 
-
+    /**
+     * 动态的时间
+     */
     @Column(name = "update_time")
     private String updateTime;
 

@@ -13,6 +13,7 @@ import java.util.Map;
 @JoinProvider(model = Alarm.class)
 public interface AlarmService {
 
+    //分页查询
     Pagination<Alarm> findAlarmPage(Alarm alarm);
 
     void createAlarm(Alarm alarm);

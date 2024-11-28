@@ -2,7 +2,9 @@ package io.tiklab.kaelthas.internet.internetItem.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
-
+/**
+ * 网络监控的监控项字典表
+ */
 @Entity
 @Table(name = "mtc_internet_item")
 public class InternetItemEntity {

@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.template.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 模板表
+ */
 @Entity
 @Table(name = "mtc_template")
 public class TemplateEntity {

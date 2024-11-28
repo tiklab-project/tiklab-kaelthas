@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.hostGroup.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 主机组
+ */
 @Entity
 @Table(name = "mtc_host_group")
 public class HostGroupEntity {

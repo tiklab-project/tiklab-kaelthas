@@ -44,7 +44,7 @@ public class EquipmentTimer {
     @Autowired
     private TimerDao timerDao;
 
-    //定时扫描主机的状态
+    //定时扫描主机、数据库、k8s、网络的状态并且修改状态
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void updateUsability() {
         String updateSql = "";

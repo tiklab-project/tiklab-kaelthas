@@ -20,6 +20,9 @@ public class DbSqlDao {
     @Autowired
     private JpaTemplate jpaTemplate;
 
+    /**
+     * 查询MYSQL或者是Pgsql的配置信息
+     */
     public List<DbMonitorVo> findSqlItemList(String dbType) {
         String sql = """
                 SELECT mdi.id as dbId,mdm.dat_name as datName,mdi.username,mdi.password,mdi.ip,mdm.id,mdi.db_port as port,mdm.db_item_id as monitorItemId
@@ -34,6 +37,7 @@ public class DbSqlDao {
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(DbMonitorVo.class));
     }
 
+    //将收集的数据插入到mtc_history
     public void insertForList(List<DbHistoryVo> entityList) {
         List<Map<String, Object>> mapList = getMapList(entityList);
         String historySql = AgentSqlUtil.getBatchInsertSql("mtc_history", mapList);

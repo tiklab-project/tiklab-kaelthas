@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.db.dbMonitor.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 数据库下的监控项
+ */
 @Entity
 @Table(name = "mtc_db_monitor")
 public class DbMonitorEntity {
@@ -54,7 +57,7 @@ public class DbMonitorEntity {
     private String monitorId;
 
     /**
-     * 监控项来源(1.系统指标,2.自定义SQL)
+     * 监控项来源(1.系统指标,2.自定义SQL)当前没有自定义SQL
      */
     @Column(name = "monitor_type")
     private Integer monitorType;

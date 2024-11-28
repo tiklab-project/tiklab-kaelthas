@@ -149,7 +149,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <version>2.8</version>
-                        <executions>
+                        <!--<executions>
                             <execution>
                                 <id>unpack</id>
                                 <phase>compile</phase>
@@ -175,7 +175,7 @@
                                     </artifactItems>
                                 </configuration>
                             </execution>
-                        </executions>
+                        </executions>-->
                     </plugin>
                 </plugins>
             </build>

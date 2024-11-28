@@ -16,20 +16,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 定时拉取MySQL的数据
+ */
 @Service
 public class MysqlService {
 
     List<DbHistoryVo> histories = new LinkedList<>();
 
-    /*@Autowired
-    private DbInfoService dbInfoService;
-
-    @Autowired
-    private DbHistoryVoService DbHistoryVoService;*/
     
     @Autowired
     private DbSqlDao dbSqlDao;
 
+    //定时拉取MySQL的的配置数据,并上报数据
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbMysql() {
         String dataTimeNow = AgentSqlUtil.getDataTimeNow();
@@ -83,6 +82,7 @@ public class MysqlService {
             }
         }
 
+        //定时上报数据
         if (histories.size() > 30) {
             List<DbHistoryVo> linkedList = new LinkedList<>(histories);
             dbSqlDao.insertForList(linkedList);
@@ -91,6 +91,7 @@ public class MysqlService {
 
     }
 
+    //根据不同版本的MySQL,执行不同的SQL用于获取指标值
     @NotNull
     private static String getSQLString(DbMonitorVo DbMonitorVo, Double version) {
         String sql = "";
@@ -240,21 +241,7 @@ public class MysqlService {
         return sql;
     }
 
-    private static void getMysqlData(Connection connection, String sql, DbHistoryVo DbHistoryVo) {
-        try (PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-            // 处理查询结果
-            while (resultSet.next()) {
-                // 假设查询结果包含一个名为 "column_name" 的列
-                String string = resultSet.getString("count");
-                DbHistoryVo.setReportData(string);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    //执行SQL,获取结果
     private static List<DbHistoryVo> getMysqlString(Connection connection, DbMonitorVo DbMonitorVo, String sql,String dataTimeNow) {
         List<DbHistoryVo> list = new LinkedList<>();
         try (PreparedStatement statement = connection.prepareStatement(sql);

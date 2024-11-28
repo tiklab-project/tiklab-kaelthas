@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.db.dbTriggerMedium.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 监控数据库下触发器与通知渠道的关联表
+ */
 @Entity
 @Table(name = "mtc_db_trigger_medium")
 public class DbTriggerMediumEntity {
@@ -11,12 +14,21 @@ public class DbTriggerMediumEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 触发器id
+     */
     @Column(name = "trigger_id")
     private String triggerId;
 
+    /**
+     * 通知渠道(例如,钉钉,企业微信)的id(字典表的id)
+     */
     @Column(name = "medium_id")
     private String mediumId;
 
+    /**
+     * 监控数据库的id
+     */
     @Column(name = "db_id")
     private String dbId;
 

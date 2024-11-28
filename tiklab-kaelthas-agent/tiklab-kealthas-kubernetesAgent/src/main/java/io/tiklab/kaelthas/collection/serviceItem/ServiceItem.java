@@ -16,6 +16,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
+/**
+ * 服务监控项(方法类)
+ */
 public class ServiceItem {
 
     public static void getNServiceReportData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) {

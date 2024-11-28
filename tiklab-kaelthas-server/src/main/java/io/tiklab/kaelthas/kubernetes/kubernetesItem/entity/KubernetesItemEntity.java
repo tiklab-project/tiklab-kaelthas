@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.kubernetes.kubernetesItem.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * k8s监控项的字典项
+ */
 @Entity
 @Table(name = "mtc_ku_item")
 public class KubernetesItemEntity {

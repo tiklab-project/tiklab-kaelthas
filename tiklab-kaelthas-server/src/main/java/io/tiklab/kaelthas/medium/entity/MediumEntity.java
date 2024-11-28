@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.medium.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 消息渠道表(App,企业微信,站内信,邮箱)
+ */
 @Entity
 @Table(name = "mtc_medium")
 public class MediumEntity {
@@ -11,15 +14,27 @@ public class MediumEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 消息名称
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * 消息类型
+     */
     @Column(name = "type")
     private Integer type;
 
+    /**
+     * 消息状态（1，开启   0，关闭）
+     */
     @Column(name = "status")
     private Integer status;
 
+    /**
+     * 消息描述
+     */
     @Column(name = "details")
     private String details;
 

@@ -15,7 +15,7 @@ public class SwitchHostDao {
     @Autowired
     private JpaTemplate jpaTemplate;
 
-
+    //查询网络的监控项信息
     public List<SwitchMonitor> findSwitchList() {
         String sql = """
                 SELECT mim.id as monitorId,mim.internet_item_id,mi.*
@@ -27,6 +27,7 @@ public class SwitchHostDao {
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(SwitchMonitor.class));
     }
 
+    //查询100个网络的信息
     public List<SwitchMonitor> findAllInternetList(){
         String sql = """
                 SELECT *

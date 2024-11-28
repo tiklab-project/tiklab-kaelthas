@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.kubernetes.kubernetesTriggerMedium.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * k8s的触发器和消息渠道的中间表
+ */
 @Entity
 @Table(name = "mtc_ku_trigger_medium")
 public class KuTriggerMediumEntity {

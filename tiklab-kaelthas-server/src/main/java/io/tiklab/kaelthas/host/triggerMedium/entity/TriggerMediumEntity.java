@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.triggerMedium.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 触发器和告警渠道的关联表
+ */
 @Entity
 @Table(name = "mtc_trigger_medium")
 public class TriggerMediumEntity {
@@ -10,9 +13,15 @@ public class TriggerMediumEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 触发器id
+     */
     @Column(name = "trigger_id")
     private String triggerId;
 
+    /**
+     * 渠道id
+     */
     @Column(name = "medium_id")
     private String mediumId;
 

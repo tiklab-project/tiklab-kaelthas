@@ -3,8 +3,7 @@ package io.tiklab.kaelthas.db.database.entity;
 import io.tiklab.dal.jpa.annotation.*;
 
 /**
- *
- * @TableName mtc_db_info
+ * 监控数据库的信息存储表
  */
 @Entity
 @Table(name = "mtc_db_info")

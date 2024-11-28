@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.kubernetes.kubernetesTrigger.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * k8s的触发器
+ */
 @Entity
 @Table(name = "mtc_ku_trigger")
 public class KuTriggerEntity {

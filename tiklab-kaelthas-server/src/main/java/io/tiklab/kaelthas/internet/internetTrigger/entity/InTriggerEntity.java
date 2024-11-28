@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.internet.internetTrigger.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 网络监控中的触发器
+ */
 @Entity
 @Table(name = "mtc_internet_trigger")
 public class InTriggerEntity {

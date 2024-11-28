@@ -3,6 +3,9 @@ package io.tiklab.kaelthas.host.host.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 主机的信息表
+ */
 @Entity
 @Table(name = "mtc_host")
 public class HostEntity {

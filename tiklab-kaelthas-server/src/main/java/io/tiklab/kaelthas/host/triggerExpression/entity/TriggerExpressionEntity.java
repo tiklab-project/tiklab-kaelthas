@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.triggerExpression.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * (暂未使用),主机触发器的表达式表,当前主机的触发表达式存放在触发器当中
+ */
 @Entity
 @Table(name = "mtc_trigger_expression")
 public class TriggerExpressionEntity {

@@ -60,6 +60,7 @@ public class GetKuReportData {
         }
     }
 
+    //配置基本信息,并且通过监控项进行数据采集
     @NotNull
     private static History getHistory(KuMonitor kuMonitor) {
 
@@ -101,6 +102,7 @@ public class GetKuReportData {
         return history;
     }
 
+    //集群下的监控项信息采集
     private static void getClusterData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) throws ApiException {
         switch (kuMonitor.getKuItemId()) {
             case "1":
@@ -420,45 +422,6 @@ public class GetKuReportData {
         return list;
     }
 
-
-    // 计算节点上的 Pod 请求的内存总量 (以 Mi 为单位)
-    private static long getNodeMemoryRequests(CoreV1Api api, String nodeName) throws ApiException {
-        long totalMemoryRequests = 0;
-
-        // 获取所有 Pod
-        V1PodList podList = api.listPodForAllNamespaces(null, null, null, "spec.nodeName=" + nodeName, null, null, null, null, null, false);
-        for (V1Pod pod : podList.getItems()) {
-            List<V1Container> containers = pod.getSpec().getContainers();
-            for (V1Container container : containers) {
-                V1ResourceRequirements resources = container.getResources();
-                if (resources != null && resources.getRequests() != null && resources.getRequests().get("memory") != null) {
-                    String memoryRequestStr = resources.getRequests().get("memory").toSuffixedString();
-                    totalMemoryRequests += convertMemoryToMi(memoryRequestStr);
-                }
-            }
-        }
-        return totalMemoryRequests;
-    }
-
-    // 计算节点上的 Pod 限制的内存总量 (以 Mi 为单位)
-    private static long getNodeMemoryLimits(CoreV1Api api, String nodeName) throws ApiException {
-        long totalMemoryLimits = 0;
-
-        // 获取所有 Pod
-        V1PodList podList = api.listPodForAllNamespaces(null, null, null, "spec.nodeName=" + nodeName, null, null, null, null, null, false);
-        for (V1Pod pod : podList.getItems()) {
-            List<V1Container> containers = pod.getSpec().getContainers();
-            for (V1Container container : containers) {
-                V1ResourceRequirements resources = container.getResources();
-                if (resources != null && resources.getLimits() != null && resources.getLimits().get("memory") != null) {
-                    String memoryLimitStr = resources.getLimits().get("memory").toSuffixedString();
-                    totalMemoryLimits += convertMemoryToMi(memoryLimitStr);
-                }
-            }
-        }
-        return totalMemoryLimits;
-    }
-
     // 将内存字符串转换为 Mi (Mebibytes)
     private static long convertMemoryToMi(String memoryStr) {
         if (memoryStr.endsWith("Ki")) {
@@ -473,6 +436,7 @@ public class GetKuReportData {
         }
     }
 
+    //将指标值进行单位转换
     private static int parseMemoryValue(String memoryStr) {
         if (memoryStr == null || memoryStr.isEmpty()) {
             return 0;

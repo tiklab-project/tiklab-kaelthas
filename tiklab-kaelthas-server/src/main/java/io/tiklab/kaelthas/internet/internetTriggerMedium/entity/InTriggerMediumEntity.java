@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.internet.internetTriggerMedium.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 网络监控中触发器与发送消息渠道的关联表
+ */
 @Entity
 @Table(name = "mtc_internet_trigger_medium")
 public class InTriggerMediumEntity {

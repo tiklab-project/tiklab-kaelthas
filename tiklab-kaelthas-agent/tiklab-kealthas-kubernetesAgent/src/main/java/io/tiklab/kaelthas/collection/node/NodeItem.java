@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * node的监控项采集,方法类
+ */
 public class NodeItem {
     public static void getNodeReportData(KuMonitor kuMonitor, History history, CoreV1Api api, AppsV1Api appsV1Api) {
 

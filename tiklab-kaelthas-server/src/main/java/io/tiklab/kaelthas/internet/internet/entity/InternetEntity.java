@@ -6,8 +6,7 @@ import io.tiklab.dal.jpa.annotation.*;
 import java.util.Date;
 
 /**
-* 
-* @TableName mtc_internet
+* 网络监控信息表
 */
 
 @Table(name = "mtc_internet")

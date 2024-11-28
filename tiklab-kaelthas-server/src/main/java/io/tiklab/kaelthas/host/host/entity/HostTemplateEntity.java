@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.host.host.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 主机和模板的关联表(中间表)
+ */
 @Entity
 @Table(name = "mtc_host_template")
 public class HostTemplateEntity {

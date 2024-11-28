@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 历史表数据的返回值类型
+ */
 @Join
 @Mapper
 public class DbHistoryVo {

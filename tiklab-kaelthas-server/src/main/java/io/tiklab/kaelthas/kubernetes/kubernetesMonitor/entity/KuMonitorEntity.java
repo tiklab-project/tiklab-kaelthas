@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.kubernetes.kubernetesMonitor.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * k8s的监控项
+ */
 @Table(name = "mtc_ku_monitor")
 @Entity
 public class KuMonitorEntity {
@@ -15,7 +18,7 @@ public class KuMonitorEntity {
     private String id;
 
     /**
-     * 数据源id
+     * k8s信息表id
      */
     @Column(name = "ku_id")
     private String kuId;
