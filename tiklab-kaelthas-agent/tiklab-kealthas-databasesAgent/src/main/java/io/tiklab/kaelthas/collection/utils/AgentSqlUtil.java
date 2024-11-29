@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.collection.util;
+package io.tiklab.kaelthas.collection.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;

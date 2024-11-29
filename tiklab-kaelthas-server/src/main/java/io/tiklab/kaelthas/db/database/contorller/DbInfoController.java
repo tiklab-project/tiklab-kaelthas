@@ -70,6 +70,9 @@ public class DbInfoController {
         dbInfoService.deleteDbInfo(id);
     }
 
+    /**
+     * 创建数据库的时候测试是否可用
+     */
     @RequestMapping(value = "/testSql",method = RequestMethod.POST)
     public Result<?> testSql(@RequestBody DbInfo dbInfo){
         return dbInfoService.testSql(dbInfo);

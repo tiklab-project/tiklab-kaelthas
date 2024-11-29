@@ -1,7 +1,6 @@
 package io.tiklab.kaelthas.internet.internetGraphics.service;
 
 import io.tiklab.core.page.Pagination;
-import io.tiklab.core.page.PaginationBuilder;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
@@ -17,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
+/**
+ * 网络监控下的图形配置
+ */
 @Service
 public class InternetGraphicsServiceImpl implements InternetGraphicsService{
 
@@ -28,18 +29,17 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
     @Autowired
     private InGraphicsMonitorService inGraphicsMonitorService;
 
+    /**
+     * 分页查询网络监控下的图形页面
+     */
     @Override
     public Pagination<InternetGraphics> findGraphicsPage(InternetGraphics internetGraphics) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(InternetGraphicsEntity.class)
-                .eq("id", internetGraphics.getId())
-                .like("name", internetGraphics.getName())
-                .pagination(internetGraphics.getParamPage())
-                .get();
-
         return internetGraphicsDao.findGraphicsPage(internetGraphics);
-
     }
 
+    /**
+     * 创建图形
+     */
     @Override
     public String createGraphics(InternetGraphics internetGraphics) {
         try {
@@ -57,6 +57,9 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
         }
     }
 
+    /**
+     * 根据id删除图形
+     */
     @Override
     public void deleteGraphics(String id) {
         try {
@@ -67,12 +70,16 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
         }
     }
 
+    /**
+     * 修改图形
+     */
     @Override
     public void updateGraphics(InternetGraphics internetGraphics) {
         try {
 
             InternetGraphicsEntity graphics = BeanMapper.map(internetGraphics, InternetGraphicsEntity.class);
 
+            //因为可以单个字段修改,所以需要判断传递的监控项是否为空,是否需要修改监控项
             if (internetGraphics.getMonitorIds().isEmpty()) {
                 internetGraphicsDao.updateGraphics(graphics);
             }else {
@@ -85,6 +92,9 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
         }
     }
 
+    /**
+     * 根据监控网络的id查询图形
+     */
     @Override
     public List<InternetGraphics> findGraphicsList(String internetId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InternetGraphicsEntity.class)
@@ -94,6 +104,7 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
         return BeanMapper.mapList(graphicsList,InternetGraphics.class);
     }
 
+    //根据监控网络的id删除图形
     @Override
     public void deleteGraphicsByInId(String id) {
         if (StringUtils.isBlank(id)) {
@@ -105,6 +116,9 @@ public class InternetGraphicsServiceImpl implements InternetGraphicsService{
         internetGraphicsDao.deleteGraphicsByInId(deleteCondition);
     }
 
+    /**
+     * 根据图形id查询图形list
+     */
     @Override
     public List<InGraphicsMonitor> findGraphicsMonitors(String id) {
         return internetGraphicsDao.findGraphicsMonitors(id);

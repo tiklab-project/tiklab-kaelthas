@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 数据库监控的动态信息
+ */
 @RestController
 @RequestMapping("/dbDynamic")
 public class DbDynamicController {

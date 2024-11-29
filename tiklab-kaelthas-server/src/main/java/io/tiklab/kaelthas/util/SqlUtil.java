@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.common.util;
+package io.tiklab.kaelthas.util;
 
 import java.util.Iterator;
 import java.util.List;

@@ -43,6 +43,9 @@ public class HomeServiceImpl implements HomeService {
         return alarmService.findAlarmTypeNum(hostId);
     }
 
+    /**
+     * 查询各种告警的数量情况
+     */
     @Override
     public Map<String, Long> findHostUsage() {
         //查询主机总数和可用主机数

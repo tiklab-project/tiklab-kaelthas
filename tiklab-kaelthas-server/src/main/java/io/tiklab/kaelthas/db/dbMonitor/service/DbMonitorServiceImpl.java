@@ -20,6 +20,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 数据库监控项
+ */
+
 @Service
 public class DbMonitorServiceImpl implements DbMonitorService {
 
@@ -35,6 +39,9 @@ public class DbMonitorServiceImpl implements DbMonitorService {
     @Autowired
     private DbDynamicService dbDynamicService;
 
+    /**
+     * 数据库监控项的分页查询
+     */
     @Override
     public Pagination<DbMonitor> findDbMonitorPage(DbMonitor dbMonitor) {
 
@@ -50,6 +57,9 @@ public class DbMonitorServiceImpl implements DbMonitorService {
         return PaginationBuilder.build(pagination, dbMonitors);
     }
 
+    /**
+     * 创建监控项
+     */
     @Override
     public String createDbMonitor(DbMonitor dbMonitor) {
         try {
@@ -65,6 +75,9 @@ public class DbMonitorServiceImpl implements DbMonitorService {
         }
     }
 
+    /**
+     * 删除监控项
+     */
     @Override
     public void deleteDbMonitor(String id) {
         try {
@@ -77,12 +90,18 @@ public class DbMonitorServiceImpl implements DbMonitorService {
         }
     }
 
+    /**
+     * 修改监控项
+     */
     @Override
     public void updateDbMonitor(DbMonitor dbMonitor) {
         DbMonitorEntity dbMonitorEntity = BeanMapper.map(dbMonitor, DbMonitorEntity.class);
         dbMonitorDao.updateDbMonitor(dbMonitorEntity);
     }
 
+    /**
+     * 根据监控数据库id查询监控项list
+     */
     @Override
     public List<DbMonitor> findAllMonitor(DbMonitor dbMonitor) {
         QueryCondition queryCondition = QueryBuilders.createQuery(DbMonitorEntity.class)
@@ -93,11 +112,9 @@ public class DbMonitorServiceImpl implements DbMonitorService {
         return BeanMapper.mapList(entityList, DbMonitor.class);
     }
 
-    @Override
-    public DbMonitor findListById(String monitorId) {
-        return dbMonitorDao.findListById(monitorId);
-    }
-
+    /**
+     * 根据监控数据库id查询监控项list
+     */
     @Override
     public List<DbMonitor> findMonitorNum(String dbId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(DbMonitorEntity.class)
@@ -107,6 +124,9 @@ public class DbMonitorServiceImpl implements DbMonitorService {
         return BeanMapper.mapList(dbMonitorEntityList, DbMonitor.class);
     }
 
+    /**
+     * 根据监控数据库id删除监控项信息
+     */
     @Override
     public void deleteByDbId(String id) {
         if (StringUtils.isBlank(id)) {

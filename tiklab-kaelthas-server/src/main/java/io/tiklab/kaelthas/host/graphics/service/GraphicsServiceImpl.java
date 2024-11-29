@@ -21,6 +21,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 主机下图形配置
+ */
 @Service
 @Exporter
 public class GraphicsServiceImpl implements GraphicsService {
@@ -34,11 +37,17 @@ public class GraphicsServiceImpl implements GraphicsService {
     @Autowired
     HostMonitorService hostMonitorService;
 
+    /**
+     * 主机下图形的分页查询
+     */
     @Override
     public Pagination<Graphics> findGraphicsPage(Graphics graphics) {
         return graphicsDao.findGraphics(graphics);
     }
 
+    /**
+     * 主机下的图形创建
+     */
     @Override
     public String createGraphics(Graphics graphics) {
 
@@ -72,6 +81,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         }
     }
 
+    /**
+     * 根据图形id删除图形
+     */
     @Override
     public void deleteGraphics(String id) {
         try {
@@ -83,6 +95,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         }
     }
 
+    /**
+     * 修改图形
+     */
     @Override
     public void updateGraphics(Graphics graphics) {
         //将要添加到图表的监控项查询出来，如果数据不是同一种类型的话则添加不了
@@ -111,6 +126,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         graphicsDao.updateGraphics(graphicsEntity);
     }
 
+    /**
+     * 根据监控项id删除图形
+     */
     @Override
     public void deleteGraphicsByMonitorId(String monitorId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
@@ -119,6 +137,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         graphicsDao.deleteGraphicsByMonitorId(deleteCondition);
     }
 
+    /**
+     * 根据主机id删除图形
+     */
     @Override
     public void deleteGraphicsByHostId(String id) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
@@ -127,6 +148,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         graphicsDao.deleteGraphicsByHostId(deleteCondition);
     }
 
+    /**
+     * 查询是否已经存在相同名称的图形
+     */
     @Override
     public List<Graphics> findGraphicsList(Graphics graphics) {
         QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
@@ -137,6 +161,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         return BeanMapper.mapList(graphicsEntityList, Graphics.class);
     }
 
+    /**
+     * 根据监控项ids删除图形
+     */
     @Override
     public void deleteGraphicsByIds(String[] monitorIds) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
@@ -145,6 +172,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         graphicsDao.deleteGraphicsByMonitorIds(deleteCondition);
     }
 
+    /**
+     * 根据主机的id查询出图形list
+     */
     @Override
     public List<Graphics> findInformationByGraphics(String hostId) {
         //查询出主机下的配置信息
@@ -157,6 +187,9 @@ public class GraphicsServiceImpl implements GraphicsService {
         return BeanMapper.mapList(entityList, Graphics.class);
     }
 
+    /**
+     * 查询单个的上报数据信息,用于单条数据图表的展示,前端页面已经没有调用
+     */
     @Override
     public List<Graphics> findGraphicsByHisInformation(Graphics graphics) {
         QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
@@ -169,11 +202,17 @@ public class GraphicsServiceImpl implements GraphicsService {
         return BeanMapper.mapList(entityList,Graphics.class);
     }
 
+    /**
+     * 查询出所有的图形数量
+     */
     @Override
     public Long findGraphicsAllNum() {
         return graphicsDao.findGraphicsAllNum();
     }
 
+    /**
+     * 根据图形id查询出监控项的ids
+     */
     @Override
     public List<String> findMonitorIds(Graphics graphics) {
         List<GraphicsMonitor> list = graphicsMonitorService.findByGraphics(graphics.getId());

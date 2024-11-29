@@ -26,6 +26,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * 模板
+ */
 @Service
 @Exporter
 public class TemplateServiceImpl implements TemplateService {
@@ -40,21 +43,13 @@ public class TemplateServiceImpl implements TemplateService {
     private TemplateMonitorService templateMonitorService;
 
     @Autowired
-    private TriggerService triggerService;
-
-    @Autowired
-    private TriggerExpressionService triggerExpressionService;
-
-    @Autowired
-    private GraphicsService graphicsService;
-
-    @Autowired
     private GraphicsMonitorService graphicsMonitorService;
 
     @Autowired
     private HostMonitorService hostMonitorService;
 
 
+    //查询所有模板
     @Override
     public List<Template> findTemplateAll() {
         QueryCondition queryCondition = QueryBuilders.createQuery(TemplateEntity.class)
@@ -119,6 +114,7 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
+    //添加模板到主机当中
     @Override
     public void addTemplate(HostTemplate hostTemplate) {
         try {
@@ -140,6 +136,7 @@ public class TemplateServiceImpl implements TemplateService {
 
     }
 
+    //移除主机当中的模板
     @Override
     public void removeTemplate(HostTemplate hostTemplate) {
 
@@ -188,7 +185,7 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
-
+    //创建模板
     @Override
     public String createTemplate(Template template) {
         TemplateEntity templateEntity = BeanMapper.map(template, TemplateEntity.class);
@@ -230,16 +227,7 @@ public class TemplateServiceImpl implements TemplateService {
         templateDao.updateTemplate(templateEntity);
     }
 
-    @Override
-    public Map<String, Integer> findTemplateNum() {
-        Map<String, Integer> map = new HashMap<>();
-        Integer tempNum = templateDao.findTemplateNum();
-        Integer monitorNum = templateMonitorService.findMonitorNumber();
-        map.put("tempNum", tempNum);
-        map.put("monitorNum", monitorNum);
-        return map;
-    }
-
+    //向模板当中添加监控项
     @Override
     public void createTemplateMonitor(HostMonitor hostMonitor) {
 
@@ -264,6 +252,7 @@ public class TemplateServiceImpl implements TemplateService {
 
     }
 
+    //删除模板当中的监控项
     @Override
     public void deleteTemplateMonitor(TemplateMonitor templateMonitor) {
         //删除模板中的监控项和主机当中的监控项
@@ -283,6 +272,7 @@ public class TemplateServiceImpl implements TemplateService {
         graphicsMonitorService.deleteByMonitorIds(strings);
     }
 
+    //修改模板当中的监控项
     @Override
     public void updateTemplateMonitor(HostMonitor hostMonitor) {
 
@@ -292,6 +282,7 @@ public class TemplateServiceImpl implements TemplateService {
         hostMonitorService.updateByMonitorId(hostMonitor);
     }
 
+    //查询模板数量
     @Override
     public Long findTemplateAllNum() {
         return templateDao.findTemplateAllNum();

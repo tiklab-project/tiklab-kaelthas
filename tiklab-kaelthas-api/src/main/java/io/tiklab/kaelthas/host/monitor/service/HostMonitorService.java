@@ -44,8 +44,6 @@ public interface HostMonitorService {
     //根据监控项id查询主机当中的监控项和模板当中的监控项
     List<HostMonitor> findmonitorByMonitorItemIds(List<String> monitorItemIds,String hostId);
 
-    Integer findHostNumber();
-
     //根据id查询模板下创建的监控项或者是主机下创建的监控项
     List<HostMonitor> findByHostId(String id);
 

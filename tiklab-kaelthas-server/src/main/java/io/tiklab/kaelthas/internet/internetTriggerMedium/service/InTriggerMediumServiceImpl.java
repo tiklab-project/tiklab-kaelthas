@@ -2,7 +2,7 @@ package io.tiklab.kaelthas.internet.internetTriggerMedium.service;
 
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
-import io.tiklab.kaelthas.common.util.SqlUtil;
+import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.internet.internetTriggerMedium.dao.InTriggerMediumDao;
 import io.tiklab.kaelthas.internet.internetTriggerMedium.entity.InTriggerMediumEntity;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -14,12 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 触发器和消息渠道的关联表
+ */
 @Service
 public class InTriggerMediumServiceImpl implements InTriggerMediumService{
 
     @Autowired
     private InTriggerMediumDao inTriggerMediumDao;
 
+    //创建触发器和消息渠道的中间表
     @Override
     public void createTriggerMedium(String string, List<String> mediumType) {
         //将插入的数据拼装成sql
@@ -34,6 +38,7 @@ public class InTriggerMediumServiceImpl implements InTriggerMediumService{
         inTriggerMediumDao.createTriggerMedium(sql);
     }
 
+    //根据触发器id删除关联信息
     @Override
     public void deleteByTrigger(String id) {
         if (StringUtils.isBlank(id)){
@@ -45,6 +50,7 @@ public class InTriggerMediumServiceImpl implements InTriggerMediumService{
         inTriggerMediumDao.deleteByTrigger(deleteCondition);
     }
 
+    //根据触发器ids删除关联表信息
     @Override
     public void deleteByTriggerIds(List<String> triggerIds) {
         if (triggerIds.isEmpty()) {

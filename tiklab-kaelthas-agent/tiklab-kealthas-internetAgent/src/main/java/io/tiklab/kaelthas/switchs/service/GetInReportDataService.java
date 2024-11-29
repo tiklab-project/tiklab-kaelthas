@@ -26,7 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 定时采集网络道德信息
+ * 定时采集网络监控信息
  */
 @Component
 public class GetInReportDataService {

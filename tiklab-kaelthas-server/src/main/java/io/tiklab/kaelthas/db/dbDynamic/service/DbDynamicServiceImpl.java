@@ -4,7 +4,7 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.core.page.PaginationBuilder;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.db.dbDynamic.dao.DbDynamicDao;
 import io.tiklab.kaelthas.db.dbDynamic.entity.DbDynamicEntity;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
@@ -14,12 +14,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 数据库监控中的动态
+ */
 @Service
 public class DbDynamicServiceImpl implements DbDynamicService{
 
     @Autowired
     private DbDynamicDao dbDynamicDao;
 
+    /**
+     * 数据库监控的动态信息
+     */
     @Override
     public Pagination<DbDynamic> findDynamicPage(DbDynamic dbDynamic) {
         QueryCondition queryCondition = QueryBuilders.createQuery(DbDynamicEntity.class)
@@ -33,6 +39,9 @@ public class DbDynamicServiceImpl implements DbDynamicService{
         return PaginationBuilder.build(pagination,dbDynamics);
     }
 
+    /**
+     * 数据库监控中创建动态信息
+     */
     @Override
     public void createDbDynamic(DbDynamic dbDynamic) {
         String date = ConversionDateUtil.date(9);

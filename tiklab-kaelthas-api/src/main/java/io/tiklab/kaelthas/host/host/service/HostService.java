@@ -44,14 +44,8 @@ public interface HostService {
     @FindList
     List<Host> findList(List<String> ids);
 
-    Map<String, Integer> findHostNumber();
-
     @FindAll
     List<Host> findAllHost();
-
-    void updateHostByHostId(String hostId);
-
-    void updateHostStatus(String hostId,Integer status);
 
     //查找可用主机数量和主机总数量
     Map<String, Long> findHostUsage();

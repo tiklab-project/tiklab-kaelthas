@@ -1,7 +1,7 @@
 package io.tiklab.kaelthas.common.timer.service;
 
 import io.tiklab.kaelthas.common.timer.dao.TimerDao;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.db.database.model.DbInfo;
 import io.tiklab.kaelthas.db.database.service.DbInfoService;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
@@ -20,6 +20,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * 定时扫描主机,数据库,k8s,网络设备的状态,进行修改
+ */
 @Component
 public class EquipmentTimer {
 

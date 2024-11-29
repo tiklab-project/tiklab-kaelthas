@@ -9,10 +9,10 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
-import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
-import io.tiklab.kaelthas.common.util.StringUtil;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.util.ConversionScriptsUtils;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.internet.internetTrigger.dao.InTriggerDao;
@@ -32,6 +32,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * 网络监控中的触发器
+ */
 @Service
 public class InTriggerServiceImpl implements InTriggerService {
 
@@ -50,11 +53,13 @@ public class InTriggerServiceImpl implements InTriggerService {
     @Autowired
     private HistoryService historyService;
 
+    //分页查询触发器
     @Override
     public Pagination<InTrigger> findTriggerPage(InTrigger inTrigger) {
         return inTriggerDao.findTriggerPage(inTrigger);
     }
 
+    //创建触发器
     @Override
     public String createInTrigger(InTrigger inTrigger) {
         try {
@@ -72,6 +77,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //根据id删除触发器
     @Override
     public void deleteTrigger(String id) {
         try {
@@ -84,6 +90,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //修改触发器
     @Override
     public void updateTrigger(InTrigger inTrigger) {
         //如果没有修改消息通知方案
@@ -102,6 +109,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //根据监控网络的id删除触发器
     @Override
     public void deleteByInId(String internetId) {
         if (StringUtils.isBlank(internetId)) {
@@ -113,6 +121,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         inTriggerDao.deleteByInId(deleteCondition);
     }
 
+    //根据监控网络的id查询触发器
     @Override
     public List<String> findTriggerByInId(String internetId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InTriggerEntity.class)
@@ -124,6 +133,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         return entityList.stream().map(InTriggerEntity::getId).toList();
     }
 
+    //触发器定时器,定时拉取触发器进行告警
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerInTrigger() {
         List<InTriggerEntity> inTriggerEntityList = inTriggerDao.findTriggerAll();
@@ -147,6 +157,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //百分比触发,计算一定时间内触发的占比超过指定数值
     private void getPercentInTrigger(InTriggerEntity trigger) {
         try {
             String flag;
@@ -207,6 +218,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //平均值触发,计算在一定时间段内的平均值进行触发
     private void getAvgValueInTrigger(InTriggerEntity trigger) {
         try {
 
@@ -267,6 +279,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //最近值触发,使用存储的最后一个数据进行触发
     private void getLastValueInTrigger(InTriggerEntity trigger) {
         try {
             String flag;
@@ -280,7 +293,7 @@ public class InTriggerServiceImpl implements InTriggerService {
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
 
             //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-            List<History> historyList = historyService.findInHistoryByHostId(trigger.getInternetId(), beforeTime);
+            List<History> historyList = historyService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
 
             if (historyList.isEmpty()) {
                 return;
@@ -340,6 +353,7 @@ public class InTriggerServiceImpl implements InTriggerService {
         }
     }
 
+    //根据监控项表达式模糊查询触发器表达式
     @Override
     public List<InTrigger> findLikeTrigger(String hostId, String expression) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InTriggerEntity.class)

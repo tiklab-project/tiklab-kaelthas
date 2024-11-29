@@ -26,8 +26,6 @@ public interface HistoryService {
     //根据条件删除历史数据
     void deleteByCondition(History history);
 
-    void findHistoryByCondition(History history);
-
     //数据库监控查询
     List<List<History>> findGraphicsLine(History history);
 
@@ -38,7 +36,7 @@ public interface HistoryService {
 
     List<History> findHistoryByGatherTime(String dbId, String beforeTime);
 
-    List<History> findDbHistoryByHostId(String hostId,String beforeTime);
+    List<History> findDbHistoryByHostId(String dbId,String beforeTime);
 
     List<History> findKuHistoryByHostId(String kuId, String beforeTime);
 
@@ -46,11 +44,7 @@ public interface HistoryService {
 
     Map<String, Object> findInternetOverview(String internetId);
 
-    List<History> findInHistoryByHostId(String internetId, String beforeTime);
-
     List<History> findInternetToGatherTime(String internetId, String beforeTime);
-
-    List<History> findHistoryByHostId(String id,String beforeTime);
 
     List<History> findHistoryByHostIds(String beforeTime);
 

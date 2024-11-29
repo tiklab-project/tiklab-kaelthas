@@ -22,7 +22,7 @@ import io.tiklab.kaelthas.alarm.dao.AlarmDao;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.host.host.model.Host;
 import io.tiklab.kaelthas.host.host.service.HostService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.host.triggerMedium.service.TriggerMediumService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * 所有告警方法的实现
+ */
 @Service
 @Exporter
 public class AlarmServiceImpl implements AlarmService {
@@ -261,6 +264,9 @@ public class AlarmServiceImpl implements AlarmService {
         }
     }
 
+    /**
+     * 根据触发器删除告警消息，删除触发器的时候会删除告警消息
+     */
     @Override
     public void deleteByTriggerId(String triggerId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(AlarmEntity.class)
@@ -269,6 +275,7 @@ public class AlarmServiceImpl implements AlarmService {
         alarmDao.deleteByTriggerId(deleteCondition);
     }
 
+    //根据条件查询告警的list，实际上是查询告警的数量
     @Override
     public List<Alarm> findAlarmList(Alarm alarm) {
         QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
@@ -279,6 +286,7 @@ public class AlarmServiceImpl implements AlarmService {
         return BeanMapper.mapList(entityList, Alarm.class);
     }
 
+    //改变告警的状态，未解决->已解决
     @Override
     public void updateAlarm(Alarm alarm) {
         String date = ConversionDateUtil.date(9);
@@ -288,17 +296,21 @@ public class AlarmServiceImpl implements AlarmService {
         alarmDao.updateAlarmState(alarm);
     }
 
+    //根据主机id查询不同告警等级的数量
     @Override
     public List<Alarm> findAlarmTypeNum(String hostId) {
         return alarmDao.findAlarmTypeNum(hostId);
     }
 
+    //查询出十天内的所有告警数量
     @Override
     public Long findAlarmAllNum() {
+        //返回十天前的时间值
         String beforeTenTime = ConversionDateUtil.findLocalDateTime(0, 240, null);
         return alarmDao.findAlarmAllNum(beforeTenTime);
     }
 
+    //查询十天内未解决的告警数量
     @Override
     public Long findAlarmTimeNum() {
         //向前推十天的时间
@@ -313,6 +325,7 @@ public class AlarmServiceImpl implements AlarmService {
         return typeDistribution;
     }
 
+    //根据ip分类查询出告警总数,已解决告警数量,未解决告警数量
     @Override
     public Map<String,Integer> findAlarmNumByCondition(Alarm alarm) {
         Map<String,Integer> map = new HashMap<>();

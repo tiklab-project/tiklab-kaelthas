@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * k8s监控中的监控项
+ */
 @Service
 public class KuMonitorServiceImpl implements KuMonitorService{
 
@@ -29,6 +32,7 @@ public class KuMonitorServiceImpl implements KuMonitorService{
     @Autowired
     private KuGraphicsMonitorService kuGraphicsMonitorService;
 
+    //根据名称和id进行分页查询
     @Override
     public Pagination<KuMonitor> findKuMonitorPage(KuMonitor kuMonitor) {
         QueryCondition queryCondition = QueryBuilders.createQuery(KuMonitorEntity.class)
@@ -46,12 +50,14 @@ public class KuMonitorServiceImpl implements KuMonitorService{
         return PaginationBuilder.build(pagination, kuMonitorList);
     }
 
+    //创建k8s下的监控项
     @Override
     public String createKuMonitor(KuMonitor kuMonitor) {
         KuMonitorEntity entity = BeanMapper.map(kuMonitor, KuMonitorEntity.class);
         return kuMonitorDao.createKuMonitor(entity);
     }
 
+    //根据监控项id删除监控项
     @Override
     public void deleteKuMonitor(String id) {
         try {
@@ -63,12 +69,14 @@ public class KuMonitorServiceImpl implements KuMonitorService{
         }
     }
 
+    //修改监控项
     @Override
     public void updateKuMonitor(KuMonitor kuMonitor) {
         KuMonitorEntity entity = BeanMapper.map(kuMonitor, KuMonitorEntity.class);
         kuMonitorDao.updateKuMonitor(entity);
     }
 
+    //根据k8sid查询所有的监控项
     @Override
     public List<KuMonitor> findAllKuMonitor(String kuId) {
         return kuMonitorDao.findAllKuMonitor(kuId);
@@ -82,6 +90,7 @@ public class KuMonitorServiceImpl implements KuMonitorService{
         return kuMonitorDao.findKuAndMonitor();
     }
 
+    //根据k8s监控的id删除监控项
     @Override
     public void deleteByKuId(String id) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuMonitorEntity.class)

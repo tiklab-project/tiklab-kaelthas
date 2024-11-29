@@ -58,7 +58,7 @@ public class GraphicsController {
     }
 
     /**
-     * 查询单个的上报数据信息,用于单条数据图表的展示
+     * 查询单个的上报数据信息,用于单条数据图表的展示,前端页面已经没有调用
      */
     @RequestMapping(value = "/findGraphicsByHisInformation", method = RequestMethod.POST)
     public Result<List<Graphics>> findGraphicsByHisInformation(@RequestBody Graphics graphics) {

@@ -11,12 +11,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 网络监控项的字典项
+ */
 @Service
 public class InternetItemServiceImpl implements InternetItemService {
 
     @Autowired
     private InternetItemDao internetItemDao;
 
+    /**
+     * 根据网络设备的类型查询网络的监控项字典项
+     */
     @Override
     public List<InternetItem> findItemList(InternetItem internetItem) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InternetItemEntity.class)

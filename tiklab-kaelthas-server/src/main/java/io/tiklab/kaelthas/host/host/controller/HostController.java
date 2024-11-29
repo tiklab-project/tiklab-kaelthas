@@ -75,6 +75,9 @@ public class HostController {
     }
 
 
+    /**
+     * 主机页面的分页查询
+     */
     @RequestMapping(value = "/findHostPage",method = RequestMethod.POST)
     public Result<Pagination<Host>> findHostPage(@RequestBody Host host){
         Pagination<Host> pagination = hostService.findHostPage(host);
@@ -82,7 +85,7 @@ public class HostController {
     }
 
     /**
-     * 根据主机下的监控项大类和主机id查询出主机下的监控项
+     * 根据主机下的监控项大类和主机id查询出主机下的监控项(这个接口前端已经不使用了)
      */
     @RequestMapping(value = "/findMonitorByCategories",method = RequestMethod.POST)
     public Result<List<HostMonitor>> findMonitorForHost(@RequestBody Host host){

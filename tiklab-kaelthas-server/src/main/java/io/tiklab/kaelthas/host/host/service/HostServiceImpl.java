@@ -33,7 +33,7 @@ import io.tiklab.kaelthas.host.monitor.service.HostMonitorService;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 import io.tiklab.kaelthas.host.triggerExpression.service.TriggerExpressionService;
 import io.tiklab.kaelthas.host.trigger.service.TriggerService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,10 +86,9 @@ public class HostServiceImpl implements HostService {
     @Autowired
     GraphicsMonitorService graphicsMonitorService;
 
-    @Autowired
-    private DbInfoService dbInfoService;
-
-
+    /**
+     * 分页查询
+     */
     @Override
     public Pagination<Host> findPageHost(Host host) {
         //查询出来分页数据
@@ -98,6 +97,9 @@ public class HostServiceImpl implements HostService {
         return pageHost;
     }
 
+    /**
+     * 创建监控主机
+     */
     @Override
     public String createHost(Host host) {
         String date = ConversionDateUtil.date(9);
@@ -133,6 +135,9 @@ public class HostServiceImpl implements HostService {
         }
     }
 
+    /**
+     * 修改主机
+     */
     @Override
     public void updateHost(Host host) {
         try {
@@ -144,6 +149,9 @@ public class HostServiceImpl implements HostService {
         }
     }
 
+    /**
+     * 根据主机的id进行查询主机下监控项和触发器数量信息
+     */
     @Override
     public Host findHostById(String id) {
 
@@ -173,12 +181,18 @@ public class HostServiceImpl implements HostService {
 
     }
 
+    /**
+     * findOne方法
+     */
     @Override
     public Host findOneHost(String id) {
         HostEntity hostEntity = hostDao.findOne(id);
         return BeanMapper.map(hostEntity, Host.class);
     }
 
+    /**
+     * 根据id删除主机
+     */
     @Override
     public void deleteHostById(String id) {
 
@@ -212,9 +226,10 @@ public class HostServiceImpl implements HostService {
         }
     }
 
+    //根据主机ip查询出所有符合ip的主机id
     @Override
     public List<HostMonitor> findMonitorItemListByHostIp(String ip) {
-        //根据主机ip查询出所有符合ip的主机id
+
         QueryCondition queryCondition = QueryBuilders.createQuery(HostEntity.class)
                 .eq("ip", ip)
                 .eq("state", 1)
@@ -234,11 +249,15 @@ public class HostServiceImpl implements HostService {
         return monitorList;
     }
 
+    /**
+     * 主机监控的分页查询
+     */
     @Override
     public Pagination<Host> findHostPage(Host host) {
         return hostDao.findHostPageForMonitoring(host);
     }
 
+    //根据主机的监控大类查询,前端已经没有这个业务了
     @Override
     public List<HostMonitor> findMonitorForHost(Host host) {
         //根据监控大类查询出监控项id
@@ -262,6 +281,9 @@ public class HostServiceImpl implements HostService {
         return hostMonitors;
     }
 
+    /**
+     * 查询最近的四个主机,用于首页的常用主机展示,前端已经没有这个业务了
+     */
     @Override
     public List<Host> findRecentHostList(String hostId) {
         List<Host> summaryList = new ArrayList<>();
@@ -304,38 +326,23 @@ public class HostServiceImpl implements HostService {
         }
     }
 
+    //findList方法
     @Override
     public List<Host> findList(List<String> ids) {
         List<HostEntity> entityList = hostDao.findList(ids);
         return BeanMapper.mapList(entityList, Host.class);
     }
 
-    @Override
-    public Map<String, Integer> findHostNumber() {
-        Map<String, Integer> map = new HashMap<>();
-        Integer hostNum = hostDao.findHostNumber();
-        Integer hostMonitorNum = monitorService.findHostNumber();
-        map.put("hostNum", hostNum);
-        map.put("hostMonitorNum", hostMonitorNum);
-        return map;
-    }
-
+    //findAll方法
     @Override
     public List<Host> findAllHost() {
         List<HostEntity> all = hostDao.findAll();
         return BeanMapper.mapList(all, Host.class);
     }
 
-    @Override
-    public void updateHostByHostId(String hostId) {
-        hostDao.updateHostStatus(hostId, 1);
-    }
-
-    @Override
-    public void updateHostStatus(String hostId, Integer status) {
-        hostDao.updateHostStatus(hostId, status);
-    }
-
+    /**
+     * 查询主机总数和可用主机数
+     */
     @Override
     public Map<String, Long> findHostUsage() {
         //查找主机的总数量

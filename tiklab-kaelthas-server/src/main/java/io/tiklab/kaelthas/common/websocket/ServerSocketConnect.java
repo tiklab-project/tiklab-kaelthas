@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 主机agent上报数据的接收
+ */
 @Service
 public class ServerSocketConnect {
 
@@ -35,14 +38,15 @@ public class ServerSocketConnect {
 
     private static final List<History> historyList = new ArrayList<>();
 
-    private static final int BATCH_SIZE = 10;
+    //定义一个常量,如果达到这个阈值的话插入数据
+    private static final int BATCH_SIZE = 1000;
 
     public final ExecutorService executorService = Executors.newCachedThreadPool();
 
     public final ExecutorService service = Executors.newCachedThreadPool();
 
-    public final ExecutorService saveDataService = Executors.newCachedThreadPool();
 
+    //创建一个线程,持续接收数据
     @Bean
     public void readSocketMessage() {
         try {
@@ -76,14 +80,7 @@ public class ServerSocketConnect {
                                     List<History> histories = new ArrayList<>(historyList);
                                     historyList.clear();
 
-                                    saveDataService.submit(() -> {
-                                        historyService.insertForList(histories);
-                                    });
-
-                                    /*//查看数据是否经过触发器生成告警数据
-                                    saveDataService.submit(() -> {
-                                        triggerService.insertAlarmForTrigger(histories);
-                                    });*/
+                                    historyService.insertForList(histories);
 
                                 }
                             }

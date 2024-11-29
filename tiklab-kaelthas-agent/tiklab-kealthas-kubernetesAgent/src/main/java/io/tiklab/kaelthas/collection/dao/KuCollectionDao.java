@@ -23,4 +23,15 @@ public class KuCollectionDao {
 
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(KuMonitor.class));
     }
+
+    public List<KuMonitor> findKuAllMonitor() {
+        String sql = """
+                SELECT mkm.*,mk.ip,mk.port,mk.api_token
+                FROM mtc_ku_monitor mkm
+                LEFT JOIN mtc_ku_info mk
+                ON mkm.ku_id = mk.id
+                """;
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(KuMonitor.class));
+    }
 }

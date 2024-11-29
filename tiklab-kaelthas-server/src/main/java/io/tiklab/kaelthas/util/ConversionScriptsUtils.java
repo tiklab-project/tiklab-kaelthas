@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.common.javascripts;
+package io.tiklab.kaelthas.util;
 
 import com.alibaba.fastjson.JSONObject;
 import io.tiklab.core.exception.ApplicationException;

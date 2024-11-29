@@ -7,7 +7,7 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.toolkit.beans.BeanMapper;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.kubernetes.kubernetesGraphics.entity.KuGraphics;
 import io.tiklab.kaelthas.kubernetes.kubernetesGraphics.service.KuGraphicsService;
 import io.tiklab.kaelthas.kubernetes.kubernetesGraphicsMonitor.service.KuGraphicsMonitorService;
@@ -21,6 +21,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * k8s监控的信息表
+ */
 @Service
 public class KubernetesServiceImpl implements KubernetesService {
 
@@ -39,11 +42,13 @@ public class KubernetesServiceImpl implements KubernetesService {
     @Autowired
     private KuTriggerService kuTriggerService;
 
+    //k8s的分页查询
     @Override
     public Pagination<Kubernetes> findKbInfoPage(Kubernetes kubernetes) {
         return kubernetesDao.findKbInfoPage(kubernetes);
     }
 
+    //创建k8s监控监控
     @Override
     public String createKbInfo(Kubernetes kubernetes) {
         KubernetesEntity kubernetesEntity = BeanMapper.map(kubernetes, KubernetesEntity.class);
@@ -53,6 +58,7 @@ public class KubernetesServiceImpl implements KubernetesService {
         return kubernetesDao.createKbInfo(kubernetesEntity);
     }
 
+    //修改k8s监控信息
     @Override
     public void updateKbInfo(Kubernetes kubernetes) {
         KubernetesEntity kubernetesEntity = BeanMapper.map(kubernetes, KubernetesEntity.class);
@@ -61,6 +67,7 @@ public class KubernetesServiceImpl implements KubernetesService {
         kubernetesDao.updateKbInfo(kubernetesEntity);
     }
 
+    //根据id删除监控的k8s信息
     @Override
     public void deleteKuInfo(String id) {
         try {
@@ -80,6 +87,7 @@ public class KubernetesServiceImpl implements KubernetesService {
         }
     }
 
+    //根据时间倒排,查询四个k8s监控信息
     @Override
     public List<Kubernetes> findKuDropDown() {
         QueryCondition queryCondition = QueryBuilders.createQuery(KubernetesEntity.class)
@@ -91,12 +99,14 @@ public class KubernetesServiceImpl implements KubernetesService {
         return BeanMapper.mapList(kuDropDown.getDataList(),Kubernetes.class);
     }
 
+    //根据id查询k8s的监控信息
     @Override
     public Kubernetes findKuInfoById(String id) {
         KubernetesEntity kubernetesEntity = kubernetesDao.findKuInfoById(id);
         return BeanMapper.map(kubernetesEntity,Kubernetes.class);
     }
 
+    //查询所有k8s监控信息
     @Override
     public List<Kubernetes> findAll() {
         List<KubernetesEntity> kubernetesEntities = kubernetesDao.findAll();

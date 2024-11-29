@@ -17,7 +17,7 @@ import io.tiklab.kaelthas.db.dbTrigger.model.DbTrigger;
 import io.tiklab.kaelthas.db.dbTrigger.service.DbTriggerService;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +26,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * 监控数据库
+ */
 @Service
 public class DbInfoInfoServiceImpl implements DbInfoService {
 
@@ -53,11 +56,13 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
     @Autowired
     private DbTriggerMediumService dbTriggerMediumService;
 
+    //分页查询
     @Override
     public Pagination<DbInfo> findDbInfoPage(DbInfo dbInfo) {
         return dbInfoDao.findDbInfoPage(dbInfo);
     }
 
+    //创建监控数据库
     @Override
     public String createDbInfo(DbInfo dbInfo) {
         try {
@@ -78,6 +83,7 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         }
     }
 
+    //修改监控数据库
     @Override
     public void updateDbInfo(DbInfo dbInfo) {
         DbInfoEntity dbInfoEntity = BeanMapper.map(dbInfo, DbInfoEntity.class);
@@ -86,6 +92,7 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         dbInfoDao.updateDbInfo(dbInfoEntity);
     }
 
+    //删除监控数据库
     @Override
     public void deleteDbInfo(String id) {
         try {
@@ -108,6 +115,7 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         }
     }
 
+    //根据监控数据库的id查询详细信息
     @Override
     public DbInfo findDbInfoById(String id) {
 
@@ -130,6 +138,7 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         return dbInfo;
     }
 
+    //创建监控数据库的时候测试是否能够连接
     @Override
     public Result<?> testSql(DbInfo dbInfo) {
         String url = "";
@@ -183,23 +192,20 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         }
     }
 
-    @Override
-    public List<DbMonitor> findUsableDbInfoList() {
-        //通过ip查找数据库,并且查找数据库的监控项
-        return dbInfoDao.findUsableDbInfoList();
-    }
-
+    //查询出点击最近的四个监控数据库
     @Override
     public List<DbInfo> findDropDown() {
         return dbInfoDao.findDropDown();
     }
 
+    //查询出所有的数据库
     @Override
     public List<DbInfo> findAll() {
         List<DbInfoEntity> dbInfoEntityList = dbInfoDao.findAll();
         return BeanMapper.mapList(dbInfoEntityList, DbInfo.class);
     }
 
+    //查询出MYSQL的监控字典项
     @Override
     public List<DbMonitor> findMysqlItemList() {
         return dbInfoDao.findMysqlItemList();

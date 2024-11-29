@@ -9,13 +9,10 @@ import java.util.List;
 
 @JoinProvider(model = TemplateMonitor.class)
 public interface TemplateMonitorService {
-    void deleteByMonitorId(String id);
 
     void createTemplateMonitor(HostMonitor hostMonitor);
 
     List<TemplateMonitor> findIdsByTemplateId(String templateId);
-
-    void deleteByTemplateId(String templateId);
 
     @FindList
     List<TemplateMonitor> findList(List<String> monitorIds);
@@ -24,14 +21,7 @@ public interface TemplateMonitorService {
 
     void updateTemplateMonitor(HostMonitor hostMonitor);
 
-    List<TemplateMonitor> findTemplateMonitorByIds(String[] templateIds, HostMonitor hostMonitor);
-
-    TemplateMonitor findOneMonitor(String id);
-
-    void deleteMonitorByIds(String[] ids);
-
     List<TemplateMonitor> findMonitorByItemIds(List<String> monitorItemIds,List<String> templateIds);
 
-    Integer findMonitorNumber();
 
 }

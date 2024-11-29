@@ -29,13 +29,10 @@ public interface TriggerService {
 
     void updateTrigger(Trigger trigger);
 
-    void deleteByMonitor(String monitorId);
-
     void deleteByHostId(String hostId);
 
     List<Trigger> findTriggerListById(String hostId);
 
-    //void insertAlarmForTrigger(List<History> entityList);
 
     List<Trigger> findLikeTrigger(String hostId, String expression);
 

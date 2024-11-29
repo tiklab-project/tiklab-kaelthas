@@ -13,12 +13,15 @@ import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.host.hostRecent.dao.HostRecentDao;
 import io.tiklab.kaelthas.host.hostRecent.model.HostRecent;
 import io.tiklab.kaelthas.host.hostRecent.entity.HostRecentEntity;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 最近使用的主机,
+ */
 @Service
 @Exporter
 public class HostRecentServiceImpl implements HostRecentService {
@@ -32,6 +35,9 @@ public class HostRecentServiceImpl implements HostRecentService {
     @Autowired
     AlarmService alarmService;
 
+    /**
+     * 查询出最近使用的主机list
+     */
     @Override
     public List<HostRecent> findRecentHostList() {
         QueryCondition queryCondition = QueryBuilders.createQuery(HostRecentEntity.class)

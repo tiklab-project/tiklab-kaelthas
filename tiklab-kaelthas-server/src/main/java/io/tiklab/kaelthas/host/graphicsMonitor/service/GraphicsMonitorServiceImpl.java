@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 主机下图形和监控项的关联表
+ */
 @Service
 @Exporter
 public class GraphicsMonitorServiceImpl implements GraphicsMonitorService {
@@ -21,12 +24,18 @@ public class GraphicsMonitorServiceImpl implements GraphicsMonitorService {
     @Autowired
     private GraphicsMonitorDao graphicsMonitorDao;
 
+    /**
+     * 插入数据
+     */
     @Override
     public void insertByGraphics(GraphicsMonitor graphicsMonitor) {
         GraphicsMonitorEntity relation = BeanMapper.map(graphicsMonitor, GraphicsMonitorEntity.class);
         graphicsMonitorDao.insertByGraphics(relation);
     }
 
+    /**
+     * 根据图形id删除数据
+     */
     @Override
     public void deleteByGraphicsId(String graphicsId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsMonitorEntity.class)
@@ -36,6 +45,9 @@ public class GraphicsMonitorServiceImpl implements GraphicsMonitorService {
         graphicsMonitorDao.deleteByGraphicsId(deleteCondition);
     }
 
+    /**
+     * 根据监控项的ids删除数据
+     */
     @Override
     public void deleteByMonitorIds(String[] strings) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsMonitorEntity.class)
@@ -44,6 +56,9 @@ public class GraphicsMonitorServiceImpl implements GraphicsMonitorService {
         graphicsMonitorDao.deleteByMonitorIds(deleteCondition);
     }
 
+    /**
+     * 根据监控项的id删除数据
+     */
     @Override
     public void deleteByMonitorId(String id) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsMonitorEntity.class)
@@ -52,11 +67,17 @@ public class GraphicsMonitorServiceImpl implements GraphicsMonitorService {
         graphicsMonitorDao.deleteByMonitorId(deleteCondition);
     }
 
+    /**
+     * 根据图形的id查询list
+     */
     @Override
     public List<GraphicsMonitor> findByGraphics(String graphicsId) {
         return graphicsMonitorDao.findByGraphics(graphicsId);
     }
 
+    /**
+     * 根据图形的ids删除数据
+     */
     @Override
     public void deleteByGraphicsIds(List<String> stringList) {
         if (stringList.isEmpty()) {

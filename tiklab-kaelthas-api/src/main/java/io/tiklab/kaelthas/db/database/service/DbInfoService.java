@@ -30,8 +30,6 @@ public interface DbInfoService {
     //测试数据源是否可用
     Result<?> testSql(DbInfo dbInfo);
 
-    //查询所有数据库的监控项信息
-    List<DbMonitor> findUsableDbInfoList();
 
     //查询出最后修改的四个数据库
     List<DbInfo> findDropDown();

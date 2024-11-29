@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 自定义SQL的增删改查,暂未开发使用
+ */
 @Service
 public class CustomizeServiceImpl implements CustomizeService{
 

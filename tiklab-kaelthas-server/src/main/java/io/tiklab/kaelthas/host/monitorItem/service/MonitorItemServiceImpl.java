@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 监控项字典表
+ */
 @Service
 @Exporter
 public class MonitorItemServiceImpl implements MonitorItemService {
@@ -23,6 +26,7 @@ public class MonitorItemServiceImpl implements MonitorItemService {
     @Resource
     private MonitorItemDao monitorItemDao;
 
+    //查询单个监控项字典数据
     @Override
     public MonitorItem findOneMonitorItem(String itemId) {
         MonitorItem monitorItem = BeanMapper.map(monitorItemDao.findOneMonitorItem(itemId), MonitorItem.class);
@@ -30,6 +34,7 @@ public class MonitorItemServiceImpl implements MonitorItemService {
         return monitorItem;
     }
 
+    //根据ids查询字典表list
     @Override
     public List<MonitorItem> findMonitorItemList(List<String> idList) {
 
@@ -39,6 +44,7 @@ public class MonitorItemServiceImpl implements MonitorItemService {
 
     }
 
+    //根据类型查询字典项ids
     @Override
     public List<String> findMonitorByCategories(String dataCategories) {
         QueryCondition queryCondition = QueryBuilders.createQuery(MonitorItemEntity.class)
@@ -48,6 +54,7 @@ public class MonitorItemServiceImpl implements MonitorItemService {
         return monitorItemEntities.stream().map(MonitorItemEntity::getId).toList();
     }
 
+    //根据字类型查询字典项list
     @Override
     public List<MonitorItem> findMonitorItemByName(String name) {
         QueryCondition queryCondition = QueryBuilders.createQuery(MonitorItemEntity.class)

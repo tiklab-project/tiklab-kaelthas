@@ -1,9 +1,9 @@
 package io.tiklab.kaelthas.collection.service.mysql;
 
 import io.tiklab.kaelthas.collection.dao.DbSqlDao;
-import io.tiklab.kaelthas.collection.entity.vo.DbHistoryVo;
-import io.tiklab.kaelthas.collection.entity.vo.DbMonitorVo;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
+import io.tiklab.kaelthas.collection.model.vo.DbHistoryVo;
+import io.tiklab.kaelthas.collection.model.vo.DbMonitorVo;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

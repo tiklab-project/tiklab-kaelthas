@@ -4,16 +4,14 @@ import com.alibaba.fastjson.JSON;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
-import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.history.dao.HistoryDao;
 import io.tiklab.kaelthas.history.dao.HistoryMultiDao;
-import io.tiklab.kaelthas.db.database.model.DbInfo;
 import io.tiklab.kaelthas.db.database.service.DbInfoService;
 import io.tiklab.kaelthas.db.dbGraphics.model.DbGraphics;
 import io.tiklab.kaelthas.db.dbGraphics.service.DbGraphicsService;
 import io.tiklab.kaelthas.db.dbGraphicsMonitor.model.DbGraphicsMonitor;
 import io.tiklab.kaelthas.db.dbGraphicsMonitor.service.DbGraphicsMonitorService;
-import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
+import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.db.dbTrigger.model.DbTrigger;
 import io.tiklab.kaelthas.db.dbTrigger.service.DbTriggerService;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
@@ -23,10 +21,10 @@ import io.tiklab.kaelthas.host.graphicsMonitor.service.GraphicsMonitorService;
 import io.tiklab.kaelthas.history.entity.HistoryEntity;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.host.service.HostService;
-import io.tiklab.kaelthas.common.util.SqlUtil;
+import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 import io.tiklab.kaelthas.host.trigger.service.TriggerService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.internet.internetGraphics.model.InternetGraphics;
 import io.tiklab.kaelthas.internet.internetGraphics.service.InternetGraphicsService;
 import io.tiklab.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
@@ -51,6 +49,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * 数据存储表的业务处理(上报数据存储的表)
+ */
 @Service
 public class HistoryServiceImpl implements HistoryService {
 
@@ -82,9 +83,6 @@ public class HistoryServiceImpl implements HistoryService {
     private DbTriggerService dbTriggerService;
 
     @Autowired
-    private DbInfoService dbInfoService;
-
-    @Autowired
     private KuGraphicsService kuGraphicsService;
 
     @Autowired
@@ -102,6 +100,9 @@ public class HistoryServiceImpl implements HistoryService {
         return pagination;
     }
 
+    /**
+     * 主机监控当中的图形展示
+     */
     @Override
     public List<List<History>> findInformationByGraphics(History history) {
         //1.根据主机的id查询主机当中的图表
@@ -115,6 +116,7 @@ public class HistoryServiceImpl implements HistoryService {
         LocalDateTime endLocalTime = LocalDateTime.parse(history.getEndTime(), dateTimeFormatter);
         long minutes = Duration.between(beginLocalTime, endLocalTime).toMinutes();
 
+        //查询分时间段来查询不同的表
         if (minutes <= 5) {
 
             List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 1);
@@ -304,6 +306,7 @@ public class HistoryServiceImpl implements HistoryService {
         return resList;
     }
 
+    //将触发器的表达式找出来,传递到前端,如果超过阈值的将其标注成红色的
     private void setThreshold(List<History> histories, History information) {
 
         //根据监控项查询监控项的阈值
@@ -370,28 +373,10 @@ public class HistoryServiceImpl implements HistoryService {
         }
     }
 
-    private static String getEndTime(History history, List<History> historyList) {
-        String endTime = history.getEndTime();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        List<String> stringList = historyList.stream().map(History::getGatherTime).distinct().toList();
-
-        for (int i = stringList.size() - 1; i >= 0; i--) {
-            try {
-                Date parse = dateFormat.parse(history.getEndTime());
-                Date parse1 = dateFormat.parse(stringList.get(i));
-                if (parse1.getTime() < parse.getTime()) {
-                    endTime = stringList.get(i);
-                    break;
-                }
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return endTime;
-    }
-
+    /**
+     * 根据条件查询单条数据,之前有这个业务,现在没有使用
+     */
     @Override
     public History findInformationByLine(History history) {
 
@@ -412,6 +397,9 @@ public class HistoryServiceImpl implements HistoryService {
         return history1;
     }
 
+    /**
+     * 将传递的数据分批次进行插入,例如整分钟的,五分钟的,十五分钟的
+     */
     @Override
     public void insertForList(List<History> entityList) {
         List<Map<String, Object>> mapList = getMapList(entityList);
@@ -463,6 +451,9 @@ public class HistoryServiceImpl implements HistoryService {
 
     }
 
+    /**
+     * 定义要插入表的字段,在插入数据的时候使用
+     */
     private static List<Map<String, Object>> getMapList(List<History> entityList) {
         return entityList.stream().map(history -> {
             Map<String, Object> map = new HashMap<>();
@@ -484,6 +475,9 @@ public class HistoryServiceImpl implements HistoryService {
         return historyDao.findInformationToGatherTime(hostId, beforeDateTime);
     }
 
+    /**
+     * 根据监控项删除存储的数据
+     */
     @Override
     public void deleteByCondition(History history) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(HistoryEntity.class)
@@ -493,25 +487,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * 查询历史数据表当中有没有此主机的数据
+     * 监控数据库中监控模块的图形展示
      */
-    @Override
-    public void findHistoryByCondition(History history) {
-
-        String hostId = history.getHostId();
-        //查询最近五分钟有没有这个主机的数据,如果没有的话就说明这个主机没有数据上报,修改状态为不可用
-        String beforeTime = ConversionDateUtil.findLocalDateTime(2, 5, null);
-        String nowTime = ConversionDateUtil.findLocalDateTime(2, 0, null);
-        List<History> histories = historyDao.findHistoryByCondition(history, beforeTime, nowTime);
-
-        if (histories.isEmpty()) {
-            //修改主机状态为2
-            hostService.updateHostStatus(hostId, 2);
-        } else {
-            hostService.updateHostStatus(hostId, 1);
-        }
-    }
-
     @Override
     public List<List<History>> findGraphicsLine(History history) {
         //根据id查询图形列表
@@ -524,6 +501,7 @@ public class HistoryServiceImpl implements HistoryService {
         LocalDateTime endLocalTime = LocalDateTime.parse(history.getEndTime(), dateTimeFormatter);
         long minutes = Duration.between(beginLocalTime, endLocalTime).toMinutes();
 
+        //与主机监控当中的一样,分时间进行查询,根据时间跨度查询不同的表
         if (minutes <= 5) {
             List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 1);
 
@@ -719,6 +697,9 @@ public class HistoryServiceImpl implements HistoryService {
         return resList;
     }
 
+    /**
+     * 监控k8s中监控模块的图形展示
+     */
     @Override
     public List<List<History>> findKuGraphicsLine(History history) {
         //根据id查询图形列表
@@ -731,6 +712,7 @@ public class HistoryServiceImpl implements HistoryService {
         LocalDateTime endLocalTime = LocalDateTime.parse(history.getEndTime(), dateTimeFormatter);
         long minutes = Duration.between(beginLocalTime, endLocalTime).toMinutes();
 
+        //按照时间跨度进行查询,时间跨度不同查询的表不同
         if (minutes <= 5) {
             List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 1);
 
@@ -999,7 +981,7 @@ public class HistoryServiceImpl implements HistoryService {
         if (StringUtils.isBlank(expression)) {
             return;
         }
-        //根据表达式查询触发器表达式
+        //根据监控项表达式查询触发器表达式
         List<InTrigger> triggerList = inTriggerService.findLikeTrigger(histories.get(0).getHostId(), expression);
 
         if (!triggerList.isEmpty()) {
@@ -1058,6 +1040,9 @@ public class HistoryServiceImpl implements HistoryService {
         }
     }
 
+    /**
+     * k8s概况页展示的信息数据
+     */
     @Override
     public Map<String, Object> findKuOverviewTotal(String kuId) {
 
@@ -1120,21 +1105,33 @@ public class HistoryServiceImpl implements HistoryService {
         return map;
     }
 
+    /**
+     * 查询数据库监控的存储信息,beforeTime时间之后的
+     */
     @Override
-    public List<History> findHistoryByGatherTime(String hostId, String beforeTime) {
-        return historyDao.findHistoryByGatherTime(hostId, beforeTime);
+    public List<History> findHistoryByGatherTime(String dbId, String beforeTime) {
+        return historyDao.findHistoryByGatherTime(dbId, beforeTime);
     }
 
+    /**
+     * 根据监控数据库的id和时间查询时间之后的存储数据
+     */
     @Override
-    public List<History> findDbHistoryByHostId(String hostId, String beforeTime) {
-        return historyDao.findDbHistoryByHostId(hostId, beforeTime);
+    public List<History> findDbHistoryByHostId(String dbId, String beforeTime) {
+        return historyDao.findDbHistoryByHostId(dbId, beforeTime);
     }
 
+    /**
+     * 根据k8s监控的id和时间查询时间之后的存储数据
+     */
     @Override
     public List<History> findKuHistoryByHostId(String kuId, String beforeTime) {
         return historyDao.findKuHistoryByHostId(kuId, beforeTime);
     }
 
+    /**
+     * 网络监控中监控模块的图形展示
+     */
     @Override
     public List<List<History>> findInGraphicsLine(History history) {
         //根据id查询图形列表
@@ -1147,6 +1144,7 @@ public class HistoryServiceImpl implements HistoryService {
         LocalDateTime endLocalTime = LocalDateTime.parse(history.getEndTime(), dateTimeFormatter);
         long minutes = Duration.between(beginLocalTime, endLocalTime).toMinutes();
 
+        //根据时间跨度来查询不同的表
         if (minutes <= 5) {
             List<String> xTime = ConversionDateUtil.splitTime(history.getBeginTime(), history.getEndTime(), 1);
 
@@ -1376,26 +1374,25 @@ public class HistoryServiceImpl implements HistoryService {
         return map;
     }
 
-    @Override
-    public List<History> findInHistoryByHostId(String internetId, String beforeTime) {
-        return historyDao.findInHistoryByHostId(internetId, beforeTime);
-    }
-
+    /**
+     * 根据网络监控的id和指定的时间后查询存储数据
+     */
     @Override
     public List<History> findInternetToGatherTime(String internetId, String beforeTime) {
         return historyDao.findInternetToGatherTime(internetId, beforeTime);
     }
 
-    @Override
-    public List<History> findHistoryByHostId(String id, String beforeTime) {
-        return historyDao.findHistoryByHostId(id, beforeTime);
-    }
-
+    /**
+     * 查询距离当前时间指定分钟的数据
+     */
     @Override
     public List<History> findHistoryByHostIds( String beforeTime) {
         return historyDao.findHistoryByHostIds(beforeTime);
     }
 
+    /**
+     * 根据主机监控的id和指定的时间后查询存储数据
+     */
     @Override
     public List<History> findByHostTrigger(String hostId, String beforeTime) {
         return historyDao.findByHostTrigger(hostId, beforeTime);

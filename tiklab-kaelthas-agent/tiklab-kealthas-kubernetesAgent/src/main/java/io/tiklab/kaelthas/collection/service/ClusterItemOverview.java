@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.collection.cluster;
+package io.tiklab.kaelthas.collection.service;
 
 import com.alibaba.fastjson.JSON;
 import io.kubernetes.client.custom.Quantity;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
- * 获取概况页的信息
+ * 定时获取概况页的信息
  */
 @Component
 public class ClusterItemOverview {

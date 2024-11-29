@@ -24,9 +24,6 @@ public interface DbMonitorService {
     //根据dbId查询当前数据库下的所有监控项信息
     List<DbMonitor> findAllMonitor(DbMonitor dbMonitor);
 
-    //根据monitorId查询监控项的信息
-    DbMonitor findListById(String monitorId);
-
     //根据dbId查询监控项的数量
     List<DbMonitor> findMonitorNum(String dbId);
 

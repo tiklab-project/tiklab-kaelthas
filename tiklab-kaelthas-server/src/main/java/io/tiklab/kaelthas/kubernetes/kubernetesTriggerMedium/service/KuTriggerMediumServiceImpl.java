@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 触发器和消息渠道中间表
+ */
 @Service
 public class KuTriggerMediumServiceImpl implements KuTriggerMediumService{
 
     @Autowired
     private KuTriggerMediumDao kuTriggerMediumDao;
 
+    /**
+     * 根据触发器ids删除中间表
+     */
     @Override
     public void deleteByTriggerIds(List<String> stringList) {
         if (stringList.isEmpty()) {
@@ -28,6 +34,9 @@ public class KuTriggerMediumServiceImpl implements KuTriggerMediumService{
         kuTriggerMediumDao.deleteByTriggerIds(deleteCondition);
     }
 
+    /**
+     * 创建中间表
+     */
     @Override
     public void createKuTriggerMedium(String triggerId, List<String> mediumType) {
         if (mediumType.isEmpty()) {
@@ -41,6 +50,9 @@ public class KuTriggerMediumServiceImpl implements KuTriggerMediumService{
         }
     }
 
+    /**
+     * 根据触发器id删除中间表
+     */
     @Override
     public void deleteByTriggerId(String triggerId) {
         if (StringUtils.isBlank(triggerId)) {

@@ -9,14 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+/**
+ * 触发器和消息渠道的关联业务(关联表)
+ */
 @Service
 public class DbTriggerMediumServiceImpl implements DbTriggerMediumService {
 
     @Autowired
     private DbTriggerMediumDao dbTriggerMediumDao;
 
+    /**
+     * 创建触发器和消息渠道的关联信息
+     */
     @Override
     public void createTriggerMedium(DbTrigger dbTrigger) {
         if (dbTrigger.getMediumType().isEmpty()) {
@@ -31,6 +35,9 @@ public class DbTriggerMediumServiceImpl implements DbTriggerMediumService {
         }
     }
 
+    /**
+     * 根据触发器的id删除信息
+     */
     @Override
     public void deleteByTriggerId(String id) {
         if (StringUtils.isBlank(id)) {
@@ -42,6 +49,9 @@ public class DbTriggerMediumServiceImpl implements DbTriggerMediumService {
         dbTriggerMediumDao.deleteByTriggerId(deleteCondition);
     }
 
+    /**
+     * 根据监控数据库的id删除关联表
+     */
     @Override
     public void deleteByDbId(String dbId) {
         if (StringUtils.isBlank(dbId)) {

@@ -2,6 +2,9 @@ package io.tiklab.kaelthas.history.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 
+/**
+ * 每隔十五分钟上报的数据表
+ */
 @Entity
 @Table(name = "mtc_history_fifteen_minute")
 public class HistoryFifteenEntity {

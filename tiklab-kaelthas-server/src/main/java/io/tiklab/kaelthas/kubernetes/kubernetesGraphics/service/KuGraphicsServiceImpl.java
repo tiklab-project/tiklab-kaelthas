@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * k8s下的图形配置
+ */
 @Service
 public class KuGraphicsServiceImpl implements KuGraphicsService {
 
@@ -25,11 +28,13 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
     @Autowired
     private KuGraphicsMonitorService kuGraphicsMonitorService;
 
+    //分页查询图形
     @Override
     public Pagination<KuGraphics> findKuGraphicsPage(KuGraphics kuGraphics) {
         return kuGraphicsDao.findKuGraphicsPage(kuGraphics);
     }
 
+    //创建图形
     @Override
     public String createKuGraphics(KuGraphics kuGraphics) {
         try {
@@ -44,6 +49,7 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
         }
     }
 
+    //根据id删除图形
     @Override
     public void deleteKuGraphics(String id) {
         try {
@@ -54,6 +60,7 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
         }
     }
 
+    //修改图形
     @Override
     public void updateKuGraphics(KuGraphics kuGraphics) {
         try {
@@ -69,6 +76,7 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
         }
     }
 
+    //根据k8s监控的id查询图形信息
     @Override
     public List<KuGraphics> findKuGraphicsList(String hostId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(KuGraphicsEntity.class)
@@ -78,6 +86,7 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
         return BeanMapper.mapList(kuGraphicsEntityList,KuGraphics.class);
     }
 
+    //根据k8s监控的id删除图形信息
     @Override
     public void deleteByKuId(String id) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuGraphicsEntity.class)

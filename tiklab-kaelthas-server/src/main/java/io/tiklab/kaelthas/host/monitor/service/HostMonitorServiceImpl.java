@@ -18,13 +18,16 @@ import io.tiklab.kaelthas.host.monitor.dao.HostMonitorDao;
 import io.tiklab.kaelthas.host.monitorItem.entity.MonitorItemEntity;
 import io.tiklab.kaelthas.host.monitorItem.model.MonitorItem;
 import io.tiklab.kaelthas.host.monitorItem.service.MonitorItemService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.host.triggerExpression.service.TriggerExpressionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * 主机下的监控项
+ */
 @Service
 @Exporter
 public class HostMonitorServiceImpl implements HostMonitorService {
@@ -144,6 +147,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return hostMonitors;
     }
 
+    //根据监控类型查询MonitorItem中的监控项
     @Override
     public List<MonitorItem> findMonitorItemByName(String name) {
 
@@ -152,6 +156,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return monitorList;
     }
 
+    //创建主机监控项
     @Override
     public String createMonitor(HostMonitor monitor) {
 
@@ -184,6 +189,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         }
     }
 
+    //根据监控项id删除主机监控项
     @Override
     public void deleteMonitorById(String id) {
 
@@ -192,16 +198,8 @@ public class HostMonitorServiceImpl implements HostMonitorService {
             //删除监控项当中的数据
             hostMonitorDao.deleteMonitorById(id);
 
-            //删除触发器
-            //triggerService.deleteByMonitor(id);
-
             //删除图表关联信息
             graphicsMonitorService.deleteByMonitorId(id);
-
-//            graphicsService.deleteGraphicsByMonitorId(id);
-
-            //删除触发器的关联数据
-            triggerExpressionService.deleteByMonitorId(id);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -209,6 +207,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
 
     }
 
+    //修改监控项
     @Override
     public void updateMonitor(HostMonitor monitor) {
 
@@ -246,6 +245,9 @@ public class HostMonitorServiceImpl implements HostMonitorService {
 
     }
 
+    /**
+     * 根据监控项的ids查询list数据
+     */
     @Override
     public List<HostMonitor> findList(List<String> idList) {
         if (idList == null || idList.isEmpty()) {
@@ -257,6 +259,9 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return hostMonitors;
     }
 
+    /**
+     * 根据主机ids查询出监控项list
+     */
     @Override
     public List<HostMonitor> findHostMonitorListByHostIds(List<String> hostIds) {
         if (hostIds.isEmpty()) {
@@ -274,6 +279,9 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(monitorEntityList, HostMonitor.class);
     }
 
+    /**
+     * 根据模板id分页查询监控项
+     */
     @Override
     public Pagination<HostMonitor> findMonitorByTemplateId(HostMonitor hostMonitor) {
 
@@ -291,6 +299,9 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return PaginationBuilder.build(pagination,monitorList);
     }
 
+    /**
+     * 查询监控项字典项list
+     */
     @Override
     public List<MonitorItem> findMonitorItemAll() {
         List<MonitorItemEntity> monitorItemAll = hostMonitorDao.findMonitorItemAll();
@@ -308,6 +319,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         hostMonitorDao.deleteByHostId(deleteCondition);
     }
 
+    //根据主机id查询监控项list
     @Override
     public List<HostMonitor> findMonitorByHostId(String hostId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(HostMonitorEntity.class)
@@ -318,6 +330,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(entityList, HostMonitor.class);
     }
 
+    //根据监控项字典项ids和主机的id来查询监控项的list
     @Override
     public List<HostMonitor> findmonitorByMonitorItemIds(List<String> monitorItemIds,String hostId) {
         Object[] array = monitorItemIds.toArray();
@@ -329,11 +342,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(monitorEntities,HostMonitor.class);
     }
 
-    @Override
-    public Integer findHostNumber() {
-        return hostMonitorDao.findHostNumber();
-    }
-
+    //查询主机下的监控项list
     @Override
     public List<HostMonitor> findByHostId(String id) {
         QueryCondition queryCondition = QueryBuilders.createQuery(HostMonitorEntity.class)
@@ -344,6 +353,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(hostMonitorEntityList,HostMonitor.class);
     }
 
+    //根据条件删除监控项
     @Override
     public void deleteCondition(HostMonitor hostMonitor) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(HostMonitorEntity.class)
@@ -355,17 +365,20 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         hostMonitorDao.deleteCondition(deleteCondition);
     }
 
+    //修改主机引用模板的监控项
     @Override
     public void updateByMonitorId(HostMonitor hostMonitor) {
         hostMonitorDao.updateByMonitorId(hostMonitor);
     }
 
+    //修改模板当中的监控项
     @Override
     public void updateMonitorByTemplate(HostMonitor hostMonitor) {
         HostMonitorEntity monitorEntity = BeanMapper.map(hostMonitor, HostMonitorEntity.class);
         hostMonitorDao.updateMonitorByTemplate(monitorEntity);
     }
 
+    //根据模板的ids删除监控项
     @Override
     public void deleteMonitorByItemIds(List<String> stringList) {
         if (stringList.isEmpty()) {
@@ -379,6 +392,9 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         hostMonitorDao.deleteMonitorByItemIds(deleteCondition);
     }
 
+    /**
+     * 根据模板或者主机的id查询监控项
+     */
     @Override
     public List<HostMonitor> findCondition(HostMonitor hostMonitor) {
         QueryCondition queryCondition = QueryBuilders.createQuery(HostMonitorEntity.class)
@@ -389,6 +405,9 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(entityList,HostMonitor.class);
     }
 
+    /**
+     * 根据主机id或者模板的ids查询监控项list
+     */
     @Override
     public List<HostMonitor> findConditionByHost(HostMonitor hostMonitor) {
 
@@ -405,6 +424,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(entityList,HostMonitor.class);
     }
 
+    //查询监控项数量
     @Override
     public Long findMonitorAllNum() {
         return hostMonitorDao.findMonitorAllNum();

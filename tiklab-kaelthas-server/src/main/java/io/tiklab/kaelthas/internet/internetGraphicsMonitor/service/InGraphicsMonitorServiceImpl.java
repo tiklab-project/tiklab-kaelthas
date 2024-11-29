@@ -4,7 +4,7 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.common.util.SqlUtil;
+import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.internet.internetGraphicsMonitor.dao.InGraphicsMonitorDao;
 import io.tiklab.kaelthas.internet.internetGraphicsMonitor.entity.InGraphicsMonitorEntity;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -15,12 +15,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 图形和监控项的关联表
+ */
 @Service
 public class InGraphicsMonitorServiceImpl implements InGraphicsMonitorService {
 
     @Autowired
     private InGraphicsMonitorDao inGraphicsMonitorDao;
 
+    //创建图形和监控项的关联表
     @Override
     public void createGraphicsMonitorList(String string, List<String> monitorIds) {
         //将传递过来的数据进行拼装SQL,插入表当中
@@ -35,6 +39,7 @@ public class InGraphicsMonitorServiceImpl implements InGraphicsMonitorService {
         inGraphicsMonitorDao.createGraphicsMonitorList(sql);
     }
 
+    //根据图形id删除关联表
     @Override
     public void deleteByGraphics(String graphicsId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(InGraphicsMonitorEntity.class)
@@ -43,6 +48,7 @@ public class InGraphicsMonitorServiceImpl implements InGraphicsMonitorService {
         inGraphicsMonitorDao.deleteByGraphics(deleteCondition);
     }
 
+    //根据图形id查询出监控项的ids
     @Override
     public List<String> findMonitorIds(String id) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InGraphicsMonitorEntity.class)
@@ -53,6 +59,7 @@ public class InGraphicsMonitorServiceImpl implements InGraphicsMonitorService {
         return entityList.stream().map(InGraphicsMonitorEntity::getMonitorId).toList();
     }
 
+    //根据图形的ids删除图形
     @Override
     public void deleteByGraphicsIds(List<String> stringList) {
         if (stringList.isEmpty()) {

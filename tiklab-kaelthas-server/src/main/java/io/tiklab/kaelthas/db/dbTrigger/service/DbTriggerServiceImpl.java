@@ -7,12 +7,12 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
-import io.tiklab.kaelthas.common.util.StringUtil;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
 import io.tiklab.toolkit.beans.BeanMapper;
-import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
+import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.db.dbTrigger.dao.DbTriggerDao;
 import io.tiklab.kaelthas.db.dbTrigger.entity.DbTriggerEntity;
 import io.tiklab.kaelthas.db.dbTrigger.model.DbTrigger;
@@ -21,7 +21,7 @@ import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,6 +31,10 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+/**
+ * 监控项中的触发器
+ */
 
 @Service
 public class DbTriggerServiceImpl implements DbTriggerService {
@@ -53,11 +57,17 @@ public class DbTriggerServiceImpl implements DbTriggerService {
     @Autowired
     private DbDynamicService dbDynamicService;
 
+    /**
+     * 触发器的分页查询
+     */
     @Override
     public Pagination<DbTrigger> findDbTriggerPage(DbTrigger dbTrigger) {
         return dbTriggerDao.findDbTriggerPage(dbTrigger);
     }
 
+    /**
+     * 触发器的创建
+     */
     @Override
     public String createDbTrigger(DbTrigger dbTrigger) {
         try {
@@ -79,6 +89,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         }
     }
 
+    /**
+     * 根据触发器id删除触发器信息和关联表信息
+     */
     @Override
     public void deleteDbTrigger(String id) {
         try {
@@ -90,19 +103,25 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         }
     }
 
+    /**
+     * 修改触发器
+     */
     @Override
     public void updateDbTrigger(DbTrigger dbTrigger) {
         DbTriggerEntity entity = BeanMapper.map(dbTrigger, DbTriggerEntity.class);
         dbTriggerDao.updateDbTrigger(entity);
 
         if (dbTrigger.getMediumType() != null && !dbTrigger.getMediumType().isEmpty()) {
-            //将之前的的关联删除,将修改后的进行添加
+            //将之前与通知渠道的关联删除,将修改后的进行添加
             dbTriggerMediumService.deleteByTriggerId(dbTrigger.getId());
 
             dbTriggerMediumService.createTriggerMedium(dbTrigger);
         }
     }
 
+    /**
+     * 查询出可用的触发器list
+     */
     @Override
     public List<DbTrigger> findListByDbId(String hostId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
@@ -113,6 +132,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         return BeanMapper.mapList(listByDbId, DbTrigger.class);
     }
 
+    /**
+     * 定时拉取触发器,进行告警
+     */
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerTrigger() {
         //获取所有数据库下的触发器
@@ -265,7 +287,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         }
     }
 
-
+    /**
+     * 最后一个值进行判断,单值判断
+     */
     private void getLastValueTrigger(DbTriggerEntity dbTriggerEntity) {
 
         String flag;
@@ -340,6 +364,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         }
     }
 
+    /**
+     * 根据表达式模糊查询触发器list
+     */
     @Override
     public List<DbTrigger> findLikeTrigger(String hostId, String expression) {
         QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
@@ -350,6 +377,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         return BeanMapper.mapList(dbTriggerEntityList, DbTrigger.class);
     }
 
+    /**
+     * 根据监控数据库的id删除触发器
+     */
     @Override
     public void deleteByDbId(String id) {
         if (StringUtils.isBlank(id)) {

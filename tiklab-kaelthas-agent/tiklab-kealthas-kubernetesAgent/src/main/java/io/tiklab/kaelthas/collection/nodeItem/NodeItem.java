@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.collection.node;
+package io.tiklab.kaelthas.collection.nodeItem;
 
 import com.alibaba.fastjson.JSON;
 import io.kubernetes.client.openapi.ApiException;

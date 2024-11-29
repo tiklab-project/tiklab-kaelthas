@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 主机下的动态
+ */
 @Service
 @Exporter
 public class HostDynamicServiceImpl implements HostDynamicService {
@@ -23,6 +26,9 @@ public class HostDynamicServiceImpl implements HostDynamicService {
     @Autowired
     HostDynamicDao hostDynamicDao;
 
+    /**
+     * 主机下的动态信息,分页查询
+     */
     @Override
     public Pagination<HostDynamic> findPage(HostDynamic hostDynamic) {
         QueryCondition queryCondition = QueryBuilders.createQuery(HostDynamicEntity.class)
@@ -37,6 +43,9 @@ public class HostDynamicServiceImpl implements HostDynamicService {
         return PaginationBuilder.build(hostDynamicDaoPage,hostDynamics);
     }
 
+    /**
+     * 创建主机下的动态信息
+     */
     @Override
     public void createHostDynamic(HostDynamic hostDynamic) {
         HostDynamicEntity entity = BeanMapper.map(hostDynamic, HostDynamicEntity.class);

@@ -1,16 +1,10 @@
 package io.tiklab.kaelthas.host.platform.service;
 
-import io.tiklab.core.exception.ApplicationException;
 import io.tiklab.licence.appauth.service.ApplyAuthService;
 import io.tiklab.licence.licence.service.VersionService;
 import io.tiklab.message.message.service.MessageNoticeService;
 import io.tiklab.message.setting.service.MessageSendTypeService;
-import io.tiklab.product.product.model.Product;
-import io.tiklab.product.product.model.ProductQuery;
-import io.tiklab.product.product.service.ProductService;
 import io.tiklab.rpc.annotation.Exporter;
-import io.tiklab.rpc.annotation.Reference;
-import io.tiklab.rpc.common.context.RpcTenantHolder;
 import io.tiklab.security.backups.service.BackupsDbService;
 import io.tiklab.user.orga.service.OrgaService;
 import io.tiklab.user.user.service.UserService;
@@ -21,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * 设置中的首页
+ */
 @Service
 @Exporter
 public class PlatFormServiceImpl implements PlatFormService {
@@ -58,6 +54,9 @@ public class PlatFormServiceImpl implements PlatFormService {
     @Autowired
     HostService hostService;
 
+    /**
+     * 设置中的首页查询信息
+     */
     @Override
     public Map<String,Object> count() {
         //调用平台的方法查询数据

@@ -1,9 +1,9 @@
 package io.tiklab.kaelthas.collection.dao;
 
 import io.tiklab.dal.jpa.JpaTemplate;
-import io.tiklab.kaelthas.collection.entity.vo.DbMonitorVo;
-import io.tiklab.kaelthas.collection.entity.vo.DbHistoryVo;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
+import io.tiklab.kaelthas.collection.model.vo.DbMonitorVo;
+import io.tiklab.kaelthas.collection.model.vo.DbHistoryVo;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

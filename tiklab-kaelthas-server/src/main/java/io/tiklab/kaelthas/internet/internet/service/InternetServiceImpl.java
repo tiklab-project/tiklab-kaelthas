@@ -1,10 +1,7 @@
 package io.tiklab.kaelthas.internet.internet.service;
 
 import io.tiklab.core.page.Pagination;
-import io.tiklab.core.page.PaginationBuilder;
-import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
-import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.internet.internet.dao.InternetDao;
 import io.tiklab.kaelthas.internet.internet.entity.InternetEntity;
 import io.tiklab.kaelthas.internet.internet.model.Internet;
@@ -20,6 +17,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 网络监控信息存储表
+ */
 @Service
 public class InternetServiceImpl implements InternetService{
 
@@ -41,11 +41,13 @@ public class InternetServiceImpl implements InternetService{
     @Autowired
     private InTriggerMediumService inTriggerMediumService;
 
+    //网络监控的分页查询
     @Override
     public Pagination<Internet> findInternetPage(Internet internet) {
         return internetDao.findInternetPage(internet);
     }
 
+    //创建网络监控
     @Override
     public String createInternet(Internet internet) {
         InternetEntity internetEntity = BeanMapper.map(internet, InternetEntity.class);
@@ -56,6 +58,7 @@ public class InternetServiceImpl implements InternetService{
         return internetDao.createInternet(internetEntity);
     }
 
+    //根据监控网络的id删除监控的网络信息
     @Override
     public void deleteInternet(String id) {
         //删除图形,先查询出图形的ids,删除图形与监控项关联的表
@@ -88,6 +91,7 @@ public class InternetServiceImpl implements InternetService{
         }
     }
 
+    //修改网络信息
     @Override
     public void updateInternet(Internet internet) {
         InternetEntity internetEntity = BeanMapper.map(internet, InternetEntity.class);
@@ -96,12 +100,14 @@ public class InternetServiceImpl implements InternetService{
         internetDao.updateInternet(internetEntity);
     }
 
+    //根据监控网络的id查询监控网络的信息
     @Override
     public Internet findInternetById(String id) {
         InternetEntity internetEntity = internetDao.findInternetById(id);
         return BeanMapper.map(internetEntity,Internet.class);
     }
 
+    //查询所有的网络信息
     @Override
     public List<Internet> findAll() {
         List<InternetEntity> entityList = internetDao.findAll();

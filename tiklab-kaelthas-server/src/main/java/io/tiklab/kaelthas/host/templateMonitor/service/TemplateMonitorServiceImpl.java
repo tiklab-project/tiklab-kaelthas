@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * 模板下监控项
+ */
 @Service
 public class TemplateMonitorServiceImpl implements TemplateMonitorService {
 
@@ -35,14 +37,7 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
     @Autowired
     private HostTemplateService hostTemplateService;
 
-    @Override
-    public void deleteByMonitorId(String monitorId) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(TemplateMonitorEntity.class)
-                .eq("id", monitorId)
-                .get();
-        templateMonitorDao.deleteByMonitorId(deleteCondition);
-    }
-
+    //模板下创建监控项
     @Override
     public void createTemplateMonitor(HostMonitor hostMonitor) {
 
@@ -67,6 +62,7 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
 
     }
 
+    //根据模板id查询模板下监控项
     @Override
     public List<TemplateMonitor> findIdsByTemplateId(String templateId) {
 
@@ -79,13 +75,6 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
         return templateMonitors;
     }
 
-    @Override
-    public void deleteByTemplateId(String templateId) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(TemplateMonitorEntity.class)
-                .eq("templateId", templateId)
-                .get();
-        templateMonitorDao.deleteByTemplateId(deleteCondition);
-    }
 
     /**
      * 根据模板下监控项ids查询模板下监控项集合
@@ -96,18 +85,16 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
         return BeanMapper.mapList(entityList, TemplateMonitor.class);
     }
 
+    //删除模板下监控项
     @Override
     public void deleteTemplateMonitor(TemplateMonitor templateMonitor) {
         //删除模板中的监控项和主机当中的监控项
         HostMonitor hostMonitor = new HostMonitor();
         hostMonitor.setId(templateMonitor.getId());
         hostMonitorService.deleteCondition(hostMonitor);
-
-
-        //删除监控项关联的图表,触发器
-
     }
 
+    //修改模板下的监控项
     @Override
     public void updateTemplateMonitor(HostMonitor hostMonitor) {
 
@@ -117,53 +104,7 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
         hostMonitorService.updateByMonitorId(hostMonitor);
     }
 
-    /**
-     * 根据模板ids和名称模糊查询监控项信息
-     */
-    @Override
-    public List<TemplateMonitor> findTemplateMonitorByIds(String[] templateIds, HostMonitor hostMonitor) {
-
-        if (templateIds.length == 0) {
-            return Collections.emptyList();
-        }
-
-        QueryCondition queryCondition = QueryBuilders.createQuery(TemplateMonitorEntity.class)
-                .in("templateId", templateIds)
-                .eq("monitorItemId", hostMonitor.getMonitorItemId())
-                .like("name", hostMonitor.getName())
-                .get();
-
-        List<TemplateMonitorEntity> entityList = templateMonitorDao.findTemplateByIds(queryCondition);
-
-        List<TemplateMonitor> templateMonitors = BeanMapper.mapList(entityList, TemplateMonitor.class);
-
-        joinTemplate.joinQuery(templateMonitors);
-
-        for (TemplateMonitor templateMonitor : templateMonitors) {
-            templateMonitor.setMonitorSource(2);
-        }
-
-        return templateMonitors;
-
-    }
-
-    @Override
-    public TemplateMonitor findOneMonitor(String id) {
-        TemplateMonitorEntity oneMonitor = templateMonitorDao.findOneMonitor(id);
-        TemplateMonitor monitor = BeanMapper.map(oneMonitor, TemplateMonitor.class);
-        joinTemplate.joinQuery(monitor);
-        return monitor;
-
-    }
-
-    @Override
-    public void deleteMonitorByIds(String[] ids) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(TemplateMonitorEntity.class)
-                .in("id", ids)
-                .get();
-        templateMonitorDao.deleteMonitorByIds(deleteCondition);
-    }
-
+    //根据模板的ids和监控项item的ids查询模板下监控项
     @Override
     public List<TemplateMonitor> findMonitorByItemIds(List<String> monitorItemIds,List<String> templateIds) {
         Object[] array = monitorItemIds.toArray();
@@ -176,8 +117,4 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
         return BeanMapper.mapList(templateMonitorEntities,TemplateMonitor.class);
     }
 
-    @Override
-    public Integer findMonitorNumber() {
-        return templateMonitorDao.findMonitorNumber();
-    }
 }

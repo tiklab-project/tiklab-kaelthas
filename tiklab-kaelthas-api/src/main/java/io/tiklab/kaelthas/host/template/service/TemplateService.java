@@ -30,8 +30,6 @@ public interface TemplateService {
 
     void updateTemplate(Template template);
 
-    Map<String, Integer> findTemplateNum();
-
     //创建模板下的监控项
     void createTemplateMonitor(HostMonitor hostMonitor);
 

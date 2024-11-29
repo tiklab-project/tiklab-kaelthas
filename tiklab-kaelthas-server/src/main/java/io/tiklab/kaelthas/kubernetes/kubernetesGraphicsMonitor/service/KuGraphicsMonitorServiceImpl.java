@@ -13,12 +13,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 图形和监控项的关联表
+ */
 @Service
 public class KuGraphicsMonitorServiceImpl implements KuGraphicsMonitorService {
 
     @Autowired
     private KuGraphicsMonitorDao kuGraphicsMonitorDao;
 
+    //创建关联表
     @Override
     public void createKuGraphicsMonitor(KuGraphics kuGraphics) {
         List<String> monitorIds = kuGraphics.getMonitorIds();
@@ -33,6 +37,7 @@ public class KuGraphicsMonitorServiceImpl implements KuGraphicsMonitorService {
         }
     }
 
+    //根据图形id和监控项id删除关联表
     @Override
     public void deleteByCondition(String graphicsId, String monitorId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuGraphicsMonitorEntity.class)
@@ -42,6 +47,7 @@ public class KuGraphicsMonitorServiceImpl implements KuGraphicsMonitorService {
         kuGraphicsMonitorDao.deleteByKuCondition(deleteCondition);
     }
 
+    //根据图形id查询出监控项ids
     @Override
     public List<String> findMonitorIds(KuGraphicsMonitor kuGraphicsMonitor) {
         QueryCondition queryCondition = QueryBuilders.createQuery(KuGraphicsMonitorEntity.class)
@@ -60,6 +66,7 @@ public class KuGraphicsMonitorServiceImpl implements KuGraphicsMonitorService {
         return kuGraphicsMonitorDao.findGraphicsMonitors(id);
     }
 
+    //根据图形的ids删除关联表
     @Override
     public void deleteByGraphicsIds(List<String> stringList) {
         if (stringList.isEmpty()) {

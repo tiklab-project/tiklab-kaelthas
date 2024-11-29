@@ -6,7 +6,6 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.internet.internet.entity.InternetEntity;
 import io.tiklab.kaelthas.internet.internetMonitor.dao.InternetMonitorDao;
 import io.tiklab.kaelthas.internet.internetMonitor.entity.InternetMonitorEntity;
 import io.tiklab.kaelthas.internet.internetMonitor.model.InternetMonitor;
@@ -17,12 +16,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 网络监控中的监控项
+ */
 @Service
 public class InternetMonitorServiceImpl implements InternetMonitorService{
 
     @Autowired
     private InternetMonitorDao internetMonitorDao;
 
+    /**
+     * 分页查询监控项
+     */
     @Override
     public Pagination<InternetMonitor> findMonitorPage(InternetMonitor internetMonitor) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InternetMonitorEntity.class)
@@ -36,23 +41,27 @@ public class InternetMonitorServiceImpl implements InternetMonitorService{
         return PaginationBuilder.build(pagination,internetMonitors);
     }
 
+    //创建监控项
     @Override
     public String createMonitor(InternetMonitor internetMonitor) {
         InternetMonitorEntity entity = BeanMapper.map(internetMonitor, InternetMonitorEntity.class);
         return internetMonitorDao.createMonitor(entity);
     }
 
+    //删除监控项
     @Override
     public void deleteMonitor(String id) {
         internetMonitorDao.deleteMonitor(id);
     }
 
+    //修改监控项
     @Override
     public void updateMonitor(InternetMonitor internetMonitor) {
         InternetMonitorEntity entity = BeanMapper.map(internetMonitor, InternetMonitorEntity.class);
         internetMonitorDao.updateMonitor(entity);
     }
 
+    //根据监控网络的id查询出监控项的list
     @Override
     public List<InternetMonitor> findMonitorByInId(InternetMonitor internetMonitor) {
         QueryCondition queryCondition = QueryBuilders.createQuery(InternetMonitorEntity.class)
@@ -63,6 +72,7 @@ public class InternetMonitorServiceImpl implements InternetMonitorService{
         return BeanMapper.mapList(entityList,InternetMonitor.class);
     }
 
+    //根据监控网络的id删除监控项
     @Override
     public void deleteByInternet(String id) {
         if (StringUtils.isBlank(id)) {

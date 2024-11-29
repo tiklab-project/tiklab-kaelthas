@@ -8,19 +8,19 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
-import io.tiklab.kaelthas.common.util.StringUtil;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.rpc.annotation.Exporter;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
+import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.host.service.HostService;
 import io.tiklab.kaelthas.host.hostDynamic.model.HostDynamic;
 import io.tiklab.kaelthas.host.hostDynamic.service.HostDynamicService;
 import io.tiklab.kaelthas.host.monitor.service.HostMonitorService;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.host.templateMonitor.service.TemplateMonitorService;
 import io.tiklab.kaelthas.host.monitorItem.service.MonitorItemService;
 import io.tiklab.kaelthas.host.trigger.dao.TriggerDao;
@@ -43,6 +43,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * 主机下的触发器
+ */
 @Service
 @Exporter
 public class TriggerServiceImpl implements TriggerService {
@@ -82,7 +85,7 @@ public class TriggerServiceImpl implements TriggerService {
 
 
     /**
-     * 查询主机下的触发器
+     * 分页查询主机下的触发器
      */
     @Override
     public Pagination<Trigger> findTrigger(Trigger trigger) {
@@ -105,18 +108,21 @@ public class TriggerServiceImpl implements TriggerService {
         return PaginationBuilder.build(pagination, triggers);
     }
 
+    //查询所有的触发器
     @Override
     public List<Trigger> findTriggerAll() {
         List<TriggerEntity> triggerAll = triggerDao.findTriggerAll();
         return BeanMapper.mapList(triggerAll, Trigger.class);
     }
 
+    //查询单个触发器
     @Override
     public Trigger findTriggerOne(String triggerId) {
         TriggerEntity trigger = triggerDao.findTriggerOne(triggerId);
         return BeanMapper.map(trigger, Trigger.class);
     }
 
+    //根据ids查询触发器list
     @Override
     public List<Trigger> findTriggerList(List<String> ids) {
         List<TriggerEntity> triggerEntityList = triggerDao.findTriggerList(ids);
@@ -150,6 +156,7 @@ public class TriggerServiceImpl implements TriggerService {
         }
     }
 
+    //删除触发器
     @Override
     public void deleteTriggerById(String id) {
         try {
@@ -170,6 +177,7 @@ public class TriggerServiceImpl implements TriggerService {
         }
     }
 
+    //修改触发器
     @Override
     public void updateTrigger(Trigger trigger) {
         TriggerEntity triggerEntity = BeanMapper.map(trigger, TriggerEntity.class);
@@ -186,12 +194,7 @@ public class TriggerServiceImpl implements TriggerService {
         }
     }
 
-    @Override
-    public void deleteByMonitor(String monitorId) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(TriggerEntity.class).eq("monitorId", monitorId).get();
-        triggerDao.deleteByMonitor(deleteCondition);
-    }
-
+    //根据主机id删除触发器
     @Override
     public void deleteByHostId(String hostId) {
         DeleteCondition deleteCondition = DeleteBuilders
@@ -201,14 +204,19 @@ public class TriggerServiceImpl implements TriggerService {
         triggerDao.deleteByHostId(deleteCondition);
     }
 
+    //根据主机id查询触发器list
     @Override
     public List<Trigger> findTriggerListById(String hostId) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(TriggerEntity.class).eq("hostId", hostId).get();
+        QueryCondition queryCondition = QueryBuilders
+                .createQuery(TriggerEntity.class)
+                .eq("hostId", hostId)
+                .get();
         List<TriggerEntity> triggerList = triggerDao.findTriggerListById(queryCondition);
         return BeanMapper.mapList(triggerList, Trigger.class);
     }
 
 
+    //定时拉取触发器,触发之后进行告警
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void insertAlarmForTrigger() {
 
@@ -235,42 +243,10 @@ public class TriggerServiceImpl implements TriggerService {
                     getPercentValueTrigger(trigger);
                     break;
             }
-                /*int isTriggerNum = 1;
-
-                if (entityList.isEmpty()) {
-                    isTriggerNum = 0;
-                } else {
-
-
-                    alarm.setAlertTime(ConversionDateUtil.date(9));
-
-                    //查询当前时间区间的最后一个值进行判断
-                    isTriggerNum = getIsTriggerNum(entityList, trigger, engine, isTriggerNum);
-
-                    //平均值计算
-                    isTriggerNum = getIsTriggerNum(trigger, trigger.getHostId(), engine, isTriggerNum);
-
-                    //触发的数据超过一定百分比后进行告警
-                    isTriggerNum = getTriggerNum(trigger, trigger.getHostId(), engine, isTriggerNum);
-                }
-
-                //如果为1的话进行插入
-                if (isTriggerNum == 1) {
-                    //将这个时间记录到告警表当中,以后告警表计算的告警持续时间都是使用这个字段
-                    alarm.setStatus(2);
-                    alarm.setHostId(trigger.getHostId());
-                    alarm.setTriggerId(trigger.getId());
-                    alarm.setSendMessage(trigger.getDescribe());
-                    alarm.setSeverityLevel(trigger.getSeverityLevel());
-                    alarm.setMachineType(1);
-                    //插入到告警表当中
-                    alarmService.createAlarm(alarm);
-                }*/
         }
-
-
     }
 
+    //百分比触发,计算一定时间内触发的占比超过指定数值
     private void getPercentValueTrigger(TriggerEntity trigger) {
         try {
             String flag;
@@ -330,6 +306,7 @@ public class TriggerServiceImpl implements TriggerService {
         }
     }
 
+    //平均值触发,计算在一定时间段内的平均值进行触发
     private void getAvgValueTrigger(TriggerEntity trigger) {
         try {
 
@@ -391,6 +368,7 @@ public class TriggerServiceImpl implements TriggerService {
         }
     }
 
+    //最近值触发,使用存储的最后一个数据进行触发
     private void getLastValueTrigger(TriggerEntity trigger) {
         String flag;
 
@@ -464,151 +442,8 @@ public class TriggerServiceImpl implements TriggerService {
         }
     }
 
-    private int getTriggerNum(TriggerEntity trigger, String hostId, ScriptEngine engine, int isTriggerNum) {
-        if (trigger.getScheme() == 3) {
-            String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<History> informationList = historyService.findInformationToGatherTime(hostId, beforeTime);
-            Collection<List<History>> values = informationList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values();
 
-            BigDecimal total = new BigDecimal(values.size());
-
-            BigDecimal triggerNum = new BigDecimal(0);
-
-            for (List<History> value : values) {
-                if (!value.isEmpty()) {
-                    String strJson = getString(value);
-                    JSONObject jsonObject = JSONObject.parseObject(strJson);
-                    //将表达式替换成值,然后进行运算
-                    String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
-
-                    //查看这个表达式当中有没有没有被替换掉的表达式,如果有的话就不进行运算了,没有才进行运算
-                    Set<String> functionList = conversionScriptsUtils.getFunctionList(string);
-                    if (functionList.isEmpty()) {
-                        Object eval;
-                        try {
-                            eval = engine.eval(string);
-                        } catch (ScriptException e) {
-                            throw new RuntimeException(e);
-                        }
-                        String jsonString = JSON.toJSONString(eval);
-                        if ("true".equals(jsonString)) {
-                            triggerNum = triggerNum.add(BigDecimal.ONE);
-                        } else {
-                            triggerNum = triggerNum.add(BigDecimal.ZERO);
-                        }
-                    } else {
-                        isTriggerNum += 1;
-                        break;
-                    }
-                }
-            }
-
-            BigDecimal divide = triggerNum.divide(total, 2, RoundingMode.DOWN).multiply(BigDecimal.valueOf(100));
-
-            if (divide.compareTo(BigDecimal.valueOf(trigger.getPercentage())) <= 0) {
-                isTriggerNum += 1;
-            }
-
-        }
-        return isTriggerNum;
-    }
-
-    private int getIsTriggerNum(TriggerEntity trigger, String hostId, ScriptEngine engine, int isTriggerNum) {
-        if (trigger.getScheme() == 2) {
-            String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<History> informationList = historyService.findInformationToGatherTime(hostId, beforeTime);
-
-            //根据监控项id进行分组,然后进行计算平均值
-            Collection<List<History>> values1 = informationList.stream().collect(Collectors.groupingBy(History::getMonitorId)).values();
-            String avgNumber = setAvgNumber(values1);
-            JSONObject jsonObject = JSONObject.parseObject(avgNumber);
-            String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
-            Set<String> functionList = conversionScriptsUtils.getFunctionList(string);
-            if (functionList.isEmpty()) {
-                Object eval;
-                try {
-                    eval = engine.eval(string);
-                } catch (ScriptException e) {
-                    throw new RuntimeException(e);
-                }
-                String jsonString = JSON.toJSONString(eval);
-                if ("false".equals(jsonString)) {
-                    isTriggerNum += 1;
-                }
-            } else {
-                isTriggerNum += 1;
-            }
-        }
-        return isTriggerNum;
-    }
-
-    private int getIsTriggerNum(List<History> entityList, TriggerEntity trigger, ScriptEngine engine, int isTriggerNum) {
-        if (trigger.getScheme() == 1) {
-            List<List<History>> list = entityList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values().stream().toList();
-            if (!list.isEmpty()) {
-                //获取最后一组数据
-                List<History> historyList = list.get(list.size() - 1);
-                String lastValue = getLastValue(historyList);
-                JSONObject jsonObject = JSONObject.parseObject(lastValue);
-                //将表达式中{{}}中的值替换掉
-                String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
-
-                //检验是否没有匹配到的,如果存在没有监控项的数据,则不会进行告警
-                Set<String> functionList = conversionScriptsUtils.getFunctionList(string);
-                if (functionList.isEmpty()) {
-                    Object eval;
-                    try {
-                        eval = engine.eval(string);
-                    } catch (ScriptException e) {
-                        throw new RuntimeException(e);
-                    }
-                    String jsonString = JSON.toJSONString(eval);
-                    if ("false".equals(jsonString)) {
-                        isTriggerNum += 1;
-                    }
-                } else {
-                    isTriggerNum += 1;
-                }
-            }
-        }
-        return isTriggerNum;
-    }
-
-    private static String getLastValue(List<History> historyList) {
-        String strJson = "{";
-        for (int i = 0; i < historyList.size(); i++) {
-            strJson = strJson.concat("'" + historyList.get(i).getExpression() + "':'" + historyList.get(i).getReportData() + "'");
-            if (i != historyList.size() - 1) {
-                strJson = strJson.concat(",");
-            }
-        }
-        strJson = strJson.concat("}");
-        return strJson;
-    }
-
-    private static String setAvgNumber(Collection<List<History>> values1) {
-        String strJson = "{";
-        for (List<History> histories : values1) {
-            double avg = histories.stream().mapToDouble(item -> Double.parseDouble(item.getReportData())).average().orElse(0);
-            strJson = strJson.concat("'" + histories.get(0).getExpression() + "':'" + avg + "',");
-        }
-
-        strJson = strJson.concat("}");
-        return strJson;
-    }
-
-    private static String getString(List<History> value) {
-        String strJson = "{";
-        for (int i = 0; i < value.size(); i++) {
-            strJson = strJson.concat("'" + value.get(i).getExpression() + "':'" + value.get(i).getReportData() + "'");
-            if (i != value.size() - 1) {
-                strJson = strJson.concat(",");
-            }
-        }
-        strJson = strJson.concat("}");
-        return strJson;
-    }
-
+    //根据主机的id和表达式进行查询
     @Override
     public List<Trigger> findLikeTrigger(String hostId, String expression) {
         QueryCondition queryCondition = QueryBuilders.createQuery(TriggerEntity.class)
@@ -620,6 +455,7 @@ public class TriggerServiceImpl implements TriggerService {
         return BeanMapper.mapList(entityList, Trigger.class);
     }
 
+    //查询触发器数量
     @Override
     public Long findTriggerAllNum() {
         return triggerDao.findTriggerAllNum();

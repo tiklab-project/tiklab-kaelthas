@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 主机组
+ */
 @Service
 @Exporter
 public class HostGroupServiceImpl implements HostGroupService {
@@ -23,7 +26,7 @@ public class HostGroupServiceImpl implements HostGroupService {
     @Autowired
     private HostGroupDao hostGroupDao;
 
-    //根据名称查询主机组信息
+    //查询所有主机组信息
     @Override
     public List<HostGroup> findHostGroupByName() {
 
@@ -44,15 +47,20 @@ public class HostGroupServiceImpl implements HostGroupService {
         HostGroupEntity hostGroupEntity = hostGroupDao.findHostGroupById(id);
 
         return BeanMapper.map(hostGroupEntity, HostGroup.class);
-
     }
 
+    /**
+     * 查询所有主机组的list信息
+     */
     @Override
     public List<HostGroup> findAllHostGroupList() {
         List<HostGroupEntity> allHostGroupList = hostGroupDao.findAllHostGroupList();
         return BeanMapper.mapList(allHostGroupList,HostGroup.class);
     }
 
+    /**
+     * 主机组分页查询
+     */
     @Override
     public Pagination<HostGroup> findHostGroupPage(HostGroup hostGroup) {
         QueryCondition queryCondition = QueryBuilders.createQuery(HostGroupEntity.class)
@@ -66,23 +74,35 @@ public class HostGroupServiceImpl implements HostGroupService {
         return PaginationBuilder.build(pagination,hostGroupList);
     }
 
+    /**
+     * 创建主机组
+     */
     @Override
     public void createHostGroup(HostGroup hostGroup) {
         HostGroupEntity map = BeanMapper.map(hostGroup, HostGroupEntity.class);
         hostGroupDao.createHostGroup(map);
     }
 
+    /**
+     * 删除主机组
+     */
     @Override
     public void deleteHostGroup(String id) {
         hostGroupDao.deleteHostGroup(id);
     }
 
+    /**
+     * 修改主机组
+     */
     @Override
     public void updateHostGroup(HostGroup hostGroup) {
         HostGroupEntity hostGroupEntity = BeanMapper.map(hostGroup, HostGroupEntity.class);
         hostGroupDao.updateHostGroup(hostGroupEntity);
     }
 
+    /**
+     * 查询主机组数量
+     */
     @Override
     public Long findHostGroupAllNum() {
         return hostGroupDao.findHostGroupAllNum();

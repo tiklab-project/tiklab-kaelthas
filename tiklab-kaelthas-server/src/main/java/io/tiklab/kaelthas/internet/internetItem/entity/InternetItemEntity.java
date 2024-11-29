@@ -44,6 +44,9 @@ public class InternetItemEntity {
     @Column(name = "report_type")
     private Integer reportType;
 
+    /**
+     * 是否可以选择(0.不能在监控项列表选择到,1.可以在监控项列表中选择到)
+     */
     @Column(name = "is_optional")
     private Integer isOptional;
 

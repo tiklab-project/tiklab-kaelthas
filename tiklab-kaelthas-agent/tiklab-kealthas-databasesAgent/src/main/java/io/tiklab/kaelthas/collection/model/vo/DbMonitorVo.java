@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.collection.entity.vo;
+package io.tiklab.kaelthas.collection.model.vo;
 import io.tiklab.core.page.Page;
 
 /**

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 触发器和消息渠道的中间表
+ */
 @Service
 @Exporter
 public class TriggerMediumServiceImpl implements TriggerMediumService {
@@ -19,6 +22,7 @@ public class TriggerMediumServiceImpl implements TriggerMediumService {
     @Autowired
     private TriggerMediumDao triggerMediumDao;
 
+    //创建关联表信息
     @Override
     public void createTriggerMedium(String triggerId, List<String> mediumIds) {
         for (String mediumId : mediumIds) {
@@ -29,6 +33,7 @@ public class TriggerMediumServiceImpl implements TriggerMediumService {
         }
     }
 
+    //根据触发器id删除关联表
     @Override
     public void deleteByTriggerId(String id) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(TriggerMediumEntity.class)
@@ -37,6 +42,7 @@ public class TriggerMediumServiceImpl implements TriggerMediumService {
         triggerMediumDao.deleteByTriggerId(deleteCondition);
     }
 
+    //根据触发器id查询消息渠道的ids
     @Override
     public List<String> findMediumIdByTriggerId(String triggerId) {
         QueryCondition queryCondition = QueryBuilders.createQuery(TriggerMediumEntity.class)

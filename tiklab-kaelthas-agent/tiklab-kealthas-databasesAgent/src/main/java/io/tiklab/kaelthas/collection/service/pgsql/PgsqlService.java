@@ -2,9 +2,9 @@ package io.tiklab.kaelthas.collection.service.pgsql;
 
 
 import io.tiklab.kaelthas.collection.dao.DbSqlDao;
-import io.tiklab.kaelthas.collection.entity.vo.DbHistoryVo;
-import io.tiklab.kaelthas.collection.entity.vo.DbMonitorVo;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
+import io.tiklab.kaelthas.collection.model.vo.DbHistoryVo;
+import io.tiklab.kaelthas.collection.model.vo.DbMonitorVo;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,6 +14,9 @@ import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 定时拉取配置进行数据上报
+ */
 @Service
 public class PgsqlService {
 
@@ -58,7 +61,9 @@ public class PgsqlService {
             }
 
             List<DbHistoryVo> DbHistoryVoList = getReportNum(dataTimeNow, value.get(0), sql);
-            histories.addAll(DbHistoryVoList);
+            if (DbHistoryVoList != null) {
+                histories.addAll(DbHistoryVoList);
+            }
         }
 
         if (histories.size() > 30) {
@@ -181,7 +186,7 @@ public class PgsqlService {
                 list.add(DbHistoryVo);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
         }
         return list;
     }

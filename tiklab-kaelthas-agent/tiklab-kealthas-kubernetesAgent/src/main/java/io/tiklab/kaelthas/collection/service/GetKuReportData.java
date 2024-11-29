@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.collection.common;
+package io.tiklab.kaelthas.collection.service;
 
 import com.alibaba.fastjson.JSON;
 import io.kubernetes.client.custom.Quantity;
@@ -9,7 +9,8 @@ import io.kubernetes.client.openapi.apis.AppsV1Api;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.*;
 import io.kubernetes.client.util.ClientBuilder;
-import io.tiklab.kaelthas.collection.node.NodeItem;
+import io.tiklab.kaelthas.collection.dao.KuCollectionDao;
+import io.tiklab.kaelthas.collection.nodeItem.NodeItem;
 import io.tiklab.kaelthas.collection.serviceItem.ServiceItem;
 import io.tiklab.kaelthas.collection.utils.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.history.model.History;
@@ -38,11 +39,14 @@ public class GetKuReportData {
     @Autowired
     private HistoryService historyService;
 
+    @Autowired
+    private KuCollectionDao kuCollectionDao;
+
     //定时拉取配置信息,并采集指定的数据
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void getKubernetesInfo() {
 
-        List<KuMonitor> monitorList = kuMonitorService.findKuAndMonitor();
+        List<KuMonitor> monitorList = kuCollectionDao.findKuAllMonitor();
 
         if (monitorList.isEmpty()) {
             return;

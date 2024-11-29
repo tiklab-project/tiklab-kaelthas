@@ -14,13 +14,5 @@ public interface TriggerExpressionService {
     @FindAll
     List<TriggerExpression> findTriggerExpressionAll();
 
-    void deleteByMonitorId(String monitorId);
 
-    void deleteByMonitorIds(String[] monitorIds);
-
-    void updateTriggerExpression(TriggerExpression triggerExpression);
-
-    void deleteByTriggerId(String triggerId);
-
-    void createTriggerExpression(TriggerExpression entity);
 }

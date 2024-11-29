@@ -7,12 +7,12 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.collection.util.AgentSqlUtil;
-import io.tiklab.kaelthas.common.javascripts.ConversionScriptsUtils;
-import io.tiklab.kaelthas.common.util.ConversionDateUtil;
+import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.util.ConversionScriptsUtils;
+import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.common.util.StringUtil;
+import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.toolkit.beans.BeanMapper;
@@ -32,8 +32,11 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static io.tiklab.kaelthas.common.util.StringUtil.*;
+import static io.tiklab.kaelthas.util.StringUtil.*;
 
+/**
+ * k8s监控中的触发器
+ */
 @Service
 public class KuTriggerServiceImpl implements KuTriggerService {
 
@@ -52,11 +55,13 @@ public class KuTriggerServiceImpl implements KuTriggerService {
     @Autowired
     private HistoryService historyService;
 
+    //触发器分页查询
     @Override
     public Pagination<KuTrigger> findKuTriggerPage(KuTrigger kuTrigger) {
         return kuTriggerDao.findKuTriggerPage(kuTrigger);
     }
 
+    //创建触发器
     @Override
     public String createKuTrigger(KuTrigger kuTrigger) {
 
@@ -74,6 +79,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
 
     }
 
+    //根据触发器id删除触发器
     @Override
     public void deleteKuTrigger(String id) {
         try {
@@ -87,6 +93,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         }
     }
 
+    //修改触发器
     @Override
     public void updateKuTrigger(KuTrigger kuTrigger) {
         KuTriggerEntity entity = BeanMapper.map(kuTrigger, KuTriggerEntity.class);
@@ -113,6 +120,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         kuTriggerDao.deleteKuTriggerByKuId(deleteCondition);
     }
 
+    //根据k8s监控id查询触发器list
     @Override
     public List<KuTrigger> findKuTriggerByKuId(String id) {
         QueryCondition queryCondition = QueryBuilders.createQuery(KuTriggerEntity.class)
@@ -122,6 +130,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         return BeanMapper.mapList(kuTriggerByKuId, KuTrigger.class);
     }
 
+    //定时任务,定时使用触发器进行告警
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerKuTrigger() {
         List<KuTriggerEntity> kuTriggerEntityList = kuTriggerDao.findAllTrigger();
@@ -143,6 +152,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         }
     }
 
+    //最近值触发,使用存储的最后一个数据进行触发
     private void getLastValueTrigger(KuTriggerEntity trigger) {
         try {
             String flag;
@@ -216,6 +226,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         }
     }
 
+    //平均值触发,计算在一定时间段内的平均值进行触发
     private void getAvgValueTrigger(KuTriggerEntity trigger) {
         try {
 
@@ -276,6 +287,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         }
     }
 
+    //百分比触发,计算一定时间内触发的占比超过指定数值
     private void getPercentValueTrigger(KuTriggerEntity trigger) {
         try {
             Alarm alarm = new Alarm();

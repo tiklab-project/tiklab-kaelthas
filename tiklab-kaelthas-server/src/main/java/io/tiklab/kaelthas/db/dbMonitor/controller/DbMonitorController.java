@@ -29,6 +29,9 @@ public class DbMonitorController {
         return Result.ok(pagination);
     }
 
+    /**
+     * 根据监控数据库id查询监控项
+     */
     @RequestMapping(value = "/findAllMonitor",method = RequestMethod.POST)
     public Result<?> findAllMonitor(@RequestBody DbMonitor dbMonitor){
         List<DbMonitor> monitorList = dbMonitorService.findAllMonitor(dbMonitor);
