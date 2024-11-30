@@ -11,7 +11,7 @@
 | dao     | 查询数据库信息，插入数据库采集的数据   |
 | model   | 存储数据表的model和数据库监控项的model |
 | service | mysql和pgsql的定时任务执行             |
-| utils   | 数据库agent的工具类                    |
+| utils   | 数据库监控中agent的工具类              |
 
 
 
@@ -22,7 +22,7 @@
 | dao     | 查询网络监控项信息                                     |
 | model   | 监控项的model                                          |
 | service | 概况页面的数据采集和指标的定时数据采集，并且插入数据库 |
-| utils   | 数据库agent的工具类                                    |
+| utils   | 网络监控中agent的工具类                                |
 
 
 
@@ -34,7 +34,7 @@
 | nodeItem    | node类型的监控项，方法类            |
 | service     | 定时任务采集k8s的概况信息和配置信息 |
 | serviceItem | service类型的监控项，方法类         |
-| utils       | k8s的工具类                         |
+| utils       | k8s监控中的工具类                   |
 
 
 
@@ -58,6 +58,7 @@
 | dbGraphics        | 监控数据库的图形配置模块             |
 | dbGraphicsMonitor | 监控数据库的图形和监控项关联模块     |
 | dbItem            | 监控数据库的字典表模块               |
+| dbMonitor         | 监控数据库的监控项                   |
 | dbTrigger         | 监控数据库的触发器                   |
 | dbTriggerMedium   | 监控数据库中触发器和告警渠道的中间表 |
 
@@ -71,16 +72,24 @@
 
 ## host
 
-| 目录            | 说明                                       |
-| --------------- | ------------------------------------------ |
-| dynamic         | 主机的动态表，之前首页展示，当前没有展示   |
-| graphics        | 主机下的图形信息                           |
-| graphicsMonitor | 主机下图形和监控项的关联表                 |
-| home            | 首页的请求接口存放目录                     |
-| host            | 主机的增删改查                             |
-| hostDynamic     | 主机下的动态信息，例如创建监控项           |
-| hostGroup       | 主机组的增删改查                           |
-| hostRecent      | 常用主机存放表，之前首页展示，当前没有展示 |
+| 目录              | 说明                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| dynamic           | 主机的动态表，之前首页展示，当前没有展示                     |
+| graphics          | 主机下的图形信息                                             |
+| graphicsMonitor   | 主机下图形和监控项的关联表                                   |
+| home              | 首页的请求接口存放目录                                       |
+| host              | 主机的增删改查                                               |
+| hostDynamic       | 主机下的动态信息，例如创建监控项                             |
+| hostGroup         | 主机组的增删改查                                             |
+| hostRecent        | 常用主机存放表，之前首页展示，当前没有展示                   |
+| monitor           | 主机监控项                                                   |
+| monitorItem       | 监控项字典表                                                 |
+| platform          | 设置中首页的接口请求                                         |
+| template          | 模板表                                                       |
+| templateMonitor   | 模板下监控项                                                 |
+| trigger           | 主机下的触发器                                               |
+| triggerExpression | 触发器的表达式                                               |
+| triggerMedium     | 触发器和消息通知渠道的关联表（消息通知渠道：站内信、邮箱、企业微信等） |
 
 
 
@@ -147,6 +156,7 @@
 | dbGraphics        | 监控数据库的图形配置模块             |
 | dbGraphicsMonitor | 监控数据库的图形和监控项关联模块     |
 | dbItem            | 监控数据库的字典表模块               |
+| dbMonitor         | 监控数据库下的触发器                 |
 | dbTrigger         | 监控数据库的触发器                   |
 | dbTriggerMedium   | 监控数据库中触发器和告警渠道的中间表 |
 
@@ -160,16 +170,24 @@
 
 ## host
 
-| 目录            | 说明                                       |
-| --------------- | ------------------------------------------ |
-| dynamic         | 主机的动态表，之前首页展示，当前没有展示   |
-| graphics        | 主机下的图形信息                           |
-| graphicsMonitor | 主机下图形和监控项的关联表                 |
-| home            | 首页的请求接口存放目录                     |
-| host            | 主机的增删改查                             |
-| hostDynamic     | 主机下的动态信息，例如创建监控项           |
-| hostGroup       | 主机组的增删改查                           |
-| hostRecent      | 常用主机存放表，之前首页展示，当前没有展示 |
+| 目录              | 说明                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| dynamic           | 主机的动态表，之前首页展示，当前没有展示                     |
+| graphics          | 主机下的图形信息                                             |
+| graphicsMonitor   | 主机下图形和监控项的关联表                                   |
+| home              | 首页的请求接口存放目录                                       |
+| host              | 主机的增删改查                                               |
+| hostDynamic       | 主机下的动态信息，例如创建监控项                             |
+| hostGroup         | 主机组的增删改查                                             |
+| hostRecent        | 常用主机存放表，之前首页展示，当前没有展示                   |
+| monitor           | 主机监控项                                                   |
+| monitorItem       | 监控项字典表                                                 |
+| platform          | 设置中首页的接口请求                                         |
+| template          | 模板表                                                       |
+| templateMonitor   | 模板下监控项                                                 |
+| trigger           | 主机下的触发器                                               |
+| triggerExpression | 触发器的表达式                                               |
+| triggerMedium     | 触发器和消息通知渠道的关联表（消息通知渠道：站内信、邮箱、企业微信等） |
 
 
 
@@ -209,4 +227,9 @@
 
 ## util
 
-使用的工具类存放文件夹
+| 文件                   | 说明                                           |
+| ---------------------- | ---------------------------------------------- |
+| ConversionDateUtil     | 工具类，大多用于获取时间，对时间的处理         |
+| ConversionScriptsUtils | javaScipts脚本的工具，触发器进行占位符替换使用 |
+| SqlUtil                | 用于数据拼接成SQL，批量插入的工具类            |
+| StringUtil             | 字符串拼接的工具类                             |
