@@ -9,7 +9,7 @@ import io.kubernetes.client.openapi.models.V1NodeCondition;
 import io.kubernetes.client.openapi.models.V1PodList;
 import io.tiklab.kaelthas.collection.utils.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.history.model.History;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;

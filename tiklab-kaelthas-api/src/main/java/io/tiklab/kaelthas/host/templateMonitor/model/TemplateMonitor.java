@@ -7,6 +7,9 @@ import io.tiklab.toolkit.join.annotation.Join;
 import io.tiklab.toolkit.join.annotation.JoinQuery;
 import io.tiklab.kaelthas.host.monitorItem.model.MonitorItem;
 
+/**
+ * 模板下的监控项
+ */
 @Join
 @Mapper
 public class TemplateMonitor {

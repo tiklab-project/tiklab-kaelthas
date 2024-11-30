@@ -61,14 +61,6 @@ public class HistoryController {
         return Result.ok(list);
     }
 
-    /**
-     * 获取k8s的详情
-     */
-    @RequestMapping(value = "/findKuOverviewTotal", method = RequestMethod.POST)
-    public Result<?> findKuOverviewTotal(@NotNull String kuId) {
-        Map<String, Object> mapList = historyService.findKuOverviewTotal(kuId);
-        return Result.ok(mapList);
-    }
 
     /**
      * 网络设备的图形展示
@@ -77,15 +69,6 @@ public class HistoryController {
     public Result<?> findInGraphicsLine(@RequestBody History history){
         List<List<History>> list = historyService.findInGraphicsLine(history);
         return Result.ok(list);
-    }
-
-    /**
-     * 获取网络详情
-     */
-    @RequestMapping(value = "/findInternetOverview",method = RequestMethod.POST)
-    public Result<?> findInternetOverview(@NotNull String internetId){
-        Map<String,Object> objectMap = historyService.findInternetOverview(internetId);
-        return Result.ok(objectMap);
     }
 
 }

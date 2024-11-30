@@ -38,6 +38,9 @@ public class DbInfoController {
         return Result.ok(dbInfoList);
     }
 
+    /**
+     * 根据id查询数据源
+     */
     @RequestMapping(value = "/findDbInfoById",method = RequestMethod.POST)
     public Result<?> findDbInfoById(@NotNull String id){
         DbInfo dbInfo = dbInfoService.findDbInfoById(id);

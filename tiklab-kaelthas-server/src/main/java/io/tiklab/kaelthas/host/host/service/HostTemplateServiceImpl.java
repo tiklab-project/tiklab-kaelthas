@@ -39,7 +39,7 @@ public class HostTemplateServiceImpl implements HostTemplateService {
     }
 
     /**
-     * findList方法
+     * findList方法,根据ids查询list数据
      */
     @Override
     public List<HostTemplate> findHostTemplateList(List<String> ids) {
@@ -100,22 +100,6 @@ public class HostTemplateServiceImpl implements HostTemplateService {
         List<HostTemplateEntity> entityList = hostTemplateDao.findTemplateByTemplateId(queryCondition);
 
         return BeanMapper.mapList(entityList, HostTemplate.class);
-    }
-
-    /**
-     * 根据主机ids查询模板ids
-     */
-    @Override
-    public List<HostTemplate> findHostTemplateListByHostIds(List<String> hostIds) {
-
-        String[] strings = hostIds.toArray(String[]::new);
-
-        QueryCondition queryCondition = QueryBuilders.createQuery(HostTemplateEntity.class)
-                .in("hostId", strings)
-                .get();
-
-        List<HostTemplateEntity> templateEntityList = hostTemplateDao.findHostTemplateListByHostIds(queryCondition);
-        return BeanMapper.mapList(templateEntityList, HostTemplate.class);
     }
 
     /**

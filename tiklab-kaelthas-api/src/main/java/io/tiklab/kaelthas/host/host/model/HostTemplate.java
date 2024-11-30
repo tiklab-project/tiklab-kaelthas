@@ -3,6 +3,9 @@ package io.tiklab.kaelthas.host.host.model;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 主机和模板关联表
+ */
 @Mapper
 @Join
 public class HostTemplate {
@@ -12,7 +15,7 @@ public class HostTemplate {
     //模板id
     private String templateId;
 
-    //监控指标id
+    //主机id
     private String hostId;
 
     public String getId() {

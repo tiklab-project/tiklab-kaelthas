@@ -9,31 +9,61 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 历史数据表信息
+ */
 @Join
 @Mapper
 public class History {
 
     private String id;
 
+    /**
+     * (监控主机的id,监控数据库的id,监控k8s的id和监控网络的id上报到数据存储使用的字段),只不过字段名是hostId
+     */
     private String hostId;
 
+    /**
+     * 监控项的id(也是上报数据监控项的id,主机监控,数据库监控,k8s监控和网络监控 的监控项id)
+     */
     private String monitorId;
 
+    /**
+     * 图形id
+     */
     private String graphicsId;
 
+    /**
+     * 数据上报的时间
+     */
     private String gatherTime;
 
+    /**
+     * 上报的数据
+     */
     private String reportData;
 
+    /**
+     * 来源
+     */
     private Integer source = 0;
 
+    /**
+     * 监控项指标的id
+     */
     private String monitorItemId;
 
+    /**
+     * 间隔时间
+     */
     private String intervalTime;
 
     //资源大类
     private String dataCategories;
 
+    /**
+     * 数据类型
+     */
     private String dataCate;
 
     //资源小类
@@ -60,31 +90,67 @@ public class History {
     //结束时间
     private String endTime;
 
+    /**
+     * 触发器id
+     */
     private String triggerId;
 
+    /**
+     * 数据大小范围
+     */
     private Integer dataRange;
 
+    /**
+     * 表达式
+     */
     private String expression;
 
+    /**
+     * 租户id
+     */
     private String tenant;
 
+    /**
+     * 描述
+     */
     private String describe;
 
+    /**
+     * 图形名称
+     */
     private String graphicsName;
 
+    /**
+     * 监控项数值的list,用于图形展示
+     */
     private List<String> data = new ArrayList<>();
 
+    /**
+     * 时间list,用于图形展示
+     */
     private List<String> dataTimes = new ArrayList<>();
 
+    /**
+     * 字符串的监控项ids
+     */
     private String monitorIds;
 
+    /**
+     * 监控项ids,list
+     */
     private List<String> monitorIdList = new ArrayList<>();
 
+    /**
+     * 存储触发器的信息,用于图形展示
+     */
     private List<Map<String,String>> mapList = new ArrayList<>();
 
     //分页参数
     private Page pageParam = new Page();
 
+    /**
+     * 问题
+     */
     private String problem;
 
     public History() {

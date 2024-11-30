@@ -3,6 +3,9 @@ package io.tiklab.kaelthas.db.customize.service;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.db.customize.model.Customize;
 
+/**
+ * 自定义SQL的增删改查,暂未开发使用
+ */
 public interface CustomizeService {
 
     //自定义SQL的分页查询

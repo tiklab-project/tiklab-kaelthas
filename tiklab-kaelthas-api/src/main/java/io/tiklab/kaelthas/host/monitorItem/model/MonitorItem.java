@@ -3,6 +3,9 @@ package io.tiklab.kaelthas.host.monitorItem.model;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 监控项字典表
+ */
 @Join
 @Mapper
 public class MonitorItem {
@@ -26,6 +29,7 @@ public class MonitorItem {
     //数据大类
     private String dataCategories;
 
+    //上报的数据类型
     private Integer reportType;
 
     public Integer getReportType() {

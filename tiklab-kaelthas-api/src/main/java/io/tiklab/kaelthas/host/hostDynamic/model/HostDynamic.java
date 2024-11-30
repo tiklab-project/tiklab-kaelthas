@@ -4,6 +4,9 @@ import io.tiklab.core.page.Page;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 主机下的动态信息
+ */
 @Join
 @Mapper
 public class HostDynamic {
@@ -11,15 +14,24 @@ public class HostDynamic {
 
     private String id;
 
-
+    /**
+     * 动态名称
+     */
     private String name;
 
-
+    /**
+     * 动态时间
+     */
     private String time;
 
-
+    /**
+     * 主机id
+     */
     private String hostId;
 
+    /**
+     * 分页信息
+     */
     private Page pageParam = new Page();
 
 

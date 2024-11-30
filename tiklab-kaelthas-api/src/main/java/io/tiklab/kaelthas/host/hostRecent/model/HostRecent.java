@@ -13,14 +13,19 @@ public class HostRecent {
 
     private String id;
 
+    //主机id
     private String hostId;
 
+    //用户名称
     private String hostName;
 
+    //状态
     private Integer state;
 
+    //颜色
     private Integer color;
 
+    //用户id
     private String userId;
 
     //主机信息
@@ -30,8 +35,10 @@ public class HostRecent {
     @JoinQuery(key = "id")
     private Host host;
 
+    //修改时间
     private String updateTime;
 
+    //告警数量
     private Integer alarmNum;
 
     public String getId() {

@@ -6,14 +6,13 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.kaelthas.history.dao.HistoryDao;
 import io.tiklab.kaelthas.history.dao.HistoryMultiDao;
-import io.tiklab.kaelthas.db.database.service.DbInfoService;
-import io.tiklab.kaelthas.db.dbGraphics.model.DbGraphics;
-import io.tiklab.kaelthas.db.dbGraphics.service.DbGraphicsService;
-import io.tiklab.kaelthas.db.dbGraphicsMonitor.model.DbGraphicsMonitor;
-import io.tiklab.kaelthas.db.dbGraphicsMonitor.service.DbGraphicsMonitorService;
+import io.tiklab.kaelthas.db.graphics.model.DbGraphics;
+import io.tiklab.kaelthas.db.graphics.service.DbGraphicsService;
+import io.tiklab.kaelthas.db.graphicsMonitor.model.DbGraphicsMonitor;
+import io.tiklab.kaelthas.db.graphicsMonitor.service.DbGraphicsMonitorService;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
-import io.tiklab.kaelthas.db.dbTrigger.model.DbTrigger;
-import io.tiklab.kaelthas.db.dbTrigger.service.DbTriggerService;
+import io.tiklab.kaelthas.db.trigger.model.DbTrigger;
+import io.tiklab.kaelthas.db.trigger.service.DbTriggerService;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import io.tiklab.kaelthas.host.graphics.service.GraphicsService;
 import io.tiklab.kaelthas.host.graphicsMonitor.model.GraphicsMonitor;
@@ -25,22 +24,20 @@ import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 import io.tiklab.kaelthas.host.trigger.service.TriggerService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
-import io.tiklab.kaelthas.internet.internetGraphics.model.InternetGraphics;
-import io.tiklab.kaelthas.internet.internetGraphics.service.InternetGraphicsService;
-import io.tiklab.kaelthas.internet.internetGraphicsMonitor.model.InGraphicsMonitor;
-import io.tiklab.kaelthas.internet.internetTrigger.model.InTrigger;
-import io.tiklab.kaelthas.internet.internetTrigger.service.InTriggerService;
-import io.tiklab.kaelthas.kubernetes.kubernetesGraphics.entity.KuGraphics;
-import io.tiklab.kaelthas.kubernetes.kubernetesGraphics.service.KuGraphicsService;
-import io.tiklab.kaelthas.kubernetes.kubernetesGraphicsMonitor.model.KuGraphicsMonitor;
-import io.tiklab.kaelthas.kubernetes.kubernetesGraphicsMonitor.service.KuGraphicsMonitorService;
+import io.tiklab.kaelthas.internet.graphics.model.InternetGraphics;
+import io.tiklab.kaelthas.internet.graphics.service.InternetGraphicsService;
+import io.tiklab.kaelthas.internet.graphicsMonitor.model.InGraphicsMonitor;
+import io.tiklab.kaelthas.internet.trigger.model.InTrigger;
+import io.tiklab.kaelthas.internet.trigger.service.InTriggerService;
+import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphics;
+import io.tiklab.kaelthas.kubernetes.graphics.service.KuGraphicsService;
+import io.tiklab.kaelthas.kubernetes.graphicsMonitor.model.KuGraphicsMonitor;
+import io.tiklab.kaelthas.kubernetes.graphicsMonitor.service.KuGraphicsMonitorService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -94,6 +91,9 @@ public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private InTriggerService inTriggerService;
 
+    /**
+     * 历史数据的分页查询
+     */
     @Override
     public Pagination<History> findInformationPage(History history) {
         Pagination<History> pagination = historyDao.findInformationPage(history);

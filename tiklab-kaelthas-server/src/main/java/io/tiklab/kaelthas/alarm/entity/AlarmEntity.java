@@ -10,39 +10,75 @@ public class AlarmEntity {
     @Column(name = "id")
     private String id;
 
+    /**
+     * 监控主机id、监控数据库id、监控k8sid，监控网络id
+     */
     @Column(name = "host_id")
     private String hostId;
 
+    /**
+     * 状态(1，已解决  2，未解决)
+     */
     @Column(name = "status")
     private Integer status;
 
+    /**
+     * 发送的消息(告警消息)
+     */
     @Column(name = "send_message")
     private String sendMessage;
 
+    /**
+     * 触发器id
+     */
     @Column(name = "trigger_id")
     private String triggerId;
 
+    /**
+     * 告警时间
+     */
     @Column(name = "alert_time")
     private String alertTime;
 
+    /**
+     * 告警持续时间
+     */
     @Column(name = "duration")
     private String duration;
 
+    /**
+     * 消息是否发送成功（1，成功   2，失败）功能没有做
+     */
     @Column(name = "is_send")
     private String idSend;
 
+    /**
+     * 解决告警的时间
+     */
     @Column(name = "resolution_time")
     private String resolutionTime;
 
+    /**
+     * 机器类型,(1,主机,2.数据库,3.k8s,4.网络监控)
+     */
     @Column(name = "machine_type")
     private Integer machineType;
 
+    /**
+     * 设备ip
+     */
     @Column(name = "ip")
     private String ip;
 
+    /**
+     * 设备名称
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * 告警等级
+     */
     @Column(name = "severity_level")
     private Integer severityLevel;
 

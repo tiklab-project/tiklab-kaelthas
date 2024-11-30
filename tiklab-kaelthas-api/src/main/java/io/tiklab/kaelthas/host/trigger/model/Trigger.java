@@ -45,6 +45,7 @@ public class Trigger {
     @JoinQuery(key = "id")
     private HostMonitor monitor;
 
+    //触发器表达式的list
     private List<TriggerExpression> function;
 
     //触发器表达式的id
@@ -56,22 +57,28 @@ public class Trigger {
     //表达式的数值
     private Integer numericalValue;
 
+    //触发器表达式
     private String expression;
 
     //通知消息类型
     private Integer mediumType;
 
+    //消息ids
     private List<String> mediumIds;
 
+    //消息id
     private String mediumId;
 
+    //触发方案
     private Integer scheme;
 
-
+    //时间范畴
     private Integer rangeTime;
 
+    //百分比
     private Integer percentage;
 
+    //分页参数
     private Page pageParam = new Page();
 
     public String getId() {

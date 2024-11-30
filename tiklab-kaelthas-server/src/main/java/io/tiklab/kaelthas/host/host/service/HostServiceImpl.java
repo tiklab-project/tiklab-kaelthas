@@ -40,6 +40,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * 主机中的业务
+ */
 @Service
 @Exporter
 public class HostServiceImpl implements HostService {

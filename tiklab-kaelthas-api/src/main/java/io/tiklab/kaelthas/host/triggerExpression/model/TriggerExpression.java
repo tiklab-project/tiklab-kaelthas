@@ -9,16 +9,34 @@ public class TriggerExpression {
 
     private String id;
 
+    /**
+     * 触发器表达式
+     */
     private String expression;
 
+    /**
+     * 大小运算符
+     */
     private Integer operator;
 
+    /**
+     * 数值
+     */
     private Integer numericalValue;
 
+    /**
+     * 触发器id
+     */
     private String triggerId;
 
+    /**
+     * 来源(1.主机,2.模板)
+     */
     private Integer source;
 
+    /**
+     * 监控项id
+     */
     private String monitorId;
 
     public String getId() {

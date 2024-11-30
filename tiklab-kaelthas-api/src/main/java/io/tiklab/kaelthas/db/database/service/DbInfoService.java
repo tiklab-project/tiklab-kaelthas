@@ -2,13 +2,16 @@ package io.tiklab.kaelthas.db.database.service;
 
 import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
-import io.tiklab.kaelthas.db.dbMonitor.model.DbMonitor;
+import io.tiklab.kaelthas.db.monitor.model.DbMonitor;
 import io.tiklab.toolkit.join.annotation.FindAll;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
 import io.tiklab.kaelthas.db.database.model.DbInfo;
 
 import java.util.List;
 
+/**
+ * 监控数据库
+ */
 @JoinProvider(model = DbInfo.class)
 public interface DbInfoService {
 

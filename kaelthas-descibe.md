@@ -50,23 +50,31 @@
 
 ## db
 
-| 目录              | 说明                                 |
-| ----------------- | ------------------------------------ |
-| customize         | 自定义SQL的功能，这个功能没有开发    |
-| databases         | 检控数据库列表的增删改查             |
-| dbDynamic         | 监控数据库的动态信息                 |
-| dbGraphics        | 监控数据库的图形配置模块             |
-| dbGraphicsMonitor | 监控数据库的图形和监控项关联模块     |
-| dbItem            | 监控数据库的字典表模块               |
-| dbMonitor         | 监控数据库的监控项                   |
-| dbTrigger         | 监控数据库的触发器                   |
-| dbTriggerMedium   | 监控数据库中触发器和告警渠道的中间表 |
+| 目录            | 说明                                 |
+| --------------- | ------------------------------------ |
+| customize       | 自定义SQL的功能，这个功能没有开发    |
+| databases       | 检控数据库列表的增删改查             |
+| dbDynamic       | 监控数据库的动态信息                 |
+| graphics        | 监控数据库的图形配置模块             |
+| graphicsMonitor | 监控数据库的图形和监控项关联模块     |
+| item            | 监控数据库的字典表模块               |
+| monitor         | 监控数据库的监控项                   |
+| overview        | 监控数据库的概况页面接口             |
+| setting         | 监控数据库的设置页面接口             |
+| trigger         | 监控数据库的触发器                   |
+| triggerMedium   | 监控数据库中触发器和告警渠道的中间表 |
 
 
 
 ## history
 
 上报数据的汇总表，agent上报的数据都存放在这张表中，此外还有一分钟、五分钟、十五分钟的表。
+
+
+
+## home
+
+项目的设置，里面存放了设置页面的接口。
 
 
 
@@ -77,14 +85,14 @@
 | dynamic           | 主机的动态表，之前首页展示，当前没有展示                     |
 | graphics          | 主机下的图形信息                                             |
 | graphicsMonitor   | 主机下图形和监控项的关联表                                   |
-| home              | 首页的请求接口存放目录                                       |
 | host              | 主机的增删改查                                               |
 | hostDynamic       | 主机下的动态信息，例如创建监控项                             |
 | hostGroup         | 主机组的增删改查                                             |
 | hostRecent        | 常用主机存放表，之前首页展示，当前没有展示                   |
 | monitor           | 主机监控项                                                   |
 | monitorItem       | 监控项字典表                                                 |
-| platform          | 设置中首页的接口请求                                         |
+| overview          | 主机概况页面的接口                                           |
+| setting           | 主机的设置页面接口                                           |
 | template          | 模板表                                                       |
 | templateMonitor   | 模板下监控项                                                 |
 | trigger           | 主机下的触发器                                               |
@@ -95,29 +103,33 @@
 
 ## internet
 
-| 目录                    | 说明                               |
-| ----------------------- | ---------------------------------- |
-| internet                | 网络监控的信息                     |
-| internetGraphics        | 网络监控下的图形信息               |
-| internetGraphicsMonitor | 网络监控中图形和监控项的关联表     |
-| internetItem            | 网络监控中监控项的字典表           |
-| internetMoinitor        | 网络监控的监控项                   |
-| internetTrigger         | 网络监控的触发器                   |
-| internetTriggerMedium   | 网络监控中触发器与消息渠道的关联表 |
+| 目录            | 说明                               |
+| --------------- | ---------------------------------- |
+| graphics        | 网络监控下的图形信息               |
+| graphicsMonitor | 网络监控中图形和监控项的关联表     |
+| internet        | 网络监控的信息                     |
+| item            | 网络监控中监控项的字典表           |
+| moinitor        | 网络监控的监控项                   |
+| overview        | 网络监控中的概况页面接口           |
+| setting         | 网络监控中的设置页面接口           |
+| trigger         | 网络监控的触发器                   |
+| triggerMedium   | 网络监控中触发器与消息渠道的关联表 |
 
 
 
 ## kubernetes
 
-| 目录                      | 说明                               |
-| ------------------------- | ---------------------------------- |
-| kubernetesGraphics        | 网络监控下的图形信息               |
-| kubernetesGraphicsMonitor | 网络监控中图形和监控项的关联表     |
-| kubernetesInfo            | 网络监控的信息                     |
-| kubernetesItem            | 网络监控中监控项的字典表           |
-| kubernetesMoinitor        | 网络监控的监控项                   |
-| kubernetesTrigger         | 网络监控的触发器                   |
-| kubernetesTriggerMedium   | 网络监控中触发器与消息渠道的关联表 |
+| 目录            | 说明                               |
+| --------------- | ---------------------------------- |
+| graphics        | 网络监控下的图形信息               |
+| graphicsMonitor | 网络监控中图形和监控项的关联表     |
+| item            | 网络监控中监控项的字典表           |
+| kubernetesInfo  | 网络监控的信息                     |
+| moinitor        | 网络监控的监控项                   |
+| overview        | k8s中的概况页面接口                |
+| setting         | k8s中设置页面的接口                |
+| trigger         | 网络监控的触发器                   |
+| triggerMedium   | 网络监控中触发器与消息渠道的关联表 |
 
 
 
@@ -148,23 +160,31 @@
 
 ## db
 
-| 目录              | 说明                                 |
-| ----------------- | ------------------------------------ |
-| customize         | 自定义SQL的功能，这个功能没有开发    |
-| databases         | 检控数据库列表的增删改查             |
-| dbDynamic         | 监控数据库的动态信息                 |
-| dbGraphics        | 监控数据库的图形配置模块             |
-| dbGraphicsMonitor | 监控数据库的图形和监控项关联模块     |
-| dbItem            | 监控数据库的字典表模块               |
-| dbMonitor         | 监控数据库下的触发器                 |
-| dbTrigger         | 监控数据库的触发器                   |
-| dbTriggerMedium   | 监控数据库中触发器和告警渠道的中间表 |
+| 目录            | 说明                                 |
+| --------------- | ------------------------------------ |
+| customize       | 自定义SQL的功能，这个功能没有开发    |
+| databases       | 检控数据库列表的增删改查             |
+| dbDynamic       | 监控数据库的动态信息                 |
+| graphics        | 监控数据库的图形配置模块             |
+| graphicsMonitor | 监控数据库的图形和监控项关联模块     |
+| item            | 监控数据库的字典表模块               |
+| monitor         | 监控数据库的监控项                   |
+| overview        | 监控数据库的概况页面接口             |
+| setting         | 监控数据库的设置页面接口             |
+| trigger         | 监控数据库的触发器                   |
+| triggerMedium   | 监控数据库中触发器和告警渠道的中间表 |
 
 
 
 ## history
 
 上报数据的汇总表，agent上报的数据都存放在这张表中，此外还有一分钟、五分钟、十五分钟的表。
+
+
+
+## home
+
+项目的设置，里面存放了设置页面的接口。
 
 
 
@@ -175,14 +195,14 @@
 | dynamic           | 主机的动态表，之前首页展示，当前没有展示                     |
 | graphics          | 主机下的图形信息                                             |
 | graphicsMonitor   | 主机下图形和监控项的关联表                                   |
-| home              | 首页的请求接口存放目录                                       |
 | host              | 主机的增删改查                                               |
 | hostDynamic       | 主机下的动态信息，例如创建监控项                             |
 | hostGroup         | 主机组的增删改查                                             |
 | hostRecent        | 常用主机存放表，之前首页展示，当前没有展示                   |
 | monitor           | 主机监控项                                                   |
 | monitorItem       | 监控项字典表                                                 |
-| platform          | 设置中首页的接口请求                                         |
+| overview          | 主机概况页面的接口                                           |
+| setting           | 主机的设置页面接口                                           |
 | template          | 模板表                                                       |
 | templateMonitor   | 模板下监控项                                                 |
 | trigger           | 主机下的触发器                                               |
@@ -193,29 +213,33 @@
 
 ## internet
 
-| 目录                    | 说明                               |
-| ----------------------- | ---------------------------------- |
-| internet                | 网络监控的信息                     |
-| internetGraphics        | 网络监控下的图形信息               |
-| internetGraphicsMonitor | 网络监控中图形和监控项的关联表     |
-| internetItem            | 网络监控中监控项的字典表           |
-| internetMoinitor        | 网络监控的监控项                   |
-| internetTrigger         | 网络监控的触发器                   |
-| internetTriggerMedium   | 网络监控中触发器与消息渠道的关联表 |
+| 目录            | 说明                               |
+| --------------- | ---------------------------------- |
+| graphics        | 网络监控下的图形信息               |
+| graphicsMonitor | 网络监控中图形和监控项的关联表     |
+| internet        | 网络监控的信息                     |
+| item            | 网络监控中监控项的字典表           |
+| moinitor        | 网络监控的监控项                   |
+| overview        | 网络监控中的概况页面接口           |
+| setting         | 网络监控中的设置页面接口           |
+| trigger         | 网络监控的触发器                   |
+| triggerMedium   | 网络监控中触发器与消息渠道的关联表 |
 
 
 
 ## kubernetes
 
-| 目录                      | 说明                               |
-| ------------------------- | ---------------------------------- |
-| kubernetesGraphics        | 网络监控下的图形信息               |
-| kubernetesGraphicsMonitor | 网络监控中图形和监控项的关联表     |
-| kubernetesInfo            | 网络监控的信息                     |
-| kubernetesItem            | 网络监控中监控项的字典表           |
-| kubernetesMoinitor        | 网络监控的监控项                   |
-| kubernetesTrigger         | 网络监控的触发器                   |
-| kubernetesTriggerMedium   | 网络监控中触发器与消息渠道的关联表 |
+| 目录            | 说明                               |
+| --------------- | ---------------------------------- |
+| graphics        | 网络监控下的图形信息               |
+| graphicsMonitor | 网络监控中图形和监控项的关联表     |
+| item            | 网络监控中监控项的字典表           |
+| kubernetesInfo  | 网络监控的信息                     |
+| moinitor        | 网络监控的监控项                   |
+| overview        | k8s中的概况页面接口                |
+| setting         | k8s中设置页面的接口                |
+| trigger         | 网络监控的触发器                   |
+| triggerMedium   | 网络监控中触发器与消息渠道的关联表 |
 
 
 

@@ -18,7 +18,7 @@ import java.util.List;
  * 数据库监控中的动态
  */
 @Service
-public class DbDynamicServiceImpl implements DbDynamicService{
+public class DbDynamicServiceImpl implements DbDynamicService {
 
     @Autowired
     private DbDynamicDao dbDynamicDao;

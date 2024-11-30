@@ -6,8 +6,7 @@ import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
 /**
-* 
-* @TableName mtc_internet
+* 网络监控信息表
 */
 
 @Mapper
@@ -64,8 +63,14 @@ public class Internet {
      */
     private Integer port;
 
+    /**
+     * 告警数量
+     */
     private Integer alarmNum;
 
+    /**
+     * 消息
+     */
     private String message;
 
     //分页参数

@@ -13,7 +13,7 @@ import io.tiklab.kaelthas.collection.dao.KuCollectionDao;
 import io.tiklab.kaelthas.collection.utils.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

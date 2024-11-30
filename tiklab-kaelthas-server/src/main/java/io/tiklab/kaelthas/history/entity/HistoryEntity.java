@@ -15,7 +15,7 @@ public class HistoryEntity {
     private String id;
 
     /**
-     * (监控主机的id,监控数据库的id,监控k8s的id和监控网络的id上报到数据存储使用的字段),只不过字段是hostId
+     * (监控主机的id,监控数据库的id,监控k8s的id和监控网络的id上报到数据存储使用的字段),只不过字段名是hostId
      */
     @Column(name = "host_id")
     private String hostId;

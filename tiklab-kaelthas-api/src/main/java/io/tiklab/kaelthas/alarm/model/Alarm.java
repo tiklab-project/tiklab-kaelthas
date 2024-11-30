@@ -9,57 +9,116 @@ import io.tiklab.toolkit.join.annotation.JoinQuery;
 import io.tiklab.kaelthas.host.host.model.Host;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 
-
+/**
+ * 告警表
+ */
 @Join
 @Mapper
 public class Alarm {
 
     private String id;
 
+    /**
+     * 监控主机id、监控数据库id、监控k8sid，监控网络id
+     */
     private String hostId;
 
+    /**
+     * 设备名称
+     */
     private String name;
 
+    /**
+     * 设备ip
+     */
     private String ip;
 
+    /**
+     * 触发器名称
+     */
     private String triggerName;
 
+    /**
+     * 触发器实体类
+     */
     @Mappings({
             @Mapping(source = "trigger.id", target = "triggerId")
     })
     @JoinQuery(key = "id")
     private Trigger trigger;
 
+    /**
+     * 主机实体类
+     */
     @Mappings({
             @Mapping(source = "host.id", target = "hostId")
     })
     @JoinQuery(key = "id")
     private Host host;
 
+    /**
+     * 监控项id
+     */
     private String monitorId;
 
+    /**
+     * 状态
+     */
     private Integer status;
 
+    /**
+     * 告警持续时间
+     */
     private String duration;
 
+    /**
+     * 发送的消息(告警消息)
+     */
     private String sendMessage;
 
+    /**
+     * 触发器id
+     */
     private String triggerId;
 
+    /**
+     * 告警时间
+     */
     private String alertTime;
 
+    /**
+     * 上报数据的时间
+     */
     private String gatherTime;
 
+    /**
+     * 告警等级
+     */
     private Integer severityLevel;
 
+    /**
+     * 媒介类型
+     */
     private String mediumType;
 
+    /**
+     * 是否发送
+     */
     private Integer isSend;
 
+    /**
+     * 告警数量
+     */
     private Integer alarmNum;
 
+    /**
+     * 解决时间
+     */
     private String resolutionTime;
 
+    /**
+     * 机器类型,(1,主机,2.数据库,3.k8s,4.网络监控)
+     */
     private Integer machineType;
 
     private Page pageParam = new Page();

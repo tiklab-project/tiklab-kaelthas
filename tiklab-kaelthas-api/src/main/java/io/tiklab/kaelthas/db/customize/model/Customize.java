@@ -4,18 +4,26 @@ import io.tiklab.core.page.Page;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 自定义SQL
+ */
 @Join
 @Mapper
 public class Customize {
 
+
     private String id;
 
+    //监控数据库的id
     private String dbId;
 
+    //条件表达式
     private String expression;
 
+    //自定义SQL
     private String statementSql;
 
+    //描述
     private String describe;
 
     private Page pageParam = new Page();

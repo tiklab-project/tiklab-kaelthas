@@ -1,7 +1,7 @@
 package io.tiklab.kaelthas.collection.dao;
 
 import io.tiklab.dal.jpa.JpaTemplate;
-import io.tiklab.kaelthas.kubernetes.kubernetesMonitor.model.KuMonitor;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;

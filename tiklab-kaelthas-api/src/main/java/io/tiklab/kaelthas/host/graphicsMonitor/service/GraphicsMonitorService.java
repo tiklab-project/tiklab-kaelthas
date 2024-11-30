@@ -5,13 +5,25 @@ import io.tiklab.kaelthas.host.graphicsMonitor.model.GraphicsMonitor;
 
 import java.util.List;
 
+/**
+ * 主机下图形和监控项的关联表
+ */
 @JoinProvider(model = GraphicsMonitor.class)
 public interface GraphicsMonitorService {
 
+    /**
+     * 插入数据
+     */
     void insertByGraphics(GraphicsMonitor graphicsMonitor);
 
+    /**
+     * 根据图形id删除数据
+     */
     void deleteByGraphicsId(String graphicsId);
 
+    /**
+     * 根据监控项的ids删除数据
+     */
     void deleteByMonitorIds(String[] strings);
 
     //根据监控项id删除数据

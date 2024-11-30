@@ -3,6 +3,9 @@ package io.tiklab.kaelthas.host.dynamic.model;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 主机的动态信息,首页展示,当前没有使用了
+ */
 @Join
 @Mapper
 public class Dynamic {
@@ -10,10 +13,19 @@ public class Dynamic {
 
     private String id;
 
+    /**
+     * 动态名称
+     */
     private String name;
 
+    /**
+     * 主机id
+     */
     private String hostId;
 
+    /**
+     * 动态的时间
+     */
     private String updateTime;
 
     public String getId() {

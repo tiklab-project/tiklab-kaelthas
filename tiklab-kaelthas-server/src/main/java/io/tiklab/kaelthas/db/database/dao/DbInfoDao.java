@@ -4,7 +4,7 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.kaelthas.db.database.entity.DbInfoEntity;
 import io.tiklab.kaelthas.db.database.model.DbInfo;
-import io.tiklab.kaelthas.db.dbMonitor.model.DbMonitor;
+import io.tiklab.kaelthas.db.monitor.model.DbMonitor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

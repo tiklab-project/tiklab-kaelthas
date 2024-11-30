@@ -54,6 +54,9 @@ public class KubernetesController {
         return Result.ok();
     }
 
+    /**
+     * 根据id查询k8s的信息
+     */
     @RequestMapping(value = "/findKuInfoById",method = RequestMethod.POST)
     public Result<Kubernetes> findKuInfoById(@NotNull String id){
         Kubernetes kubernetes = kubernetesService.findKuInfoById(id);

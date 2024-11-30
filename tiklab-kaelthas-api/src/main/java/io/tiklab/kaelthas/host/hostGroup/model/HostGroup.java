@@ -4,6 +4,9 @@ import io.tiklab.core.page.Page;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 主机组
+ */
 @Join
 @Mapper
 public class HostGroup {

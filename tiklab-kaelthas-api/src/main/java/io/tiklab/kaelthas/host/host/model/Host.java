@@ -8,12 +8,13 @@ import io.tiklab.toolkit.join.annotation.Join;
 import io.tiklab.toolkit.join.annotation.JoinQuery;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import io.tiklab.kaelthas.host.hostGroup.model.HostGroup;
-import io.tiklab.kaelthas.host.monitor.model.HostMonitor;
 import io.tiklab.kaelthas.host.template.model.Template;
-import io.tiklab.kaelthas.host.trigger.model.Trigger;
 
 import java.util.List;
 
+/**
+ * 主机表
+ */
 @Join
 @Mapper
 public class Host {
@@ -23,16 +24,11 @@ public class Host {
     //主机名称
     private String name;
 
-    private List<String> nameList;
-
     //主机ip
     private String ip;
 
     //模板id
     private String templateId;
-
-    //主机组id
-    private String hostGroupId;
 
     //主机组信息
     @Mappings({
@@ -44,26 +40,15 @@ public class Host {
     //模板信息
     private List<Template> templates;
 
-    //监控项信息
-    private List<HostMonitor> monitors;
-
-    //触发器信息
-    private List<Trigger> triggers;
 
     //图形信息
     private List<Graphics> graphics;
-
-    //模板数量
-    private Integer templateNum;
 
     //监控项数量
     private Integer monitorNum;
 
     //触发器数量
     private Integer triggerNum;
-
-    //图形数量
-    private Integer graphicNum;
 
     //告警数量
     private Integer alarmNum;
@@ -92,14 +77,16 @@ public class Host {
     //颜色
     private Integer color;
 
+    //消息
     private String message;
 
+    //数据的分类
     private String dataCate;
 
+    //告警等级
     private Integer severityLevel;
 
-    private List<List<Integer>> leaveList;
-
+    //分页参数
     private Page pageParam = new Page();
 
     public String getMessage() {
@@ -150,21 +137,6 @@ public class Host {
         this.name = name;
     }
 
-    public List<String> getNameList() {
-        return nameList;
-    }
-
-    public void setNameList(List<String> nameList) {
-        this.nameList = nameList;
-    }
-
-    public List<List<Integer>> getLeaveList() {
-        return leaveList;
-    }
-
-    public void setLeaveList(List<List<Integer>> leaveList) {
-        this.leaveList = leaveList;
-    }
 
     public String getIp() {
         return ip;
@@ -174,13 +146,6 @@ public class Host {
         this.ip = ip;
     }
 
-    public String getHostGroupId() {
-        return hostGroupId;
-    }
-
-    public void setHostGroupId(String hostGroupId) {
-        this.hostGroupId = hostGroupId;
-    }
 
     public HostGroup getHostGroup() {
         return hostGroup;
@@ -198,21 +163,6 @@ public class Host {
         this.templates = templates;
     }
 
-    public List<HostMonitor> getMonitors() {
-        return monitors;
-    }
-
-    public void setMonitors(List<HostMonitor> monitors) {
-        this.monitors = monitors;
-    }
-
-    public List<Trigger> getTriggers() {
-        return triggers;
-    }
-
-    public void setTriggers(List<Trigger> triggers) {
-        this.triggers = triggers;
-    }
 
     public List<Graphics> getGraphics() {
         return graphics;
@@ -270,13 +220,6 @@ public class Host {
         this.updateTime = updateTime;
     }
 
-    public Integer getTemplateNum() {
-        return templateNum;
-    }
-
-    public void setTemplateNum(Integer templateNum) {
-        this.templateNum = templateNum;
-    }
 
     public Integer getMonitorNum() {
         return monitorNum;
@@ -294,13 +237,6 @@ public class Host {
         this.triggerNum = triggerNum;
     }
 
-    public Integer getGraphicNum() {
-        return graphicNum;
-    }
-
-    public void setGraphicNum(Integer graphicNum) {
-        this.graphicNum = graphicNum;
-    }
 
     public Integer getVisibility() {
         return visibility;

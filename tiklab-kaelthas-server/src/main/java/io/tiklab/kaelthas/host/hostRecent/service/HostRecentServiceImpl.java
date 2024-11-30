@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 最近使用的主机,
+ * 最近使用的主机
  */
 @Service
 @Exporter
@@ -52,6 +52,9 @@ public class HostRecentServiceImpl implements HostRecentService {
         return hostRecents;
     }
 
+    /**
+     * 创建最近主机
+     */
     @Override
     public String createHostRecent(HostRecent hostRecent) {
         //先查询一下是否已经有当前数据了,没有的话添加上
@@ -71,6 +74,9 @@ public class HostRecentServiceImpl implements HostRecentService {
         }
     }
 
+    /**
+     * 根据id删除最近主机
+     */
     @Override
     public void deleteByHostId(String hostId) {
         DeleteCondition deleteCondition = DeleteBuilders.createDelete(HostRecentEntity.class)
@@ -79,12 +85,18 @@ public class HostRecentServiceImpl implements HostRecentService {
         hostRecentDao.deleteByHostId(deleteCondition);
     }
 
+    /**
+     * 查询出最近使用的四个主机信息
+     */
     @Override
     public List<HostRecent> findHostRecentList() {
         List<HostRecent> hostRecentList = hostRecentDao.findHostRecentList();
         return hostRecentList;
     }
 
+    /**
+     * 根据id查询最近使用主机
+     */
     @Override
     public HostRecent findHostRecentOne(String id) {
         HostRecentEntity hostRecentEntity = hostRecentDao.findHostRecentOne(id);
@@ -97,6 +109,9 @@ public class HostRecentServiceImpl implements HostRecentService {
         return BeanMapper.mapList(recentList, HostRecent.class);
     }
 
+    /**
+     * 修改最近使用的主机信息
+     */
     @Override
     public void updateHostRecent(HostRecent hostRecent) {
         HostRecentEntity recentEntity = BeanMapper.map(hostRecent, HostRecentEntity.class);

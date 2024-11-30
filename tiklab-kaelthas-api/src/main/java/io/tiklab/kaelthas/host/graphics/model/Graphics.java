@@ -1,35 +1,69 @@
 package io.tiklab.kaelthas.host.graphics.model;
 
 import io.tiklab.core.page.Page;
+import io.tiklab.dal.jpa.annotation.Column;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
 import java.util.List;
 
+/**
+ * 图形配置
+ */
 @Join
 @Mapper
 public class Graphics {
 
     private String id;
 
+    /**
+     * 图形名称(监控展示的时候会有显示
+     */
     private String name;
 
-    private String monitorId;
-
-    private List<String> monitorIds;
-
+    /**
+     * 图形描述
+     */
     private String describe;
 
+    /**
+     * 宽度,废弃字段,暂时没有使用
+     */
     private String width;
 
+    /**
+     * 高度,废弃字段,暂时没有使用
+     */
     private String height;
 
+    /**
+     * 主机id
+     */
     private String hostId;
 
+    /**
+     * 来源(1.主机,2.模板),当前主机的图形只有在主机当中才能创建
+     */
     private Integer source;
 
+    /**
+     * 监控项id
+     */
+    private String monitorId;
+
+    /**
+     * 监控项的ids
+     */
+    private List<String> monitorIds;
+
+    /**
+     * 监控项数量
+     */
     private Integer monitorSum;
 
+    /**
+     * 分页信息
+     */
     private Page pageParam = new Page();
 
     public List<String> getMonitorIds() {

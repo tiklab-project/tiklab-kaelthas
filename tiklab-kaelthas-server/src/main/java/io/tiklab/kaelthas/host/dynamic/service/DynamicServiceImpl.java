@@ -23,7 +23,7 @@ public class DynamicServiceImpl implements DynamicService {
     @Autowired
     DynamicDao dynamicDao;
 
-    //查询动态list
+    //根据ids查询动态list
     @Override
     public List<Dynamic> findList(List<String> idList) {
         List<DynamicEntity> dynamicEntityList = dynamicDao.findList(idList);

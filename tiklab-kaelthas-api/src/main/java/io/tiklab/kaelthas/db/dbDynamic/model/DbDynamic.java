@@ -4,16 +4,28 @@ import io.tiklab.core.page.Page;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 监控数据库的动态信息
+ */
 @Mapper
 @Join
 public class DbDynamic {
 
     private String id;
 
+    /**
+     * 检控数据库的id
+     */
     private String dbId;
 
+    /**
+     * 动态信息
+     */
     private String name;
 
+    /**
+     * 动态时间
+     */
     private String time;
 
     private Page pageParam = new Page();

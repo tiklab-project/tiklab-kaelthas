@@ -127,17 +127,6 @@ public class GraphicsServiceImpl implements GraphicsService {
     }
 
     /**
-     * 根据监控项id删除图形
-     */
-    @Override
-    public void deleteGraphicsByMonitorId(String monitorId) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
-                .eq("monitorId", monitorId)
-                .get();
-        graphicsDao.deleteGraphicsByMonitorId(deleteCondition);
-    }
-
-    /**
      * 根据主机id删除图形
      */
     @Override
@@ -161,16 +150,6 @@ public class GraphicsServiceImpl implements GraphicsService {
         return BeanMapper.mapList(graphicsEntityList, Graphics.class);
     }
 
-    /**
-     * 根据监控项ids删除图形
-     */
-    @Override
-    public void deleteGraphicsByIds(String[] monitorIds) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
-                .in("id", monitorIds)
-                .get();
-        graphicsDao.deleteGraphicsByMonitorIds(deleteCondition);
-    }
 
     /**
      * 根据主机的id查询出图形list

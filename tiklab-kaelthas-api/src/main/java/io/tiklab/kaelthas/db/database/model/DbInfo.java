@@ -4,6 +4,9 @@ import io.tiklab.core.page.Page;
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;
 
+/**
+ * 数据库监控信息
+ */
 @Join
 @Mapper
 public class DbInfo {
