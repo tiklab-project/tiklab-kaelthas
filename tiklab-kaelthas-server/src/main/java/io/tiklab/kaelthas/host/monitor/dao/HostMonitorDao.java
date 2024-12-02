@@ -78,14 +78,6 @@ public class HostMonitorDao {
         return jpaTemplate.findList(queryCondition, HostMonitorEntity.class);
     }
 
-    public List<HostMonitorEntity> findMonitorByMonitorItemIds(QueryCondition queryCondition) {
-        return jpaTemplate.findList(queryCondition, HostMonitorEntity.class);
-    }
-
-    public Integer findHostNumber() {
-        return jpaTemplate.findAll(HostMonitorEntity.class).size();
-    }
-
     public Pagination<HostMonitorEntity> findMonitorPage(QueryCondition queryCondition) {
         return jpaTemplate.findPage(queryCondition, HostMonitorEntity.class);
     }

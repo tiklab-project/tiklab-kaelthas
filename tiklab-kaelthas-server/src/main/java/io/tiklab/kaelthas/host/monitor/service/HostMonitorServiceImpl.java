@@ -330,18 +330,6 @@ public class HostMonitorServiceImpl implements HostMonitorService {
         return BeanMapper.mapList(entityList, HostMonitor.class);
     }
 
-    //根据监控项字典项ids和主机的id来查询监控项的list
-    @Override
-    public List<HostMonitor> findmonitorByMonitorItemIds(List<String> monitorItemIds,String hostId) {
-        Object[] array = monitorItemIds.toArray();
-        QueryCondition queryCondition = QueryBuilders.createQuery(HostMonitorEntity.class)
-                .eq("hostId",hostId)
-                .in("monitorItemId", array)
-                .get();
-        List<HostMonitorEntity> monitorEntities = hostMonitorDao.findMonitorByMonitorItemIds(queryCondition);
-        return BeanMapper.mapList(monitorEntities,HostMonitor.class);
-    }
-
     //查询主机下的监控项list
     @Override
     public List<HostMonitor> findByHostId(String id) {
