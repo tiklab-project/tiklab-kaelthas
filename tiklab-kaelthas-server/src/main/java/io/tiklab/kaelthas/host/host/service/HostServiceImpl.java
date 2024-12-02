@@ -1,37 +1,27 @@
 package io.tiklab.kaelthas.host.host.service;
 
-import com.alibaba.fastjson.JSON;
-import io.tiklab.core.order.Order;
-import io.tiklab.core.order.OrderTypeEnum;
-import io.tiklab.core.page.Page;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.host.hostGroup.model.HostGroup;
+import io.tiklab.kaelthas.host.hostGroup.service.HostGroupService;
+import io.tiklab.kaelthas.host.hostTemplate.service.HostTemplateService;
 import io.tiklab.privilege.dmRole.service.DmRoleService;
 import io.tiklab.rpc.annotation.Exporter;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.toolkit.join.JoinTemplate;
-import io.tiklab.kaelthas.db.database.service.DbInfoService;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.host.dynamic.model.Dynamic;
-import io.tiklab.kaelthas.host.dynamic.service.DynamicService;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import io.tiklab.kaelthas.host.graphicsMonitor.service.GraphicsMonitorService;
-import io.tiklab.kaelthas.host.hostRecent.model.HostRecent;
-import io.tiklab.kaelthas.host.hostRecent.service.HostRecentService;
 import io.tiklab.kaelthas.host.monitor.model.HostMonitor;
-import io.tiklab.kaelthas.host.monitorItem.service.MonitorItemService;
-import io.tiklab.kaelthas.host.templateMonitor.model.TemplateMonitor;
-import io.tiklab.kaelthas.host.templateMonitor.service.TemplateMonitorService;
 import io.tiklab.kaelthas.host.graphics.service.GraphicsService;
 import io.tiklab.kaelthas.host.host.dao.HostDao;
 import io.tiklab.kaelthas.host.host.entity.HostEntity;
-import io.tiklab.kaelthas.host.host.model.HostTemplate;
+import io.tiklab.kaelthas.host.hostTemplate.model.HostTemplate;
 import io.tiklab.kaelthas.host.host.model.Host;
 import io.tiklab.kaelthas.host.monitor.service.HostMonitorService;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
-import io.tiklab.kaelthas.host.triggerExpression.service.TriggerExpressionService;
 import io.tiklab.kaelthas.host.trigger.service.TriggerService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -63,25 +53,11 @@ public class HostServiceImpl implements HostService {
     private HostTemplateService hostTemplateService;
 
     @Autowired
-    private TriggerExpressionService triggerExpressionService;
-
-    @Autowired
     private GraphicsService graphicsService;
 
-    @Autowired
-    private TemplateMonitorService templateMonitorService;
-
-    @Autowired
-    private MonitorItemService monitorItemService;
-
-    @Autowired
-    HostRecentService hostRecentService;
 
     @Autowired
     DmRoleService dmRoleService;
-
-    @Autowired
-    DynamicService dynamicService;
 
     @Autowired
     AlarmService alarmService;
@@ -89,16 +65,9 @@ public class HostServiceImpl implements HostService {
     @Autowired
     GraphicsMonitorService graphicsMonitorService;
 
-    /**
-     * 分页查询
-     */
-    @Override
-    public Pagination<Host> findPageHost(Host host) {
-        //查询出来分页数据
-        Pagination<Host> pageHost = hostDao.findPageHost(host);
+    @Autowired
+    private HostGroupService hostGroupService;
 
-        return pageHost;
-    }
 
     /**
      * 创建监控主机
@@ -127,10 +96,6 @@ public class HostServiceImpl implements HostService {
                     monitorService.createMonitor(hostMonitor);
                 }
             }
-            Dynamic dynamic = new Dynamic();
-            dynamic.setName("创建主机" + host.getName());
-            dynamic.setUpdateTime(ConversionDateUtil.date(9));
-            dynamicService.createDynamic(dynamic);
             dmRoleService.initDmRoles(hostId, "111111", 2);
             return hostId;
         } catch (Exception e) {
@@ -216,8 +181,6 @@ public class HostServiceImpl implements HostService {
             hostTemplate.setHostId(id);
             hostTemplateService.deleteByHostId(hostTemplate);
 
-            hostRecentService.deleteByHostId(id);
-
             //删除主机下的触发器
             triggerService.deleteByHostId(id);
 
@@ -260,75 +223,6 @@ public class HostServiceImpl implements HostService {
         return hostDao.findHostPageForMonitoring(host);
     }
 
-    //根据主机的监控大类查询,前端已经没有这个业务了
-    @Override
-    public List<HostMonitor> findMonitorForHost(Host host) {
-        //根据监控大类查询出监控项id
-        List<String> monitorItemIds = monitorItemService.findMonitorByCategories(host.getDataCate());
-        //根据监控项id查询主机当中的监控项和模板当中的监控项
-        List<HostMonitor> hostMonitors = monitorService.findmonitorByMonitorItemIds(monitorItemIds, host.getId());
-
-        //根据监控项id查询主机当中模板的监控项
-        //查询主机下的模板
-        List<HostTemplate> templateForHost = hostTemplateService.findTemplateForHost(host.getId());
-        List<HostMonitor> monitors = new ArrayList<>();
-        if (!templateForHost.isEmpty()) {
-            //模板的ids
-            List<String> stringList = templateForHost.stream().map(HostTemplate::getTemplateId).toList();
-            List<TemplateMonitor> templateMonitors = templateMonitorService.findMonitorByItemIds(monitorItemIds, stringList);
-            monitors = JSON.parseArray(JSON.toJSONString(templateMonitors), HostMonitor.class);
-        }
-
-        hostMonitors.addAll(monitors);
-
-        return hostMonitors;
-    }
-
-    /**
-     * 查询最近的四个主机,用于首页的常用主机展示,前端已经没有这个业务了
-     */
-    @Override
-    public List<Host> findRecentHostList(String hostId) {
-        List<Host> summaryList = new ArrayList<>();
-        //查询当前主机的信息
-        HostEntity entity = hostDao.findHostById(hostId);
-        Host map = BeanMapper.map(entity, Host.class);
-
-        //先查询最近的主机,如果最近没有主机的话就按照时间的先后顺序进行查询五条
-        List<HostRecent> hostRecentList = hostRecentService.findRecentHostList();
-
-        QueryCondition queryCondition = QueryBuilders.createQuery(HostEntity.class)
-                .pagination(new Page(1, 5))
-                .order(new Order("createTime", OrderTypeEnum.desc))
-                .get();
-
-        Pagination<HostEntity> hostPagination = hostDao.findRecentHostList(queryCondition);
-
-        List<Host> list = BeanMapper.mapList(hostPagination.getDataList(), Host.class);
-
-        summaryList.add(map);
-        if (hostRecentList.size() >= 5) {
-            List<HostRecent> list1 = hostRecentList.stream().filter(hostRecent -> !hostRecent.getHostId().equals(hostId)).limit(4).toList();
-            List<Host> hostList = list1.stream().map(HostRecent::getHost).toList();
-            summaryList.addAll(hostList);
-            return summaryList;
-        } else if (hostRecentList.isEmpty()) {
-            List<Host> hosts1 = list.stream().filter(host -> !host.getId().equals(hostId)).limit(4).toList();
-            summaryList.addAll(hosts1);
-            return summaryList;
-        } else {
-            //将上面的数据进行转换,然后拼接后面的数据
-            List<Host> hostList = new ArrayList<>(hostRecentList.stream().filter(hostRecent -> !hostRecent.getHostId().equals(hostId)).map(HostRecent::getHost).toList());
-
-            List<String> stringList = hostList.stream().map(Host::getId).toList();
-
-            List<Host> hosts = list.stream().filter(host -> !stringList.contains(host.getId()) && !host.getId().equals(hostId)).limit(4 - hostList.size()).toList();
-            summaryList.addAll(hostList);
-            summaryList.addAll(hosts);
-            return summaryList;
-        }
-    }
-
     //findList方法
     @Override
     public List<Host> findList(List<String> ids) {
@@ -357,5 +251,13 @@ public class HostServiceImpl implements HostService {
         map.put("hostCount", hostCount);
         map.put("hostAbnormal", hostUsability);
         return map;
+    }
+
+    /**
+     * 查询所有主机组信息
+     */
+    @Override
+    public List<HostGroup> findAllHostGroupList() {
+        return hostGroupService.findAllHostGroupList();
     }
 }

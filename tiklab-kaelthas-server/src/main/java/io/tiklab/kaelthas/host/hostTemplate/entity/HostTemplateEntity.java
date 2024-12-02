@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.host.host.entity;
+package io.tiklab.kaelthas.host.hostTemplate.entity;
 
 import io.tiklab.dal.jpa.annotation.*;
 

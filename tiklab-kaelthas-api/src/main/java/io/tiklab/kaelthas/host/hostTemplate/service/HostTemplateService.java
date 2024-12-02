@@ -1,9 +1,9 @@
-package io.tiklab.kaelthas.host.host.service;
+package io.tiklab.kaelthas.host.hostTemplate.service;
 
 import io.tiklab.toolkit.join.annotation.FindAll;
 import io.tiklab.toolkit.join.annotation.FindList;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
-import io.tiklab.kaelthas.host.host.model.HostTemplate;
+import io.tiklab.kaelthas.host.hostTemplate.model.HostTemplate;
 import io.tiklab.kaelthas.host.monitor.model.MonitorQuery;
 
 import java.util.List;

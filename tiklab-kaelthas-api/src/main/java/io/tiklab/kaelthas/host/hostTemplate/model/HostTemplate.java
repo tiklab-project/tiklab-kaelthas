@@ -1,4 +1,4 @@
-package io.tiklab.kaelthas.host.host.model;
+package io.tiklab.kaelthas.host.hostTemplate.model;
 
 import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.join.annotation.Join;

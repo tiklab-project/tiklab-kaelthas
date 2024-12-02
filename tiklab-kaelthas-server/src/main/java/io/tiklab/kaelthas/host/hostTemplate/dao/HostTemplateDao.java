@@ -1,9 +1,9 @@
-package io.tiklab.kaelthas.host.host.dao;
+package io.tiklab.kaelthas.host.hostTemplate.dao;
 
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
-import io.tiklab.kaelthas.host.host.entity.HostTemplateEntity;
+import io.tiklab.kaelthas.host.hostTemplate.entity.HostTemplateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

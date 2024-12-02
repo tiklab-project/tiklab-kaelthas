@@ -90,7 +90,7 @@ public class HostMonitorController {
 
 
     /**
-     * 查询所有监控项选择
+     * 查询所有监控项
      */
     @RequestMapping(value = "/findMonitorItemAll",method = RequestMethod.POST)
     public Result<List<MonitorItem>> findMonitorItemAll(){

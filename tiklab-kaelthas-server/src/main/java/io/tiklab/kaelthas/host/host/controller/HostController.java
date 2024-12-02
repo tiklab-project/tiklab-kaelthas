@@ -4,6 +4,7 @@ import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.host.host.model.Host;
 import io.tiklab.kaelthas.host.host.service.HostService;
+import io.tiklab.kaelthas.host.hostGroup.model.HostGroup;
 import io.tiklab.kaelthas.host.monitor.model.HostMonitor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,16 +19,6 @@ public class HostController {
 
     @Resource
     private HostService hostService;
-
-    /**
-     * 根据条件查询主机信息
-     */
-    @RequestMapping(path = "/findPageHost", method = RequestMethod.POST)
-    public Result<Pagination<Host>> findPageHost(@RequestBody Host host) {
-        Pagination<Host> pageHost = hostService.findPageHost(host);
-        return Result.ok(pageHost);
-    }
-
 
     /**
      * 创建主机
@@ -85,22 +76,12 @@ public class HostController {
     }
 
     /**
-     * 根据主机下的监控项大类和主机id查询出主机下的监控项(这个接口前端已经不使用了)
+     * 查询所有主机组
      */
-    @RequestMapping(value = "/findMonitorByCategories",method = RequestMethod.POST)
-    public Result<List<HostMonitor>> findMonitorForHost(@RequestBody Host host){
-        List<HostMonitor> monitors = hostService.findMonitorForHost(host);
-        return Result.ok(monitors);
-    }
-
-
-    /**
-     * 查询切换主机页面的
-     */
-    @RequestMapping(value = "/findRecentHostList",method = RequestMethod.POST)
-    public Result<List<Host>> findRecentHostList(String hostId){
-        List<Host> list = hostService.findRecentHostList(hostId);
-        return Result.ok(list);
+    @RequestMapping(value = "/findAllHostGroupList",method = RequestMethod.POST)
+    public Result<List<HostGroup>> findAllHostGroupList(){
+        List<HostGroup> resData = hostService.findAllHostGroupList();
+        return Result.ok(resData);
     }
 
 }

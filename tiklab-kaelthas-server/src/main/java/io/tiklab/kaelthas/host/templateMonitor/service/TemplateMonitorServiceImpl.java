@@ -1,13 +1,11 @@
 package io.tiklab.kaelthas.host.templateMonitor.service;
 
-import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
-import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.toolkit.join.JoinTemplate;
-import io.tiklab.kaelthas.host.host.model.HostTemplate;
-import io.tiklab.kaelthas.host.host.service.HostTemplateService;
+import io.tiklab.kaelthas.host.hostTemplate.model.HostTemplate;
+import io.tiklab.kaelthas.host.hostTemplate.service.HostTemplateService;
 import io.tiklab.kaelthas.host.monitor.service.HostMonitorService;
 import io.tiklab.kaelthas.host.templateMonitor.dao.TemplateMonitorDao;
 import io.tiklab.kaelthas.host.templateMonitor.entity.TemplateMonitorEntity;
@@ -16,7 +14,6 @@ import io.tiklab.kaelthas.host.templateMonitor.model.TemplateMonitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

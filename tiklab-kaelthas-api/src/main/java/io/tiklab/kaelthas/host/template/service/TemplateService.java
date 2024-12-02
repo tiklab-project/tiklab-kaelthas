@@ -3,14 +3,13 @@ package io.tiklab.kaelthas.host.template.service;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.toolkit.join.annotation.FindAll;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
-import io.tiklab.kaelthas.host.host.model.HostTemplate;
+import io.tiklab.kaelthas.host.hostTemplate.model.HostTemplate;
 import io.tiklab.kaelthas.host.template.model.Template;
 import io.tiklab.kaelthas.host.templateMonitor.model.TemplateMonitor;
 import io.tiklab.kaelthas.host.monitor.model.HostMonitor;
 import io.tiklab.kaelthas.host.monitor.model.MonitorQuery;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 模板业务

@@ -2,7 +2,7 @@ package io.tiklab.kaelthas.host.template.controller;
 
 import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
-import io.tiklab.kaelthas.host.host.model.HostTemplate;
+import io.tiklab.kaelthas.host.hostTemplate.model.HostTemplate;
 import io.tiklab.kaelthas.host.monitor.model.HostMonitor;
 import io.tiklab.kaelthas.host.monitor.model.MonitorQuery;
 import io.tiklab.kaelthas.host.template.model.Template;
@@ -56,33 +56,6 @@ public class TemplateController {
     public Result<?> removeTemplateForHost(@RequestBody HostTemplate hostTemplate){
         templateService.removeTemplate(hostTemplate);
         return Result.ok();
-    }
-
-
-    /**
-     * 创建模板
-     */
-    @RequestMapping(value = "/createTemplate",method = RequestMethod.POST)
-    public Result<String> createTemplate(@RequestBody Template template){
-        String templateId = templateService.createTemplate(template);
-        return Result.ok(templateId);
-    }
-
-
-    /**
-     * 根据模板id删除模板
-     */
-    @RequestMapping(value = "/deleteTemplate",method = RequestMethod.POST)
-    public void deleteTemplate(@NotNull String id){
-        templateService.deleteTemplate(id);
-    }
-
-    /**
-     * 修改模板
-     */
-    @RequestMapping(value = "/updateTemplate",method = RequestMethod.POST)
-    public void updateTemplate(@RequestBody Template template){
-        templateService.updateTemplate(template);
     }
 
     /**

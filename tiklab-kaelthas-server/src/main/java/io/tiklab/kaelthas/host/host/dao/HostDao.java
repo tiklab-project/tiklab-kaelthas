@@ -128,21 +128,12 @@ public class HostDao {
         return jpaTemplate.findList(HostEntity.class, ids);
     }
 
-    public Integer findHostNumber() {
-        return jpaTemplate.findAll(HostEntity.class).size();
-    }
-
     public HostEntity findOne(String id) {
         return jpaTemplate.findOne(HostEntity.class, id);
     }
 
     public List<HostEntity> findAll() {
         return jpaTemplate.findAll(HostEntity.class);
-    }
-
-    public void updateHostStatus(String hostId, Integer status) {
-        String sql = "update mtc_host set usability = " + status + " where id = '" + hostId + "'";
-        jpaTemplate.getJdbcTemplate().execute(sql);
     }
 
     public Long findHostCount() {

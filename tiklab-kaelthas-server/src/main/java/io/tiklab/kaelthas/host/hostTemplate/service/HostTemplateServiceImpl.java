@@ -1,13 +1,13 @@
-package io.tiklab.kaelthas.host.host.service;
+package io.tiklab.kaelthas.host.hostTemplate.service;
 
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.toolkit.beans.BeanMapper;
-import io.tiklab.kaelthas.host.host.dao.HostTemplateDao;
-import io.tiklab.kaelthas.host.host.entity.HostTemplateEntity;
-import io.tiklab.kaelthas.host.host.model.HostTemplate;
+import io.tiklab.kaelthas.host.hostTemplate.dao.HostTemplateDao;
+import io.tiklab.kaelthas.host.hostTemplate.entity.HostTemplateEntity;
+import io.tiklab.kaelthas.host.hostTemplate.model.HostTemplate;
 import io.tiklab.kaelthas.host.monitor.model.MonitorQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

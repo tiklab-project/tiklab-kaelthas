@@ -1,6 +1,7 @@
 package io.tiklab.kaelthas.host.host.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.host.hostGroup.model.HostGroup;
 import io.tiklab.toolkit.join.annotation.FindAll;
 import io.tiklab.toolkit.join.annotation.FindList;
 import io.tiklab.toolkit.join.annotation.FindOne;
@@ -13,11 +14,6 @@ import java.util.Map;
 
 @JoinProvider(model = Host.class)
 public interface HostService {
-
-    /**
-     * 分页查询
-     */
-    Pagination<Host> findPageHost(Host host);
 
     /**
      * 创建监控主机
@@ -52,14 +48,6 @@ public interface HostService {
     Pagination<Host> findHostPage(Host host);
 
     /**
-     * 根据主机的监控大类查询,前端已经没有这个业务了
-     */
-    List<HostMonitor> findMonitorForHost(Host host);
-
-    //查询最近主机
-    List<Host> findRecentHostList(String hostId);
-
-    /**
      * 根据ids查询主机的列表信息
      */
     @FindList
@@ -75,5 +63,10 @@ public interface HostService {
      * 查找可用主机数量和主机总数量
      */
     Map<String, Long> findHostUsage();
+
+    /**
+     * 查询所有主机组信息
+     */
+    List<HostGroup> findAllHostGroupList();
 
 }
