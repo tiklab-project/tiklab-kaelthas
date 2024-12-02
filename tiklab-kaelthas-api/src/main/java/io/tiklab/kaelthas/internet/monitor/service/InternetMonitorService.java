@@ -1,6 +1,7 @@
 package io.tiklab.kaelthas.internet.monitor.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.internet.item.model.InternetItem;
 import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
 
 import java.util.List;
@@ -29,4 +30,9 @@ public interface InternetMonitorService {
 
     //根据监控网络的id删除监控项
     void deleteByInternet(String id);
+
+    /**
+     * 根据类型查询对应的item
+     */
+    List<InternetItem> findItemList(InternetItem internetItem);
 }

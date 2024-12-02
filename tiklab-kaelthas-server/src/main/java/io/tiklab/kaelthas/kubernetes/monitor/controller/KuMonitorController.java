@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.kubernetes.monitor.controller;
 
 import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import io.tiklab.kaelthas.kubernetes.monitor.service.KuMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,14 @@ public class KuMonitorController {
     public Result<List<KuMonitor>> findAllKuMonitor(@NotNull String kuId){
         List<KuMonitor> kuMonitorList = kuMonitorService.findAllKuMonitor(kuId);
         return Result.ok(kuMonitorList);
+    }
+
+    /**
+     * 根据监控项类型查询监控项字典表
+     */
+    @RequestMapping(value = "/findItemList",method = RequestMethod.POST)
+    public Result<?> findItemList(@RequestBody KubernetesItem kubernetesItem){
+        List<KubernetesItem> itemList = kuMonitorService.findItemList(kubernetesItem);
+        return Result.ok(itemList);
     }
 }

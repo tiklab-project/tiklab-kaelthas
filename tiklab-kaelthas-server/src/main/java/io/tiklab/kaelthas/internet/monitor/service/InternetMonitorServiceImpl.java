@@ -6,6 +6,8 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.internet.item.model.InternetItem;
+import io.tiklab.kaelthas.internet.item.service.InternetItemService;
 import io.tiklab.kaelthas.internet.monitor.dao.InternetMonitorDao;
 import io.tiklab.kaelthas.internet.monitor.entity.InternetMonitorEntity;
 import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
@@ -24,6 +26,9 @@ public class InternetMonitorServiceImpl implements InternetMonitorService{
 
     @Autowired
     private InternetMonitorDao internetMonitorDao;
+
+    @Autowired
+    private InternetItemService internetItemService;
 
     /**
      * 分页查询监控项
@@ -82,5 +87,13 @@ public class InternetMonitorServiceImpl implements InternetMonitorService{
                 .eq("internetId", id)
                 .get();
         internetMonitorDao.deleteGraphicsByInId(deleteCondition);
+    }
+
+    /**
+     * 根据类型查询对应的item
+     */
+    @Override
+    public List<InternetItem> findItemList(InternetItem internetItem) {
+        return internetItemService.findItemList(internetItem);
     }
 }

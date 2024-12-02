@@ -1,6 +1,7 @@
 package io.tiklab.kaelthas.db.monitor.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.db.item.model.DbItem;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
 import io.tiklab.kaelthas.db.monitor.model.DbMonitor;
 
@@ -34,4 +35,9 @@ public interface DbMonitorService {
      * 根据监控数据库id删除监控项信息
      */
     void deleteByDbId(String id);
+
+    /**
+     * 根据监控项类型查询监控项item
+     */
+    List<DbItem> findItemListByType(DbItem dbItem);
 }

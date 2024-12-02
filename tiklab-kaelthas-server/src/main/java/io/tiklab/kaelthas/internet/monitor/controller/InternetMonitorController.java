@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.internet.monitor.controller;
 
 import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.internet.item.model.InternetItem;
 import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
 import io.tiklab.kaelthas.internet.monitor.service.InternetMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,15 @@ public class InternetMonitorController {
     public Result<?> findMonitorByInId(@RequestBody InternetMonitor internetMonitor){
         List<InternetMonitor> monitorList = internetMonitorService.findMonitorByInId(internetMonitor);
         return Result.ok(monitorList);
+    }
+
+    /**
+     * 根据类型查询对应的item
+     */
+    @RequestMapping(value = "/findItemList",method = RequestMethod.POST)
+    public Result<?> findItemList(@RequestBody InternetItem internetItem){
+        List<InternetItem> itemList = internetMonitorService.findItemList(internetItem);
+        return Result.ok(itemList);
     }
 
 }

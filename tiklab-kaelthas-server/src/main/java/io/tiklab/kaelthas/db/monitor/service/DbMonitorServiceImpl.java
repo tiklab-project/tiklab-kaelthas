@@ -8,6 +8,8 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
+import io.tiklab.kaelthas.db.item.model.DbItem;
+import io.tiklab.kaelthas.db.item.service.DbItemService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.toolkit.join.JoinTemplate;
 import io.tiklab.kaelthas.db.graphicsMonitor.service.DbGraphicsMonitorService;
@@ -38,6 +40,9 @@ public class DbMonitorServiceImpl implements DbMonitorService {
 
     @Autowired
     private DbDynamicService dbDynamicService;
+
+    @Autowired
+    private DbItemService dbItemService;
 
     /**
      * 数据库监控项的分页查询
@@ -138,5 +143,13 @@ public class DbMonitorServiceImpl implements DbMonitorService {
                 .get();
 
         dbMonitorDao.deleteByDbId(deleteCondition);
+    }
+
+    /**
+     * 根据监控项类型查询监控项item
+     */
+    @Override
+    public List<DbItem> findItemListByType(DbItem dbItem) {
+        return dbItemService.findItemListByType(dbItem);
     }
 }

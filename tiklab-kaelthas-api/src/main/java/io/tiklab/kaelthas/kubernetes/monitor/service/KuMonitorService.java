@@ -1,6 +1,7 @@
 package io.tiklab.kaelthas.kubernetes.monitor.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
 
@@ -34,4 +35,9 @@ public interface KuMonitorService {
 
     //根据k8s监控的id删除监控项
     void deleteByKuId(String id);
+
+    /**
+     * 根据监控项类型查询监控项字典表
+     */
+    List<KubernetesItem> findItemList(KubernetesItem kubernetesItem);
 }

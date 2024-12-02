@@ -7,6 +7,8 @@ import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.kubernetes.graphicsMonitor.service.KuGraphicsMonitorService;
+import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
+import io.tiklab.kaelthas.kubernetes.item.service.KubernetesItemService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.toolkit.join.JoinTemplate;
 import io.tiklab.kaelthas.kubernetes.monitor.dao.KuMonitorDao;
@@ -31,6 +33,9 @@ public class KuMonitorServiceImpl implements KuMonitorService{
 
     @Autowired
     private KuGraphicsMonitorService kuGraphicsMonitorService;
+
+    @Autowired
+    private KubernetesItemService kubernetesItemService;
 
     //根据名称和id进行分页查询
     @Override
@@ -97,5 +102,13 @@ public class KuMonitorServiceImpl implements KuMonitorService{
                 .eq("kuId", id)
                 .get();
         kuMonitorDao.deleteByKuId(deleteCondition);
+    }
+
+    /**
+     * 根据监控项类型查询监控项字典表
+     */
+    @Override
+    public List<KubernetesItem> findItemList(KubernetesItem kubernetesItem) {
+        return kubernetesItemService.findItemList(kubernetesItem);
     }
 }

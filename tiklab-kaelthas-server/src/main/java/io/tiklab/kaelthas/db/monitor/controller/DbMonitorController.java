@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.db.monitor.controller;
 
 import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.db.item.model.DbItem;
 import io.tiklab.kaelthas.db.monitor.model.DbMonitor;
 import io.tiklab.kaelthas.db.monitor.service.DbMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,14 @@ public class DbMonitorController {
     public Result<?> updateDbMonitor(@RequestBody DbMonitor dbMonitor){
         dbMonitorService.updateDbMonitor(dbMonitor);
         return Result.ok();
+    }
+
+    /**
+     * 根据监控项类型查询监控项item
+     */
+    @RequestMapping(value = "/findItemListByType",method = RequestMethod.POST)
+    public Result<?> findItemListByType(@RequestBody DbItem dbItem){
+        List<DbItem> dbItemList = dbMonitorService.findItemListByType(dbItem);
+        return Result.ok(dbItemList);
     }
 }
