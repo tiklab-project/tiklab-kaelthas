@@ -31,9 +31,6 @@ public interface HistoryService {
      */
     List<History> findInformationToGatherTime(String hostId, String beforeDateTime);
 
-    //根据条件删除历史数据
-    void deleteByCondition(History history);
-
     //数据库监控查询
     List<List<History>> findGraphicsLine(History history);
 

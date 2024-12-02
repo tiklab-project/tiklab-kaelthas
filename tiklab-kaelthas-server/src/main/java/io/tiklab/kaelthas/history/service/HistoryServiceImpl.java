@@ -476,17 +476,6 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * 根据监控项删除存储的数据
-     */
-    @Override
-    public void deleteByCondition(History history) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(HistoryEntity.class)
-                .eq("monitorId", history.getMonitorId())
-                .get();
-        historyDao.deleteByCondition(deleteCondition);
-    }
-
-    /**
      * 监控数据库中监控模块的图形展示
      */
     @Override

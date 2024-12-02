@@ -32,11 +32,6 @@ public interface HostTemplateService {
     List<HostTemplate> findHostTemplateAll();
 
     /**
-     * 根据主机id查询出主机与模板关联表中模板的id
-     */
-    List<HostTemplate> findTemplateForHost(String hostId);
-
-    /**
      * 根据主机或者模板id删除数据
      */
     void deleteByHostId(HostTemplate hostTemplate);

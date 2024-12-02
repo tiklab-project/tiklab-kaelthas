@@ -85,9 +85,6 @@ public class HistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(History.class));
     }
 
-    public void deleteByCondition(DeleteCondition deleteCondition) {
-        jpaTemplate.delete(deleteCondition);
-    }
 
 
     public List<History> findHistoryByCondition(History history, String beforeTime, String nowTime) {

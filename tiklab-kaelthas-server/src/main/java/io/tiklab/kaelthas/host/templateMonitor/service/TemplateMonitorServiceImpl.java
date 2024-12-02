@@ -101,17 +101,4 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
         hostMonitorService.updateByMonitorId(hostMonitor);
     }
 
-    //根据模板的ids和监控项item的ids查询模板下监控项
-    @Override
-    public List<TemplateMonitor> findMonitorByItemIds(List<String> monitorItemIds,List<String> templateIds) {
-        Object[] array = monitorItemIds.toArray();
-        Object[] idsArray = templateIds.toArray();
-        QueryCondition queryCondition = QueryBuilders.createQuery(TemplateMonitorEntity.class)
-                .in("templateId", idsArray)
-                .in("monitorItemId", array)
-                .get();
-        List<TemplateMonitorEntity> templateMonitorEntities = templateMonitorDao.findMonitorByItemIds(queryCondition);
-        return BeanMapper.mapList(templateMonitorEntities,TemplateMonitor.class);
-    }
-
 }

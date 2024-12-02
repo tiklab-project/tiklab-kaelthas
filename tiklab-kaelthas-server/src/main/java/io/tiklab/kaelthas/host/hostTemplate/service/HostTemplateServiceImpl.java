@@ -62,21 +62,6 @@ public class HostTemplateServiceImpl implements HostTemplateService {
     }
 
     /**
-     * 根据主机id查询出主机与模板关联表中模板的id
-     */
-    @Override
-    public List<HostTemplate> findTemplateForHost(String hostId) {
-
-        QueryCondition queryCondition = QueryBuilders.createQuery(HostTemplateEntity.class)
-                .eq("hostId", hostId)
-                .get();
-
-        List<HostTemplateEntity> hostTemplateEntities = hostTemplateDao.findTemplateForHost(queryCondition);
-
-        return BeanMapper.mapList(hostTemplateEntities, HostTemplate.class);
-    }
-
-    /**
      * 根据主机或者模板id删除数据
      */
     @Override

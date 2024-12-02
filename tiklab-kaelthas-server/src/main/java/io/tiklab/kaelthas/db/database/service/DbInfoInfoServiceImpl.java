@@ -205,9 +205,4 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         return BeanMapper.mapList(dbInfoEntityList, DbInfo.class);
     }
 
-    //查询出MYSQL的监控字典项
-    @Override
-    public List<DbMonitor> findMysqlItemList() {
-        return dbInfoDao.findMysqlItemList();
-    }
 }

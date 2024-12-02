@@ -34,9 +34,4 @@ public interface TemplateMonitorService {
      * 修改模板下的监控项
      */
     void updateTemplateMonitor(HostMonitor hostMonitor);
-
-    /**
-     * 根据模板的ids和监控项item的ids查询模板下监控项
-     */
-    List<TemplateMonitor> findMonitorByItemIds(List<String> monitorItemIds,List<String> templateIds);
 }

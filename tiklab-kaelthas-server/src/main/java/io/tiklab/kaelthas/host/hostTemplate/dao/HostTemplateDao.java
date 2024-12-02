@@ -16,10 +16,6 @@ public class HostTemplateDao {
     private JpaTemplate jpaTemplate;
 
 
-    public List<HostTemplateEntity> findTemplateForHost(QueryCondition queryCondition) {
-        return jpaTemplate.findList(queryCondition, HostTemplateEntity.class);
-    }
-
     public String save(HostTemplateEntity hostTemplateEntity) {
         return jpaTemplate.save(hostTemplateEntity, String.class);
     }

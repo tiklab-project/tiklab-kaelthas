@@ -40,7 +40,5 @@ public interface DbInfoService {
     @FindAll
     List<DbInfo> findAll();
 
-    //查找MySQL的监控项信息
-    List<DbMonitor> findMysqlItemList();
 
 }
