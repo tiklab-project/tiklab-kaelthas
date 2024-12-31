@@ -4,7 +4,6 @@ import io.tiklab.kaelthas.common.timer.dao.TimerDao;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.db.database.model.DbInfo;
 import io.tiklab.kaelthas.db.database.service.DbInfoService;
-import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.host.host.model.Host;
@@ -30,9 +29,6 @@ public class EquipmentTimer {
     HostService hostService;
 
     @Autowired
-    AlarmService alarmService;
-
-    @Autowired
     HistoryService historyService;
 
     @Autowired
@@ -48,7 +44,7 @@ public class EquipmentTimer {
     private TimerDao timerDao;
 
     //定时扫描主机、数据库、k8s、网络的状态并且修改状态
-    @Scheduled(cron = "0 0/5 * * * ? ")
+    //@Scheduled(cron = "0 0/5 * * * ? ")
     public void updateUsability() {
         String updateSql = "";
         String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);

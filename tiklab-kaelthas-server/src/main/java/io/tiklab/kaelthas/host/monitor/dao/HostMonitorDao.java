@@ -51,7 +51,6 @@ public class HostMonitorDao {
     public HostMonitorEntity findOneMonitor(String monitorId) {
 
         return jpaTemplate.findOne(HostMonitorEntity.class, monitorId);
-
     }
 
     public List<HostMonitorEntity> findList(List<String> idList) {

@@ -10,6 +10,7 @@ import io.tiklab.kaelthas.db.graphics.model.DbGraphics;
 import io.tiklab.kaelthas.db.graphics.service.DbGraphicsService;
 import io.tiklab.kaelthas.db.graphicsMonitor.model.DbGraphicsMonitor;
 import io.tiklab.kaelthas.db.graphicsMonitor.service.DbGraphicsMonitorService;
+import io.tiklab.kaelthas.history.entity.HistoryFifteenEntity;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.db.trigger.model.DbTrigger;
 import io.tiklab.kaelthas.db.trigger.service.DbTriggerService;
@@ -35,6 +36,8 @@ import io.tiklab.kaelthas.kubernetes.graphicsMonitor.model.KuGraphicsMonitor;
 import io.tiklab.kaelthas.kubernetes.graphicsMonitor.service.KuGraphicsMonitorService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +54,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class HistoryServiceImpl implements HistoryService {
+    private static Logger logger = LoggerFactory.getLogger(HistoryServiceImpl.class);
 
     @Autowired
     HistoryDao historyDao;
@@ -91,6 +95,9 @@ public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private InTriggerService inTriggerService;
 
+
+
+
     /**
      * 历史数据的分页查询
      */
@@ -105,7 +112,7 @@ public class HistoryServiceImpl implements HistoryService {
      */
     @Override
     public List<List<History>> findInformationByGraphics(History history) {
-        //1.根据主机的id查询主机当中的图表
+        //根据主机的id查询主机当中的图表
         List<Graphics> graphicsList = graphicsService.findInformationByGraphics(history.getHostId());
 
         List<List<History>> resList = new ArrayList<>();

@@ -151,4 +151,10 @@ public class SettingServiceImpl implements SettingService {
     public void updateHostGroup(HostGroup hostGroup) {
         hostGroupService.updateHostGroup(hostGroup);
     }
+
+    @Override
+    public Template findTemplateById(String id) {
+        Template template = templateService.findTemplate(id);
+        return template;
+    }
 }

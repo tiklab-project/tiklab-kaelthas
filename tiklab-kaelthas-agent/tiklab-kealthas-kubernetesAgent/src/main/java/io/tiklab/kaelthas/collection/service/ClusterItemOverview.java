@@ -35,7 +35,7 @@ public class ClusterItemOverview {
     private HistoryService historyService;
 
     //定时采集k8s的信息,用于概况页面展示
-    @Scheduled(cron = "0 0/5 * * * ? ")
+    //@Scheduled(cron = "0 0/5 * * * ? ")
     public void getClusterOverview() {
         //获取所有的k8s信息,将集群的基本信息进行收集
         List<KuMonitor> kuMonitors = kuCollectionDao.findKuMonitor();

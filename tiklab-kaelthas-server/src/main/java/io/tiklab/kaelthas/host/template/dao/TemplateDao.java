@@ -3,6 +3,7 @@ package io.tiklab.kaelthas.host.template.dao;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.kaelthas.host.monitor.entity.HostMonitorEntity;
 import io.tiklab.kaelthas.host.template.entity.TemplateEntity;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,10 @@ public class TemplateDao {
         return jpaTemplate.findList(queryCondition, TemplateEntity.class);
     }
 
+    public TemplateEntity findOneTemplate(String id) {
 
+        return jpaTemplate.findOne(TemplateEntity.class, id);
+    }
     public Pagination<TemplateEntity> findTemplateForCondition(QueryCondition queryCondition) {
         return jpaTemplate.findPage(queryCondition, TemplateEntity.class);
     }

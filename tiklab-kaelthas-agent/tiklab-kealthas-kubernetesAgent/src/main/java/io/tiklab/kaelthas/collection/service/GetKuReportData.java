@@ -43,7 +43,7 @@ public class GetKuReportData {
     private KuCollectionDao kuCollectionDao;
 
     //定时拉取配置信息,并采集指定的数据
-    @Scheduled(cron = "0 0/1 * * * ? ")
+   // @Scheduled(cron = "0 0/1 * * * ? ")
     public void getKubernetesInfo() {
 
         List<KuMonitor> monitorList = kuCollectionDao.findKuAllMonitor();

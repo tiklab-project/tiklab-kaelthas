@@ -131,7 +131,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
     }
 
     //定时任务,定时使用触发器进行告警
-    @Scheduled(cron = "0 0/5 * * * ? ")
+    //@Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerKuTrigger() {
         List<KuTriggerEntity> kuTriggerEntityList = kuTriggerDao.findAllTrigger();
         if (kuTriggerEntityList.isEmpty()) {

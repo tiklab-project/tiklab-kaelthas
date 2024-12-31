@@ -58,6 +58,13 @@ public class TemplateServiceImpl implements TemplateService {
         return BeanMapper.mapList(templateAll, Template.class);
     }
 
+    @Override
+    public Template findTemplate(String id) {
+        TemplateEntity oneTemplate = templateDao.findOneTemplate(id);
+        Template template = BeanMapper.map(oneTemplate, Template.class);
+        return template;
+    }
+
 
     /**
      * 根据查询条件查询出主机当中的模板
@@ -110,6 +117,8 @@ public class TemplateServiceImpl implements TemplateService {
             return PaginationBuilder.build(entityPagination, templates);
         }
     }
+
+
 
     //添加模板到主机当中
     @Override

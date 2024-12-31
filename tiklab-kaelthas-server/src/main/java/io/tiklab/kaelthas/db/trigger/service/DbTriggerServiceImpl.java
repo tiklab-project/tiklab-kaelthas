@@ -134,8 +134,8 @@ public class DbTriggerServiceImpl implements DbTriggerService {
     /**
      * 定时拉取触发器,进行告警
      */
-    @Scheduled(cron = "0 0/5 * * * ? ")
-    public void TimerTrigger() {
+    //@Scheduled(cron = "0 0/5 * * * ? ")
+    public void timerTrigger() {
         //获取所有数据库下的触发器
         QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
                 .eq("state", 1)

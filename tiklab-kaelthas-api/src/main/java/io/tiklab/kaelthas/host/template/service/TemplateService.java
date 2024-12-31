@@ -28,6 +28,8 @@ public interface TemplateService {
      */
     Pagination<Template> findTemplate(MonitorQuery query);
 
+    Template findTemplate(String id);
+
     /**
      * 添加模板到主机当中
      */

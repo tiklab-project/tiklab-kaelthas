@@ -94,8 +94,9 @@ public class KaelthasDsmAutoConfiguration {
         dsmConfig.newVersion("1.1.1",new String[]{
                 "user_1.1.1",
         });
-
-
+        dsmConfig.newVersion("1.1.2",new String[]{
+                "kaelthas_1.1.2"
+        });
 
         return dsmConfig;
     }

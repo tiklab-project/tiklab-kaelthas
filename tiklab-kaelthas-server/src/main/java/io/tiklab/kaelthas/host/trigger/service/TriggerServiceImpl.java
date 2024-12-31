@@ -214,8 +214,8 @@ public class TriggerServiceImpl implements TriggerService {
     }
 
 
-    //定时拉取触发器,触发之后进行告警
-    @Scheduled(cron = "0 0/5 * * * ? ")
+    //主机下定时拉取触发器,触发之后进行告警
+    //@Scheduled(cron = "0 0/5 * * * ? ")
     public void insertAlarmForTrigger() {
 
         //将符合条件的触发器全部拉进来,进行判断(当前主机下根据当前监控项创建的触发器)

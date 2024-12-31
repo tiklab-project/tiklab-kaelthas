@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.switchs.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import io.tiklab.core.exception.SystemException;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.switchs.dao.SwitchHostDao;
@@ -39,20 +40,24 @@ public class SwitchOverviewService {
     private static final List<History> historyList = new LinkedList<>();
 
     //定时执行采集网络的指标
-    @Scheduled(cron = "30 0/5 * * * ? ")
-    public void executeOverview() throws IOException {
+    //@Scheduled(cron = "30 0/5 * * * ? ")
+    public void executeOverview()  {
 
         //查询出网络列表,用于数据的采集和上报
         String dataTimeNow = ConversionAllTypeUtil.getDataTimeNow();
 
         List<SwitchMonitor> hostList = switchHostDao.findAllInternetList();
+        try {
+            for (SwitchMonitor switchMonitor : hostList) {
 
-        for (SwitchMonitor switchMonitor : hostList) {
+                findPortStatus(switchMonitor,dataTimeNow);
 
-            findPortStatus(switchMonitor,dataTimeNow);
-
-            findDescription(switchMonitor,dataTimeNow);
+                findDescription(switchMonitor,dataTimeNow);
+            }
+        }catch (Exception e){
+            throw new SystemException(e);
         }
+
 
         if (historyList.size() > 3) {
             List<History> list = new LinkedList<>(historyList);

@@ -134,7 +134,7 @@ public class InTriggerServiceImpl implements InTriggerService {
     }
 
     //触发器定时器,定时拉取触发器进行告警
-    @Scheduled(cron = "0 0/5 * * * ? ")
+    //@Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerInTrigger() {
         List<InTriggerEntity> inTriggerEntityList = inTriggerDao.findTriggerAll();
 

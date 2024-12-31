@@ -48,6 +48,15 @@ public class HostController {
     }
 
     /**
+     * 根据主机的id进行查询主机下监控项和触发器数量信息
+     */
+    @RequestMapping(value = "/findOneHost",method = RequestMethod.POST)
+    public Result<Host> findOneHost(@NotNull String id){
+        Host resHost = hostService.findOneHost(id);
+        return Result.ok(resHost);
+    }
+
+    /**
      * 根据id删除主机
      */
     @RequestMapping(value = "/deleteHostById",method = RequestMethod.POST)

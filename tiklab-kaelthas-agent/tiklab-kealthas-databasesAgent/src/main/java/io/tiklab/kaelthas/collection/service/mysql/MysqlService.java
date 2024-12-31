@@ -6,6 +6,8 @@ import io.tiklab.kaelthas.collection.model.vo.DbMonitorVo;
 import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class MysqlService {
-
+    private static Logger logger = LoggerFactory.getLogger(MysqlService.class);
     List<DbHistoryVo> histories = new LinkedList<>();
 
     
@@ -29,7 +31,7 @@ public class MysqlService {
     private DbSqlDao dbSqlDao;
 
     //定时拉取MySQL的的配置数据,并上报数据
-    @Scheduled(cron = "0 0/1 * * * ? ")
+    //@Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbMysql() {
         String dataTimeNow = AgentSqlUtil.getDataTimeNow();
 
@@ -43,6 +45,7 @@ public class MysqlService {
 
         Collection<List<DbMonitorVo>> values = DbMonitorVoList.stream().collect(Collectors.groupingBy(DbMonitorVo::getDbId)).values();
 
+       // connectASql(values);
         for (List<DbMonitorVo> value : values) {
             //每个数据库连接需要查询版本,拼接不同的SQL语句
             List<String> sqlList = new LinkedList<>();
@@ -78,9 +81,10 @@ public class MysqlService {
                 histories.addAll(DbHistoryVoList);
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.info( "连接数据库："+value.get(0).getIp()+"失败error："+e.getMessage());
             }
         }
+
 
         //定时上报数据
         if (histories.size() > 30) {
@@ -88,8 +92,9 @@ public class MysqlService {
             dbSqlDao.insertForList(linkedList);
             histories.clear();
         }
-
     }
+
+
 
     //根据不同版本的MySQL,执行不同的SQL用于获取指标值
     @NotNull

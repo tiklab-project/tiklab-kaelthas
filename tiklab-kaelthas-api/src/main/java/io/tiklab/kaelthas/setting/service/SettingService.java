@@ -53,4 +53,6 @@ public interface SettingService {
      * 修改主机组
      */
     void updateHostGroup(HostGroup hostGroup);
+
+    Template findTemplateById(String id);
 }

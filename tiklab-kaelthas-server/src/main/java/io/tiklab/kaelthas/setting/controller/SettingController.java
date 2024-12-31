@@ -76,6 +76,12 @@ public class SettingController {
         return Result.ok(resData);
     }
 
+    @RequestMapping(value = "/findTemplateById",method = RequestMethod.POST)
+    public Result<Template> findTemplateById(@NotNull String id){
+       Template resData = settingService.findTemplateById(id);
+        return Result.ok(resData);
+    }
+
     /**
      * 创建模板
      */

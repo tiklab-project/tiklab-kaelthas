@@ -26,7 +26,7 @@ public class PgsqlService {
     private DbSqlDao dbSqlDao;
 
     //定时拉取pgsql的数据,执行SQL进行数据上报
-    @Scheduled(cron = "0 0/1 * * * ? ")
+   // @Scheduled(cron = "0 0/1 * * * ? ")
     public void changeDbAim() {
         String dataTimeNow = AgentSqlUtil.date(9);
 
