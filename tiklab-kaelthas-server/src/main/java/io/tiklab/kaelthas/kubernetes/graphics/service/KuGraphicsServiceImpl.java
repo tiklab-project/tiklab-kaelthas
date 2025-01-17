@@ -8,7 +8,7 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.kubernetes.graphics.dao.KuGraphicsDao;
 import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphics;
-import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphicsEntity;
+import io.tiklab.kaelthas.kubernetes.graphics.entity.KuGraphicsEntity;
 import io.tiklab.kaelthas.kubernetes.graphicsMonitor.service.KuGraphicsMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,11 +77,9 @@ public class KuGraphicsServiceImpl implements KuGraphicsService {
 
     //根据k8s监控的id查询图形信息
     @Override
-    public List<KuGraphics> findKuGraphicsList(String hostId) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(KuGraphicsEntity.class)
-                .eq("kuId", hostId)
-                .get();
-        List<KuGraphicsEntity> kuGraphicsEntityList = kuGraphicsDao.findKuGraphicsList(queryCondition);
+    public List<KuGraphics> findKuGraphicsList(String kuId) {
+
+        List<KuGraphicsEntity> kuGraphicsEntityList = kuGraphicsDao.findKuGraphicsList(kuId);
         return BeanMapper.mapList(kuGraphicsEntityList,KuGraphics.class);
     }
 

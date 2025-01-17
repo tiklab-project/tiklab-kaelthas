@@ -4,6 +4,7 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.internet.trigger.entity.InTriggerEntity;
 import io.tiklab.kaelthas.internet.trigger.model.InTrigger;
 import org.apache.commons.lang3.StringUtils;
@@ -64,7 +65,11 @@ public class InTriggerDao {
         return jpaTemplate.findAll(InTriggerEntity.class);
     }
 
-    public List<InTriggerEntity> findLikeTrigger(QueryCondition queryCondition) {
+    public List<InTriggerEntity> findLikeTrigger(String hostId, String expression) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(InTriggerEntity.class)
+                .eq("internetId", hostId)
+                .like("expression", expression)
+                .get();
         return jpaTemplate.findList(queryCondition,InTriggerEntity.class);
     }
 }

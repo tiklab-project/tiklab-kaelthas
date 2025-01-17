@@ -9,7 +9,7 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.util.StringUtil;
@@ -22,7 +22,6 @@ import io.tiklab.kaelthas.internet.triggerMedium.service.InTriggerMediumService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
@@ -356,11 +355,8 @@ public class InTriggerServiceImpl implements InTriggerService {
     //根据监控项表达式模糊查询触发器表达式
     @Override
     public List<InTrigger> findLikeTrigger(String hostId, String expression) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(InTriggerEntity.class)
-                .eq("internetId", hostId)
-                .like("expression", expression)
-                .get();
-        List<InTriggerEntity> triggerEntityList = inTriggerDao.findLikeTrigger(queryCondition);
+
+        List<InTriggerEntity> triggerEntityList = inTriggerDao.findLikeTrigger(hostId,expression);
 
         return BeanMapper.mapList(triggerEntityList,InTrigger.class);
     }

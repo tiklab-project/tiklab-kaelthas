@@ -1,17 +1,17 @@
 package io.tiklab.kaelthas.timedtask.quartz;
 
-import io.tiklab.eam.common.context.LoginContext;
-import io.tiklab.kaelthas.collection.service.ClusterItemOverview;
-import io.tiklab.kaelthas.collection.service.GetKuReportData;
-import io.tiklab.kaelthas.collection.service.mysql.MysqlService;
-import io.tiklab.kaelthas.collection.service.pgsql.PgsqlService;
-import io.tiklab.kaelthas.common.timer.service.EquipmentTimer;
+import io.tiklab.kaelthas.db.agent.service.MysqlService;
+import io.tiklab.kaelthas.kubernetes.agent.service.ClusterItemOverview;
+import io.tiklab.kaelthas.kubernetes.agent.service.GetKuReportData;
+import io.tiklab.kaelthas.db.agent.service.PgsqlService;
+import io.tiklab.kaelthas.timedtask.timer.service.CreHistoryTable;
+import io.tiklab.kaelthas.timedtask.timer.service.EquipmentTimer;
 import io.tiklab.kaelthas.db.trigger.service.DbTriggerServiceImpl;
 import io.tiklab.kaelthas.host.trigger.service.TriggerServiceImpl;
 import io.tiklab.kaelthas.internet.trigger.service.InTriggerServiceImpl;
 import io.tiklab.kaelthas.kubernetes.trigger.service.KuTriggerServiceImpl;
-import io.tiklab.kaelthas.switchs.service.GetInReportDataService;
-import io.tiklab.kaelthas.switchs.service.SwitchOverviewService;
+import io.tiklab.kaelthas.internet.agent.service.GetInReportDataService;
+import io.tiklab.kaelthas.internet.agent.service.SwitchOverviewService;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -47,6 +47,10 @@ public  class RunJob implements org.quartz.Job {
     public static InTriggerServiceImpl inTriggerServiceImpl;
 
     public static KuTriggerServiceImpl kuTriggerServiceImpl;
+
+    public static CreHistoryTable creHistoryTable;
+
+
 
     @Autowired
     public void setMysqlService(MysqlService mysqlService) {
@@ -99,6 +103,13 @@ public  class RunJob implements org.quartz.Job {
     }
 
     @Autowired
+    public void setCreHistoryTable(CreHistoryTable creHistoryTable) {
+        this.creHistoryTable = creHistoryTable;
+    }
+
+
+
+    @Autowired
     public void setJobManager(JobManager jobManager) {
         this.jobManager = jobManager;
     }
@@ -119,7 +130,7 @@ public  class RunJob implements org.quartz.Job {
     public void execMethod(String taskType){
         if (("internetOverview").equals(taskType)){
             //定时执行采集网络的指标
-            switchOverviewService.executeOverview();
+          //  switchOverviewService.executeOverview();
 
         }else if(("internetInfo").equals(taskType)){
             //使用定时任务获取配置信息,使用配置信息获取指标数据
@@ -127,7 +138,7 @@ public  class RunJob implements org.quartz.Job {
 
         }else if(("k8sOverview").equals(taskType)){
             //定时采集k8s的信息,用于概况页面展示
-            clusterItemOverview.getClusterOverview();
+           // clusterItemOverview.getClusterOverview();
 
         }else if(("k8sInfo").equals(taskType)){
             //定时拉取配置信息,并采集指定的数据
@@ -153,6 +164,9 @@ public  class RunJob implements org.quartz.Job {
             //k8s下定时拉取触发器,触发之后进行告警
             kuTriggerServiceImpl.TimerKuTrigger();
 
+        }else if(("createDb").equals(taskType)){
+            //动态创建历史表
+            creHistoryTable.createTable();
         }else {
             //定时拉取MySQL的的配置数据,并上报数据
             mysqlService.changeDbMysql();

@@ -4,8 +4,9 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphics;
-import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphicsEntity;
+import io.tiklab.kaelthas.kubernetes.graphics.entity.KuGraphicsEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -53,7 +54,10 @@ public class KuGraphicsDao {
         jpaTemplate.update(kuGraphicsEntity);
     }
 
-    public List<KuGraphicsEntity> findKuGraphicsList(QueryCondition queryCondition) {
+    public List<KuGraphicsEntity> findKuGraphicsList(String kuId) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(KuGraphicsEntity.class)
+                .eq("kuId", kuId)
+                .get();
         return jpaTemplate.findList(queryCondition, KuGraphicsEntity.class);
     }
 

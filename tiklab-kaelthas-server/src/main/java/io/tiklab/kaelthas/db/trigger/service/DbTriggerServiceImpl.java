@@ -7,7 +7,7 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
-import io.tiklab.kaelthas.collection.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
@@ -24,7 +24,6 @@ import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
@@ -367,9 +366,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
      * 根据表达式模糊查询触发器list
      */
     @Override
-    public List<DbTrigger> findLikeTrigger(String hostId, String expression) {
+    public List<DbTrigger> findLikeTrigger(String dbId, String expression) {
         QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
-                .eq("dbId", hostId)
+                .eq("dbId", dbId)
                 .like("expression", expression)
                 .get();
         List<DbTriggerEntity> dbTriggerEntityList = dbTriggerDao.findLikeTrigger(queryCondition);

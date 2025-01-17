@@ -100,11 +100,9 @@ public class DbGraphicsServiceImpl implements DbGraphicsService {
 
     //根据监控数据库的id查询出图形的列表信息
     @Override
-    public List<DbGraphics> findDbGraphicsList(String hostId) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(DbGraphicsEntity.class)
-                .eq("dbId", hostId)
-                .get();
-        List<DbGraphicsEntity> entityList = dbGraphicsDao.findDbGraphicsList(queryCondition);
+    public List<DbGraphics> findDbGraphicsList(String dbId) {
+
+        List<DbGraphicsEntity> entityList = dbGraphicsDao.findDbGraphicsList(dbId);
 
         return BeanMapper.mapList(entityList, DbGraphics.class);
     }

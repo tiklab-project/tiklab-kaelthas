@@ -40,7 +40,7 @@ public interface DbTriggerService {
     /**
      * 根据表达式模糊查询触发器list
      */
-    List<DbTrigger> findLikeTrigger(String hostId, String expression);
+    List<DbTrigger> findLikeTrigger(String dbId, String expression);
 
     /**
      * 根据监控数据库的id删除触发器

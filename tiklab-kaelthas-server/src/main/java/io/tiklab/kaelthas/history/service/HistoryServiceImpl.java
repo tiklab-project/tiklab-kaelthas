@@ -2,15 +2,13 @@ package io.tiklab.kaelthas.history.service;
 
 import com.alibaba.fastjson.JSON;
 import io.tiklab.core.page.Pagination;
-import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
-import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.kaelthas.history.dao.HistoryDao;
 import io.tiklab.kaelthas.history.dao.HistoryMultiDao;
 import io.tiklab.kaelthas.db.graphics.model.DbGraphics;
 import io.tiklab.kaelthas.db.graphics.service.DbGraphicsService;
 import io.tiklab.kaelthas.db.graphicsMonitor.model.DbGraphicsMonitor;
 import io.tiklab.kaelthas.db.graphicsMonitor.service.DbGraphicsMonitorService;
-import io.tiklab.kaelthas.history.entity.HistoryFifteenEntity;
+import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.db.trigger.model.DbTrigger;
 import io.tiklab.kaelthas.db.trigger.service.DbTriggerService;
@@ -18,7 +16,6 @@ import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import io.tiklab.kaelthas.host.graphics.service.GraphicsService;
 import io.tiklab.kaelthas.host.graphicsMonitor.model.GraphicsMonitor;
 import io.tiklab.kaelthas.host.graphicsMonitor.service.GraphicsMonitorService;
-import io.tiklab.kaelthas.history.entity.HistoryEntity;
 import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.host.service.HostService;
 import io.tiklab.kaelthas.util.SqlUtil;
@@ -96,7 +93,22 @@ public class HistoryServiceImpl implements HistoryService {
     private InTriggerService inTriggerService;
 
 
+    @Autowired
+    InternetHistoryService internetHistoryService;
 
+    @Autowired
+    K8sHistoryService k8sHistoryService;
+
+
+    @Override
+    public void insertForList(List<History> entityList, String type) {
+        switch (type){
+            case "k8s":
+                k8sHistoryService.insertForList(entityList);
+                break;
+
+        }
+    }
 
     /**
      * 历史数据的分页查询
@@ -1168,7 +1180,7 @@ public class HistoryServiceImpl implements HistoryService {
                     }
 
                     for (String string : xTime) {
-                        History history3 = new History();
+                       History history3 = new History();
                         history3.setGatherTime(string);
                         history3.setReportData("null");
                         for (History history2 : historyList) {

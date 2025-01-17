@@ -19,7 +19,6 @@
         <module>tiklab-kaelthas-api</module>
         <module>tiklab-kaelthas-server</module>
         <module>tiklab-kaelthas-starter</module>
-        <module>tiklab-kaelthas-agent</module>
     </modules>
 
     <properties>

@@ -12,6 +12,17 @@ import java.util.Map;
  */
 public interface HistoryService {
 
+    /**
+     * 创建
+     * @param entityList 数据
+     * @param type 类型
+     */
+    void insertForList(List<History> entityList,String type);
+
+
+    //上传的数据存储到历史数据表当中
+    void insertForList(List<History> entityList);
+
     //根据条件查询监控数据
     Pagination<History> findInformationPage(History history);
 
@@ -23,8 +34,6 @@ public interface HistoryService {
      */
     History findInformationByLine(History history);
 
-    //上传的数据存储到历史数据表当中
-    void insertForList(List<History> entityList);
 
     /**
      * 根据主机id和监控项id查询上报的数据
@@ -81,4 +90,6 @@ public interface HistoryService {
      * 根据主机监控的id和指定的时间后查询存储数据
      */
     List<History> findByHostTrigger(String hostId, String beforeTime);
+
+
 }

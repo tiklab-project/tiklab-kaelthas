@@ -4,6 +4,7 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.graphics.entity.DbGraphicsEntity;
 import io.tiklab.kaelthas.db.graphics.model.DbGraphics;
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +49,10 @@ public class DbGraphicsDao {
         jpaTemplate.delete(DbGraphicsEntity.class,id);
     }
 
-    public List<DbGraphicsEntity> findDbGraphicsList(QueryCondition queryCondition) {
+    public List<DbGraphicsEntity> findDbGraphicsList(String dbId) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(DbGraphicsEntity.class)
+                .eq("dbId", dbId)
+                .get();
         return jpaTemplate.findList(queryCondition, DbGraphicsEntity.class);
     }
 

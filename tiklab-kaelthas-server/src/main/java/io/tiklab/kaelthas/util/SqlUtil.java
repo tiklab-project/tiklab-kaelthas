@@ -7,6 +7,13 @@ import java.util.Set;
 
 public class SqlUtil {
 
+
+
+    /**
+     * 拼接添加历史的数据的sql
+     * @param tableName 仓库表明
+     * @param dataList 填充数据
+     */
     public static String getBatchInsertSql(String tableName, List<Map<String, Object>> dataList) {
         StringBuffer sb = new StringBuffer();
         StringBuilder valueSb = new StringBuilder();

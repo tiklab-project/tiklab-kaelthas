@@ -538,23 +538,5 @@ public class ConversionDateUtil {
             }
         }
     }
-
-
-    /**
-     * 生成随机字符串（1~33位）
-     *
-     * @param length 字符串长度
-     * @return 随机字符串
-     */
-    public static String randomString(Integer length) {
-        String chars = "abcdefghijklmnopqrstuvwxyz123456789";
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(chars.length());
-            sb.append(chars.charAt(index));
-        }
-        return sb.toString();
-    }
 }
 

@@ -29,7 +29,7 @@ public class JobManager {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void addJob(Class jobClass,  String group) throws SchedulerException {
         String [] taskTypes={"sql","internetOverview","internetInfo","k8sOverview","k8sInfo","updateUsability",
-                "dbTrigger","hostTrigger","internetTrigger","k8sTrigger"};
+                "dbTrigger","hostTrigger","internetTrigger","k8sTrigger","createDb"};
         List<String> taskTypeList = Arrays.stream(taskTypes).toList();
         for (String taskType:taskTypeList){
             String cron;
@@ -56,6 +56,10 @@ public class JobManager {
                  * */
                 cron="0 0/1 * * * ?";
 
+            }else if(("createDb").equals(taskType)){
+                //每天凌晨 2 点执行。
+                cron="0 0/1 * * * ?";
+                //cron="0 0 2 * * ?";
             }else {
                 //sql
                 cron="0 0/1 * * * ?";

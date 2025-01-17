@@ -23,7 +23,7 @@ public interface KuGraphicsService{
     void updateKuGraphics(KuGraphics kuGraphics);
 
     //根据k8s监控的id查询图形信息
-    List<KuGraphics> findKuGraphicsList(String hostId);
+    List<KuGraphics> findKuGraphicsList(String kuId);
 
     //根据k8s监控的id删除图形信息
     void deleteByKuId(String id);
