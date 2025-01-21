@@ -4,6 +4,7 @@ import io.tiklab.kaelthas.internet.history.model.InternetHistory;
 import io.tiklab.kaelthas.internet.history.model.InternetHistoryQuery;
 
 import java.util.List;
+import java.util.Map;
 
 public interface InternetHistoryService {
 
@@ -22,4 +23,15 @@ public interface InternetHistoryService {
      * @param beforeTime 时间
      */
     List<InternetHistory> findInHistoryByTime(String beforeTime);
+
+    /**
+     * 查询出网络的详情页
+     */
+    Map<String, Object> findInternetOverview(String internetId);
+
+
+    /**
+     * 根据网络监控的id和指定的时间后查询存储数据
+     */
+    List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime);
 }

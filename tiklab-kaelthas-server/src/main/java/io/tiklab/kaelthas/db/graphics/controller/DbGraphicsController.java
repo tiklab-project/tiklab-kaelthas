@@ -32,13 +32,15 @@ public class DbGraphicsController {
     }
 
     @RequestMapping(value = "/deleteGraphics",method = RequestMethod.POST)
-    public void deleteGraphics(@NotNull String id){
+    public Result<Void> deleteGraphics(@NotNull String id){
         dbGraphicsService.deleteGraphics(id);
+        return Result.ok();
     }
 
     @RequestMapping(value = "/updateGraphics",method = RequestMethod.POST)
-    public void updateGraphics(@RequestBody DbGraphics dbGraphics){
+    public Result<Void> updateGraphics(@RequestBody DbGraphics dbGraphics){
         dbGraphicsService.updateGraphics(dbGraphics);
+        return Result.ok();
     }
 
     @RequestMapping(value = "/findMonitorIds",method = RequestMethod.POST)

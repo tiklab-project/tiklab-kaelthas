@@ -1,10 +1,9 @@
 package io.tiklab.kaelthas.kubernetes.history.dao;
 
 import io.tiklab.dal.jpa.JpaTemplate;
-import io.tiklab.kaelthas.db.history.model.DbHistory;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistoryQuery;
+import io.tiklab.kaelthas.util.TableUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -71,4 +70,56 @@ public class KubernetesHistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(KubernetesHistory.class));
     }
 
+
+    public List<KubernetesHistory> findKuOverviewTotal(List<String> list, String kuId,String beforeTime,String nowDate) {
+        String tableName = TableUtil.getK8sTableName(0);
+
+        String sql = " SELECT mh.*,mki.name,mki.report_type as reportType "+
+                "FROM mtc_ku_item mki "+
+                "LEFT JOIN "+tableName+" mh "+
+                "ON mki.id = mh.ku_monitor_id ";
+
+        if (StringUtils.isNotBlank(kuId)) {
+            sql = sql.concat(" where mh.ku_id = '" + kuId + "'");
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            stringBuilder.append("'").append(list.get(i).concat("'"));
+            if (i != list.size() - 1) {
+                stringBuilder.append(",");
+            }
+        }
+
+        sql = sql.concat(" and mh.gather_time BETWEEN '" + beforeTime + "' and '"+nowDate+"'");
+
+        sql = sql.concat(" and mh.ku_monitor_id in (" + stringBuilder + ")");
+
+        sql = sql.concat(" ORDER BY mh.gather_time DESC LIMIT 22");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(KubernetesHistory.class));
+    }
+
+
+    public List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime) {
+        String tableName = TableUtil.getK8sTableName(0);
+        String sql = "SELECT mh.*,mdi.expression "+
+                "FROM mtc_ku_monitor mdm "+
+                "JOIN mtc_ku_item mdi "+
+                "ON mdm.ku_item_id = mdi.id "+
+                "LEFT JOIN "+tableName+" mh "+
+                "ON mdm.id = mh.ku_monitor_id ";
+
+        if (StringUtils.isNotBlank(kuId)) {
+            sql = sql.concat(" where mh.ku_id = '" + kuId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time > '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" and mdi.report_type != 2 order by mh.gather_time desc limit 28");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(KubernetesHistory.class));
+    }
 }

@@ -5,6 +5,7 @@ import io.tiklab.kaelthas.db.agent.dao.DbSqlDao;
 import io.tiklab.kaelthas.db.agent.model.DbMonitorVo;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.service.DbHistoryService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -13,15 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class MysqlService {
     private static Logger logger = LoggerFactory.getLogger(MysqlService.class);
-    List<DbHistory> histories = new LinkedList<>();
 
     @Autowired
     DbHistoryService dbHistoryService;
@@ -29,9 +27,17 @@ public class MysqlService {
     @Autowired
     DbSqlDao dbSqlDao;
 
+    public static final List<DbHistory> histories = new LinkedList<>();
+
+    public static final Map<String,Long> mySqlStoreTime = new HashMap();
+
     //定时拉取MySQL的的配置数据,并上报数据
     public void changeDbMysql() {
         String dataTimeNow = AgentSqlUtil.getDataTimeNow();
+
+        if (ObjectUtils.isEmpty(mySqlStoreTime.get("time"))){
+            mySqlStoreTime.put("time",System.currentTimeMillis());
+        }
 
         //查询mysql下的监控项
         List<DbMonitorVo> DbMonitorVoList = dbSqlDao.findSqlItemList("MYSQL");
@@ -83,14 +89,15 @@ public class MysqlService {
             }
         }
 
-        //定时上报数据
-    /*    if (histories.size() > 20) {
+        Long aLong = mySqlStoreTime.get("time");
+        long time = System.currentTimeMillis() - aLong;
+        //定时上报数据 存储时间大于30条或者时间超过1分钟
+        if (histories.size() > 30||time>=60000) {
             List<DbHistory> linkedList = new LinkedList<>(histories);
             dbHistoryService.insertForList(linkedList);
             histories.clear();
-        }*/
-        List<DbHistory> linkedList = new LinkedList<>(histories);
-        dbHistoryService.insertForList(linkedList);
+            mySqlStoreTime.put("time",System.currentTimeMillis());
+        }
         histories.clear();
     }
 

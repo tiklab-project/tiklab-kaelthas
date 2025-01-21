@@ -8,13 +8,13 @@ import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
+import io.tiklab.kaelthas.kubernetes.history.service.KubernetesHistoryService;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.util.StringUtil;
-import io.tiklab.kaelthas.history.model.History;
-import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.kubernetes.trigger.dao.KuTriggerDao;
 import io.tiklab.kaelthas.kubernetes.trigger.entity.KuTriggerEntity;
@@ -51,8 +51,10 @@ public class KuTriggerServiceImpl implements KuTriggerService {
     @Autowired
     private AlarmService alarmService;
 
+
     @Autowired
-    private HistoryService historyService;
+    private KubernetesHistoryService kubernetesHistoryService;
+
 
     //触发器分页查询
     @Override
@@ -165,17 +167,17 @@ public class KuTriggerServiceImpl implements KuTriggerService {
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
 
             //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-            List<History> historyList = historyService.findKuHistoryByHostId(trigger.getKuId(), beforeTime);
+            List<KubernetesHistory> historyList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime);
 
             if (historyList.isEmpty()) {
                 return;
             }
 
             //将数据进行处理,取最后一个值
-            List<History> list = historyList.stream()
+            List<KubernetesHistory> list = historyList.stream()
                     .collect(Collectors.toMap(
-                            History::getMonitorId, // 根据 id 去重
-                            history -> history, // 保留对象
+                            KubernetesHistory::getKuMonitorId, // 根据 id 去重
+                            kubernetesHistory -> kubernetesHistory, // 保留对象
                             (existing, replacement) -> replacement // 如果 id 相同，保留后者
                     ))
                     .values().stream().toList();
@@ -185,7 +187,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             //将数据换成JSON的字符串
-            String json = StringUtil.getString(list);
+            String json = StringUtil.getKuString(list);
 
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);
@@ -241,15 +243,15 @@ public class KuTriggerServiceImpl implements KuTriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<History> informationList = historyService.findKuHistoryByHostId(trigger.getKuId(), beforeTime);
+            List<KubernetesHistory> informationList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime);
 
             if (informationList.isEmpty()) {
                 return;
             }
 
             //根据监控项id进行分组,然后进行计算平均值
-            Collection<List<History>> values1 = informationList.stream().collect(Collectors.groupingBy(History::getMonitorId)).values();
-            String avgNumber = getAvgNumber(values1);
+            Collection<List<KubernetesHistory>> values1 = informationList.stream().collect(Collectors.groupingBy(KubernetesHistory::getKuMonitorId)).values();
+            String avgNumber = getKuAvgNumber(values1);
 
             JSONObject jsonObject = JSONObject.parseObject(avgNumber);
 
@@ -297,9 +299,9 @@ public class KuTriggerServiceImpl implements KuTriggerService {
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
 
-            List<History> informationList = historyService.findKuHistoryByHostId(trigger.getKuId(), beforeTime);
+            List<KubernetesHistory> informationList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime);
 
-            Collection<List<History>> values = informationList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values();
+            Collection<List<KubernetesHistory>> values = informationList.stream().collect(Collectors.groupingBy(KubernetesHistory::getGatherTime)).values();
 
             if (values.isEmpty()) {
                 return;
@@ -308,12 +310,12 @@ public class KuTriggerServiceImpl implements KuTriggerService {
 
             BigDecimal triggerNum = new BigDecimal(0);
 
-            for (List<History> value : values) {
+            for (List<KubernetesHistory> value : values) {
                 if (value.isEmpty()) {
                     continue;
                 }
 
-                String strJson = StringUtil.getString(value);
+                String strJson = StringUtil.getKuString(value);
                 JSONObject jsonObject = JSONObject.parseObject(strJson);
                 //将表达式替换成值,然后进行运算
                 String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);

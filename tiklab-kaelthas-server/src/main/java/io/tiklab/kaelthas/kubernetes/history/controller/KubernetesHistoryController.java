@@ -1,7 +1,6 @@
 package io.tiklab.kaelthas.kubernetes.history.controller;
 
 import io.tiklab.core.Result;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistoryQuery;
 import io.tiklab.kaelthas.kubernetes.history.service.KubernetesHistoryService;

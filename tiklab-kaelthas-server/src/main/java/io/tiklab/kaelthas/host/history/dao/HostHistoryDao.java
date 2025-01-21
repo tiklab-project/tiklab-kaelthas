@@ -1,10 +1,9 @@
 package io.tiklab.kaelthas.host.history.dao;
 
 import io.tiklab.dal.jpa.JpaTemplate;
-import io.tiklab.kaelthas.db.history.model.DbHistory;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.history.model.HostHistory;
 import io.tiklab.kaelthas.host.history.model.HostHistoryQuery;
+import io.tiklab.kaelthas.util.TableUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -66,5 +65,28 @@ public class HostHistoryDao {
         sql = sql.concat(" and gather_time >= '" + beforeTime + "'");
 
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(HostHistory.class));
+    }
+
+    public List<HostHistory> findByHostTrigger(String hostId, String beforeTime) {
+        String tableName = TableUtil.getHostTableName(0);
+
+        String sql = " SELECT mh.*,mdi.data_type as reportType,mdm.expression "+
+                "FROM "+tableName+" mh "+
+                "JOIN mtc_host_monitor mdm "+
+                "ON mh.host_monitor_id = mdm.id "+
+                "JOIN mtc_item mdi "+
+                "ON mdm.monitor_item_id = mdi.id ";
+
+        if (StringUtils.isNotBlank(hostId)) {
+            sql = sql.concat(" where mh.host_id = '" + hostId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time >= '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" order by mh.gather_time desc");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(HostHistory.class));
     }
 }

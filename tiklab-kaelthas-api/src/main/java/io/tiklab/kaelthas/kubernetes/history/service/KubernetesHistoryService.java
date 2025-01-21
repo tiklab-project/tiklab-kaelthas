@@ -4,6 +4,7 @@ import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistoryQuery;
 
 import java.util.List;
+import java.util.Map;
 
 public interface KubernetesHistoryService {
 
@@ -21,4 +22,16 @@ public interface KubernetesHistoryService {
      * @param beforeTime 时间
      */
     List<KubernetesHistory> findKuHistoryByTime(String beforeTime);
+
+
+    /**
+     * k8s概况页展示的信息数据
+     */
+    Map<String,Object> findKuOverviewTotal(String kuId);
+
+    /**
+     * 根据k8s监控的id和时间查询时间之后的存储数据
+     */
+    List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime);
+
 }

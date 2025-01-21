@@ -32,12 +32,14 @@ public class DbTriggerController {
     }
 
     @RequestMapping(value = "/deleteDbTrigger",method = RequestMethod.POST)
-    public void deleteDbTrigger(@NotNull String id){
+    public Result<Void> deleteDbTrigger(@NotNull String id){
         dbTriggerService.deleteDbTrigger(id);
+        return Result.ok();
     }
 
     @RequestMapping(value = "/updateDbTrigger",method = RequestMethod.POST)
-    public void updateDbTrigger(@RequestBody DbTrigger dbTrigger){
+    public Result<Void> updateDbTrigger(@RequestBody DbTrigger dbTrigger){
         dbTriggerService.updateDbTrigger(dbTrigger);
+        return Result.ok();
     }
 }

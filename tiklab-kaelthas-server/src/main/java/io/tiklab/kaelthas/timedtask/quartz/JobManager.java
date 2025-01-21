@@ -58,8 +58,8 @@ public class JobManager {
 
             }else if(("createDb").equals(taskType)){
                 //每天凌晨 2 点执行。
-                cron="0 0/1 * * * ?";
-                //cron="0 0 2 * * ?";
+                //cron="0 0/1 * * * ?";
+                cron="0 0 2 * * ?";
             }else {
                 //sql
                 cron="0 0/1 * * * ?";

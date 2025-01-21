@@ -5,7 +5,6 @@ import io.tiklab.toolkit.join.annotation.FindAll;
 import io.tiklab.toolkit.join.annotation.FindList;
 import io.tiklab.toolkit.join.annotation.FindOne;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 
 import java.util.List;

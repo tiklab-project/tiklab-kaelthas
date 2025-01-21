@@ -98,7 +98,8 @@ public class KaelthasGatewayAutoConfiguration {
                         "/appAuthorization/validUserInProduct",
                         "/clean/data/cleanMessageData",
 
-                        "/init/install/findStatus"
+                        "/init/install/findStatus",
+                        "/actuator/shutdown"
                 })
                 .ignorePreUrls(new String[]{
                         "/service",

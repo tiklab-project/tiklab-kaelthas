@@ -7,6 +7,7 @@ import io.tiklab.kaelthas.internet.agent.model.SwitchMonitor;
 import io.tiklab.kaelthas.internet.history.model.InternetHistory;
 import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
 import io.tiklab.kaelthas.util.DataUtil;
+import org.apache.commons.lang3.ObjectUtils;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
@@ -20,9 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 定时采集网络监控信息
@@ -38,11 +37,17 @@ public class GetInReportDataService {
 
     private static final List<InternetHistory> historyList = new LinkedList<>();
 
+    private static final Map<String,Long> inStoreTime = new HashMap();
+
     //使用定时任务获取配置信息,使用配置信息获取指标数据
     //@Scheduled(cron = "0 0/1 * * * ? ")
     public void executeSwitchHost() {
         //获取配置的信息,监控项的信息
         String dataTimeNow = DataUtil.getDataTimeNow();
+
+        if (ObjectUtils.isEmpty(inStoreTime.get("time"))){
+            inStoreTime.put("time",System.currentTimeMillis());
+        }
 
         List<SwitchMonitor> hostList = switchHostDao.findSwitchList();
 
@@ -66,10 +71,14 @@ public class GetInReportDataService {
             }
         }
 
-        if (historyList.size() > 5) {
+        Long aLong = inStoreTime.get("time");
+        long time = System.currentTimeMillis() - aLong;
+        //定时上报数据 存储时间大于30条或者时间超过1分钟
+        if (historyList.size() > 30||time>=60000) {
             List<InternetHistory> list = new LinkedList<>(historyList);
             internetHistoryService.insertForList(list);
             historyList.clear();
+            inStoreTime.put("time",System.currentTimeMillis());
         }
 
     }

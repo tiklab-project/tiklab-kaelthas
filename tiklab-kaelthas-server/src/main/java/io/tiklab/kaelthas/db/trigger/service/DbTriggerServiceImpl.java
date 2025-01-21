@@ -8,6 +8,8 @@ import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.db.history.model.DbHistory;
+import io.tiklab.kaelthas.db.history.service.DbHistoryService;
 import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
@@ -19,8 +21,6 @@ import io.tiklab.kaelthas.db.trigger.model.DbTrigger;
 import io.tiklab.kaelthas.db.triggerMedium.service.DbTriggerMediumService;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
-import io.tiklab.kaelthas.history.model.History;
-import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
     private ConversionScriptsUtils conversionScriptsUtils;
 
     @Autowired
-    private HistoryService historyService;
+    DbHistoryService dbHistoryService;
 
     @Autowired
     private AlarmService alarmService;
@@ -177,14 +177,14 @@ public class DbTriggerServiceImpl implements DbTriggerService {
             //Set<String> functionList = conversionScriptsUtils.getFunctionList(dbTriggerEntity.getExpression());
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, dbTriggerEntity.getRangeTime(), null);
-            List<History> informationList = historyService.findHistoryByGatherTime(dbTriggerEntity.getDbId(), beforeTime);
+            List<DbHistory> dbHistoryList = dbHistoryService.findHistoryByGatherTime(dbTriggerEntity.getDbId(), beforeTime);
 
-            if (informationList.isEmpty()) {
+            if (dbHistoryList.isEmpty()) {
                 return;
             }
 
             //根据监控项id进行分组,然后进行计算平均值
-            Collection<List<History>> values1 = informationList.stream().collect(Collectors.groupingBy(History::getMonitorId)).values();
+            Collection<List<DbHistory>> values1 = dbHistoryList.stream().collect(Collectors.groupingBy(DbHistory::getDbMonitorId)).values();
             String avgNumber = StringUtil.getAvgNumber(values1);
 
             JSONObject jsonObject = JSONObject.parseObject(avgNumber);
@@ -237,9 +237,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, dbTriggerEntity.getRangeTime(), null);
 
-            List<History> informationList = historyService.findInformationToGatherTime(dbTriggerEntity.getDbId(), beforeTime);
+            List<DbHistory> dbHistoryList = dbHistoryService.findInformationToGatherTime(dbTriggerEntity.getDbId(), beforeTime);
 
-            Collection<List<History>> values = informationList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values();
+            Collection<List<DbHistory>> values = dbHistoryList.stream().collect(Collectors.groupingBy(DbHistory::getGatherTime)).values();
 
             if (values.isEmpty()) {
                 return;
@@ -301,17 +301,17 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
 
         //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-        List<History> historyList = historyService.findDbHistoryByHostId(dbTriggerEntity.getDbId(), beforeTime);
+        List<DbHistory> historyList = dbHistoryService.findDbHistoryByDbId(dbTriggerEntity.getDbId(), beforeTime);
 
         if (historyList.isEmpty()) {
             return;
         }
 
         //将数据进行处理,取最后一个值
-        List<History> list = historyList.stream()
+        List<DbHistory> list = historyList.stream()
                 .collect(Collectors.toMap(
-                        History::getMonitorId, // 根据 id 去重
-                        history -> history, // 保留对象
+                        DbHistory::getDbMonitorId, // 根据 id 去重
+                        dbHistory -> dbHistory, // 保留对象
                         (existing, replacement) -> replacement // 如果 id 相同，保留后者
                 ))
                 .values().stream().toList();

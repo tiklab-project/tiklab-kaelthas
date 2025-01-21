@@ -12,7 +12,6 @@ import io.tiklab.kaelthas.db.history.service.DbHistoryService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.db.database.model.DbInfo;
 import io.tiklab.kaelthas.db.database.service.DbInfoService;
-import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.host.host.model.Host;
 import io.tiklab.kaelthas.host.host.service.HostService;
 import io.tiklab.kaelthas.internet.internet.model.Internet;
@@ -35,8 +34,6 @@ public class EquipmentTimer {
     @Autowired
     HostService hostService;
 
-    @Autowired
-    HistoryService historyService;
 
     @Autowired
     private DbInfoService dbInfoService;

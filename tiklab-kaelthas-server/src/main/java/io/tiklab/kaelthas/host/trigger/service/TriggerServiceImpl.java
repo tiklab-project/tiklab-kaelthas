@@ -9,13 +9,14 @@ import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.host.history.model.HostHistory;
+import io.tiklab.kaelthas.host.history.service.HostHistoryService;
 import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.rpc.annotation.Exporter;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.host.service.HostService;
 import io.tiklab.kaelthas.host.hostDynamic.model.HostDynamic;
 import io.tiklab.kaelthas.host.hostDynamic.service.HostDynamicService;
@@ -27,7 +28,6 @@ import io.tiklab.kaelthas.host.trigger.dao.TriggerDao;
 import io.tiklab.kaelthas.host.trigger.entity.TriggerEntity;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 import io.tiklab.kaelthas.host.triggerExpression.service.TriggerExpressionService;
-import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.host.triggerMedium.service.TriggerMediumService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +63,7 @@ public class TriggerServiceImpl implements TriggerService {
     TemplateMonitorService templateMonitorService;
 
     @Autowired
-    HistoryService historyService;
+    HostHistoryService hostHistoryService;
 
     @Autowired
     AlarmService alarmService;
@@ -258,15 +258,15 @@ public class TriggerServiceImpl implements TriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<History> informationList = historyService.findByHostTrigger(trigger.getHostId(), beforeTime);
+            List<HostHistory> informationList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime);
 
             if (informationList.isEmpty()) {
                 return;
             }
 
             //根据监控项id进行分组,然后进行计算平均值
-            Collection<List<History>> values1 = informationList.stream().collect(Collectors.groupingBy(History::getMonitorId)).values();
-            String avgNumber = StringUtil.getAvgNumber(values1);
+            Collection<List<HostHistory>> values1 = informationList.stream().collect(Collectors.groupingBy(HostHistory::getMonitorId)).values();
+            String avgNumber = StringUtil.getHostAvgNumber(values1);
 
             JSONObject jsonObject = JSONObject.parseObject(avgNumber);
 
@@ -317,15 +317,15 @@ public class TriggerServiceImpl implements TriggerService {
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
 
-            List<History> informationList = historyService.findByHostTrigger(trigger.getHostId(), beforeTime);
+            List<HostHistory> informationList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime);
 
-            Collection<List<History>> values = informationList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values();
+            Collection<List<HostHistory>> values = informationList.stream().collect(Collectors.groupingBy(HostHistory::getGatherTime)).values();
 
             if (values.isEmpty()) {
                 return;
             }
 
-            String strJson = StringUtil.getAvgNumber(values);
+            String strJson = StringUtil.getHostAvgNumber(values);
             JSONObject jsonObject = JSONObject.parseObject(strJson);
 
             //将表达式替换成值,然后进行运算
@@ -378,17 +378,17 @@ public class TriggerServiceImpl implements TriggerService {
         String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
 
         //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-        List<History> historyList = historyService.findByHostTrigger(trigger.getHostId(), beforeTime);
+        List<HostHistory> historyList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime);
 
         if (historyList.isEmpty()) {
             return;
         }
 
         //将数据进行处理,取最后一个值
-        List<History> list = historyList.stream()
+        List<HostHistory> list = historyList.stream()
                 .collect(Collectors.toMap(
-                        History::getMonitorId, // 根据 id 去重
-                        history -> history, // 保留对象
+                        HostHistory::getMonitorId, // 根据 id 去重
+                        hostHistory -> hostHistory, // 保留对象
                         (existing, replacement) -> replacement // 如果 id 相同，保留后者
                 ))
                 .values().stream().toList();
@@ -399,7 +399,7 @@ public class TriggerServiceImpl implements TriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             //将数据换成JSON的字符串
-            String json = StringUtil.getString(list);
+            String json = StringUtil.getHostString(list);
 
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);

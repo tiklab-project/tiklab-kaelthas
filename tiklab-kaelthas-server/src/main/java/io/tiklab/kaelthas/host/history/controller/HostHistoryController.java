@@ -1,7 +1,6 @@
 package io.tiklab.kaelthas.host.history.controller;
 
 import io.tiklab.core.Result;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.host.history.model.HostHistory;
 import io.tiklab.kaelthas.host.history.model.HostHistoryQuery;
 import io.tiklab.kaelthas.host.history.service.HostHistoryService;

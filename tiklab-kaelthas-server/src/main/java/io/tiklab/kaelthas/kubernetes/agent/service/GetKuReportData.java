@@ -18,6 +18,7 @@ import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.service.KubernetesHistoryService;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import io.tiklab.kaelthas.kubernetes.monitor.service.KuMonitorService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,16 @@ import java.util.*;
 @Component
 public class GetKuReportData {
 
-    List<KubernetesHistory> historyList = new ArrayList<>();
-
-    @Autowired
-    private KuMonitorService kuMonitorService;
-
     @Autowired
     private KubernetesHistoryService historyService;
 
     @Autowired
     private KuCollectionDao kuCollectionDao;
+
+
+    public static final  List<KubernetesHistory> historyList = new ArrayList<>();
+
+    public static final Map<String,Long> kuStoreTime = new HashMap();
 
     //定时拉取配置信息,并采集指定的数据
    // @Scheduled(cron = "0 0/1 * * * ? ")
@@ -52,15 +53,22 @@ public class GetKuReportData {
             return;
         }
 
+        if (ObjectUtils.isEmpty(kuStoreTime.get("time"))){
+            kuStoreTime.put("time",System.currentTimeMillis());
+        }
+
         for (KuMonitor kuMonitor : monitorList) {
             KubernetesHistory history = getHistory(kuMonitor);
             historyList.add(history);
         }
 
-        if (historyList.size() > 30) {
+        Long aLong = kuStoreTime.get("time");
+        long time = System.currentTimeMillis() - aLong;
+        if (historyList.size() > 30||time>=60000) {
             List<KubernetesHistory> list = new LinkedList<>(historyList);
             historyService.insertForList(list);
             historyList.clear();
+            kuStoreTime.put("time",System.currentTimeMillis());
         }
     }
 

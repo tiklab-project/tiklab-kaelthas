@@ -10,11 +10,11 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
+import io.tiklab.kaelthas.internet.history.model.InternetHistory;
+import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.util.StringUtil;
-import io.tiklab.kaelthas.history.model.History;
-import io.tiklab.kaelthas.history.service.HistoryService;
 import io.tiklab.kaelthas.internet.trigger.dao.InTriggerDao;
 import io.tiklab.kaelthas.internet.trigger.entity.InTriggerEntity;
 import io.tiklab.kaelthas.internet.trigger.model.InTrigger;
@@ -50,7 +50,7 @@ public class InTriggerServiceImpl implements InTriggerService {
     private AlarmService alarmService;
 
     @Autowired
-    private HistoryService historyService;
+    InternetHistoryService internetHistoryService;
 
     //分页查询触发器
     @Override
@@ -172,15 +172,15 @@ public class InTriggerServiceImpl implements InTriggerService {
 
             //将当前的触发器的表达式进行切割,获取表达式,将时间段内的表达式获取出来,然后进行计算
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<History> informationList = historyService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
+            List<InternetHistory> informationList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
 
             if (informationList.isEmpty()) {
                 return;
             }
 
             //根据监控项id进行分组,然后进行计算平均值
-            Collection<List<History>> values1 = informationList.stream().collect(Collectors.groupingBy(History::getMonitorId)).values();
-            String avgNumber = StringUtil.getAvgNumber(values1);
+            Collection<List<InternetHistory>> values1 = informationList.stream().collect(Collectors.groupingBy(InternetHistory::getInternetMonitorId)).values();
+            String avgNumber = StringUtil.getInAvgNumber(values1);
 
             JSONObject jsonObject = JSONObject.parseObject(avgNumber);
 
@@ -231,15 +231,15 @@ public class InTriggerServiceImpl implements InTriggerService {
 
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
 
-            List<History> informationList = historyService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
+            List<InternetHistory> informationList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
 
-            Collection<List<History>> values = informationList.stream().collect(Collectors.groupingBy(History::getGatherTime)).values();
+            Collection<List<InternetHistory>> values = informationList.stream().collect(Collectors.groupingBy(InternetHistory::getGatherTime)).values();
 
             if (values.isEmpty()) {
                 return;
             }
 
-            String strJson = StringUtil.getAvgNumber(values);
+            String strJson = StringUtil.getInAvgNumber(values);
 
             JSONObject jsonObject = JSONObject.parseObject(strJson);
             //将表达式替换成值,然后进行运算
@@ -292,17 +292,17 @@ public class InTriggerServiceImpl implements InTriggerService {
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
 
             //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-            List<History> historyList = historyService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
+            List<InternetHistory> historyList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
 
             if (historyList.isEmpty()) {
                 return;
             }
 
             //将数据进行处理,取最后一个值
-            List<History> list = historyList.stream()
+            List<InternetHistory> list = historyList.stream()
                     .collect(Collectors.toMap(
-                            History::getMonitorId, // 根据 id 去重
-                            history -> history, // 保留对象
+                            InternetHistory::getInternetMonitorId, // 根据 id 去重
+                            internetHistory -> internetHistory, // 保留对象
                             (existing, replacement) -> replacement // 如果 id 相同，保留后者
                     ))
                     .values().stream().toList();
@@ -312,7 +312,7 @@ public class InTriggerServiceImpl implements InTriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             //将数据换成JSON的字符串
-            String json = StringUtil.getString(list);
+            String json = StringUtil.getInString(list);
 
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);

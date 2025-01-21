@@ -3,7 +3,7 @@ package io.tiklab.kaelthas.internet.history.dao;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.kaelthas.internet.history.model.InternetHistory;
 import io.tiklab.kaelthas.internet.history.model.InternetHistoryQuery;
-import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
+import io.tiklab.kaelthas.util.TableUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -68,4 +68,52 @@ public class InternetHistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(InternetHistory.class));
     }
 
+    public List<InternetHistory> findHistoryByCondition(InternetHistory history, String beforeTime, String nowTime) {
+        String tableName = TableUtil.getInternetTableName(0);
+
+        String sql = "select * from "+tableName+" where 1=1";
+
+        if (StringUtils.isNotBlank(history.getInternetId())) {
+            sql = sql.concat(" and internet_id = '" + history.getInternetId() + "'");
+        }
+
+        if (StringUtils.isNotBlank(history.getInternetMonitorId())) {
+            sql = sql.concat(" and internet_monitor_id = '" + history.getInternetMonitorId() + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and gather_time >= '" + beforeTime + "'");
+        }
+
+        if (StringUtils.isNotBlank(nowTime)) {
+            sql = sql.concat(" and gather_time <= '" + nowTime + "'");
+        }
+
+        sql = sql.concat(" order by gather_time desc limit 1");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(InternetHistory.class));
+
+    }
+
+    public List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime) {
+        String tableName = TableUtil.getInternetTableName(0);
+        String sql = " SELECT mh.*,mdi.expression "+
+                "FROM mtc_internet_monitor mdm "+
+                "JOIN mtc_internet_item mdi "+
+                "ON mdm.internet_item_id = mdi.id "+
+                "LEFT JOIN "+tableName+" mh "+
+                " ON mdm.id = mh.internet_monitor_id ";
+
+        if (StringUtils.isNotBlank(internetId)) {
+            sql = sql.concat(" where mh.internet_id = '" + internetId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time > '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" and mdi.report_type = 1 order by mh.gather_time desc limit 2");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(InternetHistory.class));
+    }
 }

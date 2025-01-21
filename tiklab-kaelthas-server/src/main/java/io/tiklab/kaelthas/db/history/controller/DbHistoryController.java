@@ -4,7 +4,6 @@ import io.tiklab.core.Result;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.model.DbHistoryQuery;
 import io.tiklab.kaelthas.db.history.service.DbHistoryService;
-import io.tiklab.kaelthas.history.model.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

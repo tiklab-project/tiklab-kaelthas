@@ -3,7 +3,6 @@ package io.tiklab.kaelthas.db.history.dao;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.model.DbHistoryQuery;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.util.TableUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,4 +71,71 @@ public class DbHistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(DbHistory.class));
     }
 
+
+    public List<DbHistory> findInformationToGatherTime(String hostId, String beforeDateTime) {
+        String dbTableName = TableUtil.getDbTableName(0);
+
+        String sql = " SELECT mh.*,mki.report_type as reportType "+
+                "FROM "+dbTableName+" mh "+
+                "JOIN mtc_ku_monitor mkm "+
+                "ON mh.db_monitor_id = mkm.id "+
+                "JOIN mtc_ku_item mki "+
+                " ON mkm.ku_item_id = mki.id ";
+
+        if (StringUtils.isNotBlank(hostId)) {
+            sql = sql.concat(" where mh.db_id = '" + hostId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeDateTime)) {
+            sql = sql.concat(" and mh.gather_time >= '" + beforeDateTime + "'");
+        }
+
+        sql = sql.concat(" and mki.report_type != 2 order by mh.gather_time desc");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(DbHistory.class));
+    }
+
+    public List<DbHistory> findHistoryByGatherTime(String hostId, String beforeTime) {
+        String dbTableName = TableUtil.getDbTableName(0);
+        String sql = " SELECT mh.*,mdi.data_type as reportType,mdi.expression "+
+                "FROM "+dbTableName+" mh "+
+                "JOIN mtc_db_monitor mdm "+
+                "ON mh.db_monitor_id = mdm.id "+
+                "JOIN mtc_db_item mdi "+
+                "ON mdm.db_item_id = mdi.id ";
+
+        if (StringUtils.isNotBlank(hostId)) {
+            sql = sql.concat(" where mh.db_id = '" + hostId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time >= '" + beforeTime + "'");
+        }
+
+        sql = sql.concat(" and mdi.data_type != 2 order by mh.gather_time desc");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(DbHistory.class));
+    }
+
+
+    public List<DbHistory> findDbHistoryByDbId(String hostId, String beforeTime) {
+        String dbTableName = TableUtil.getDbTableName(0);
+        String sql = " SELECT mh.*,mdi.expression "+
+                "FROM mtc_db_monitor mdm "+
+                "JOIN mtc_db_item mdi "+
+                "ON mdm.db_item_id = mdi.id "+
+                "LEFT JOIN "+dbTableName+" mh "+
+                "ON mdm.id = mh.db_monitor_id ";
+
+        if (StringUtils.isNotBlank(hostId)) {
+            sql = sql.concat(" where mh.db_id = '" + hostId + "'");
+        }
+
+        if (StringUtils.isNotBlank(beforeTime)) {
+            sql = sql.concat(" and mh.gather_time > '" + beforeTime + "'");
+        }
+        sql = sql.concat(" limit 28");
+
+        return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(DbHistory.class));
+    }
 }

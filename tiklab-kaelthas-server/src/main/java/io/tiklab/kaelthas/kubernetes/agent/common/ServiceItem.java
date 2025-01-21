@@ -7,7 +7,6 @@ import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.V1Container;
 import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.openapi.models.V1ServiceList;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;

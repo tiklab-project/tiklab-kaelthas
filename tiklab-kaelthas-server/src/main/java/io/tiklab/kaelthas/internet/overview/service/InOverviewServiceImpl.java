@@ -1,6 +1,6 @@
 package io.tiklab.kaelthas.internet.overview.service;
 
-import io.tiklab.kaelthas.history.service.HistoryService;
+import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +12,15 @@ import java.util.Map;
 @Service
 public class InOverviewServiceImpl implements InOverviewService{
 
+
     @Autowired
-    private HistoryService historyService;
+    private InternetHistoryService internetHistoryService;
 
     /**
      * 获取网络详情
      */
     @Override
     public Map<String, Object> findInternetOverview(String internetId) {
-        return historyService.findInternetOverview(internetId);
+        return internetHistoryService.findInternetOverview(internetId);
     }
 }

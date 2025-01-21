@@ -1,5 +1,6 @@
 package io.tiklab.kaelthas.internet.history.service;
 
+import com.alibaba.fastjson.JSON;
 import io.tiklab.kaelthas.internet.graphics.model.InternetGraphics;
 import io.tiklab.kaelthas.internet.graphics.service.InternetGraphicsService;
 import io.tiklab.kaelthas.internet.graphicsMonitor.model.InGraphicsMonitor;
@@ -12,7 +13,6 @@ import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.util.TableUtil;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +122,50 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
         String tableName = TableUtil.getInternetTableName(0);
         List<InternetHistory> inHistoryList = internetHistoryDao.findInHistoryByTime(beforeTime, tableName);
         return inHistoryList;
+    }
+
+
+    /**
+     * 查询出网络的详情页
+     */
+    @Override
+    public Map<String, Object> findInternetOverview(String internetId) {
+
+        Map<String, Object> map = new HashMap<>();
+
+        String nowDate = ConversionDateUtil.date(9);
+        String beforeTime = ConversionDateUtil.findLocalDateTime(0, 1, null);
+
+        //将端口状态的信息转换成list放到map中
+        InternetHistory history = new InternetHistory();
+        history.setInternetId(internetId);
+        history.setInternetMonitorId("301");
+        List<InternetHistory> list = internetHistoryDao.findHistoryByCondition(history, beforeTime, nowDate);
+        if (!list.isEmpty()) {
+            String reportData = list.get(0).getReportData();
+            List<Map<String, Object>> mapList = JSON.parseObject(reportData, List.class);
+            map.put("podInfo", mapList);
+        }
+
+        InternetHistory history2 = new InternetHistory();
+        history2.setInternetId(internetId);
+        history2.setInternetMonitorId("304");
+        List<InternetHistory> list2 = internetHistoryDao.findHistoryByCondition(history2, beforeTime, nowDate);
+        if (!list2.isEmpty()) {
+            String reportData = list2.get(0).getReportData();
+            Map map1 = JSON.parseObject(reportData, Map.class);
+            map.put("systemInfo", map1);
+        }
+        return map;
+    }
+
+
+    /**
+     * 根据网络监控的id和指定的时间后查询存储数据
+     */
+    @Override
+    public List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime) {
+        return internetHistoryDao.findInternetToGatherTime(internetId, beforeTime);
     }
 
 

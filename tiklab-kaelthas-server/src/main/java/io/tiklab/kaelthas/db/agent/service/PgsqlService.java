@@ -6,6 +6,7 @@ import io.tiklab.kaelthas.db.agent.model.DbMonitorVo;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.service.DbHistoryService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,15 @@ import java.util.stream.Collectors;
 @Service
 public class PgsqlService {
 
-    public static final List<DbHistory> histories = new LinkedList<>();
-
     @Autowired
     private DbSqlDao dbSqlDao;
 
     @Autowired
     DbHistoryService dbHistoryService;
+
+    public static final List<DbHistory> histories = new LinkedList<>();
+
+    public static final Map<String,Long> pgSqlStoreTime = new HashMap();
 
     //定时拉取pgsql的数据,执行SQL进行数据上报
    // @Scheduled(cron = "0 0/1 * * * ? ")
@@ -37,6 +40,10 @@ public class PgsqlService {
 
         if (DbMonitorVoList.isEmpty()) {
             return;
+        }
+
+        if (ObjectUtils.isEmpty(pgSqlStoreTime.get("time"))){
+            pgSqlStoreTime.put("time",System.currentTimeMillis());
         }
 
         Collection<List<DbMonitorVo>> values = DbMonitorVoList.stream().collect(Collectors.groupingBy(DbMonitorVo::getDbId)).values();
@@ -69,10 +76,14 @@ public class PgsqlService {
             }
         }
 
-        if (histories.size() > 30) {
+        Long aLong = pgSqlStoreTime.get("time");
+        long time = System.currentTimeMillis() - aLong;
+        //定时上报数据 存储时间大于30条或者时间超过1分钟
+        if (histories.size() > 30||time>=60000) {
             List<DbHistory> DbHistoryVoList = new LinkedList<>(histories);
             dbHistoryService.insertForList(DbHistoryVoList);
             histories.clear();
+            pgSqlStoreTime.put("time",System.currentTimeMillis());
         }
     }
 

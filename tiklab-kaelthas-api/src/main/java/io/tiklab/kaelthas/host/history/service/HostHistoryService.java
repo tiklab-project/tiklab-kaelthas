@@ -21,4 +21,9 @@ public interface HostHistoryService {
      * @param beforeTime 时间
      */
     List<HostHistory> findHostHistoryByTime(String beforeTime);
+
+    /**
+     * 根据主机监控的id和指定的时间后查询存储数据
+     */
+    List<HostHistory> findByHostTrigger(String hostId, String beforeTime);
 }

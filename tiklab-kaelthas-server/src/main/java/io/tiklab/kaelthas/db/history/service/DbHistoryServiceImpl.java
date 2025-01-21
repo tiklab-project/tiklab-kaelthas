@@ -9,12 +9,10 @@ import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.model.DbHistoryQuery;
 import io.tiklab.kaelthas.db.trigger.model.DbTrigger;
 import io.tiklab.kaelthas.db.trigger.service.DbTriggerService;
-import io.tiklab.kaelthas.history.model.History;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.util.TableUtil;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +124,25 @@ public class DbHistoryServiceImpl implements DbHistoryService {
         String dbTableName = TableUtil.getDbTableName(0);
         List<DbHistory> historyList = dbHistoryDao.findDbHistoryByTime(beforeTime, dbTableName);
         return historyList;
+    }
+
+    @Override
+    public List<DbHistory> findInformationToGatherTime(String dbId, String beforeDateTime) {
+        List<DbHistory> dbHistoryList = dbHistoryDao.findInformationToGatherTime(dbId, beforeDateTime);
+        return dbHistoryList;
+    }
+
+    @Override
+    public List<DbHistory> findHistoryByGatherTime(String dbId, String beforeTime) {
+        return dbHistoryDao.findHistoryByGatherTime(dbId, beforeTime);
+    }
+
+    /**
+     * 根据监控数据库的id和时间查询时间之后的存储数据
+     */
+    @Override
+    public List<DbHistory> findDbHistoryByDbId(String dbId, String beforeTime) {
+        return dbHistoryDao.findDbHistoryByDbId(dbId, beforeTime);
     }
 
 

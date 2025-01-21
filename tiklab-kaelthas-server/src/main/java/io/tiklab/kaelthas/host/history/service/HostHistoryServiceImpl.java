@@ -1,6 +1,5 @@
 package io.tiklab.kaelthas.host.history.service;
 
-import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import io.tiklab.kaelthas.host.graphics.service.GraphicsService;
 import io.tiklab.kaelthas.host.graphicsMonitor.model.GraphicsMonitor;
@@ -125,6 +124,14 @@ public class HostHistoryServiceImpl implements HostHistoryService {
         String dbTableName = TableUtil.getHostTableName(0);
         List<HostHistory> hostHistoryList = hostHistoryDao.findHostHistoryByTime(beforeTime, dbTableName);
         return hostHistoryList;
+    }
+
+    /**
+     * 根据主机监控的id和指定的时间后查询存储数据
+     */
+    @Override
+    public List<HostHistory> findByHostTrigger(String hostId, String beforeTime) {
+        return hostHistoryDao.findByHostTrigger(hostId, beforeTime);
     }
 
 

@@ -252,59 +252,14 @@ COMMENT ON COLUMN "mtc_graphics_monitor"."monitor_id" IS '监控项id';
 COMMENT ON COLUMN "mtc_graphics_monitor"."graphics_id" IS '图表id';
 COMMENT ON TABLE "mtc_graphics_monitor" IS '监控项和图表的关联表';
 
--- ----------------------------
--- Table structure for mtc_history
--- ----------------------------
-CREATE TABLE "mtc_history" (
-                               "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-                               "host_id" varchar(32) COLLATE "pg_catalog"."default",
-                               "monitor_id" varchar(32) COLLATE "pg_catalog"."default",
-                               "report_data" text COLLATE "pg_catalog"."default",
-                               "gather_time" timestamp(6)
-)
-;
-COMMENT ON COLUMN "mtc_history"."id" IS '历史数据id';
-COMMENT ON COLUMN "mtc_history"."host_id" IS '主机id';
-COMMENT ON COLUMN "mtc_history"."monitor_id" IS '监控项中间表id';
-COMMENT ON COLUMN "mtc_history"."report_data" IS '当前数值';
-COMMENT ON COLUMN "mtc_history"."gather_time" IS '检查时间';
-COMMENT ON TABLE "mtc_history" IS '历史数据表';
 
--- ----------------------------
--- Table structure for mtc_history_fifteen_minute
--- ----------------------------
-CREATE TABLE "mtc_history_fifteen_minute" (
-                                              "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-                                              "host_id" varchar(32) COLLATE "pg_catalog"."default",
-                                              "monitor_id" varchar(32) COLLATE "pg_catalog"."default",
-                                              "report_data" text COLLATE "pg_catalog"."default",
-                                              "gather_time" timestamp(6)
-)
-;
 
--- ----------------------------
--- Table structure for mtc_history_five_minute
--- ----------------------------
-CREATE TABLE "mtc_history_five_minute" (
-                                           "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-                                           "host_id" varchar(32) COLLATE "pg_catalog"."default",
-                                           "monitor_id" varchar(32) COLLATE "pg_catalog"."default",
-                                           "report_data" text COLLATE "pg_catalog"."default",
-                                           "gather_time" timestamp(6)
-)
-;
 
--- ----------------------------
--- Table structure for mtc_history_one_minute
--- ----------------------------
-CREATE TABLE "mtc_history_one_minute" (
-                                          "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-                                          "host_id" varchar(32) COLLATE "pg_catalog"."default",
-                                          "monitor_id" varchar(32) COLLATE "pg_catalog"."default",
-                                          "report_data" text COLLATE "pg_catalog"."default",
-                                          "gather_time" timestamp(6)
-)
-;
+
+
+
+
+
 
 -- ----------------------------
 -- Table structure for mtc_host
@@ -946,19 +901,7 @@ ALTER TABLE "mtc_graphics" ADD CONSTRAINT "graphics_pkey" PRIMARY KEY ("id");
 -- ----------------------------
 ALTER TABLE "mtc_graphics_monitor" ADD CONSTRAINT "graphics_list_pkey" PRIMARY KEY ("id");
 
--- ----------------------------
--- Indexes structure for table mtc_history
--- ----------------------------
-CREATE INDEX "idx_host_monitor_time" ON "mtc_history" USING btree (
-    "host_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
-    "monitor_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
-    "gather_time" "pg_catalog"."timestamp_ops" ASC NULLS LAST
-    );
 
--- ----------------------------
--- Primary Key structure for table mtc_history
--- ----------------------------
-ALTER TABLE "mtc_history" ADD CONSTRAINT "historical_information_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table mtc_host

@@ -1,6 +1,6 @@
 package io.tiklab.kaelthas.kubernetes.history.service;
 
-import io.tiklab.kaelthas.db.history.model.DbHistory;
+import com.alibaba.fastjson.JSON;
 import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphics;
 import io.tiklab.kaelthas.kubernetes.graphics.service.KuGraphicsService;
 import io.tiklab.kaelthas.kubernetes.graphicsMonitor.model.KuGraphicsMonitor;
@@ -11,7 +11,6 @@ import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistoryQuery;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.util.SqlUtil;
 import io.tiklab.kaelthas.util.TableUtil;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +121,77 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
         List<KubernetesHistory> kuHistoryList = kubernetesHistoryDao.findKuHistoryByTime(beforeTime, tableName);
         return kuHistoryList;
     }
+
+    @Override
+    public Map<String, Object> findKuOverviewTotal(String kuId) {
+        String nowDate = ConversionDateUtil.date(9);
+        String beforeTime = ConversionDateUtil.findLocalDateTime(0, 1, null);
+
+        Map<String, Object> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i < 23; i++) {
+            list.add(String.valueOf(i));
+        }
+
+        List<KubernetesHistory> entityList = kubernetesHistoryDao.findKuOverviewTotal(list, kuId,beforeTime,nowDate);
+        List<KubernetesHistory> entities = entityList.stream().filter(h -> h.getReportType() == 1).collect(Collectors.groupingBy(
+                        KubernetesHistory::getKuMonitorId,
+                        Collectors.maxBy(Comparator.comparing(KubernetesHistory::getGatherTime))
+                ))
+                .values()
+                .stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toList();
+
+        map.put("mapTotal", entities);
+
+        List<Object> objectList = new LinkedList<>();
+
+        List<KubernetesHistory> collect = entityList.stream().filter(h -> h.getReportType() == 2).toList();
+        for (KubernetesHistory history : collect) {
+            Map<String, Object> objectMap = new HashMap<>();
+            List<List<String>> listList = new LinkedList<>();
+            Set<String> stringSet = new HashSet<>();
+
+            if (!Objects.isNull(history.getReportData()) && !"null".equals(history.getReportData())) {
+                List<Map<String, String>> mapList = JSON.parseObject(history.getReportData(), List.class);
+                if (mapList.isEmpty()) {
+                    objectMap.put("name", history.getName());
+                    objectMap.put("data", listList);
+                    objectList.add(objectMap);
+                    continue;
+                }
+                for (Map<String, String> stringMap : mapList) {
+                    List<String> list1 = new LinkedList<>();
+                    for (Map.Entry<String, String> entry : stringMap.entrySet()) {
+                        stringSet.add(entry.getKey());
+                        list1.add(entry.getValue());
+                    }
+                    listList.add(list1);
+                }
+                listList.add(stringSet.stream().toList());
+                Collections.reverse(listList);
+            }
+
+            objectMap.put("name", history.getName());
+            objectMap.put("data", listList);
+
+            objectList.add(objectMap);
+        }
+        map.put("mapStatus", objectList);
+
+        return map;
+    }
+
+    /**
+     * 根据k8s监控的id和时间查询时间之后的存储数据
+     */
+    @Override
+    public List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime) {
+        return kubernetesHistoryDao.findKuHistoryByKuId(kuId, beforeTime);
+    }
+
 
     /**
      * 拼接监控历史数据
