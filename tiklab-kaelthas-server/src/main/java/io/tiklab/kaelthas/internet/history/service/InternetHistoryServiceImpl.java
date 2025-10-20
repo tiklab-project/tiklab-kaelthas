@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -41,8 +42,8 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
     @Override
     public void insertForList(List<InternetHistory> entityList) {
 
-        //获取网络历史表名
-        String internetTableName = TableUtil.getInternetTableName(0);
+        //获取网络历史表名,插入数据只会插入但前年月份的表
+        String internetTableName = TableUtil.getInternetTableName(LocalDate.now(),0);
 
         List<Map<String, Object>> mapList = getMapList(entityList);
         String historySql = SqlUtil.getBatchInsertSql(internetTableName, mapList);
@@ -119,7 +120,7 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
 
     @Override
     public List<InternetHistory> findInHistoryByTime(String beforeTime) {
-        String tableName = TableUtil.getInternetTableName(0);
+        String tableName = TableUtil.getInternetTableName(LocalDate.now(),0);
         List<InternetHistory> inHistoryList = internetHistoryDao.findInHistoryByTime(beforeTime, tableName);
         return inHistoryList;
     }
@@ -164,8 +165,8 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
      * 根据网络监控的id和指定的时间后查询存储数据
      */
     @Override
-    public List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime) {
-        return internetHistoryDao.findInternetToGatherTime(internetId, beforeTime);
+    public List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime,String expression) {
+        return internetHistoryDao.findInternetToGatherTime(internetId, beforeTime,expression);
     }
 
 
@@ -176,15 +177,13 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
      */
     public List<List<InternetHistory>> joinMonitorHistoryData(InternetHistoryQuery internetHistoryQuery, int data){
         List<List<InternetHistory>> resList = new ArrayList<>();
-        List<String> timeList = new ArrayList<>();
-        List<String> dataList = new ArrayList<>();
 
 
         //根据主机的id查询主机当中的图表
         List<InternetGraphics> graphicsList = internetGraphicsService.findGraphicsList(internetHistoryQuery.getInternetId());
 
         //计算两个时间中间的时间点
-        List<String> xTime = ConversionDateUtil.splitTime(internetHistoryQuery.getBeginTime(), internetHistoryQuery.getEndTime(), data);
+      //  List<String> xTime = ConversionDateUtil.splitTime(internetHistoryQuery.getBeginTime(), internetHistoryQuery.getEndTime(), data);
         //2.根据查询出的图表,分别查询出图表中对应的监控项数据
         for (InternetGraphics graphics : graphicsList) {
             //查询出每个图表下的监控项
@@ -196,24 +195,30 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
             //查询每条监控项的数据集合
             List<InternetHistory> list = new LinkedList<>();
             for (InGraphicsMonitor graphicsMonitor : graphicsMonitors) {
+                List<String> timeList = new ArrayList<>();
+                List<String> dataList = new ArrayList<>();
 
                 //通过监控项id查询监控历史记录
                 internetHistoryQuery.setInternetMonitorId(graphicsMonitor.getMonitorId());
 
                 //通过监控项id和时间段查询历史
                 int endName = TableUtil.getHistoryEndName(data);
-                String dbTableName = TableUtil.getInternetTableName(endName);
-                List<InternetHistory> internetHistories = internetHistoryDao.findInternetHistoryByInMonitorId(internetHistoryQuery, dbTableName);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDate localDate = LocalDate.parse(internetHistoryQuery.getBeginTime(), formatter);
+                String dbTableName = TableUtil.getInternetTableName(localDate,endName);
+
 
                 InternetHistory internetHistory = new InternetHistory();
+                //图形名称
                 internetHistory.setGraphicsName(graphicsMonitor.getGraphicsName());
+                //图形下监控项名称
+                internetHistory.setName(graphicsMonitor.getMonitorName());
 
+                List<InternetHistory> internetHistories = internetHistoryDao.findInternetHistoryByInMonitorId(internetHistoryQuery, dbTableName);
                 if (!internetHistories.isEmpty()) {
                     internetHistories = internetHistories.stream().sorted(Comparator.comparing(InternetHistory::getGatherTime))
                             .collect(Collectors.toList());
 
-                    //监控项名字
-                    internetHistory.setName(internetHistories.get(0).getMonitorName());
                     //设置告警信息
                     InternetColorLine(internetHistories,internetHistory);
 
@@ -231,8 +236,7 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
                                 timeList.add(gatherTime);
                                 dataList.add(reportData);
                             }
-                        }
-                        if (i==internetHistories.size()-1){
+                        }else if (i==internetHistories.size()-1){
                             //查询的数据最后一个时间不等于客户端传入的结束时间 添加内容为null
                             if (!internetHistoryQuery.getEndTime().equals(gatherTime)){
                                 timeList.add(internetHistoryQuery.getEndTime());
@@ -250,8 +254,14 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
                     internetHistory.setData(dataList);
                     internetHistory.setDataTimes(timeList);
                 }else {
+                    //没有历史记录数据,只需要添加开始时间和结束时间
+                    dataList.add("null");
+                    dataList.add("null");
+                    timeList.add(internetHistoryQuery.getBeginTime());
+                    timeList.add(internetHistoryQuery.getEndTime());
                     internetHistory.setData(dataList);
-                    internetHistory.setDataTimes(xTime);
+                    internetHistory.setDataTimes(timeList);
+
                 }
                 if (StringUtils.isNotBlank(internetHistory.getName())) {
                     list.add(internetHistory);
@@ -343,6 +353,6 @@ public class InternetHistoryServiceImpl implements InternetHistoryService {
             map.put("report_data", history.getReportData());
             map.put("gather_time", history.getGatherTime());
             return map;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 }

@@ -4,8 +4,10 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.alarm.entity.AlarmEntity;
 import io.tiklab.kaelthas.alarm.model.Alarm;
+import io.tiklab.kaelthas.alarm.model.AlarmQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,43 +23,42 @@ public class AlarmDao {
     @Autowired
     private JpaTemplate jpaTemplate;
 
-    public Pagination<Alarm> findAlarmPage(Alarm alarm) {
-
-        String sql = """
-                SELECT mtc_alarm.*
-                FROM mtc_alarm
-                where 1=1
-                """;
-
-
-        if (StringUtils.isNotBlank(alarm.getName())) {
-            sql = sql.concat(" and name like '%" + alarm.getName() + "%'");
-        }
-
-        if (StringUtils.isNotBlank(alarm.getIp())) {
-            sql = sql.concat(" and ip like '%" + alarm.getIp() + "%'");
-        }
-
-        if (alarm.getStatus() != null) {
-            sql = sql.concat(" and status = " + alarm.getStatus());
-        }
-
-        if (StringUtils.isNotBlank(alarm.getHostId())) {
-            sql = sql.concat(" and host_id = '" + alarm.getHostId() + "'");
-        }
-
-        if (alarm.getSeverityLevel() != null) {
-            sql = sql.concat(" and severity_level = " + alarm.getSeverityLevel());
-        }
-
-        if (alarm.getMachineType() != null) {
-            sql = sql.concat(" and machine_type = " + alarm.getMachineType());
-        }
-
-        sql = sql.concat(" order by status desc,alert_time desc");
-
-        return jpaTemplate.getJdbcTemplate().findPage(sql, null, alarm.getPageParam(), new BeanPropertyRowMapper<>(Alarm.class));
+    /**
+     * 查找
+     * @param id
+     */
+    public AlarmEntity findAlarm(String id){
+        return jpaTemplate.findOne(AlarmEntity.class,id);
     }
+
+
+    /**
+     * 条件查询
+     * @param alarmQuery
+     * @return List <RepositoryEntity>
+     */
+    public List<AlarmEntity> findAlarmList(AlarmQuery alarmQuery) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
+                .eq("hostId", alarmQuery.getHostId())
+                .eq("machineType", alarmQuery.getMachineType())
+                .orders(alarmQuery.getOrderParams())
+                .get();
+        return  jpaTemplate.findList(queryCondition,AlarmEntity.class);
+    }
+
+    public Pagination<AlarmEntity> findAlarmPage(Alarm alarm) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(AlarmEntity.class)
+                .like("name",alarm.getName())
+                .like("ip",alarm.getIp())
+                .eq("status",alarm.getStatus())
+                .eq("hostId",alarm.getHostId())
+                .eq("severityLevel",alarm.getSeverityLevel())
+                .eq("machineType",alarm.getMachineType())
+                .pagination(alarm.getPageParam())
+                .get();
+
+       return jpaTemplate.findPage(queryCondition,AlarmEntity.class);
+      }
 
     public String createAlarm(AlarmEntity alarmEntity) {
         return jpaTemplate.save(alarmEntity, String.class);

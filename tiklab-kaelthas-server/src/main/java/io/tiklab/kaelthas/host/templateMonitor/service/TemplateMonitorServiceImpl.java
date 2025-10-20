@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 模板下监控项
@@ -45,7 +46,7 @@ public class TemplateMonitorServiceImpl implements TemplateMonitorService {
             //查询有多少主机引用了模板,将添加的监控项一并添加到这些主机下
             List<HostTemplate> templateList = hostTemplateService.findTemplateByTemplateId(hostMonitor.getHostId());
             //查询出主机的ids
-            List<String> stringList = templateList.stream().map(HostTemplate::getHostId).toList();
+            List<String> stringList = templateList.stream().map(HostTemplate::getHostId).collect(Collectors.toList());
 
             //将从模板创建的监控项复制到引用模板的主机当中
             for (String string : stringList) {

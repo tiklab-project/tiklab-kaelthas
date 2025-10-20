@@ -93,6 +93,9 @@ public class DbInfo {
 
     private Integer alarmNum;
 
+    //图形数量
+    private Integer graphicsNum;
+
     private String message;
 
     private Page pageParam = new Page();
@@ -247,5 +250,13 @@ public class DbInfo {
 
     public void setPageParam(Page pageParam) {
         this.pageParam = pageParam;
+    }
+
+    public Integer getGraphicsNum() {
+        return graphicsNum;
+    }
+
+    public void setGraphicsNum(Integer graphicsNum) {
+        this.graphicsNum = graphicsNum;
     }
 }

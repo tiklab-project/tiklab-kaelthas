@@ -1,9 +1,7 @@
 app:
-  name: tiklab-kaelthas-ce
-  version: ee
+  name: kaelthas
 
-APP_HOME: ${APP_HOME}
-application: kaelthas-ce
+
 
 spring:
   config:
@@ -14,29 +12,27 @@ spring:
 server:
   port: 8080
 
+APP_HOME: ${APP_HOME}
+
+#DATA config
+DATA_HOME: ${user.home}/tiklab/kaelthas
+
+#dal config for mysql jdbc
 jdbc:
   driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://localhost:5432/xmonitor_ee?stringtype=unspecified
+  url: jdbc:postgresql://localhost:5432/kaelthas?stringtype=unspecified
   username: postgres
   password: darth2020
 
-#plugin config
-DATA_HOME: /opt/thoughtware/xmonitor-ee
-
-plugin:
-  path: ${DATA_HOME}/plugin
-
-#dfs config
-dfs:
-  server:
-    enabled: false
-    mode: server
-    port: 4000
-    datapath: ${DATA_HOME}/files
-  client:
-    url: 127.0.0.1:4000
-    bucket: ${app.name}
-
+postgresql:
+  embbed:
+    enable: true
+  database: kaelthas
+  db:
+    port: 5432
+    username: postgres
+    password: darth2020
+    address: ${DATA_HOME}/postgresql
 
 #dcs config
 dcs:
@@ -52,55 +48,13 @@ dcs:
     database: dcs1
     expire: 7200
 
-#dcs config
-dss:
-  server:
-    enabled: false
-    mode: server
-    port: 6000
-    datapath: ${DATA_HOME}/index
-  client:
-    url: 127.0.0.1:6000
-    bucket: ${app.name}
-
-postgresql:
-  embbed:
-    enable: true
-  database: xmonitor_ee
-  db:
-    port: 5432
-    username: postgres
-    password: darth2020
-    address: ${DATA_HOME}/postgresql
-
-datapath: ${DATA_HOME}/caches
-
-soular:
-  embbed:
-    enable: true
-  address: e.tiklab.net
 
 
-backups:
-  dir: /data/xmonitor-ee
-  #    time: 0 */1 * * * ?
-  time: 0 0 2 * * ?
+# (local:本地登录  soular:统一登录)
+auth:
+  type: local
+  soular:
+    address: ""
 
-#message:
-#  sms:
-#    enabled: true
 
-#base:
-#  url: http://xmonitor-ce.test.tiklab.net/
 
-#homes
-homes:
-  address: http://homes.tiklab.net
-
-#license
-licences:
-  path: ${APP_HOME}/licences
-
-#file
-file:
-  path: http://file.tiklab.net

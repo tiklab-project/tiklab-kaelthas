@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 图形和监控项的关联表
@@ -55,7 +56,7 @@ public class KuGraphicsMonitorServiceImpl implements KuGraphicsMonitorService {
                 .get();
         List<KuGraphicsMonitorEntity> entityList = kuGraphicsMonitorDao.findMonitorIds(queryCondition);
 
-        return entityList.stream().map(KuGraphicsMonitorEntity::getMonitorId).toList();
+        return entityList.stream().map(KuGraphicsMonitorEntity::getMonitorId).collect(Collectors.toList());
     }
 
     /**

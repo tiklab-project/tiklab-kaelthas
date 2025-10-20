@@ -1,35 +1,31 @@
 app:
-  name: tiklab-xmonitor-ee
-  version: ee
+  name: kaelthas
 
-APP_HOME: ${APP_HOME}
-application: xmonitor
 
 server:
   port: 8080
 
+APP_HOME: ${APP_HOME}
+
+#DATA config
+DATA_HOME: ${user.home}/tiklab/kaelthas
+
+#dal config for mysql jdbc
 jdbc:
   driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://localhost:5432/xmonitor_ee?stringtype=unspecified
+  url: jdbc:postgresql://localhost:5432/kaelthas?stringtype=unspecified
   username: postgres
   password: darth2020
 
-#plugin config
-DATA_HOME: /opt/thoughtware/xmonitor-ee
-
-plugin:
-  path: ${DATA_HOME}/plugin
-
-#dfs config
-dfs:
-  server:
-    enabled: true
-    mode: server
-    port: 4000
-    datapath: ${DATA_HOME}/files
-  client:
-    url: 127.0.0.1:4000
-    bucket: ${app.name}
+postgresql:
+  embbed:
+    enable: true
+  database: kaelthas
+  db:
+    port: 5432
+    username: postgres
+    password: darth2020
+    address: ${DATA_HOME}/postgresql
 
 #dcs config
 dcs:
@@ -42,63 +38,20 @@ dcs:
     url: 127.0.0.1:5000
     bucket: ${app.name}
 
-#dcs config
-dss:
-  server:
-    enabled: true
-    mode: server
-    port: 6000
-    datapath: ${DATA_HOME}/index
-  client:
-    url: 127.0.0.1:6000
-    bucket: ${app.name}
 
-postgresql:
-  embbed:
-    enable: true
-  database: xmonitor_ee
-  db:
-    port: 5432
-    username: postgres
-    password: darth2020
-    address: ${DATA_HOME}/postgresql
+# (local:本地登录  soular:统一登录)
+auth:
+  type: soular
+  soular:
+    address: http://e.eas.tiklab.net
+  expire: 86400 # 过期时间，单位秒，默认1天
 
-datapath: ${DATA_HOME}/caches
+#backups:
+#  dir: /data/xmonitor-ee
+#  time: 0 0 2 * * ?
 
-eas:
-  embbed:
-#    enable: true
-    enable: false
-  address: http://e.eas.tiklab.net
-
-
-backups:
-  dir: /data/xmonitor-ee
-  #    time: 0 */1 * * * ?
-  time: 0 0 2 * * ?
-
-base:
+external:
   url: http://e.kaelthas.tiklab.net
-
-#homes
-homes:
-  address: http://homes.tiklab.net
-
-#license
-licences:
-  path: ${APP_HOME}/licences
-
-#file
-file:
-  path: http://file.tiklab.net
-
-
-
-
-
-
-
-
 
 
 

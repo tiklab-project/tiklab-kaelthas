@@ -84,6 +84,16 @@ public class ConversionScriptsUtils {
         return stringList;
     }
 
+    /**
+     * 获取触发器中的表达式中{{}} 数据
+     */
+    public String getTriggerExData(String expression) {
+
+        String s = expression.replaceAll("^\\{\\{(.*?)\\}\\}([<>]=?|==)\\[.*?\\]$", "$1");
+        return s;
+    }
+
+
 
     /**
      * 正则匹配变量获取 [] 里面的值

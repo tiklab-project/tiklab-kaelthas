@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 主机下的监控项
@@ -165,7 +166,7 @@ public class HostMonitorServiceImpl implements HostMonitorService {
 
         List<HostMonitor> allMonitor = this.findAllMonitor(monitor);
 
-        List<String> stringList = allMonitor.stream().map(HostMonitor::getExpression).toList();
+        List<String> stringList = allMonitor.stream().map(HostMonitor::getExpression).collect(Collectors.toList());
 
         if (stringList.contains(monitor.getExpression())) {
             return null;

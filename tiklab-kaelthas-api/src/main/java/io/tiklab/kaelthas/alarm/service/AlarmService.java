@@ -1,9 +1,12 @@
 package io.tiklab.kaelthas.alarm.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.alarm.model.AlarmQuery;
+import io.tiklab.toolkit.join.annotation.FindOne;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
 import io.tiklab.kaelthas.alarm.model.Alarm;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +15,17 @@ import java.util.Map;
  */
 @JoinProvider(model = Alarm.class)
 public interface AlarmService {
+
+
+    @FindOne
+    Alarm findOne(@NotNull String id);
+
+    /**
+     * 条件查询列表
+     * @param alarmQuery
+     * @return
+     */
+    List<Alarm> findAlarmList(AlarmQuery alarmQuery);
 
     //分页查询
     Pagination<Alarm> findAlarmPage(Alarm alarm);

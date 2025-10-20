@@ -33,6 +33,13 @@ public class DbGraphicsMonitor {
      */
     private String graphicsName;
 
+
+    /**
+     * 监控项名称
+     */
+    private String monitorName;
+
+
     public String getId() {
         return id;
     }
@@ -71,5 +78,13 @@ public class DbGraphicsMonitor {
 
     public void setDbId(String dbId) {
         this.dbId = dbId;
+    }
+
+    public String getMonitorName() {
+        return monitorName;
+    }
+
+    public void setMonitorName(String monitorName) {
+        this.monitorName = monitorName;
     }
 }

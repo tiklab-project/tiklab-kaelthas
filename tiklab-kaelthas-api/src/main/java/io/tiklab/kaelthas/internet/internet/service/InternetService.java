@@ -28,4 +28,9 @@ public interface InternetService {
     //查询所有的网络信息
     List<Internet> findAll();
 
+    /**
+     * 根据id查询网络信息的概括（告警、监控项、触发器、图形）
+     * @param  id
+     */
+    Internet findInternetGeneralize(String id);
 }

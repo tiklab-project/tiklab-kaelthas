@@ -1,7 +1,7 @@
 package io.tiklab.kaelthas.starter;
 
-import io.tiklab.core.property.PropertyAndYamlSourceFactory;
 import io.tiklab.kaelthas.starter.annotation.EnableKaelthas;
+import io.tiklab.toolkit.property.PropertyAndYamlSourceFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;

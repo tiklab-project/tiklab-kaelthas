@@ -1,8 +1,10 @@
 package io.tiklab.kaelthas.internet.monitor.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.internet.internet.model.InternetOverviewQuery;
 import io.tiklab.kaelthas.internet.item.model.InternetItem;
 import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
+import io.tiklab.kaelthas.internet.monitor.model.InternetMonitorQuery;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public interface InternetMonitorService {
     void updateMonitor(InternetMonitor internetMonitor);
 
     //根据监控网络的id查询出监控项的list
-    List<InternetMonitor> findMonitorByInId(InternetMonitor internetMonitor);
+    List<InternetMonitor> findMonitorList(InternetMonitorQuery internetMonitorQuery);
 
     //根据监控网络的id删除监控项
     void deleteByInternet(String id);

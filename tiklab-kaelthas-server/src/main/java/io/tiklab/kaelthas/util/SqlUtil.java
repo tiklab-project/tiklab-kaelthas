@@ -1,9 +1,8 @@
 package io.tiklab.kaelthas.util;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import io.tiklab.kaelthas.kubernetes.kubernetesInfo.model.KuOverview;
+
+import java.util.*;
 
 public class SqlUtil {
 
@@ -48,5 +47,42 @@ public class SqlUtil {
         }
         sb.append(valueSb);
         return sb.toString().replace(",)", ")");
+    }
+
+
+    /**
+     * 拼接更新历史的数据的sql
+     * @param tableName 仓库表明
+     * @param updateList 填充数据
+     */
+    public static String getKuViewBatchUpdateSql(String tableName,  List<KuOverview> updateList) {
+        StringBuffer sql = new StringBuffer();
+        StringBuilder valueSb = new StringBuilder();
+
+        sql.append("UPDATE  ");
+        sql.append(tableName);
+        sql.append(" SET report_data= CASE ");
+
+        List<String> idList=new ArrayList<>();
+        for (int i = 0; i < updateList.size(); i++){
+            KuOverview kuOverview = updateList.get(i);
+            sql.append("WHEN id= '");
+            sql.append(kuOverview.getId());
+            sql.append("' THEN '");
+            sql.append(kuOverview.getReportData());
+            sql.append("' ");
+
+            valueSb.append("'");
+            valueSb.append(kuOverview.getId());
+            if (i==updateList.size()-1){
+                valueSb.append("'");
+            }else {
+                valueSb.append("',");
+            }
+        }
+        sql.append("ELSE report_data END WHERE id IN ( ");
+        sql.append(valueSb);
+        sql.append(")");
+        return sql.toString();
     }
 }

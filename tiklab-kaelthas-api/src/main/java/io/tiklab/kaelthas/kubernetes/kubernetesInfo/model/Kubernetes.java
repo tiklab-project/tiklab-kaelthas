@@ -58,7 +58,18 @@ public class Kubernetes {
      */
     private Page pageParam = new Page();
 
+    //告警数量
     private Integer alarmNum;
+
+    //监控项数量
+    private Integer monitorNum;
+
+    //触发器数量
+    private Integer triggerNum;
+
+
+    //图形数量
+    private Integer graphicsNum;
 
     private String message;
 
@@ -166,5 +177,29 @@ public class Kubernetes {
 
     public void setUsability(Integer usability) {
         this.usability = usability;
+    }
+
+    public Integer getMonitorNum() {
+        return monitorNum;
+    }
+
+    public void setMonitorNum(Integer monitorNum) {
+        this.monitorNum = monitorNum;
+    }
+
+    public Integer getTriggerNum() {
+        return triggerNum;
+    }
+
+    public void setTriggerNum(Integer triggerNum) {
+        this.triggerNum = triggerNum;
+    }
+
+    public Integer getGraphicsNum() {
+        return graphicsNum;
+    }
+
+    public void setGraphicsNum(Integer graphicsNum) {
+        this.graphicsNum = graphicsNum;
     }
 }

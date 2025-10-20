@@ -12,6 +12,7 @@ import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.internet.history.model.InternetHistory;
 import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
+import io.tiklab.kaelthas.internet.trigger.model.InTriggerQuery;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.util.StringUtil;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Service;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -51,6 +53,13 @@ public class InTriggerServiceImpl implements InTriggerService {
 
     @Autowired
     InternetHistoryService internetHistoryService;
+
+    @Override
+    public List<InTrigger> findTriggerList(InTriggerQuery inTriggerQuery) {
+        List<InTriggerEntity> inTriggerEntityList = inTriggerDao.findInTriggerList(inTriggerQuery);
+        List<InTrigger> inTriggers = BeanMapper.mapList(inTriggerEntityList, InTrigger.class);
+        return inTriggers;
+    }
 
     //分页查询触发器
     @Override
@@ -129,13 +138,14 @@ public class InTriggerServiceImpl implements InTriggerService {
 
         List<InTriggerEntity> entityList = inTriggerDao.findTriggerByInId(queryCondition);
 
-        return entityList.stream().map(InTriggerEntity::getId).toList();
+        return entityList.stream().map(InTriggerEntity::getId).collect(Collectors.toList());
     }
 
     //触发器定时器,定时拉取触发器进行告警
     //@Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerInTrigger() {
-        List<InTriggerEntity> inTriggerEntityList = inTriggerDao.findTriggerAll();
+        //查询网络下打开的触发器
+        List<InTriggerEntity> inTriggerEntityList = inTriggerDao.findInTriggerList(new InTriggerQuery().setState(1));
 
         if (inTriggerEntityList.isEmpty()) {
             return;
@@ -170,13 +180,18 @@ public class InTriggerServiceImpl implements InTriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+
             //将当前的触发器的表达式进行切割,获取表达式,将时间段内的表达式获取出来,然后进行计算
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<InternetHistory> informationList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
+            //通过网络ID、时间、表达式查询监控历史数据(查询20分钟内的数据)
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
+            List<InternetHistory> informationList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime,triggerExData);
 
             if (informationList.isEmpty()) {
                 return;
             }
+
+
 
             //根据监控项id进行分组,然后进行计算平均值
             Collection<List<InternetHistory>> values1 = informationList.stream().collect(Collectors.groupingBy(InternetHistory::getInternetMonitorId)).values();
@@ -229,9 +244,10 @@ public class InTriggerServiceImpl implements InTriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+            //通过网络ID、时间、表达式查询监控历史数据(查询20分钟内的数据)
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-
-            List<InternetHistory> informationList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
+            List<InternetHistory> informationList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime,triggerExData);
 
             Collection<List<InternetHistory>> values = informationList.stream().collect(Collectors.groupingBy(InternetHistory::getGatherTime)).values();
 
@@ -289,23 +305,18 @@ public class InTriggerServiceImpl implements InTriggerService {
                 return;
             }
 
+            //通过网络ID、时间、表达式查询监控历史数据(查询20分钟内的数据)
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
-
-            //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-            List<InternetHistory> historyList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime);
+            List<InternetHistory> historyList = internetHistoryService.findInternetToGatherTime(trigger.getInternetId(), beforeTime,triggerExData);
 
             if (historyList.isEmpty()) {
                 return;
             }
 
-            //将数据进行处理,取最后一个值
-            List<InternetHistory> list = historyList.stream()
-                    .collect(Collectors.toMap(
-                            InternetHistory::getInternetMonitorId, // 根据 id 去重
-                            internetHistory -> internetHistory, // 保留对象
-                            (existing, replacement) -> replacement // 如果 id 相同，保留后者
-                    ))
-                    .values().stream().toList();
+            //排序
+            List<InternetHistory> list = historyList.stream().sorted(Comparator.comparing(InternetHistory::getGatherTime).reversed()).toList();
+
 
             //将触发器的表达式和数值进行替换,看是否能够进行触发
 

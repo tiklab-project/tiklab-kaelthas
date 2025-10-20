@@ -1,13 +1,12 @@
 package io.tiklab.kaelthas.starter.config;
 
 import io.tiklab.eam.author.Authenticator;
-import io.tiklab.eam.client.author.config.AuthorConfig;
-import io.tiklab.eam.client.author.config.AuthorConfigBuilder;
-import io.tiklab.eam.client.author.handler.AuthorHandler;
-import io.tiklab.gateway.router.Router;
-import io.tiklab.gateway.router.RouterBuilder;
-import io.tiklab.gateway.router.config.RouterConfig;
-import io.tiklab.gateway.router.config.RouterConfigBuilder;
+import io.tiklab.eam.client.author.handler.DefaultAuthorHandler;
+import io.tiklab.gateway.config.GatewayConfig;
+import io.tiklab.gateway.config.IgnoreConfig;
+import io.tiklab.gateway.config.IgnoreConfigBuilder;
+import io.tiklab.gateway.handler.author.AuthorHandler;
+
 import io.tiklab.user.util.util.CodeUtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,39 +15,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KaelthasGatewayAutoConfiguration {
 
-    @Autowired
-    CodeUtilService codeUtilService;
 
-    //路由
     @Bean
-    Router router(RouterConfig routerConfig){
-        return RouterBuilder.newRouter(routerConfig);
-    }
+    GatewayConfig gatewayConfig(IgnoreConfig ignoreConfig){
+        GatewayConfig gatewayConfig = new GatewayConfig();
+        gatewayConfig.setIgnoreConfig(ignoreConfig);
 
-    //路由配置
-    @Bean
-    RouterConfig routerConfig(){
-        String[] s =  new String[]{};
-
-         if (codeUtilService.findEmbedEnable()){
-             s = new String[]{};
-         }
-        return RouterConfigBuilder.instance()
-                .preRoute(s, codeUtilService.findEmbedAddress())
-                .get();
-    }
-
-    //认证filter
-    @Bean
-    AuthorHandler authorFilter(Authenticator authenticator, AuthorConfig ignoreConfig){
-        return new AuthorHandler()
-                .setAuthenticator(authenticator)
-                .setAuthorConfig(ignoreConfig);
+        return gatewayConfig;
     }
 
     @Bean
-    public AuthorConfig authorConfig(){
-        return AuthorConfigBuilder.instance()
+    //许行配置
+    public IgnoreConfig ignoreConfig(){
+        return IgnoreConfigBuilder.instance()
                 .ignoreTypes(new String[]{
                         ".ico",
                         ".jpg",
@@ -97,9 +76,12 @@ public class KaelthasGatewayAutoConfiguration {
                         "/disk/findDiskList",
                         "/appAuthorization/validUserInProduct",
                         "/clean/data/cleanMessageData",
+                        "/actuator/shutdown",
 
                         "/init/install/findStatus",
-                        "/actuator/shutdown"
+                        "/state/apply/findApply",
+                        "/user/ldap/common/cfg/findLdapCfg",
+                        "/eam/ldap/passport/login"
                 })
                 .ignorePreUrls(new String[]{
                         "/service",

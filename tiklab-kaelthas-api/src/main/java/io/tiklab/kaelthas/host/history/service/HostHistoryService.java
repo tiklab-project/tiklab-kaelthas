@@ -17,13 +17,16 @@ public interface HostHistoryService {
     List<List<HostHistory>> findInformationByGraphics(HostHistoryQuery hostHistoryQuery);
 
     /**
-     * 查询距离当前时间指定分钟的数据
+     * 查询距离当前时间指定分钟的数据 （当前月的）
      * @param beforeTime 时间
      */
     List<HostHistory> findHostHistoryByTime(String beforeTime);
 
     /**
-     * 根据主机监控的id和指定的时间后查询存储数据
+     * 根据主机监控的id和指定的时间以及表达式后查询存储数据 （当前月的）
+     * @param hostId 主机id
+     * @param beforeTime 相对当前时间之前的时间点
+     * @param expression 监控的表达式
      */
-    List<HostHistory> findByHostTrigger(String hostId, String beforeTime);
+    List<HostHistory> findByHostTrigger(String hostId, String beforeTime,String expression);
 }

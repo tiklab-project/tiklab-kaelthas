@@ -2,6 +2,7 @@ package io.tiklab.kaelthas.internet.trigger.service;
 
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.internet.trigger.model.InTrigger;
+import io.tiklab.kaelthas.internet.trigger.model.InTriggerQuery;
 
 import java.util.List;
 
@@ -9,6 +10,8 @@ import java.util.List;
  * 网络监控中的触发器
  */
 public interface InTriggerService {
+
+    List<InTrigger> findTriggerList(InTriggerQuery inTriggerQuery);
 
     //分页查询触发器
     Pagination<InTrigger> findTriggerPage(InTrigger inTrigger);

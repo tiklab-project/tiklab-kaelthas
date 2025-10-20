@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -29,12 +30,17 @@ public class KubernetesHistoryDao {
      * @param dbTableName 历史表名
      */
     public List<KubernetesHistory> findHistoryByKuMonitorId(KubernetesHistoryQuery history, String dbTableName) {
+
+
         String sql = " select mkm.name monitorName,mki.expression,mh.* "+
-                "from mtc_ku_monitor mkm "+
-                "JOIN mtc_ku_item mki "+
-                "ON mkm.ku_item_id = mki.id "+
-                "LEFT JOIN "+dbTableName+" mh "+
-                "ON mh.ku_monitor_id = mkm.id ";
+                "from "+dbTableName+" mh "+
+                "LEFT JOIN mtc_ku_monitor mkm "+
+                "ON mh.ku_monitor_id = mkm.id "+
+                "LEFT JOIN mtc_ku_item mki  "+
+                "ON mkm.ku_item_id = mki.id ";
+        if (StringUtils.isNotBlank(history.getKuId())) {
+            sql = sql.concat(" where mkm.ku_id = '" + history.getKuId() + "'");
+        }
 
         if (StringUtils.isNotBlank(history.getBeginTime())) {
             sql = sql.concat(" and mh.gather_time >= '" + history.getBeginTime() + "'");
@@ -42,10 +48,6 @@ public class KubernetesHistoryDao {
 
         if (StringUtils.isNotBlank(history.getEndTime())) {
             sql = sql.concat(" and mh.gather_time <= '" + history.getEndTime() + "'");
-        }
-
-        if (StringUtils.isNotBlank(history.getKuId())) {
-            sql = sql.concat(" where mkm.ku_id = '" + history.getKuId() + "'");
         }
 
         if (StringUtils.isNotBlank(history.getKuMonitorId())) {
@@ -72,7 +74,7 @@ public class KubernetesHistoryDao {
 
 
     public List<KubernetesHistory> findKuOverviewTotal(List<String> list, String kuId,String beforeTime,String nowDate) {
-        String tableName = TableUtil.getK8sTableName(0);
+        String tableName = TableUtil.getK8sTableName(LocalDate.now(),0);
 
         String sql = " SELECT mh.*,mki.name,mki.report_type as reportType "+
                 "FROM mtc_ku_item mki "+
@@ -101,8 +103,8 @@ public class KubernetesHistoryDao {
     }
 
 
-    public List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime) {
-        String tableName = TableUtil.getK8sTableName(0);
+    public List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime,String expression) {
+        String tableName = TableUtil.getK8sTableName(LocalDate.now(),0);
         String sql = "SELECT mh.*,mdi.expression "+
                 "FROM mtc_ku_monitor mdm "+
                 "JOIN mtc_ku_item mdi "+
@@ -113,6 +115,11 @@ public class KubernetesHistoryDao {
         if (StringUtils.isNotBlank(kuId)) {
             sql = sql.concat(" where mh.ku_id = '" + kuId + "'");
         }
+
+        if (StringUtils.isNotBlank(expression)) {
+            sql = sql.concat(" and mdi.expression = '" + expression + "'");
+        }
+
 
         if (StringUtils.isNotBlank(beforeTime)) {
             sql = sql.concat(" and mh.gather_time > '" + beforeTime + "'");

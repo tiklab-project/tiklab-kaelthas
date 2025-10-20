@@ -19,6 +19,9 @@ public class HostHistoryQuery {
     //结束时间
     private String endTime;
 
+    //年
+    private String month;
+
     public String getHostId() {
         return hostId;
     }

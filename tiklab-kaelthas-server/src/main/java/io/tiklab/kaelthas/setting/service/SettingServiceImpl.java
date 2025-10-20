@@ -12,7 +12,7 @@ import io.tiklab.message.setting.service.MessageSendTypeService;
 import io.tiklab.rpc.annotation.Exporter;
 import io.tiklab.security.backups.service.BackupsDbService;
 import io.tiklab.user.orga.service.OrgaService;
-import io.tiklab.user.user.service.UserService;
+import io.tiklab.user.user.service.UserProcessor;
 import io.tiklab.user.usergroup.service.UserGroupService;
 import io.tiklab.kaelthas.host.host.service.HostService;
 import io.tiklab.kaelthas.host.template.service.TemplateService;
@@ -33,7 +33,7 @@ public class SettingServiceImpl implements SettingService {
     OrgaService orgaService;
 
     @Autowired
-    UserService userService;
+    UserProcessor userProcessor;
 
     @Autowired
     UserGroupService userGroupService;
@@ -71,7 +71,7 @@ public class SettingServiceImpl implements SettingService {
         //用户与权限
         Map<String, Object> map = new HashMap<>();
         map.put("orgaCount",orgaService.findOrgaNumber());
-        map.put("userCount",userService.findUserNumber());
+        map.put("userCount",userProcessor.findUserNumber());
         map.put("userGroupCount",userGroupService.findUserGroupNumber());
 
         //消息

@@ -6,12 +6,12 @@ public class TableUtil {
 
     /**
      * 获取数据库表名
+     * @param currentDate : 当前月数据、客户端传入的月数据
      * @param endName 历史数据结尾字段。0（所有数据，结尾为空）、1（1分钟数据表，结尾1）、 5（5分钟数据表，结尾5）、15（15分钟数据表，结尾15）
      */
-    public static String getDbTableName(int endName){
+    public static String getDbTableName(LocalDate currentDate,int endName){
 
         // 获取当前年、月
-        LocalDate currentDate = LocalDate.now();
         int year = currentDate.getYear();
         // 获取当前月份
         int month = currentDate.getMonthValue();
@@ -29,12 +29,12 @@ public class TableUtil {
 
     /**
      * 获取网络历史表名
+     * @param currentDate : 当前月数据、客户端传入的月数据
      * @param endName 历史数据结尾字段。0（所有数据，结尾为空）、1（1分钟数据表，结尾1）、 5（5分钟数据表，结尾5）、15（15分钟数据表，结尾15）
      */
-    public static String getInternetTableName(int endName){
+    public static String getInternetTableName(LocalDate currentDate,int endName){
 
         // 获取当前年、月
-        LocalDate currentDate = LocalDate.now();
         int year = currentDate.getYear();
         // 获取当前月份
         int month = currentDate.getMonthValue();
@@ -52,12 +52,11 @@ public class TableUtil {
 
     /**
      * 获取主机历史表名
+     * @param currentDate : 当前月数据、客户端传入的月数据
      * @param endName 历史数据结尾字段。0（所有数据，结尾为空）、1（1分钟数据表，结尾1）、 5（5分钟数据表，结尾5）、15（15分钟数据表，结尾15）
      */
-    public static String getHostTableName(int endName){
+    public static String getHostTableName(LocalDate currentDate,int endName){
 
-        // 获取当前年、月
-        LocalDate currentDate = LocalDate.now();
         int year = currentDate.getYear();
         // 获取当前月份
         int month = currentDate.getMonthValue();
@@ -76,12 +75,12 @@ public class TableUtil {
 
     /**
      * 获取数据库表名
+     *  @param currentDate : 当前月数据、客户端传入的月数据
      * @param endName 历史数据结尾字段。0（所有数据，结尾为空）、1（1分钟数据表，结尾1）、 5（5分钟数据表，结尾5）、15（15分钟数据表，结尾15）
      */
-    public static String getK8sTableName(int endName){
+    public static String getK8sTableName(LocalDate currentDate,int endName){
 
         // 获取当前年、月
-        LocalDate currentDate = LocalDate.now();
         int year = currentDate.getYear();
         // 获取当前月份
         int month = currentDate.getMonthValue();

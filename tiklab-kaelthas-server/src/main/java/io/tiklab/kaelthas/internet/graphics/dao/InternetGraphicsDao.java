@@ -63,10 +63,12 @@ public class InternetGraphicsDao {
 
     public List<InGraphicsMonitor> findGraphicsMonitors(String id) {
         String sql = """
-                SELECT mt.name as graphicsName,mgm.*
+                SELECT mt.name as graphicsName,mgm.*,mim.name as monitorName
                 FROM mtc_internet_graphics mt
                 JOIN mtc_internet_graphics_monitor mgm
                 ON mt.id = mgm.graphics_id
+                LEFT JOIN  mtc_internet_monitor mim
+                ON mgm.monitor_id = mim.id
                 """;
 
         if (StringUtils.isNotBlank(id)) {

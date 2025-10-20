@@ -14,7 +14,7 @@ import java.util.Map;
  * 网络监控概况页
  */
 @RestController
-@RequestMapping("/inOverview")
+@RequestMapping("/inOverview1")
 public class InOverviewController {
 
     @Autowired

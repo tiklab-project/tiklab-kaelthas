@@ -60,8 +60,9 @@ public class DbInfoController {
      * 修改数据源
      */
     @RequestMapping(value = "/updateDbInfo",method = RequestMethod.POST)
-    public void updateDbInfo(@RequestBody DbInfo dbInfo){
+    public Result<Void> updateDbInfo(@RequestBody DbInfo dbInfo){
         dbInfoService.updateDbInfo(dbInfo);
+        return Result.ok();
     }
 
 
@@ -69,8 +70,9 @@ public class DbInfoController {
      * 删除数据源
      */
     @RequestMapping(value = "/deleteDbInfo",method = RequestMethod.POST)
-    public void deleteDbInfo(@NotNull String id){
+    public Result<?> deleteDbInfo(@NotNull String id){
         dbInfoService.deleteDbInfo(id);
+        return Result.ok();
     }
 
     /**

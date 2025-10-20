@@ -7,6 +7,8 @@ import io.tiklab.kaelthas.internet.agent.dao.SwitchHostDao;
 import io.tiklab.kaelthas.internet.agent.model.SwitchMonitor;
 import io.tiklab.kaelthas.internet.history.model.InternetHistory;
 import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
+import io.tiklab.kaelthas.internet.internet.model.InternetOverview;
+import io.tiklab.kaelthas.internet.internet.service.InternetOverviewService;
 import io.tiklab.kaelthas.util.DataUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.snmp4j.CommunityTarget;
@@ -21,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +38,8 @@ public class SwitchOverviewService {
     private SwitchHostDao switchHostDao;
 
     @Autowired
-    private InternetHistoryService internetHistoryService;
+    InternetOverviewService internetOverviewService;
+
 
     private static final List<InternetHistory> historyList = new LinkedList<>();
 
@@ -44,38 +49,42 @@ public class SwitchOverviewService {
 
         //查询出网络列表,用于数据的采集和上报
         String dataTimeNow = DataUtil.getDataTimeNow();
+        List<InternetOverview> arrayList = new ArrayList<>();
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         List<SwitchMonitor> hostList = switchHostDao.findAllInternetList();
         try {
             for (SwitchMonitor switchMonitor : hostList) {
 
-                findPortStatus(switchMonitor,dataTimeNow);
+                findPortStatus(switchMonitor,timestamp);
 
-                findDescription(switchMonitor,dataTimeNow);
+                findDescription(switchMonitor,timestamp);
             }
         }catch (Exception e){
             throw new SystemException(e);
         }
 
 
-        if (historyList.size() > 3) {
+       /* if (historyList.size() > 3) {
             List<InternetHistory> list = new LinkedList<>(historyList);
 
             internetHistoryService.insertForList(list);
             historyList.clear();
-        }
+        }*/
 
     }
 
     //获取端口的状态信息
-    private void findPortStatus(SwitchMonitor switchMonitor, String dataTimeNow) {
+    private void findPortStatus(SwitchMonitor switchMonitor, Timestamp timestamp) {
         try {
-            InternetHistory internetHistory = new InternetHistory();
 
-            internetHistory.setInternetId(switchMonitor.getId());
-            internetHistory.setGatherTime(dataTimeNow);
+            InternetOverview internetOverview = new InternetOverview();
 
-            internetHistory.setInternetMonitorId("301");
+            internetOverview.setInternetId(switchMonitor.getId());
+            internetOverview.setCreateTime(timestamp);
+
+            internetOverview.setType("pod");
             // 创建 TransportMapping 实例
             TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping();
             transport.listen();
@@ -115,7 +124,7 @@ public class SwitchOverviewService {
                 PDU responseStatus = eventStatus.getResponse();
 
                 if (responseDescr == null || responseStatus == null) {
-                    System.out.println("SNMP 请求失败或超时");
+                    System.out.println("概况采集，SNMP 请求失败或超时");
                     break;
                 } else {
                     VariableBinding vbDescr = responseDescr.get(0);
@@ -154,8 +163,8 @@ public class SwitchOverviewService {
             }
 
             snmp.close();
-            internetHistory.setReportData(portArray.toString());
-            historyList.add(internetHistory);
+            internetOverview.setReportData(portArray.toString());
+            internetOverviewService.createInternetOverview(internetOverview);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -198,12 +207,12 @@ public class SwitchOverviewService {
     }
 
     //获取网络设备的描述信息
-    public static void findDescription(SwitchMonitor switchMonitor, String dataTimeNow) throws IOException {
+    public  void findDescription(SwitchMonitor switchMonitor, Timestamp timestamp) throws IOException {
         JSONObject jsonObject = new JSONObject();
-        InternetHistory internetHistory = new InternetHistory();
-        internetHistory.setInternetId(switchMonitor.getId());
-        internetHistory.setGatherTime(dataTimeNow);
-        internetHistory.setInternetMonitorId("304");
+        InternetOverview internetOverview = new InternetOverview();
+        internetOverview.setInternetId(switchMonitor.getId());
+        internetOverview.setCreateTime(timestamp);
+        internetOverview.setType("system");
 
         // 1. 创建 SNMP 管理器
         TransportMapping<UdpAddress> transport = new DefaultUdpTransportMapping();
@@ -246,10 +255,9 @@ public class SwitchOverviewService {
         }
 
         if (!jsonObject.isEmpty()) {
-            internetHistory.setReportData(jsonObject.toJSONString());
-            historyList.add(internetHistory);
+            internetOverview.setReportData(jsonObject.toJSONString());
+            internetOverviewService.createInternetOverview(internetOverview);
         }
-
         // 4. 关闭 SNMP 管理器
         snmp.close();
     }

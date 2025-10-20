@@ -11,6 +11,7 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.host.history.model.HostHistory;
 import io.tiklab.kaelthas.host.history.service.HostHistoryService;
+import io.tiklab.kaelthas.host.trigger.model.TriggerQuery;
 import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.rpc.annotation.Exporter;
 import io.tiklab.toolkit.beans.BeanMapper;
@@ -36,6 +37,7 @@ import org.springframework.stereotype.Service;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -217,11 +219,8 @@ public class TriggerServiceImpl implements TriggerService {
     //@Scheduled(cron = "0 0/5 * * * ? ")
     public void insertAlarmForTrigger() {
 
-        //将符合条件的触发器全部拉进来,进行判断(当前主机下根据当前监控项创建的触发器)
-        QueryCondition queryCondition = QueryBuilders.createQuery(TriggerEntity.class)
-                .eq("state", 1)
-                .get();
-        List<TriggerEntity> triggers = triggerDao.findTriggerByHostIdAndMonitorId(queryCondition);
+        //查询主机的触发器
+        List<TriggerEntity> triggers = triggerDao.findTriggerList(new TriggerQuery().setState(1));
 
         if (triggers.isEmpty()) {
             return;
@@ -257,8 +256,10 @@ public class TriggerServiceImpl implements TriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+            //通过主机id、时间段、表达式查询主机历史
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<HostHistory> informationList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime);
+            List<HostHistory> informationList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime,triggerExData);
 
             if (informationList.isEmpty()) {
                 return;
@@ -315,9 +316,10 @@ public class TriggerServiceImpl implements TriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+            //通过时间段和表达式、主机id 查询主机历史
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-
-            List<HostHistory> informationList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime);
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
+            List<HostHistory> informationList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime,triggerExData);
 
             Collection<List<HostHistory>> values = informationList.stream().collect(Collectors.groupingBy(HostHistory::getGatherTime)).values();
 
@@ -374,24 +376,22 @@ public class TriggerServiceImpl implements TriggerService {
         if (StringUtils.isBlank(trigger.getExpression())) {
             return;
         }
+        String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
+
 
         String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
 
         //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-        List<HostHistory> historyList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime);
+        List<HostHistory> historyList = hostHistoryService.findByHostTrigger(trigger.getHostId(), beforeTime,triggerExData);
 
         if (historyList.isEmpty()) {
             return;
         }
 
-        //将数据进行处理,取最后一个值
+        //排序
         List<HostHistory> list = historyList.stream()
-                .collect(Collectors.toMap(
-                        HostHistory::getMonitorId, // 根据 id 去重
-                        hostHistory -> hostHistory, // 保留对象
-                        (existing, replacement) -> replacement // 如果 id 相同，保留后者
-                ))
-                .values().stream().toList();
+                .sorted(Comparator.comparing(HostHistory::getGatherTime).reversed()).toList();
+
 
         //将触发器的表达式和数值进行替换,看是否能够进行触发
         try {
@@ -399,7 +399,7 @@ public class TriggerServiceImpl implements TriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             //将数据换成JSON的字符串
-            String json = StringUtil.getHostString(list);
+            String json = StringUtil.getHostString(list.get(0));
 
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);
@@ -457,4 +457,6 @@ public class TriggerServiceImpl implements TriggerService {
     public Long findTriggerAllNum() {
         return triggerDao.findTriggerAllNum();
     }
+
+
 }

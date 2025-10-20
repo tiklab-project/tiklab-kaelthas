@@ -31,6 +31,11 @@ public class KuGraphicsMonitor {
      */
     private String graphicsName;
 
+    /**
+     * 监控项名字
+     */
+    private String monitorName;
+
 
     public String getId() {
         return id;
@@ -62,5 +67,13 @@ public class KuGraphicsMonitor {
 
     public void setGraphicsName(String graphicsName) {
         this.graphicsName = graphicsName;
+    }
+
+    public String getMonitorName() {
+        return monitorName;
+    }
+
+    public void setMonitorName(String monitorName) {
+        this.monitorName = monitorName;
     }
 }

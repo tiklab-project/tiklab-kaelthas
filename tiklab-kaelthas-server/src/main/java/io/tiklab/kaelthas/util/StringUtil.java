@@ -25,17 +25,7 @@ public class StringUtil {
         return strJson;
     }
 
-    public static String getString(List<DbHistory> value) {
-        String strJson = "{";
-        for (int i = 0; i < value.size(); i++) {
-            strJson = strJson.concat("'" + value.get(i).getExpression() + "':'" + value.get(i).getReportData() + "'");
-            if (i != value.size() - 1) {
-                strJson = strJson.concat(",");
-            }
-        }
-        strJson = strJson.concat("}");
-        return strJson;
-    }
+
 
 
     //解析K8sList为json字符串
@@ -53,18 +43,7 @@ public class StringUtil {
         return strJson;
     }
 
-    //解析K8sList为json字符串
-    public static String getKuString(List<KubernetesHistory> value) {
-        String strJson = "{";
-        for (int i = 0; i < value.size(); i++) {
-            strJson = strJson.concat("'" + value.get(i).getExpression() + "':'" + value.get(i).getReportData() + "'");
-            if (i != value.size() - 1) {
-                strJson = strJson.concat(",");
-            }
-        }
-        strJson = strJson.concat("}");
-        return strJson;
-    }
+
 
     //解析网络List为json字符串
     public static String getInAvgNumber(Collection<List<InternetHistory>> values1) {
@@ -80,18 +59,7 @@ public class StringUtil {
         strJson = strJson.concat("}");
         return strJson;
     }
-    //解析网络List为json字符串
-    public static String getInString(List<InternetHistory> value) {
-        String strJson = "{";
-        for (int i = 0; i < value.size(); i++) {
-            strJson = strJson.concat("'" + value.get(i).getExpression() + "':'" + value.get(i).getReportData() + "'");
-            if (i != value.size() - 1) {
-                strJson = strJson.concat(",");
-            }
-        }
-        strJson = strJson.concat("}");
-        return strJson;
-    }
+
 
    //解析主机List为json字符串
     public static String getHostAvgNumber(Collection<List<HostHistory>> values1) {
@@ -108,8 +76,28 @@ public class StringUtil {
         return strJson;
     }
 
-    //解析主机List为json字符串
-    public static String getHostString(List<HostHistory> value) {
+    //解析主机为json字符串
+    public static String getHostString(HostHistory history) {
+        String strJson = "{'"+history.getExpression()+ "':'" + history.getReportData() + "'}";
+
+        return strJson;
+    }
+
+    //解析数据库为json字符串
+    public static String getDbString(DbHistory dbHistory) {
+        String strJson = "{'"+dbHistory.getExpression()+ "':'" + dbHistory.getReportData() + "'}";
+
+        return strJson;
+    }
+
+    //解析K8s为json字符串
+    public static String getKuString(KubernetesHistory kubernetesHistory) {
+        String strJson = "{'"+kubernetesHistory.getExpression()+ "':'" + kubernetesHistory.getReportData() + "'}";
+
+        return strJson;
+    }
+    //解析网络List为json字符串
+    public static String getInString(List<InternetHistory> value) {
         String strJson = "{";
         for (int i = 0; i < value.size(); i++) {
             strJson = strJson.concat("'" + value.get(i).getExpression() + "':'" + value.get(i).getReportData() + "'");
@@ -121,4 +109,16 @@ public class StringUtil {
         return strJson;
     }
 
+    //解析K8sList为json字符串
+    public static String getKuListString(List<KubernetesHistory> value) {
+        String strJson = "{";
+        for (int i = 0; i < value.size(); i++) {
+            strJson = strJson.concat("'" + value.get(i).getExpression() + "':'" + value.get(i).getReportData() + "'");
+            if (i != value.size() - 1) {
+                strJson = strJson.concat(",");
+            }
+        }
+        strJson = strJson.concat("}");
+        return strJson;
+    }
 }

@@ -10,6 +10,7 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.service.KubernetesHistoryService;
+import io.tiklab.kaelthas.kubernetes.trigger.model.KuTriggerQuery;
 import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.alarm.model.Alarm;
@@ -111,7 +112,7 @@ public class KuTriggerServiceImpl implements KuTriggerService {
         //查询触发器的ids
         List<KuTrigger> triggerEntities = this.findKuTriggerByKuId(id);
         //获取触发器的ids
-        List<String> stringList = triggerEntities.stream().map(KuTrigger::getId).toList();
+        List<String> stringList = triggerEntities.stream().map(KuTrigger::getId).collect(Collectors.toList());
         //删除触发器的关联表信息
         kuTriggerMediumService.deleteByTriggerIds(stringList);
         //根据kuId删除触发器信息
@@ -124,17 +125,15 @@ public class KuTriggerServiceImpl implements KuTriggerService {
     //根据k8s监控id查询触发器list
     @Override
     public List<KuTrigger> findKuTriggerByKuId(String id) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(KuTriggerEntity.class)
-                .eq("kuId", id)
-                .get();
-        List<KuTriggerEntity> kuTriggerByKuId = kuTriggerDao.findKuTriggerByKuId(queryCondition);
+        List<KuTriggerEntity> kuTriggerByKuId = kuTriggerDao.findKuTriggerByKuId(id);
         return BeanMapper.mapList(kuTriggerByKuId, KuTrigger.class);
     }
 
     //定时任务,定时使用触发器进行告警
     //@Scheduled(cron = "0 0/5 * * * ? ")
     public void TimerKuTrigger() {
-        List<KuTriggerEntity> kuTriggerEntityList = kuTriggerDao.findAllTrigger();
+        //查询k8s下启动中的触发器
+        List<KuTriggerEntity> kuTriggerEntityList = kuTriggerDao.findKuTriggerList(new KuTriggerQuery().setState(1));
         if (kuTriggerEntityList.isEmpty()) {
             return;
         }
@@ -164,30 +163,25 @@ public class KuTriggerServiceImpl implements KuTriggerService {
                 return;
             }
 
+            //通过k8sID、时间、表达式查询监控历史数据(查询20分钟内的数据)
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
-
-            //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-            List<KubernetesHistory> historyList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime);
+            List<KubernetesHistory> historyList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime,triggerExData);
 
             if (historyList.isEmpty()) {
                 return;
             }
 
-            //将数据进行处理,取最后一个值
-            List<KubernetesHistory> list = historyList.stream()
-                    .collect(Collectors.toMap(
-                            KubernetesHistory::getKuMonitorId, // 根据 id 去重
-                            kubernetesHistory -> kubernetesHistory, // 保留对象
-                            (existing, replacement) -> replacement // 如果 id 相同，保留后者
-                    ))
-                    .values().stream().toList();
+            //排序
+            List<KubernetesHistory> list = historyList.stream().sorted(Comparator.comparing(KubernetesHistory::getGatherTime).reversed()).collect(Collectors.toList());
+
 
             //将触发器的表达式和数值进行替换,看是否能够进行触发
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             //将数据换成JSON的字符串
-            String json = StringUtil.getKuString(list);
+            String json = StringUtil.getKuString(list.get(0));
 
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);
@@ -242,8 +236,10 @@ public class KuTriggerServiceImpl implements KuTriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+            //通过k8sID、时间、表达式查询监控历史数据(查询20分钟内的数据)
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-            List<KubernetesHistory> informationList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime);
+            List<KubernetesHistory> informationList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime,triggerExData);
 
             if (informationList.isEmpty()) {
                 return;
@@ -297,9 +293,10 @@ public class KuTriggerServiceImpl implements KuTriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+            //通过k8sID、时间、表达式查询监控历史数据(查询20分钟内的数据)
+            String triggerExData = conversionScriptsUtils.getTriggerExData(trigger.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, trigger.getRangeTime(), null);
-
-            List<KubernetesHistory> informationList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime);
+            List<KubernetesHistory> informationList = kubernetesHistoryService.findKuHistoryByKuId(trigger.getKuId(), beforeTime,triggerExData);
 
             Collection<List<KubernetesHistory>> values = informationList.stream().collect(Collectors.groupingBy(KubernetesHistory::getGatherTime)).values();
 
@@ -310,12 +307,12 @@ public class KuTriggerServiceImpl implements KuTriggerService {
 
             BigDecimal triggerNum = new BigDecimal(0);
 
+
             for (List<KubernetesHistory> value : values) {
                 if (value.isEmpty()) {
                     continue;
                 }
-
-                String strJson = StringUtil.getKuString(value);
+                String strJson = StringUtil.getKuListString(value);
                 JSONObject jsonObject = JSONObject.parseObject(strJson);
                 //将表达式替换成值,然后进行运算
                 String string = conversionScriptsUtils.replaceValue(trigger.getExpression(), jsonObject);
@@ -333,14 +330,12 @@ public class KuTriggerServiceImpl implements KuTriggerService {
                     } catch (ScriptException e) {
                         throw new RuntimeException(e);
                     }
-
                 }
-
             }
 
             BigDecimal divide = triggerNum.divide(total, 2, RoundingMode.DOWN).multiply(BigDecimal.valueOf(100));
 
-            if (divide.compareTo(BigDecimal.valueOf(trigger.getPercentage())) <= 0) {
+            if (divide.compareTo(BigDecimal.valueOf(trigger.getPercentage())) >= 0) {
                 alarm.setStatus(2);
                 alarm.setHostId(trigger.getKuId());
                 alarm.setTriggerId(trigger.getId());
@@ -349,7 +344,6 @@ public class KuTriggerServiceImpl implements KuTriggerService {
                 alarm.setSeverityLevel(trigger.getSeverityLevel());
                 alarmService.createAlarmForKubernetes(alarm);
             }
-
         } catch (ScriptException e) {
             throw new RuntimeException(e);
         }

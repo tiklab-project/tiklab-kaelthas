@@ -4,6 +4,7 @@ import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.internet.item.model.InternetItem;
 import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
+import io.tiklab.kaelthas.internet.monitor.model.InternetMonitorQuery;
 import io.tiklab.kaelthas.internet.monitor.service.InternetMonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,8 +62,8 @@ public class InternetMonitorController {
      * 根据网络id查询出网络下的监控项
      */
     @RequestMapping(value = "/findMonitorByInId",method = RequestMethod.POST)
-    public Result<?> findMonitorByInId(@RequestBody InternetMonitor internetMonitor){
-        List<InternetMonitor> monitorList = internetMonitorService.findMonitorByInId(internetMonitor);
+    public Result<?> findMonitorByInId(@RequestBody InternetMonitorQuery internetMonitorQuery){
+        List<InternetMonitor> monitorList = internetMonitorService.findMonitorList(internetMonitorQuery);
         return Result.ok(monitorList);
     }
 

@@ -24,11 +24,13 @@ import io.tiklab.kaelthas.host.monitor.service.HostMonitorService;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 import io.tiklab.kaelthas.host.trigger.service.TriggerService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 主机中的业务
@@ -126,11 +128,17 @@ public class HostServiceImpl implements HostService {
         HostEntity hostEntity = hostDao.findHostById(id);
         Host host = BeanMapper.map(hostEntity, Host.class);
 
+        if (ObjectUtils.isNotEmpty(host.getHostGroup())){
+            host.setGroupId(host.getHostGroup().getId());
+        }
         //查询主机下监控项
         List<HostMonitor> entityList = monitorService.findMonitorByHostId(id);
 
         //查询主机下触发器
         List<Trigger> triggerList = triggerService.findTriggerListById(id);
+
+        //查询主机下图形
+        List<Graphics> informationByGraphics = graphicsService.findInformationByGraphics(id);
 
         Alarm alarm = new Alarm();
         alarm.setHostId(id);
@@ -143,6 +151,7 @@ public class HostServiceImpl implements HostService {
 
         host.setAlarmNum(alarmList.size());
 
+        host.setGraphicsNum(informationByGraphics.size());
         joinTemplate.joinQuery(host);
 
         return host;
@@ -171,7 +180,7 @@ public class HostServiceImpl implements HostService {
 
             //删除主机下图形与监控项关联的信息,先根据主机id查询出图形的ids,根据图形的ids删除关联表信息
             List<Graphics> graphicsList = graphicsService.findInformationByGraphics(id);
-            List<String> stringList = graphicsList.stream().map(Graphics::getId).toList();
+            List<String> stringList = graphicsList.stream().map(Graphics::getId).collect(Collectors.toList());
             graphicsMonitorService.deleteByGraphicsIds(stringList);
 
             //删除图表和删除模板关联
@@ -202,7 +211,7 @@ public class HostServiceImpl implements HostService {
                 .get();
 
         List<HostEntity> hostEntityList = hostDao.findHostByIp(queryCondition);
-        List<String> stringList = hostEntityList.stream().map(HostEntity::getId).toList();
+        List<String> stringList = hostEntityList.stream().map(HostEntity::getId).collect(Collectors.toList());
 
         //根据主机ids查询出主机下的所有监控项
         List<HostMonitor> monitorList = monitorService.findHostMonitorListByHostIds(stringList);
@@ -220,7 +229,8 @@ public class HostServiceImpl implements HostService {
      */
     @Override
     public Pagination<Host> findHostPage(Host host) {
-        return hostDao.findHostPageForMonitoring(host);
+        Pagination<Host> pagination = hostDao.findHostPageForMonitoring(host);
+        return pagination;
     }
 
     //findList方法

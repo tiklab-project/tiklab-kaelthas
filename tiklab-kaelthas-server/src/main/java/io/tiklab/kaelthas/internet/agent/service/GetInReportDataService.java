@@ -7,7 +7,10 @@ import io.tiklab.kaelthas.internet.agent.model.SwitchMonitor;
 import io.tiklab.kaelthas.internet.history.model.InternetHistory;
 import io.tiklab.kaelthas.internet.history.service.InternetHistoryService;
 import io.tiklab.kaelthas.util.DataUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
@@ -28,6 +31,7 @@ import java.util.*;
  */
 @Component
 public class GetInReportDataService {
+    private static Logger logger = LoggerFactory.getLogger(GetInReportDataService.class);
 
     @Autowired
     private SwitchHostDao switchHostDao;
@@ -74,7 +78,7 @@ public class GetInReportDataService {
         Long aLong = inStoreTime.get("time");
         long time = System.currentTimeMillis() - aLong;
         //定时上报数据 存储时间大于30条或者时间超过1分钟
-        if (historyList.size() > 30||time>=60000) {
+        if ((historyList.size() > 30||time>=60000)&&CollectionUtils.isNotEmpty(historyList)) {
             List<InternetHistory> list = new LinkedList<>(historyList);
             internetHistoryService.insertForList(list);
             historyList.clear();
@@ -140,21 +144,21 @@ public class GetInReportDataService {
             long outOctetsSum = 0;
 
             List<Long> outOctetsList = getOutOctets(snmp, target);
+            if (CollectionUtils.isNotEmpty(outOctetsList)){
+                for (int i = 0; i < outOctetsList.size(); i++) {
 
-            for (int i = 0; i < outOctetsList.size(); i++) {
+                    long outOctets = outOctetsList.get(i);
 
-                long outOctets = outOctetsList.get(i);
+                    outOctetsSum += outOctets;
 
-                outOctetsSum += outOctets;
+                }
+                BigDecimal divide = new BigDecimal(outOctetsSum).divide(new BigDecimal(1000000000),2, RoundingMode.FLOOR);
 
+                internetHistory.setReportData(divide.toString());
+                historyList.add(internetHistory);
             }
-            BigDecimal divide = new BigDecimal(outOctetsSum).divide(new BigDecimal(1000000000),2, RoundingMode.FLOOR);
-
-            internetHistory.setReportData(divide.toString());
-
             snmp.close();
-            historyList.add(internetHistory);
-
+            transport.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,7 +206,7 @@ public class GetInReportDataService {
                 PDU responseStatus = eventStatus.getResponse();
 
                 if (responseDescr == null || responseStatus == null) {
-                    System.out.println("SNMP 请求失败或超时");
+                    logger.info("SNMP 请求失败或超时");
                     break;
                 } else {
                     VariableBinding vbDescr = responseDescr.get(0);
@@ -241,8 +245,11 @@ public class GetInReportDataService {
             }
 
             snmp.close();
-            internetHistory.setReportData(portArray.toString());
-            historyList.add(internetHistory);
+           if (CollectionUtils.isNotEmpty(portArray)){
+               internetHistory.setReportData(portArray.toString());
+               historyList.add(internetHistory);
+           }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -286,6 +293,7 @@ public class GetInReportDataService {
         boolean hasNext = true;
         while (hasNext) {
             ResponseEvent event = snmp.send(pdu, target);
+            Exception error = event.getError();
             PDU response = event.getResponse();
 
             if (response == null) {

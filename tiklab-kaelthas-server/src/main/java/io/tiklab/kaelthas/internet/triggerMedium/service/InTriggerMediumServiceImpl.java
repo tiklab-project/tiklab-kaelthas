@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 触发器和消息渠道的关联表
@@ -33,7 +34,7 @@ public class InTriggerMediumServiceImpl implements InTriggerMediumService{
             map.put("trigger_id", string);
             map.put("medium_id", id);
             return map;
-        }).toList();
+        }).collect(Collectors.toList());
         String sql = SqlUtil.getBatchInsertSql("mtc_internet_trigger_medium", list);
         inTriggerMediumDao.createTriggerMedium(sql);
     }

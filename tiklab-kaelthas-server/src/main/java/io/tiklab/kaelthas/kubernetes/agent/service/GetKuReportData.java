@@ -18,6 +18,7 @@ import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.service.KubernetesHistoryService;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import io.tiklab.kaelthas.kubernetes.monitor.service.KuMonitorService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +65,7 @@ public class GetKuReportData {
 
         Long aLong = kuStoreTime.get("time");
         long time = System.currentTimeMillis() - aLong;
-        if (historyList.size() > 30||time>=60000) {
+        if ((historyList.size() > 30||time>=60000)&& CollectionUtils.isNotEmpty(historyList)) {
             List<KubernetesHistory> list = new LinkedList<>(historyList);
             historyService.insertForList(list);
             historyList.clear();

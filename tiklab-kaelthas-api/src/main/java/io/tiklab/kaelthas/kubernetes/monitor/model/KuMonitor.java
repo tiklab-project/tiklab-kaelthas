@@ -5,7 +5,7 @@ import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
-import io.tiklab.toolkit.join.annotation.JoinQuery;
+import io.tiklab.toolkit.join.annotation.JoinField;
 import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
 
 @Join
@@ -36,7 +36,7 @@ public class KuMonitor {
     @Mappings({
             @Mapping(source = "kubernetesItem.id", target = "kuItemId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private KubernetesItem kubernetesItem;
 
     /**

@@ -4,8 +4,11 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.host.trigger.entity.TriggerEntity;
 import io.tiklab.kaelthas.kubernetes.trigger.entity.KuTriggerEntity;
 import io.tiklab.kaelthas.kubernetes.trigger.model.KuTrigger;
+import io.tiklab.kaelthas.kubernetes.trigger.model.KuTriggerQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -52,7 +55,10 @@ public class KuTriggerDao {
         jpaTemplate.update(entity);
     }
 
-    public List<KuTriggerEntity> findKuTriggerByKuId(QueryCondition queryCondition) {
+    public List<KuTriggerEntity> findKuTriggerByKuId(String kuId) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(KuTriggerEntity.class)
+                .eq("kuId", kuId)
+                .get();
         return jpaTemplate.findList(queryCondition, KuTriggerEntity.class);
     }
 
@@ -60,11 +66,15 @@ public class KuTriggerDao {
         jpaTemplate.delete(deleteCondition);
     }
 
-    public List<KuTriggerEntity> findKuTriggerByKuIdAndState(QueryCondition queryCondition) {
-        return jpaTemplate.findList(queryCondition, KuTriggerEntity.class);
-    }
-
     public List<KuTriggerEntity> findAllTrigger() {
         return jpaTemplate.findAll(KuTriggerEntity.class);
+    }
+
+    public List<KuTriggerEntity> findKuTriggerList(KuTriggerQuery kuTriggerQuery) {
+        //将符合条件的触发器全部拉进来,进行判断(当前主机下根据当前监控项创建的触发器)
+        QueryCondition queryCondition = QueryBuilders.createQuery(KuTriggerEntity.class)
+                .eq("state", kuTriggerQuery.getState())
+                .get();
+        return jpaTemplate.findList(queryCondition, KuTriggerEntity.class);
     }
 }

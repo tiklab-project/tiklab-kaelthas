@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -45,7 +46,7 @@ public class HostHistoryServiceImpl implements HostHistoryService {
     @Override
     public void insertForList(List<HostHistory> entityList) {
         //获取数据库表名
-        String dbTableName = TableUtil.getHostTableName(0);
+        String dbTableName = TableUtil.getHostTableName(LocalDate.now(),0);
 
         List<Map<String, Object>> mapList = getMapList(entityList);
         String historySql = SqlUtil.getBatchInsertSql(dbTableName, mapList);
@@ -121,7 +122,7 @@ public class HostHistoryServiceImpl implements HostHistoryService {
 
     @Override
     public List<HostHistory> findHostHistoryByTime(String beforeTime) {
-        String dbTableName = TableUtil.getHostTableName(0);
+        String dbTableName = TableUtil.getHostTableName(LocalDate.now(),0);
         List<HostHistory> hostHistoryList = hostHistoryDao.findHostHistoryByTime(beforeTime, dbTableName);
         return hostHistoryList;
     }
@@ -130,8 +131,8 @@ public class HostHistoryServiceImpl implements HostHistoryService {
      * 根据主机监控的id和指定的时间后查询存储数据
      */
     @Override
-    public List<HostHistory> findByHostTrigger(String hostId, String beforeTime) {
-        return hostHistoryDao.findByHostTrigger(hostId, beforeTime);
+    public List<HostHistory> findByHostTrigger(String hostId, String beforeTime,String expression) {
+        return hostHistoryDao.findByHostTrigger(hostId, beforeTime,expression);
     }
 
 
@@ -144,39 +145,52 @@ public class HostHistoryServiceImpl implements HostHistoryService {
     public List<List<HostHistory>> joinMonitorHistoryData(HostHistoryQuery hostHistoryQuery, int data){
 
         List<List<HostHistory>> resList = new ArrayList<>();
-        List<String> timeList = new ArrayList<>();
-        List<String> dataList = new ArrayList<>();
 
         //根据主机的id查询主机当中的图表
         List<Graphics> graphicsList = graphicsService.findInformationByGraphics(hostHistoryQuery.getHostId());
-        List<String> xTime = ConversionDateUtil.splitTime(hostHistoryQuery.getBeginTime(), hostHistoryQuery.getEndTime(), data);
+       // List<String> xTime = ConversionDateUtil.splitTime(hostHistoryQuery.getBeginTime(), hostHistoryQuery.getEndTime(), data);
         //2.根据查询出的图表,分别查询出图表中对应的监控项数据
         for (Graphics graphics : graphicsList) {
+
             //查询出每个图表下的监控项
             List<GraphicsMonitor> byGraphics = graphicsMonitorService.findByGraphics(graphics.getId());
             //根据监控项的ids查询监控项的数据
             //查询每条监控项的数据集合
             List<HostHistory> list = new LinkedList<>();
             for (GraphicsMonitor graphicsMonitor : byGraphics) {
-
-                List<HostHistory> reportList = new LinkedList<>();
+                List<String> dataList = new ArrayList<>();
+                List<String> timeList = new ArrayList<>();
 
                 //通过监控项id查询监控历史记录
                 hostHistoryQuery.setHostMonitorId(graphicsMonitor.getMonitorId());
 
                 //通过监控项id和时间段查询历史
                 int endName = TableUtil.getHistoryEndName(data);
-                String dbTableName = TableUtil.getHostTableName(endName);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDate localDate = LocalDate.parse(hostHistoryQuery.getBeginTime(), formatter);
+                String dbTableName = TableUtil.getHostTableName(localDate,endName);
                 List<HostHistory> hostHistoryList = hostHistoryDao.findHistoryByMonitorId(hostHistoryQuery, dbTableName);
 
                 HostHistory hostHistory = new HostHistory();
+                //图形名称
                 hostHistory.setGraphicsName(graphicsMonitor.getGraphicsName());
+                //监控项名字
+                hostHistory.setName(graphicsMonitor.getMonitorName());
                 if (!hostHistoryList.isEmpty()) {
+
+                    // 根据 GatherTime 去重
+                     hostHistoryList = hostHistoryList.stream()
+                            .collect(Collectors.toMap(
+                                    HostHistory::getGatherTime,  // 使用 GatherTime 作为键
+                                    HostHistory -> HostHistory,  // 使用整个 Person 对象作为值
+                                    (existing, replacement) -> existing  // 保留第一个出现的对象
+                            ))
+                            .values()
+                            .stream().collect(Collectors.toList());
+
                     hostHistoryList = hostHistoryList.stream().sorted(Comparator.comparing(HostHistory::getGatherTime))
                             .collect(Collectors.toList());
 
-                    //监控项名字
-                    hostHistory.setName(hostHistoryList.get(0).getMonitorName());
 
                     //设置告警信息
                     setThreshold(hostHistoryList,hostHistory);
@@ -194,8 +208,7 @@ public class HostHistoryServiceImpl implements HostHistoryService {
                                 timeList.add(gatherTime);
                                 dataList.add(reportData);
                             }
-                        }
-                        if (i==hostHistoryList.size()-1){
+                        }else if (i==hostHistoryList.size()-1){
                             //查询的数据最后一个时间不等于客户端传入的结束时间 添加内容为null
                             if (!hostHistoryQuery.getEndTime().equals(gatherTime)){
                                 timeList.add(hostHistoryQuery.getEndTime());
@@ -213,8 +226,13 @@ public class HostHistoryServiceImpl implements HostHistoryService {
                     hostHistory.setData(dataList);
                     hostHistory.setDataTimes(timeList);
                 }else {
+                    //没有历史记录数据,只需要添加开始时间和结束时间
+                    dataList.add("null");
+                    dataList.add("null");
+                    timeList.add(hostHistoryQuery.getBeginTime());
+                    timeList.add(hostHistoryQuery.getEndTime());
                     hostHistory.setData(dataList);
-                    hostHistory.setDataTimes(xTime);
+                    hostHistory.setDataTimes(timeList);
                 }
 
                 if (StringUtils.isNotBlank(hostHistory.getName())) {
@@ -309,7 +327,7 @@ public class HostHistoryServiceImpl implements HostHistoryService {
             map.put("report_data", history.getReportData());
             map.put("gather_time", history.getGatherTime());
             return map;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 
 

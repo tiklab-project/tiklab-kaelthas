@@ -36,7 +36,7 @@ public class AgentSqlUtil {
         LocalDateTime currentDate = LocalDateTime.now();
 
         // 定义日期格式
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         // 将日期格式化为字符串
         return currentDate.format(formatter);

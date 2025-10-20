@@ -72,4 +72,14 @@ public class KubernetesController {
         return Result.ok(kubernetesList);
     }
 
+
+    /**
+     * 根据id查询k8s信息的概括（告警、监控项、触发器、图形）
+     */
+    @RequestMapping(value = "/findKuGeneralize", method = RequestMethod.POST)
+    public Result<Kubernetes> findKuGeneralize(@NotNull String kuId) {
+        Kubernetes kuOverview = kubernetesService.findKuGeneralize(kuId);
+        return Result.ok(kuOverview);
+    }
+
 }

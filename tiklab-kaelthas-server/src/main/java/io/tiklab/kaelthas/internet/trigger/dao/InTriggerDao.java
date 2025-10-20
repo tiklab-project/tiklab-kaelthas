@@ -5,8 +5,10 @@ import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.host.trigger.entity.TriggerEntity;
 import io.tiklab.kaelthas.internet.trigger.entity.InTriggerEntity;
 import io.tiklab.kaelthas.internet.trigger.model.InTrigger;
+import io.tiklab.kaelthas.internet.trigger.model.InTriggerQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,6 +21,14 @@ public class InTriggerDao {
 
     @Autowired
     private JpaTemplate jpaTemplate;
+
+    public List<InTriggerEntity> findLikeTrigger(InTriggerQuery inTriggerQuery) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(InTriggerEntity.class)
+                .eq("internetId", inTriggerQuery.getInternetId())
+                .eq("status", inTriggerQuery.getState())
+                .get();
+        return jpaTemplate.findList(queryCondition,InTriggerEntity.class);
+    }
 
     public Pagination<InTrigger> findTriggerPage(InTrigger inTrigger) {
         String sql = """
@@ -71,5 +81,12 @@ public class InTriggerDao {
                 .like("expression", expression)
                 .get();
         return jpaTemplate.findList(queryCondition,InTriggerEntity.class);
+    }
+
+    public List<InTriggerEntity> findInTriggerList(InTriggerQuery inTriggerQuery) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(InTriggerEntity.class)
+                .eq("status", inTriggerQuery.getState())
+                .get();
+        return  jpaTemplate.findList(queryCondition, InTriggerEntity.class);
     }
 }

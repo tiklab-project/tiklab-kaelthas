@@ -29,9 +29,13 @@ public interface KubernetesHistoryService {
      */
     Map<String,Object> findKuOverviewTotal(String kuId);
 
+
     /**
-     * 根据k8s监控的id和时间查询时间之后的存储数据
+     * 根据监控k8s的id和时间、监控表达式查询时间之后的存储数据
+     * @param kuId k8s的id
+     * @param beforeTime 相对当前时间之前的时间点
+     * @param expression 监控的表达式
      */
-    List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime);
+    List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime,String expression);
 
 }

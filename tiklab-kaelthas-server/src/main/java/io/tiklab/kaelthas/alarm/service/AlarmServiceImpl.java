@@ -2,11 +2,13 @@ package io.tiklab.kaelthas.alarm.service;
 
 import com.alibaba.fastjson.JSONObject;
 import io.tiklab.core.page.Pagination;
+import io.tiklab.core.page.PaginationBuilder;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.alarm.entity.AlarmEntity;
+import io.tiklab.kaelthas.alarm.model.AlarmQuery;
 import io.tiklab.kaelthas.internet.internet.model.Internet;
 import io.tiklab.kaelthas.internet.internet.service.InternetService;
 import io.tiklab.kaelthas.kubernetes.kubernetesInfo.model.Kubernetes;
@@ -62,12 +64,29 @@ public class AlarmServiceImpl implements AlarmService {
     @Autowired
     private InternetService internetService;
 
-    @Value(value = "${base.url}")
+    @Value(value = "${base.url:null}")
     private String baseUrl;
 
     @Override
+    public Alarm findOne(String id) {
+        AlarmEntity alarmEntity = alarmDao.findAlarm(id);
+        Alarm alarm = BeanMapper.map(alarmEntity, Alarm.class);
+        return alarm;
+    }
+
+    @Override
+    public List<Alarm> findAlarmList(AlarmQuery alarmQuery) {
+        List<AlarmEntity> alarmEntityList = alarmDao.findAlarmList(alarmQuery);
+        List<Alarm> alarmList = BeanMapper.mapList(alarmEntityList,Alarm.class);
+        return alarmList;
+    }
+
+    @Override
     public Pagination<Alarm> findAlarmPage(Alarm alarm) {
-        return alarmDao.findAlarmPage(alarm);
+        Pagination<AlarmEntity> alarmPage = alarmDao.findAlarmPage(alarm);
+        List<Alarm> alarmList = BeanMapper.mapList(alarmPage.getDataList(),Alarm.class);
+
+        return PaginationBuilder.build(alarmPage,alarmList);
     }
 
     //主机创建告警

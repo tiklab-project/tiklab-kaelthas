@@ -24,23 +24,12 @@ public interface DbHistoryService {
 
 
     /**
-     * 根据监控数据库id和时间蛋查询上报的数据
-     * @param dbId 监控数据库的id
-     *
+     * 根据监控数据库的id和时间、监控表达式查询时间之后的存储数据
+     * @param dbId 数据库id
+     * @param beforeTime 相对当前时间之前的时间点
+     * @param expression 监控的表达式
      */
-    List<DbHistory> findInformationToGatherTime(String dbId, String beforeDateTime);
-
-    /**
-     * 查询数据库监控的存储信息,beforeTime时间之后的
-     */
-    List<DbHistory> findHistoryByGatherTime(String dbId, String beforeTime);
-
-
-
-    /**
-     * 根据监控数据库的id和时间查询时间之后的存储数据
-     */
-    List<DbHistory> findDbHistoryByDbId(String dbId,String beforeTime);
+    List<DbHistory> findInHistoryByGatherTime(String dbId, String beforeTime,String expression);
 
 
 }

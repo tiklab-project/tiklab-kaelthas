@@ -69,6 +69,21 @@ public class Internet {
     private Integer alarmNum;
 
     /**
+     * 监控项数量
+     */
+    private Integer monitorNum;
+
+    /**
+     * 触发器数量
+     */
+    private Integer triggerNum;
+
+    /**
+     * 图形数量
+     */
+    private Integer graphicsNum;
+
+    /**
      * 消息
      */
     private String message;
@@ -178,5 +193,29 @@ public class Internet {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public Integer getMonitorNum() {
+        return monitorNum;
+    }
+
+    public void setMonitorNum(Integer monitorNum) {
+        this.monitorNum = monitorNum;
+    }
+
+    public Integer getTriggerNum() {
+        return triggerNum;
+    }
+
+    public void setTriggerNum(Integer triggerNum) {
+        this.triggerNum = triggerNum;
+    }
+
+    public Integer getGraphicsNum() {
+        return graphicsNum;
+    }
+
+    public void setGraphicsNum(Integer graphicsNum) {
+        this.graphicsNum = graphicsNum;
     }
 }

@@ -3,8 +3,11 @@ package io.tiklab.kaelthas.kubernetes.monitor.service;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitorQuery;
+import io.tiklab.toolkit.join.annotation.FindOne;
 import io.tiklab.toolkit.join.annotation.JoinProvider;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -12,6 +15,9 @@ import java.util.List;
  */
 @JoinProvider(model = KuMonitor.class)
 public interface KuMonitorService {
+
+    @FindOne
+    KuMonitor findOne(@NotNull String id);
 
     //根据名称和id进行分页查询
     Pagination<KuMonitor> findKuMonitorPage(KuMonitor kuMonitor);
@@ -40,4 +46,11 @@ public interface KuMonitorService {
      * 根据监控项类型查询监控项字典表
      */
     List<KubernetesItem> findItemList(KubernetesItem kubernetesItem);
+
+
+    /**
+     * 条件查询列表
+     * @param kuMonitorQuery
+     */
+    List<KuMonitor> findKuMonitorList(KuMonitorQuery kuMonitorQuery);
 }

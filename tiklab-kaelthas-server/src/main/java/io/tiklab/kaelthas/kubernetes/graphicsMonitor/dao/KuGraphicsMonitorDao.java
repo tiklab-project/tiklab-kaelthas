@@ -33,10 +33,12 @@ public class KuGraphicsMonitorDao {
     public List<KuGraphicsMonitor> findGraphicsMonitors(String graphicsId) {
 
         String sql = """
-                SELECT mt.name as graphicsName,mgm.*
+                SELECT mt.name as graphicsName,mgm.*,mkm.name as monitorName
                 FROM mtc_ku_graphics mt
                 JOIN mtc_ku_graphics_monitor mgm
                 ON mt.id = mgm.graphics_id
+                LEFT JOIN mtc_ku_monitor mkm
+                ON  mgm.monitor_id = mkm.id
                 """;
 
         if (StringUtils.isNotBlank(graphicsId)) {

@@ -14,12 +14,16 @@ import io.tiklab.kaelthas.kubernetes.agent.common.ConversionAllTypeUtil;
 import io.tiklab.kaelthas.kubernetes.agent.dao.KuCollectionDao;
 import io.tiklab.kaelthas.kubernetes.history.model.KubernetesHistory;
 import io.tiklab.kaelthas.kubernetes.history.service.KubernetesHistoryService;
+import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
+import io.tiklab.kaelthas.kubernetes.kubernetesInfo.model.KuOverview;
+import io.tiklab.kaelthas.kubernetes.kubernetesInfo.service.KuOverviewService;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -34,6 +38,9 @@ public class ClusterItemOverview {
     @Autowired
     private KubernetesHistoryService kubernetesHistoryService;
 
+    @Autowired
+    private KuOverviewService kuOverviewService;
+
     //定时采集k8s的信息,用于概况页面展示
     //@Scheduled(cron = "0 0/5 * * * ? ")
     public void getClusterOverview() {
@@ -44,26 +51,24 @@ public class ClusterItemOverview {
             return;
         }
 
-        List<KubernetesHistory> list  = new LinkedList<>();
+        List<KuOverview> list  = new LinkedList<>();
 
         List<KuMonitor> monitorList = getKubernetesMonitors(kuMonitors);
 
         for (KuMonitor kuMonitor : monitorList) {
 
-            KubernetesHistory history = getHistory(kuMonitor);
+            KuOverview history = getHistory(kuMonitor);
             list.add(history);
         }
-
-        kubernetesHistoryService.insertForList(list);
-
+        kuOverviewService.createKuOverview(list);
     }
 
-    //模拟监控项的id(1-22),采集指定的监控项
+    //模拟监控项的id(1-21),采集指定的监控项
     @NotNull
     private static List<KuMonitor> getKubernetesMonitors(List<KuMonitor> kuMonitors) {
         List<KuMonitor> monitorList = new LinkedList<>();
 
-        for (int i = 1; i < 23; i++) {
+        for (int i = 1; i < 22; i++) {
             for (KuMonitor kuMonitor : kuMonitors) {
                 KuMonitor monitor = new KuMonitor();
                 monitor.setKuId(kuMonitor.getId());
@@ -79,7 +84,7 @@ public class ClusterItemOverview {
     }
 
     //使用拉取的k8s信息通过k8s的api来采集指标数据
-    private static KubernetesHistory getHistory(KuMonitor kuMonitor) {
+    private static KuOverview getHistory(KuMonitor kuMonitor) {
         try {
             String token = kuMonitor.getApiToken(); // 替换为你的 Token
             String apiServerUrl = "https://" + kuMonitor.getIp() + ":" + kuMonitor.getPort(); // 替换为你的 API Server 地址
@@ -103,8 +108,15 @@ public class ClusterItemOverview {
             kubernetesHistory.setKuId(kuMonitor.getKuId());
             kubernetesHistory.setKuMonitorId(kuMonitor.getMonitorId());
             kubernetesHistory.setGatherTime(ConversionAllTypeUtil.getDataTimeNow());
-            getClusterData(kuMonitor, kubernetesHistory, api, appsV1Api);
-            return kubernetesHistory;
+            //getClusterData(kuMonitor, kubernetesHistory, api, appsV1Api);
+
+            KuOverview kuOverview = new KuOverview();
+            kuOverview.setKuId(kuMonitor.getKuId());
+            kuOverview.setCreateTime(new Timestamp(System.currentTimeMillis()));
+
+            getClusterData(kuMonitor, kuOverview, api, appsV1Api);
+
+            return kuOverview;
         } catch (ApiException e) {
             throw new RuntimeException(e);
         }
@@ -112,13 +124,16 @@ public class ClusterItemOverview {
 
 
     //根据监控的类型来采集指定的数据
-    private static void getClusterData(KuMonitor kuMonitor, KubernetesHistory history, CoreV1Api api, AppsV1Api appsV1Api) throws ApiException {
+    private static void getClusterData(KuMonitor kuMonitor, KuOverview history, CoreV1Api api, AppsV1Api appsV1Api) throws ApiException {
+        KubernetesItem kubernetesItem = new KubernetesItem();
         switch (kuMonitor.getKuItemId()) {
             case "1":
                 try {
                     V1NodeList nodeList = api.listNode(null, null, null, null, null, null, null, null, null, null);
                     int size = nodeList.getItems().size();
                     history.setReportData(String.valueOf(size));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("1"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -127,6 +142,8 @@ public class ClusterItemOverview {
                 try {
                     V1NamespaceList namespaceList = api.listNamespace(null, null, null, null, null, null, null, null, null, false);
                     history.setReportData(String.valueOf(namespaceList.getItems().size()));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("2"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -135,6 +152,8 @@ public class ClusterItemOverview {
                 try {
                     int deploymentTotal = appsV1Api.listDeploymentForAllNamespaces(null, null, null, null, null, null, null, null, null, null).getItems().size();
                     history.setReportData(String.valueOf(deploymentTotal));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("3"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -143,6 +162,8 @@ public class ClusterItemOverview {
                 try {
                     int statefulSetTotal = appsV1Api.listStatefulSetForAllNamespaces(null, null, null, null, null, null, null, null, null, null).getItems().size();
                     history.setReportData(String.valueOf(statefulSetTotal));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("4"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -151,6 +172,8 @@ public class ClusterItemOverview {
                 try {
                     int daemonSetTotal = appsV1Api.listDaemonSetForAllNamespaces(null, null, null, null, null, null, null, null, null, null).getItems().size();
                     history.setReportData(String.valueOf(daemonSetTotal));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("5"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -159,6 +182,8 @@ public class ClusterItemOverview {
                 try {
                     int serviceTotal = api.listServiceForAllNamespaces(null, null, null, null, null, null, null, null, null, null).getItems().size();
                     history.setReportData(String.valueOf(serviceTotal));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("6"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -167,6 +192,8 @@ public class ClusterItemOverview {
                 try {
                     List<V1Pod> pods = api.listPodForAllNamespaces(null, null, null, null, null, null, null, null, null, null).getItems();
                     history.setReportData(String.valueOf(pods.size()));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("7"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -176,6 +203,8 @@ public class ClusterItemOverview {
                     List<V1Pod> pods8 = api.listPodForAllNamespaces(null, null, null, null, null, null, null, null, null, null).getItems();
                     int containerTotal = pods8.stream().mapToInt(pod -> pod.getSpec().getContainers().size()).sum();
                     history.setReportData(String.valueOf(containerTotal));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("8"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -195,6 +224,8 @@ public class ClusterItemOverview {
                         }
                     }
                     history.setReportData(String.valueOf(totalCapacity));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("9"));
                 } catch (ApiException | NumberFormatException e) {
                     break;
                 }
@@ -214,6 +245,8 @@ public class ClusterItemOverview {
                         }
                     }
                     history.setReportData(String.valueOf(totalCpuRequests));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("10"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -233,6 +266,8 @@ public class ClusterItemOverview {
                         }
                     }
                     history.setReportData(String.valueOf(totalCpuLimits));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("11"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -250,6 +285,8 @@ public class ClusterItemOverview {
                         }
                     }
                     history.setReportData(String.valueOf(totalAllocatable));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("12"));
                 } catch (ApiException | NumberFormatException e) {
                     break;
                 }
@@ -267,6 +304,8 @@ public class ClusterItemOverview {
                         totalMemory += convertMemoryToMi(memoryTotalStr);
                     }
                     history.setReportData(String.valueOf(totalMemory));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("13"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -297,6 +336,8 @@ public class ClusterItemOverview {
                     double result = totalMemoryRequests / 1024.00 / 1024.00;
                     String format3 = String.format("%.2f", result);
                     history.setReportData(format3);
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("14"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -327,6 +368,8 @@ public class ClusterItemOverview {
                     double result15 = totalMemoryLimits / 1024.00 / 1024.00;
                     String format2 = String.format("%.2f", result15);
                     history.setReportData(format2);
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("15"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -348,6 +391,8 @@ public class ClusterItemOverview {
 
                     }
                     history.setReportData(String.format("%.2f", totalAllocatableMemory / 1024.00 / 1024.00));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("16"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -365,6 +410,8 @@ public class ClusterItemOverview {
                     }
 
                     history.setReportData(String.format("%.2f", totalStorage / Math.pow(2, 30)));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("17"));
                 } catch (ApiException | NumberFormatException e) {
                     break;
                 }
@@ -382,6 +429,8 @@ public class ClusterItemOverview {
                     }
 
                     history.setReportData(String.format("%.2f", allocatableStorage / Math.pow(2, 30)));
+                    history.setType(1);
+                    history.setKubernetesItem(kubernetesItem.setId("18"));
                 } catch (ApiException | NumberFormatException e) {
                     break;
                 }
@@ -395,6 +444,8 @@ public class ClusterItemOverview {
                     List<Map<String, String>> list = getMapList(nodeList19);
                     String jsonString = JSON.toJSONString(list);
                     history.setReportData(jsonString);
+                    history.setType(2);
+                    history.setKubernetesItem(kubernetesItem.setId("19"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -414,6 +465,8 @@ public class ClusterItemOverview {
                         }
                     }
                     history.setReportData(JSON.toJSONString(list20));
+                    history.setType(2);
+                    history.setKubernetesItem(kubernetesItem.setId("20"));
                 } catch (ApiException e) {
                     break;
                 }
@@ -451,13 +504,14 @@ public class ClusterItemOverview {
                         list21.add(map);
                     }
                     history.setReportData(JSON.toJSONString(list21));
+                    history.setType(2);
+                    history.setKubernetesItem(kubernetesItem.setId("21"));
                 } catch (ApiException e) {
                     break;
                 }
                 break;
-            case "22":
+           /* case "22":
                 try {
-
                     // 获取所有命名空间中的 Pod
                     V1PodList podList = api.listPodForAllNamespaces(null, null, null, null, null, null, null, null, null, null);
                     List<V1Pod> pods = podList.getItems();
@@ -475,11 +529,11 @@ public class ClusterItemOverview {
                         }
                     }
                     history.setReportData(JSON.toJSONString(list22));
-
+                    history.setType(2);
                 } catch (ApiException e) {
                     break;
                 }
-                break;
+                break;*/
         }
     }
 

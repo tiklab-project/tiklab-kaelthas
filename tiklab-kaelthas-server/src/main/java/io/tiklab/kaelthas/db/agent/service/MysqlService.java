@@ -5,6 +5,7 @@ import io.tiklab.kaelthas.db.agent.dao.DbSqlDao;
 import io.tiklab.kaelthas.db.agent.model.DbMonitorVo;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.service.DbHistoryService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -86,13 +87,14 @@ public class MysqlService {
 
             } catch (SQLException e) {
                 logger.info( "连接数据库："+value.get(0).getIp()+"失败error："+e.getMessage());
+                return;
             }
         }
 
         Long aLong = mySqlStoreTime.get("time");
         long time = System.currentTimeMillis() - aLong;
         //定时上报数据 存储时间大于30条或者时间超过1分钟
-        if (histories.size() > 30||time>=60000) {
+        if ((histories.size() > 30||time>=60000)&&CollectionUtils.isNotEmpty(histories)) {
             List<DbHistory> linkedList = new LinkedList<>(histories);
             dbHistoryService.insertForList(linkedList);
             histories.clear();

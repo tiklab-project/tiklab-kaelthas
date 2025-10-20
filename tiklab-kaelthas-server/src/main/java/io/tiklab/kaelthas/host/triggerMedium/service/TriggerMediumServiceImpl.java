@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 触发器和消息渠道的中间表
@@ -50,6 +51,6 @@ public class TriggerMediumServiceImpl implements TriggerMediumService {
                 .get();
         List<TriggerMediumEntity> triggerMediumEntities = triggerMediumDao.findMediumIdByTriggerId(queryCondition);
 
-        return triggerMediumEntities.stream().map(TriggerMediumEntity::getMediumId).toList();
+        return triggerMediumEntities.stream().map(TriggerMediumEntity::getMediumId).collect(Collectors.toList());
     }
 }

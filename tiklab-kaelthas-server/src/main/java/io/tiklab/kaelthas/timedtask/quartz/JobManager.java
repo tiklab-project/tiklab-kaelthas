@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 @Scope("singleton")
@@ -30,12 +31,13 @@ public class JobManager {
     public void addJob(Class jobClass,  String group) throws SchedulerException {
         String [] taskTypes={"sql","internetOverview","internetInfo","k8sOverview","k8sInfo","updateUsability",
                 "dbTrigger","hostTrigger","internetTrigger","k8sTrigger","createDb"};
-        List<String> taskTypeList = Arrays.stream(taskTypes).toList();
+        List<String> taskTypeList = Arrays.stream(taskTypes).collect(Collectors.toList());
         for (String taskType:taskTypeList){
             String cron;
             if (("internetOverview").equals(taskType)){
                 //定时执行采集网络的指标
                  cron="30 0/5 * * * ?";
+                //cron="0 0/1 * * * ?";
 
             }else if(("internetInfo").equals(taskType)||("k8sInfo").equals(taskType)){
                 /*
@@ -58,8 +60,8 @@ public class JobManager {
 
             }else if(("createDb").equals(taskType)){
                 //每天凌晨 2 点执行。
-                //cron="0 0/1 * * * ?";
-                cron="0 0 2 * * ?";
+                cron="0 0/1 * * * ?";
+                //cron="0 0 2 * * ?";
             }else {
                 //sql
                 cron="0 0/1 * * * ?";

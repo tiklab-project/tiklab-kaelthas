@@ -130,11 +130,9 @@ public class GraphicsServiceImpl implements GraphicsService {
      * 根据主机id删除图形
      */
     @Override
-    public void deleteGraphicsByHostId(String id) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
-                .eq("hostId", id)
-                .get();
-        graphicsDao.deleteGraphicsByHostId(deleteCondition);
+    public void deleteGraphicsByHostId(String hostId) {
+
+        graphicsDao.deleteGraphicsByHostId(hostId);
     }
 
     /**
@@ -142,11 +140,9 @@ public class GraphicsServiceImpl implements GraphicsService {
      */
     @Override
     public List<Graphics> findGraphicsList(Graphics graphics) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
-                .eq("hostId",graphics.getHostId())
-                .eq("name", graphics.getName())
-                .get();
-        List<GraphicsEntity> graphicsEntityList = graphicsDao.findGraphicsList(queryCondition);
+
+        List<GraphicsEntity> graphicsEntityList = graphicsDao.findGraphicsList(graphics);
+
         return BeanMapper.mapList(graphicsEntityList, Graphics.class);
     }
 
@@ -156,12 +152,8 @@ public class GraphicsServiceImpl implements GraphicsService {
      */
     @Override
     public List<Graphics> findInformationByGraphics(String hostId) {
-        //查询出主机下的配置信息
-        QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
-                .eq("hostId", hostId)
-                .get();
 
-        List<GraphicsEntity> entityList = graphicsDao.findGraphicsByHostId(queryCondition);
+        List<GraphicsEntity> entityList = graphicsDao.findGraphicsByHostId( hostId);
 
         return BeanMapper.mapList(entityList, Graphics.class);
     }
@@ -171,12 +163,8 @@ public class GraphicsServiceImpl implements GraphicsService {
      */
     @Override
     public List<Graphics> findGraphicsByHisInformation(Graphics graphics) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
-                .eq("hostId", graphics.getHostId())
-                .eq("monitorId", graphics.getMonitorId())
-                .eq("source", graphics.getSource())
-                .get();
-        List<GraphicsEntity> entityList = graphicsDao.findGraphicsByHisInformation(queryCondition);
+
+        List<GraphicsEntity> entityList = graphicsDao.findGraphicsByHisInformation(graphics);
 
         return BeanMapper.mapList(entityList,Graphics.class);
     }
@@ -195,6 +183,6 @@ public class GraphicsServiceImpl implements GraphicsService {
     @Override
     public List<String> findMonitorIds(Graphics graphics) {
         List<GraphicsMonitor> list = graphicsMonitorService.findByGraphics(graphics.getId());
-        return list.stream().map(GraphicsMonitor::getMonitorId).toList();
+        return list.stream().map(GraphicsMonitor::getMonitorId).collect(Collectors.toList());
     }
 }

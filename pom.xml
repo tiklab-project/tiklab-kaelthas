@@ -42,12 +42,13 @@
         <tiklab-licence.version>1.0.2</tiklab-licence.version>
         <tiklab-privilege.version>1.0.2</tiklab-privilege.version>
         <tiklab-eam.version>1.0.2</tiklab-eam.version>
+        <tiklab-user-extension.version>1.0.2</tiklab-user-extension.version>
 
         <tiklab-postgresql.version>1.0.2</tiklab-postgresql.version>
+        <tiklab-install.version>1.0.2</tiklab-install.version>
         <tiklab-jdk.version>1.0.2</tiklab-jdk.version>
         <tiklab-spotbugs.version>1.0.2</tiklab-spotbugs.version>
         <tiklab-opensca.version>1.0.2</tiklab-opensca.version>
-        <tiklab-install-starter.version>1.0.2</tiklab-install-starter.version>
 
         <!--other-->
         <commons-lang3.version>3.10</commons-lang3.version>

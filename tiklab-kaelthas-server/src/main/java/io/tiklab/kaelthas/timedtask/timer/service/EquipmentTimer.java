@@ -103,8 +103,8 @@ public class EquipmentTimer {
         if (internetList.isEmpty()) {
             return "";
         }
-        List<String> inIds = internetList.stream().map(Internet::getId).toList();
-        List<String> existInIds = inIds.stream().filter(historyHostIds::contains).toList();
+        List<String> inIds = internetList.stream().map(Internet::getId).collect(Collectors.toList());
+        List<String> existInIds = inIds.stream().filter(historyHostIds::contains).collect(Collectors.toList());
         //如果查询的数据为空
         if (existInIds.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -153,8 +153,8 @@ public class EquipmentTimer {
         if (kubernetesList.isEmpty()) {
             return "";
         }
-        List<String> kuIds = kubernetesList.stream().map(Kubernetes::getId).toList();
-        List<String> existKuIds = kuIds.stream().filter(historyHostIds::contains).toList();
+        List<String> kuIds = kubernetesList.stream().map(Kubernetes::getId).collect(Collectors.toList());
+        List<String> existKuIds = kuIds.stream().filter(historyHostIds::contains).collect(Collectors.toList());
         //如果查询的数据为空
         if (existKuIds.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -203,8 +203,8 @@ public class EquipmentTimer {
         if (dbInfoList.isEmpty()) {
             return "";
         }
-        List<String> dbIds = dbInfoList.stream().map(DbInfo::getId).toList();
-        List<String> existDbIds = dbIds.stream().filter(historyHostIds::contains).toList();
+        List<String> dbIds = dbInfoList.stream().map(DbInfo::getId).collect(Collectors.toList());
+        List<String> existDbIds = dbIds.stream().filter(historyHostIds::contains).collect(Collectors.toList());
         //如果查询的数据库数据为空
         if (existDbIds.isEmpty()) {
             StringBuilder dbBuilder = new StringBuilder();
@@ -249,8 +249,8 @@ public class EquipmentTimer {
         //过滤出存在数据的主机ids
         //查询主机列表
         List<Host> allHost = hostService.findAllHost();
-        List<String> hostIds = allHost.stream().map(Host::getId).toList();
-        List<String> existHostIds = hostIds.stream().filter(historyHostIds::contains).toList();
+        List<String> hostIds = allHost.stream().map(Host::getId).collect(Collectors.toList());
+        List<String> existHostIds = hostIds.stream().filter(historyHostIds::contains).collect(Collectors.toList());
         //如果查询的数据为空
         if (existHostIds.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();

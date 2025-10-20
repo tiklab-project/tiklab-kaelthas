@@ -5,7 +5,7 @@ import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
-import io.tiklab.toolkit.join.annotation.JoinQuery;
+import io.tiklab.toolkit.join.annotation.JoinField;
 import io.tiklab.kaelthas.host.host.model.Host;
 import io.tiklab.kaelthas.host.trigger.model.Trigger;
 
@@ -44,7 +44,7 @@ public class Alarm {
     @Mappings({
             @Mapping(source = "trigger.id", target = "triggerId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private Trigger trigger;
 
     /**
@@ -53,7 +53,7 @@ public class Alarm {
     @Mappings({
             @Mapping(source = "host.id", target = "hostId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private Host host;
 
     /**

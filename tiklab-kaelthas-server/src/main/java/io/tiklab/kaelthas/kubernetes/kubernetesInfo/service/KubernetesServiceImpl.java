@@ -6,6 +6,13 @@ import io.tiklab.core.page.Page;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.alarm.model.Alarm;
+import io.tiklab.kaelthas.alarm.model.AlarmQuery;
+import io.tiklab.kaelthas.alarm.service.AlarmService;
+import io.tiklab.kaelthas.host.trigger.service.TriggerServiceImpl;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitorQuery;
+import io.tiklab.kaelthas.kubernetes.trigger.model.KuTrigger;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.kubernetes.graphics.model.KuGraphics;
@@ -20,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * k8s监控的信息表
@@ -41,6 +49,9 @@ public class KubernetesServiceImpl implements KubernetesService {
 
     @Autowired
     private KuTriggerService kuTriggerService;
+
+    @Autowired
+    private AlarmService alarmService;
 
     //k8s的分页查询
     @Override
@@ -73,7 +84,7 @@ public class KubernetesServiceImpl implements KubernetesService {
         try {
             //1.查找集群下的图形有多少,现将图形下与监控项关联表的数据进行删除
             List<KuGraphics> kuGraphicsList = kuGraphicsService.findKuGraphicsList(id);
-            List<String> stringList = kuGraphicsList.stream().map(KuGraphics::getId).toList();
+            List<String> stringList = kuGraphicsList.stream().map(KuGraphics::getId).collect(Collectors.toList());
             kuGraphicsMonitorService.deleteByGraphicsIds(stringList);
             //2.然后删除集群下的图形表信息
             kuGraphicsService.deleteByKuId(id);
@@ -106,10 +117,47 @@ public class KubernetesServiceImpl implements KubernetesService {
         return BeanMapper.map(kubernetesEntity,Kubernetes.class);
     }
 
+    @Override
+    public Kubernetes findOne(String id) {
+        KubernetesEntity kubernetesEntity = kubernetesDao.findKubernetes(id);
+        Kubernetes kubernetes = BeanMapper.map(kubernetesEntity, Kubernetes.class);
+        return kubernetes;
+    }
+
+    @Override
+    public List<Kubernetes> findList(List<String> idList) {
+        List<KubernetesEntity> kubernetesEntities = kubernetesDao.findKubernetesList(idList);
+        List<Kubernetes> kubernetes = BeanMapper.mapList(kubernetesEntities, Kubernetes.class);
+        return kubernetes;
+    }
+
     //查询所有k8s监控信息
     @Override
     public List<Kubernetes> findAll() {
         List<KubernetesEntity> kubernetesEntities = kubernetesDao.findAll();
         return BeanMapper.mapList(kubernetesEntities,Kubernetes.class);
+    }
+
+    @Override
+    public Kubernetes findKuGeneralize(String kuId) {
+        Kubernetes kubernetes = this.findOne(kuId);
+
+        //告警
+        List<Alarm> alarmList = alarmService.findAlarmList(new AlarmQuery().setHostId(kuId));
+        kubernetes.setAlarmNum(alarmList.size());
+
+        //监控项
+        List<KuMonitor> kuMonitorList = kuMonitorService.findKuMonitorList(new KuMonitorQuery().setKuId(kuId));
+        kubernetes.setMonitorNum(kuMonitorList.size());
+
+        //触发器
+        List<KuTrigger> kuTriggerList = kuTriggerService.findKuTriggerByKuId(kuId);
+        kubernetes.setTriggerNum(kuTriggerList.size());
+
+        //图形
+        List<KuGraphics> kuGraphicsList = kuGraphicsService.findKuGraphicsList(kuId);
+        kubernetes.setGraphicsNum(kuGraphicsList.size());
+
+        return kubernetes;
     }
 }

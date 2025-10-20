@@ -37,10 +37,12 @@ public class GraphicsMonitorDao {
     public List<GraphicsMonitor> findByGraphics(String graphicsId) {
 
         String sql = """
-                SELECT mt.name as graphicsName,mgm.*
+                SELECT mt.name as graphicsName,mgm.*,hm.name as monitorName
                 FROM mtc_graphics mt
-                JOIN mtc_graphics_monitor mgm
+                JOIN mtc_graphics_monitor mgm           
                 ON mt.id = mgm.graphics_id
+                left join  mtc_host_monitor hm
+                ON  mgm.monitor_id = hm.id
                 """;
 
         if (StringUtils.isNotBlank(graphicsId)) {

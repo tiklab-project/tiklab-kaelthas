@@ -4,8 +4,10 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.trigger.entity.DbTriggerEntity;
 import io.tiklab.kaelthas.db.trigger.model.DbTrigger;
+import io.tiklab.kaelthas.db.trigger.model.DbTriggerQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -56,7 +58,10 @@ public class DbTriggerDao {
         return jpaTemplate.findList(queryCondition,DbTriggerEntity.class);
     }
 
-    public List<DbTriggerEntity> findAllTrigger(QueryCondition queryCondition) {
+    public List<DbTriggerEntity> findTriggerList(DbTriggerQuery dbTriggerQuery) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
+                .eq("state", dbTriggerQuery.getState())
+                .get();
         return jpaTemplate.findList(queryCondition,DbTriggerEntity.class);
     }
 

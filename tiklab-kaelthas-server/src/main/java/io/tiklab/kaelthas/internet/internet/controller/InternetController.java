@@ -63,4 +63,13 @@ public class InternetController {
         internetService.updateInternet(internet);
         return Result.ok();
     }
+
+    /**
+     * 根据id查询网络信息的概括（告警、监控项、触发器、图形）
+     */
+    @RequestMapping(value = "/findInternetGeneralize",method = RequestMethod.POST)
+    public Result<Internet> findInternetGeneralize(@NotNull String id){
+        Internet internet = internetService.findInternetGeneralize(id);
+        return Result.ok(internet);
+    }
 }

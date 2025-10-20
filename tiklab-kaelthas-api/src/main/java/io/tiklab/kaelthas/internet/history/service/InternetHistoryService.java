@@ -19,7 +19,7 @@ public interface InternetHistoryService {
 
 
     /**
-     * 查询距离当前时间指定分钟的数据
+     * 查询距离当前时间指定分钟的数据 （当前月的时间）
      * @param beforeTime 时间
      */
     List<InternetHistory> findInHistoryByTime(String beforeTime);
@@ -33,5 +33,5 @@ public interface InternetHistoryService {
     /**
      * 根据网络监控的id和指定的时间后查询存储数据
      */
-    List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime);
+    List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime,String expression);
 }

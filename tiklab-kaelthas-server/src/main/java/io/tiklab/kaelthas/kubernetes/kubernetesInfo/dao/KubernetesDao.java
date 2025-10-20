@@ -18,6 +18,23 @@ public class KubernetesDao {
     @Autowired
     private JpaTemplate jpaTemplate;
 
+
+    /**
+     * 查找
+     * @param id
+     */
+    public KubernetesEntity findKubernetes(String id){
+        return jpaTemplate.findOne(KubernetesEntity.class,id);
+    }
+
+    /**
+     * 通过ids查询制品库
+     * @param idList
+     */
+    public List<KubernetesEntity> findKubernetesList(List<String> idList) {
+        return jpaTemplate.findList(KubernetesEntity.class,idList);
+    }
+
     public Pagination<Kubernetes> findKbInfoPage(Kubernetes kubernetes) {
         String sql = """
                 SELECT mki.*,COUNT(ma.id) as alarmNum,MAX(ma.send_message) AS message

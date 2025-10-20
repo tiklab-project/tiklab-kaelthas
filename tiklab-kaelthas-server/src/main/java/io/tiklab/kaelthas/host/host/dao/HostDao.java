@@ -96,7 +96,7 @@ public class HostDao {
 
     public Pagination<Host> findHostPageForMonitoring(Host host) {
         String sql = """
-                SELECT mtc_host.id, mtc_host.name, mtc_host.ip, mtc_host.usability, MAX(create_time) AS create_time,
+                SELECT mtc_host.id, mtc_host.name, mtc_host.ip, mtc_host.host_group_id as groupId ,mtc_host.usability, MAX(create_time) AS create_time,
                        COUNT(mtc_alarm.id) AS alarmNum, MAX(mtc_alarm.send_message) AS message
                 FROM mtc_host
                 LEFT JOIN mtc_alarm
@@ -114,7 +114,7 @@ public class HostDao {
             sql = sql.concat(" and mtc_host.name like'%" + host.getName() + "%'");
         }
 
-        sql = sql.concat("  GROUP BY mtc_host.id, mtc_host.name, mtc_host.ip, mtc_host.usability\n" +
+        sql = sql.concat("  GROUP BY mtc_host.id, mtc_host.name, mtc_host.ip,mtc_host.host_group_id, mtc_host.usability\n" +
                 "ORDER BY create_time DESC");
 
         return jpaTemplate.getJdbcTemplate().findPage(sql, null, host.getPageParam(), new BeanPropertyRowMapper<>(Host.class));

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 图形和监控项的关联表
@@ -34,7 +35,7 @@ public class InGraphicsMonitorServiceImpl implements InGraphicsMonitorService {
             map.put("graphics_id", string);
             map.put("monitor_id", i);
             return map;
-        }).toList();
+        }).collect(Collectors.toList());
         String sql = SqlUtil.getBatchInsertSql("mtc_internet_graphics_monitor", list);
         inGraphicsMonitorDao.createGraphicsMonitorList(sql);
     }
@@ -56,7 +57,7 @@ public class InGraphicsMonitorServiceImpl implements InGraphicsMonitorService {
                 .get();
         List<InGraphicsMonitorEntity> entityList = inGraphicsMonitorDao.findMonitorIds(queryCondition);
 
-        return entityList.stream().map(InGraphicsMonitorEntity::getMonitorId).toList();
+        return entityList.stream().map(InGraphicsMonitorEntity::getMonitorId).collect(Collectors.toList());
     }
 
     //根据图形的ids删除图形

@@ -6,11 +6,13 @@ import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
 import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.internet.internet.model.InternetOverviewQuery;
 import io.tiklab.kaelthas.internet.item.model.InternetItem;
 import io.tiklab.kaelthas.internet.item.service.InternetItemService;
 import io.tiklab.kaelthas.internet.monitor.dao.InternetMonitorDao;
 import io.tiklab.kaelthas.internet.monitor.entity.InternetMonitorEntity;
 import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
+import io.tiklab.kaelthas.internet.monitor.model.InternetMonitorQuery;
 import io.tiklab.toolkit.beans.BeanMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,11 +70,9 @@ public class InternetMonitorServiceImpl implements InternetMonitorService{
 
     //根据监控网络的id查询出监控项的list
     @Override
-    public List<InternetMonitor> findMonitorByInId(InternetMonitor internetMonitor) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(InternetMonitorEntity.class)
-                .eq("internetId", internetMonitor.getInternetId())
-                .get();
-        List<InternetMonitorEntity> entityList = internetMonitorDao.findMonitorByInId(queryCondition);
+    public List<InternetMonitor> findMonitorList(InternetMonitorQuery internetMonitorQuery) {
+
+        List<InternetMonitorEntity> entityList = internetMonitorDao.findMonitorList(internetMonitorQuery);
 
         return BeanMapper.mapList(entityList,InternetMonitor.class);
     }

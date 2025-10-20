@@ -12,6 +12,7 @@ import io.tiklab.kaelthas.internet.trigger.service.InTriggerServiceImpl;
 import io.tiklab.kaelthas.kubernetes.trigger.service.KuTriggerServiceImpl;
 import io.tiklab.kaelthas.internet.agent.service.GetInReportDataService;
 import io.tiklab.kaelthas.internet.agent.service.SwitchOverviewService;
+import io.tiklab.kaelthas.util.ConversionScriptsUtils;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,6 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 public  class RunJob implements org.quartz.Job {
@@ -130,7 +133,7 @@ public  class RunJob implements org.quartz.Job {
     public void execMethod(String taskType){
         if (("internetOverview").equals(taskType)){
             //定时执行采集网络的指标
-          //  switchOverviewService.executeOverview();
+            switchOverviewService.executeOverview();
 
         }else if(("internetInfo").equals(taskType)){
             //使用定时任务获取配置信息,使用配置信息获取指标数据
@@ -138,7 +141,7 @@ public  class RunJob implements org.quartz.Job {
 
         }else if(("k8sOverview").equals(taskType)){
             //定时采集k8s的信息,用于概况页面展示
-           // clusterItemOverview.getClusterOverview();
+            clusterItemOverview.getClusterOverview();
 
         }else if(("k8sInfo").equals(taskType)){
             //定时拉取配置信息,并采集指定的数据

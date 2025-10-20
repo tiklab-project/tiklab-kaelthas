@@ -5,7 +5,7 @@ import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
-import io.tiklab.toolkit.join.annotation.JoinQuery;
+import io.tiklab.toolkit.join.annotation.JoinField;
 import io.tiklab.kaelthas.host.monitor.model.HostMonitor;
 import io.tiklab.kaelthas.host.triggerExpression.model.TriggerExpression;
 
@@ -42,7 +42,7 @@ public class Trigger {
     @Mappings({
             @Mapping(source = "monitor.id", target = "monitorId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private HostMonitor monitor;
 
     //触发器表达式的list

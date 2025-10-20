@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -30,8 +31,12 @@ public class HostHistoryDao {
 
         String sql = " select mhm.name monitorName,mhm.expression,mh.* "+
                 "from "+dbTableName+" mh "+
-                "RIGHT JOIN mtc_host_monitor mhm "+
+                "LEFT JOIN mtc_host_monitor mhm "+
                 "ON mh.host_monitor_id = mhm.id ";
+
+        if (StringUtils.isNotBlank(hostHistoryQuery.getHostId())) {
+            sql = sql.concat(" where mhm.host_id = '" + hostHistoryQuery.getHostId() + "'");
+        }
 
         if (StringUtils.isNotBlank(hostHistoryQuery.getBeginTime())) {
             sql = sql.concat(" and mh.gather_time >= '" + hostHistoryQuery.getBeginTime() + "'");
@@ -39,10 +44,6 @@ public class HostHistoryDao {
 
         if (StringUtils.isNotBlank(hostHistoryQuery.getEndTime())) {
             sql = sql.concat(" and mh.gather_time <= '" + hostHistoryQuery.getEndTime() + "'");
-        }
-
-        if (StringUtils.isNotBlank(hostHistoryQuery.getHostId())) {
-            sql = sql.concat(" where mhm.host_id = '" + hostHistoryQuery.getHostId() + "'");
         }
 
         if (StringUtils.isNotBlank(hostHistoryQuery.getHostMonitorId())) {
@@ -67,8 +68,13 @@ public class HostHistoryDao {
         return jpaTemplate.getJdbcTemplate().query(sql,new BeanPropertyRowMapper<>(HostHistory.class));
     }
 
-    public List<HostHistory> findByHostTrigger(String hostId, String beforeTime) {
-        String tableName = TableUtil.getHostTableName(0);
+
+    /**
+     * 查询距离当前时间指定分钟的数据 (当前月)
+     * @param beforeTime 时间
+     */
+    public List<HostHistory> findByHostTrigger(String hostId, String beforeTime,String expression) {
+        String tableName = TableUtil.getHostTableName(LocalDate.now(),0);
 
         String sql = " SELECT mh.*,mdi.data_type as reportType,mdm.expression "+
                 "FROM "+tableName+" mh "+
@@ -79,6 +85,9 @@ public class HostHistoryDao {
 
         if (StringUtils.isNotBlank(hostId)) {
             sql = sql.concat(" where mh.host_id = '" + hostId + "'");
+        }
+        if (StringUtils.isNotBlank(expression)) {
+            sql = sql.concat(" and mdm.expression = '" + expression + "'");
         }
 
         if (StringUtils.isNotBlank(beforeTime)) {

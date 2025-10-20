@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 监控数据库的监控项和图形的中间表
@@ -62,7 +63,7 @@ public class DbGraphicsMonitorServiceImpl implements DbGraphicsMonitorService{
                 .get();
         List<DbGraphicsMonitorEntity> list = dbGraphicsMonitorDao.findMonitorIds(queryCondition);
 
-        return list.stream().map(DbGraphicsMonitorEntity::getMonitorId).toList();
+        return list.stream().map(DbGraphicsMonitorEntity::getMonitorId).collect(Collectors.toList());
     }
 
     /**

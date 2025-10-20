@@ -43,7 +43,8 @@ public class DbSettingController {
      * 删除数据源
      */
     @RequestMapping(value = "/deleteDbInfo",method = RequestMethod.POST)
-    public void deleteDbInfo(@NotNull String id){
+    public Result<Void> deleteDbInfo(@NotNull String id){
         dbSettingService.deleteDbInfo(id);
+        return Result.ok();
     }
 }

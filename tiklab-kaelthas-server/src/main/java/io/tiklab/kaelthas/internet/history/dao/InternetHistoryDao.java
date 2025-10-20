@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -27,12 +28,24 @@ public class InternetHistoryDao {
      */
     public List<InternetHistory> findInternetHistoryByInMonitorId(InternetHistoryQuery internetHistory, String dbTableName) {
 
-        String sql = " select mkm.name monitorName,mki.expression,mh.* "+
+     /*   String sql = " select mkm.name monitorName,mki.expression,mh.* "+
                 "from mtc_internet_monitor mkm "+
                 "JOIN mtc_internet_item mki "+
                 "ON mkm.internet_item_id = mki.id "+
                 "LEFT JOIN "+dbTableName+" mh "+
-                "ON mh.internet_monitor_id = mkm.id ";
+                "ON mh.internet_monitor_id = mkm.id ";*/
+
+
+        String sql = " select mkm.name monitorName,mki.expression,mh.* "+
+                "from "+dbTableName+" mh  "+
+                "LEFT JOIN mtc_internet_monitor mkm "+
+                "ON mh.internet_monitor_id = mkm.id "+
+                "LEFT JOIN mtc_internet_item mki "+
+                "ON mkm.internet_item_id = mki.id ";
+
+        if (StringUtils.isNotBlank(internetHistory.getInternetId())) {
+            sql = sql.concat(" where mkm.internet_id = '" + internetHistory.getInternetId() + "'");
+        }
 
         if (StringUtils.isNotBlank(internetHistory.getBeginTime())) {
             sql = sql.concat(" and mh.gather_time >= '" + internetHistory.getBeginTime() + "'");
@@ -42,9 +55,7 @@ public class InternetHistoryDao {
             sql = sql.concat(" and mh.gather_time <= '" + internetHistory.getEndTime() + "'");
         }
 
-        if (StringUtils.isNotBlank(internetHistory.getInternetId())) {
-            sql = sql.concat(" where mkm.internet_id = '" + internetHistory.getInternetId() + "'");
-        }
+
 
         if (StringUtils.isNotBlank(internetHistory.getInternetMonitorId())) {
             sql = sql.concat(" and mkm.id = '" + internetHistory.getInternetMonitorId() + "'");
@@ -69,7 +80,7 @@ public class InternetHistoryDao {
     }
 
     public List<InternetHistory> findHistoryByCondition(InternetHistory history, String beforeTime, String nowTime) {
-        String tableName = TableUtil.getInternetTableName(0);
+        String tableName = TableUtil.getInternetTableName(LocalDate.now(),0);
 
         String sql = "select * from "+tableName+" where 1=1";
 
@@ -95,8 +106,8 @@ public class InternetHistoryDao {
 
     }
 
-    public List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime) {
-        String tableName = TableUtil.getInternetTableName(0);
+    public List<InternetHistory> findInternetToGatherTime(String internetId, String beforeTime,String expression) {
+        String tableName = TableUtil.getInternetTableName(LocalDate.now(),0);
         String sql = " SELECT mh.*,mdi.expression "+
                 "FROM mtc_internet_monitor mdm "+
                 "JOIN mtc_internet_item mdi "+
@@ -106,6 +117,10 @@ public class InternetHistoryDao {
 
         if (StringUtils.isNotBlank(internetId)) {
             sql = sql.concat(" where mh.internet_id = '" + internetId + "'");
+        }
+
+        if (StringUtils.isNotBlank(expression)) {
+            sql = sql.concat(" and mdi.expression = '" + expression + "'");
         }
 
         if (StringUtils.isNotBlank(beforeTime)) {

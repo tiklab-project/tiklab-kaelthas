@@ -35,6 +35,19 @@ public class KubernetesItemEntity {
     @Column(name = "kubernetes_type")
     private String kubernetesType;
 
+    /**
+     * 数据类型(1.数值,2.json 3. )
+     */
+    @Column(name = "report_type")
+    private Integer reportType;
+
+
+    /**
+     *  名字
+     */
+    @Column(name = "name")
+    private String name;
+
     public String getId() {
         return id;
     }
@@ -65,5 +78,21 @@ public class KubernetesItemEntity {
 
     public void setKubernetesType(String kubernetesType) {
         this.kubernetesType = kubernetesType;
+    }
+
+    public Integer getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(Integer reportType) {
+        this.reportType = reportType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

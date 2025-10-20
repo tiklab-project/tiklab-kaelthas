@@ -4,6 +4,7 @@ import io.tiklab.core.Result;
 import io.tiklab.core.page.Pagination;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
+import io.tiklab.kaelthas.db.graphics.model.DbGraphics;
 import io.tiklab.kaelthas.db.graphics.service.DbGraphicsService;
 import io.tiklab.kaelthas.db.graphicsMonitor.service.DbGraphicsMonitorService;
 import io.tiklab.kaelthas.db.triggerMedium.service.DbTriggerMediumService;
@@ -126,6 +127,8 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
 
         List<DbTrigger> triggerList = dbTriggerService.findListByDbId(id);
 
+        List<DbGraphics> dbGraphicsList = dbGraphicsService.findDbGraphicsList(id);
+
         Alarm alarm = new Alarm();
         alarm.setHostId(id);
         List<Alarm> alarmList = alarmService.findAlarmList(alarm);
@@ -134,7 +137,7 @@ public class DbInfoInfoServiceImpl implements DbInfoService {
         dbInfo.setMonitorNum(dbMonitorList.size());
         dbInfo.setTriggerNum(triggerList.size());
         dbInfo.setAlarmNum(alarmList.size());
-
+        dbInfo.setGraphicsNum(dbGraphicsList.size());
         return dbInfo;
     }
 

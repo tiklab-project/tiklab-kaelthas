@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 模板
@@ -155,13 +156,13 @@ public class TemplateServiceImpl implements TemplateService {
 
             //根据模板id查询出模板下监控项的ids
             List<HostMonitor> monitorByTemplateId = hostMonitorService.findCondition(hostMonitor);
-            List<String> stringList = monitorByTemplateId.stream().map(HostMonitor::getId).toList();
+            List<String> stringList = monitorByTemplateId.stream().map(HostMonitor::getId).collect(Collectors.toList());
             //根据模板下的ids和主机id查询出主机下引用的监控项ids,将主机下的ids进行删除
             HostMonitor hostMonitor2 = new HostMonitor();
             hostMonitor2.setHostId(hostTemplate.getHostId());
             hostMonitor2.setTemplateIds(stringList);
             List<HostMonitor> condition = hostMonitorService.findConditionByHost(hostMonitor2);
-            String[] strings = condition.stream().map(HostMonitor::getId).toList().toArray(new String[0]);
+            String[] strings = condition.stream().map(HostMonitor::getId).collect(Collectors.toList()).toArray(new String[0]);
             //删除图表与监控项关联信息
             graphicsMonitorService.deleteByMonitorIds(strings);
 
@@ -214,7 +215,7 @@ public class TemplateServiceImpl implements TemplateService {
             //删除引用模板的监控项
             //查询模板下的监控项信息
             List<HostMonitor> hostMonitorList = hostMonitorService.findByHostId(id);
-            List<String> stringList = hostMonitorList.stream().map(HostMonitor::getId).toList();
+            List<String> stringList = hostMonitorList.stream().map(HostMonitor::getId).collect(Collectors.toList());
             hostMonitorService.deleteMonitorByItemIds(stringList);
 
             //删除模板下的监控项
@@ -244,7 +245,7 @@ public class TemplateServiceImpl implements TemplateService {
             //查询有多少主机引用了模板,将添加的监控项一并添加到这些主机下
             List<HostTemplate> templateList = hostTemplateService.findTemplateByTemplateId(hostMonitor.getHostId());
             //查询出主机的ids
-            List<String> stringList = templateList.stream().map(HostTemplate::getHostId).toList();
+            List<String> stringList = templateList.stream().map(HostTemplate::getHostId).collect(Collectors.toList());
 
             //将从模板创建的监控项复制到引用模板的主机当中
             for (String string : stringList) {
@@ -274,7 +275,7 @@ public class TemplateServiceImpl implements TemplateService {
         //删除图形和监控项的关联表
         List<HostMonitor> hostMonitorList = hostMonitorService.findCondition(hostMonitor1);
         //求出被主机引用的监控项ids
-        String[] strings = hostMonitorList.stream().map(HostMonitor::getId).toList().toArray(new String[0]);
+        String[] strings = hostMonitorList.stream().map(HostMonitor::getId).collect(Collectors.toList()).toArray(new String[0]);
         graphicsMonitorService.deleteByMonitorIds(strings);
     }
 

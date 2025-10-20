@@ -185,4 +185,5 @@ public class AlarmEntity {
     public void setSeverityLevel(Integer severityLevel) {
         this.severityLevel = severityLevel;
     }
+
 }

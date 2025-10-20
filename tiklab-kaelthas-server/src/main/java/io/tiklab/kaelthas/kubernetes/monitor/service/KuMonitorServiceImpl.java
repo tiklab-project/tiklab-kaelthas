@@ -9,6 +9,7 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.kubernetes.graphicsMonitor.service.KuGraphicsMonitorService;
 import io.tiklab.kaelthas.kubernetes.item.model.KubernetesItem;
 import io.tiklab.kaelthas.kubernetes.item.service.KubernetesItemService;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitorQuery;
 import io.tiklab.toolkit.beans.BeanMapper;
 import io.tiklab.toolkit.join.JoinTemplate;
 import io.tiklab.kaelthas.kubernetes.monitor.dao.KuMonitorDao;
@@ -37,16 +38,20 @@ public class KuMonitorServiceImpl implements KuMonitorService{
     @Autowired
     private KubernetesItemService kubernetesItemService;
 
+
+    @Override
+    public KuMonitor findOne(String id) {
+        KuMonitorEntity kuMonitorEntity = kuMonitorDao.findKuMonitor(id);
+        KuMonitor kuMonitor = BeanMapper.map(kuMonitorEntity, KuMonitor.class);
+
+        return kuMonitor;
+    }
+
     //根据名称和id进行分页查询
     @Override
     public Pagination<KuMonitor> findKuMonitorPage(KuMonitor kuMonitor) {
-        QueryCondition queryCondition = QueryBuilders.createQuery(KuMonitorEntity.class)
-                .eq("kuId", kuMonitor.getKuId())
-                .like("name", kuMonitor.getName())
-                .pagination(kuMonitor.getPageParam())
-                .get();
 
-        Pagination<KuMonitorEntity> pagination = kuMonitorDao.findKuMonitorPage(queryCondition);
+        Pagination<KuMonitorEntity> pagination = kuMonitorDao.findKuMonitorPage(kuMonitor);
 
         List<KuMonitor> kuMonitorList = BeanMapper.mapList(pagination.getDataList(), KuMonitor.class);
 
@@ -98,10 +103,7 @@ public class KuMonitorServiceImpl implements KuMonitorService{
     //根据k8s监控的id删除监控项
     @Override
     public void deleteByKuId(String id) {
-        DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuMonitorEntity.class)
-                .eq("kuId", id)
-                .get();
-        kuMonitorDao.deleteByKuId(deleteCondition);
+        kuMonitorDao.deleteByKuId(id);
     }
 
     /**
@@ -110,5 +112,17 @@ public class KuMonitorServiceImpl implements KuMonitorService{
     @Override
     public List<KubernetesItem> findItemList(KubernetesItem kubernetesItem) {
         return kubernetesItemService.findItemList(kubernetesItem);
+    }
+
+    @Override
+    public List<KuMonitor> findKuMonitorList(KuMonitorQuery kuMonitorQuery) {
+        List<KuMonitorEntity> kuMonitorEntities = kuMonitorDao.findKuMonitorList(kuMonitorQuery);
+
+
+        List<KuMonitor> kuMonitorList = BeanMapper.mapList(kuMonitorEntities, KuMonitor.class);
+
+        joinTemplate.joinQuery(kuMonitorList);
+
+        return kuMonitorList;
     }
 }

@@ -4,6 +4,8 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.host.graphics.entity.GraphicsEntity;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import org.apache.commons.lang3.StringUtils;
@@ -60,11 +62,18 @@ public class GraphicsDao {
         jpaTemplate.delete(deleteCondition);
     }
 
-    public void deleteGraphicsByHostId(DeleteCondition deleteCondition) {
+    public void deleteGraphicsByHostId(String hostId) {
+        DeleteCondition deleteCondition = DeleteBuilders.createDelete(GraphicsEntity.class)
+                .eq("hostId", hostId)
+                .get();
         jpaTemplate.delete(deleteCondition);
     }
 
-    public List<GraphicsEntity> findGraphicsList(QueryCondition queryCondition) {
+    public List<GraphicsEntity> findGraphicsList(Graphics graphics) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
+                .eq("hostId",graphics.getHostId())
+                .eq("name", graphics.getName())
+                .get();
         return jpaTemplate.findList(queryCondition, GraphicsEntity.class);
     }
 
@@ -72,11 +81,20 @@ public class GraphicsDao {
         jpaTemplate.delete(deleteCondition);
     }
 
-    public List<GraphicsEntity> findGraphicsByHostId(QueryCondition queryCondition) {
+    public List<GraphicsEntity> findGraphicsByHostId(String hostId) {
+        //查询出主机下的配置信息
+        QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
+                .eq("hostId", hostId)
+                .get();
         return jpaTemplate.findList(queryCondition,GraphicsEntity.class);
     }
 
-    public List<GraphicsEntity> findGraphicsByHisInformation(QueryCondition queryCondition) {
+    public List<GraphicsEntity> findGraphicsByHisInformation(Graphics graphics) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(GraphicsEntity.class)
+                .eq("hostId", graphics.getHostId())
+                .eq("monitorId", graphics.getMonitorId())
+                .eq("source", graphics.getSource())
+                .get();
         return jpaTemplate.findList(queryCondition,GraphicsEntity.class);
     }
 

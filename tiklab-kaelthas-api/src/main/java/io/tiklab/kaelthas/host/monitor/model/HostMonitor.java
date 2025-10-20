@@ -5,7 +5,7 @@ import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
 import io.tiklab.toolkit.beans.annotation.Mapper;
-import io.tiklab.toolkit.join.annotation.JoinQuery;
+import io.tiklab.toolkit.join.annotation.JoinField;
 import io.tiklab.kaelthas.host.monitorItem.model.MonitorItem;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class HostMonitor {
     @Mappings({
             @Mapping(source = "monitorItem.id",target = "monitorItemId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private MonitorItem monitorItem;
 
     //间隔时间

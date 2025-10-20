@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 监控项字典表
@@ -51,7 +52,7 @@ public class MonitorItemServiceImpl implements MonitorItemService {
                 .eq("type",dataCategories).get();
 
         List<MonitorItemEntity> monitorItemEntities = monitorItemDao.findMonitorByCategories(queryCondition);
-        return monitorItemEntities.stream().map(MonitorItemEntity::getId).toList();
+        return monitorItemEntities.stream().map(MonitorItemEntity::getId).collect(Collectors.toList());
     }
 
     //根据字类型查询字典项list

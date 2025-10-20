@@ -4,8 +4,13 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.DeleteBuilders;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
+import io.tiklab.kaelthas.alarm.entity.AlarmEntity;
+import io.tiklab.kaelthas.alarm.model.AlarmQuery;
 import io.tiklab.kaelthas.kubernetes.monitor.entity.KuMonitorEntity;
 import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitor;
+import io.tiklab.kaelthas.kubernetes.monitor.model.KuMonitorQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,9 +24,26 @@ public class KuMonitorDao {
     @Autowired
     private JpaTemplate jpaTemplate;
 
-    public Pagination<KuMonitorEntity> findKuMonitorPage(QueryCondition queryCondition) {
+
+    /**
+     * 查找
+     * @param id
+     */
+    public KuMonitorEntity findKuMonitor(String id){
+        return jpaTemplate.findOne(KuMonitorEntity.class,id);
+    }
+
+
+    public Pagination<KuMonitorEntity> findKuMonitorPage(KuMonitor kuMonitor) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(KuMonitorEntity.class)
+                .eq("kuId", kuMonitor.getKuId())
+                .like("name", kuMonitor.getName())
+                .pagination(kuMonitor.getPageParam())
+                .get();
+
         return jpaTemplate.findPage(queryCondition, KuMonitorEntity.class);
     }
+
 
     public String createKuMonitor(KuMonitorEntity entity) {
         return jpaTemplate.save(entity, String.class);
@@ -64,7 +86,24 @@ public class KuMonitorDao {
         return jpaTemplate.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(KuMonitor.class));
     }
 
-    public void deleteByKuId(DeleteCondition deleteCondition) {
+    public void deleteByKuId(String id) {
+        DeleteCondition deleteCondition = DeleteBuilders.createDelete(KuMonitorEntity.class)
+                .eq("kuId", id)
+                .get();
         jpaTemplate.delete(deleteCondition);
+    }
+
+
+    /**
+     * 条件查询
+     * @param kuMonitorQuery
+     * @return List <RepositoryEntity>
+     */
+    public List<KuMonitorEntity> findKuMonitorList(KuMonitorQuery kuMonitorQuery) {
+        QueryCondition queryCondition = QueryBuilders.createQuery(KuMonitorEntity.class)
+                .eq("kuId", kuMonitorQuery.getKuId())
+                .orders(kuMonitorQuery.getOrderParams())
+                .get();
+        return  jpaTemplate.findList(queryCondition,KuMonitorEntity.class);
     }
 }

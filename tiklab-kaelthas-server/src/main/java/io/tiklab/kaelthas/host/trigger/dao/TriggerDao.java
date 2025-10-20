@@ -4,7 +4,9 @@ import io.tiklab.core.page.Pagination;
 import io.tiklab.dal.jpa.JpaTemplate;
 import io.tiklab.dal.jpa.criterial.condition.DeleteCondition;
 import io.tiklab.dal.jpa.criterial.condition.QueryCondition;
+import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.host.trigger.entity.TriggerEntity;
+import io.tiklab.kaelthas.host.trigger.model.TriggerQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -54,7 +56,15 @@ public class TriggerDao {
         jpaTemplate.delete(deleteCondition);
     }
 
-    public List<TriggerEntity> findTriggerByHostIdAndMonitorId(QueryCondition queryCondition) {
+
+    /**
+     * 条件查询
+     */
+    public List<TriggerEntity> findTriggerList(TriggerQuery triggerQuery) {
+        //将符合条件的触发器全部拉进来,进行判断(当前主机下根据当前监控项创建的触发器)
+        QueryCondition queryCondition = QueryBuilders.createQuery(TriggerEntity.class)
+                .eq("state", triggerQuery.getState())
+                .get();
         return jpaTemplate.findList(queryCondition, TriggerEntity.class);
     }
 

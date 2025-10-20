@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -41,7 +42,7 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
     public void insertForList(List<KubernetesHistory> entityList) {
 
         //获取数据库表名
-        String dbTableName = TableUtil.getK8sTableName(0);
+        String dbTableName = TableUtil.getK8sTableName(LocalDate.now(),0);
         List<Map<String, Object>> mapList = getMapList(entityList);
         //拼接添加历史的数据的sql
         String historySql = SqlUtil.getBatchInsertSql(dbTableName, mapList);
@@ -117,7 +118,7 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
 
     @Override
     public List<KubernetesHistory> findKuHistoryByTime(String beforeTime) {
-        String tableName = TableUtil.getK8sTableName(0);
+        String tableName = TableUtil.getK8sTableName(LocalDate.now(),0);
         List<KubernetesHistory> kuHistoryList = kubernetesHistoryDao.findKuHistoryByTime(beforeTime, tableName);
         return kuHistoryList;
     }
@@ -148,7 +149,7 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
 
         List<Object> objectList = new LinkedList<>();
 
-        List<KubernetesHistory> collect = entityList.stream().filter(h -> h.getReportType() == 2).toList();
+        List<KubernetesHistory> collect = entityList.stream().filter(h -> h.getReportType() == 2).collect(Collectors.toList());
         for (KubernetesHistory history : collect) {
             Map<String, Object> objectMap = new HashMap<>();
             List<List<String>> listList = new LinkedList<>();
@@ -170,7 +171,7 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
                     }
                     listList.add(list1);
                 }
-                listList.add(stringSet.stream().toList());
+                listList.add(stringSet.stream().collect(Collectors.toList()));
                 Collections.reverse(listList);
             }
 
@@ -188,8 +189,8 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
      * 根据k8s监控的id和时间查询时间之后的存储数据
      */
     @Override
-    public List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime) {
-        return kubernetesHistoryDao.findKuHistoryByKuId(kuId, beforeTime);
+    public List<KubernetesHistory> findKuHistoryByKuId(String kuId, String beforeTime,String expression) {
+        return kubernetesHistoryDao.findKuHistoryByKuId(kuId, beforeTime,expression);
     }
 
 
@@ -201,12 +202,11 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
 
     public List<List<KubernetesHistory>> joinMonitorHistoryData(KubernetesHistoryQuery kubernetesHistoryQuery, int data){
         List<List<KubernetesHistory>> resList = new ArrayList<>();
-        List<String> timeList = new ArrayList<>();
-        List<String> dataList = new ArrayList<>();
+
 
         //根据id查询图形列表
         List<KuGraphics> graphicsList = kuGraphicsService.findKuGraphicsList(kubernetesHistoryQuery.getKuId());
-        List<String> xTime = ConversionDateUtil.splitTime(kubernetesHistoryQuery.getBeginTime(), kubernetesHistoryQuery.getEndTime(), data);
+        //List<String> xTime = ConversionDateUtil.splitTime(kubernetesHistoryQuery.getBeginTime(), kubernetesHistoryQuery.getEndTime(), data);
 
         //2.根据查询出的图表,分别查询出图表中对应的监控项数据
         for (KuGraphics graphics : graphicsList) {
@@ -221,18 +221,25 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
             //查询每条监控项的数据集合
             List<KubernetesHistory> list = new LinkedList<>();
             for (KuGraphicsMonitor graphicsMonitor : graphicsMonitors) {
-
+                List<String> timeList = new ArrayList<>();
+                List<String> dataList = new ArrayList<>();
                 //通过监控项id查询监控历史记录
                 kubernetesHistoryQuery.setKuMonitorId(graphicsMonitor.getMonitorId());
 
                 //通过监控项id和时间段查询历史
                 int endName = TableUtil.getHistoryEndName(data);
-                String dbTableName = TableUtil.getK8sTableName(endName);
-                List<KubernetesHistory> kubernetesHistoryList = kubernetesHistoryDao.findHistoryByKuMonitorId(kubernetesHistoryQuery, dbTableName);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDate localDate = LocalDate.parse(kubernetesHistoryQuery.getBeginTime(), formatter);
+                String dbTableName = TableUtil.getK8sTableName(localDate,endName);
 
                 KubernetesHistory kubernetesHistory = new KubernetesHistory();
+                //图形名称
                 kubernetesHistory.setGraphicsName(graphicsMonitor.getGraphicsName());
+                //图形下面的监控项名字
+                kubernetesHistory.setName(graphicsMonitor.getMonitorName());
 
+
+                List<KubernetesHistory> kubernetesHistoryList = kubernetesHistoryDao.findHistoryByKuMonitorId(kubernetesHistoryQuery, dbTableName);
                 if (!kubernetesHistoryList.isEmpty()) {
                     kubernetesHistoryList=kubernetesHistoryList.stream().sorted(Comparator.comparing(KubernetesHistory::getGatherTime))
                             .collect(Collectors.toList());
@@ -255,8 +262,7 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
                                 timeList.add(gatherTime);
                                 dataList.add(reportData);
                             }
-                        }
-                        if (i==kubernetesHistoryList.size()-1){
+                        }else if (i==kubernetesHistoryList.size()-1){
                             //查询的数据最后一个时间不等于客户端传入的结束时间 添加内容为null
                             if (!kubernetesHistoryQuery.getEndTime().equals(gatherTime)){
                                 timeList.add(kubernetesHistoryQuery.getEndTime());
@@ -274,8 +280,13 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
                     kubernetesHistory.setData(dataList);
                     kubernetesHistory.setDataTimes(timeList);
                 }else {
+                    //没有历史记录数据,只需要添加开始时间和结束时间
+                    dataList.add("null");
+                    dataList.add("null");
+                    timeList.add(kubernetesHistoryQuery.getBeginTime());
+                    timeList.add(kubernetesHistoryQuery.getEndTime());
                     kubernetesHistory.setData(dataList);
-                    kubernetesHistory.setDataTimes(xTime);
+                    kubernetesHistory.setDataTimes(timeList);
                 }
                 if (StringUtils.isNotBlank(kubernetesHistory.getName())) {
                     list.add(kubernetesHistory);
@@ -302,6 +313,6 @@ public class KubernetesHistoryServiceImpl implements KubernetesHistoryService {
             map.put("report_data", history.getReportData());
             map.put("gather_time", history.getGatherTime());
             return map;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 }

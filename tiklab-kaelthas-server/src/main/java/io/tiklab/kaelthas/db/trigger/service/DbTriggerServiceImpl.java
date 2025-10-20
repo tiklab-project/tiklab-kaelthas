@@ -10,6 +10,7 @@ import io.tiklab.dal.jpa.criterial.conditionbuilder.QueryBuilders;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.service.DbHistoryService;
+import io.tiklab.kaelthas.db.trigger.model.DbTriggerQuery;
 import io.tiklab.kaelthas.util.StringUtil;
 import io.tiklab.kaelthas.db.dbDynamic.model.DbDynamic;
 import io.tiklab.kaelthas.db.dbDynamic.service.DbDynamicService;
@@ -24,6 +25,7 @@ import io.tiklab.kaelthas.alarm.service.AlarmService;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
@@ -135,11 +137,9 @@ public class DbTriggerServiceImpl implements DbTriggerService {
      */
     //@Scheduled(cron = "0 0/5 * * * ? ")
     public void timerTrigger() {
-        //获取所有数据库下的触发器
-        QueryCondition queryCondition = QueryBuilders.createQuery(DbTriggerEntity.class)
-                .eq("state", 1)
-                .get();
-        List<DbTriggerEntity> triggerList = dbTriggerDao.findAllTrigger(queryCondition);
+
+        //查询数据库中启用的触发器
+        List<DbTriggerEntity> triggerList = dbTriggerDao.findTriggerList(new DbTriggerQuery().setState(1));
 
         for (DbTriggerEntity dbTriggerEntity : triggerList) {
             //三种触发方式
@@ -148,10 +148,10 @@ public class DbTriggerServiceImpl implements DbTriggerService {
                     getLastValueTrigger(dbTriggerEntity);
                     break;
                 case 2:
-                    getAvgValueTrigger(dbTriggerEntity);
+                    getPercentValueTrigger(dbTriggerEntity);
                     break;
                 case 3:
-                    getPercentValueTrigger(dbTriggerEntity);
+                    getAvgValueTrigger(dbTriggerEntity);
                     break;
             }
         }
@@ -173,11 +173,10 @@ public class DbTriggerServiceImpl implements DbTriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
-            //将当前的触发器的表达式进行切割,获取表达式,将时间段内的表达式获取出来,然后进行计算
-            //Set<String> functionList = conversionScriptsUtils.getFunctionList(dbTriggerEntity.getExpression());
-
+            //通过数据库ID、时间、表达式查询监控历史数据
+            String triggerExData = conversionScriptsUtils.getTriggerExData(dbTriggerEntity.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, dbTriggerEntity.getRangeTime(), null);
-            List<DbHistory> dbHistoryList = dbHistoryService.findHistoryByGatherTime(dbTriggerEntity.getDbId(), beforeTime);
+            List<DbHistory> dbHistoryList = dbHistoryService.findInHistoryByGatherTime(dbTriggerEntity.getDbId(), beforeTime,triggerExData);
 
             if (dbHistoryList.isEmpty()) {
                 return;
@@ -235,9 +234,10 @@ public class DbTriggerServiceImpl implements DbTriggerService {
 
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
+            //通过数据库ID、时间、表达式查询监控历史数据
+            String triggerExData = conversionScriptsUtils.getTriggerExData(dbTriggerEntity.getExpression());
             String beforeTime = ConversionDateUtil.findLocalDateTime(2, dbTriggerEntity.getRangeTime(), null);
-
-            List<DbHistory> dbHistoryList = dbHistoryService.findInformationToGatherTime(dbTriggerEntity.getDbId(), beforeTime);
+            List<DbHistory> dbHistoryList = dbHistoryService.findInHistoryByGatherTime(dbTriggerEntity.getDbId(), beforeTime,triggerExData);
 
             Collection<List<DbHistory>> values = dbHistoryList.stream().collect(Collectors.groupingBy(DbHistory::getGatherTime)).values();
 
@@ -299,22 +299,17 @@ public class DbTriggerServiceImpl implements DbTriggerService {
         }
 
         String beforeTime = ConversionDateUtil.findLocalDateTime(2, 20, null);
+        String triggerExData = conversionScriptsUtils.getTriggerExData(dbTriggerEntity.getExpression());
 
         //根据触发器所在的数据库,将监控项指标全部查询出来,依次进行比对(查询20分钟内的数据)
-        List<DbHistory> historyList = dbHistoryService.findDbHistoryByDbId(dbTriggerEntity.getDbId(), beforeTime);
+        List<DbHistory> historyList = dbHistoryService.findInHistoryByGatherTime(dbTriggerEntity.getDbId(), beforeTime,triggerExData);
 
         if (historyList.isEmpty()) {
             return;
         }
 
-        //将数据进行处理,取最后一个值
-        List<DbHistory> list = historyList.stream()
-                .collect(Collectors.toMap(
-                        DbHistory::getDbMonitorId, // 根据 id 去重
-                        dbHistory -> dbHistory, // 保留对象
-                        (existing, replacement) -> replacement // 如果 id 相同，保留后者
-                ))
-                .values().stream().toList();
+        //排序
+        List<DbHistory> list = historyList.stream().sorted(Comparator.comparing(DbHistory::getGatherTime).reversed()).toList();
 
         //将触发器的表达式和数值进行替换,看是否能够进行触发
         try {
@@ -322,7 +317,7 @@ public class DbTriggerServiceImpl implements DbTriggerService {
             ScriptEngine engine = conversionScriptsUtils.getScriptEngine();
 
             //将数据换成JSON的字符串
-            String json = StringUtil.getString(list);
+            String json = StringUtil.getDbString(list.get(0));
 
             //将字符串转换成JSON
             JSONObject jsonObject = JSONObject.parseObject(json);

@@ -5,7 +5,7 @@ import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
-import io.tiklab.toolkit.join.annotation.JoinQuery;
+import io.tiklab.toolkit.join.annotation.JoinField;
 import io.tiklab.kaelthas.db.item.model.DbItem;
 
 /**
@@ -54,7 +54,7 @@ public class DbMonitor {
     @Mappings({
             @Mapping(source = "dbItem.id", target = "dbItemId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private DbItem dbItem;
 
     /**

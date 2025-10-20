@@ -1,41 +1,27 @@
 app:
   name: kaelthas-ce
-  version: ce
+
+server:
+  port: 8020
 
 APP_HOME: ${APP_HOME}
 
-application: kaelthas
-
-setting:
-  address: tiklab-kaelthas-starter/src/main/resources/settings.xml
-
-server:
-  port: 8010
+DATA_HOME: ${user.home}/tiklab/${app.name}
 
 jdbc:
   driverClassName: org.postgresql.Driver
 #  url: jdbc:postgresql://172.13.1.27:5432/xmonitor_ee?stringtype=unspecified
   #  url: jdbc:postgresql://172.10.1.10:5432/throughtware_xmonitor_ce?stringtype=unspecified
-  url: jdbc:postgresql://172.10.1.10:5432/tiklab_kaelthas?stringtype=unspecified
+  url: jdbc:postgresql://172.10.1.10:5432/tiklab-kaelthas?stringtype=unspecified
+  #url: jdbc:postgresql://172.10.1.10:5432/tiklab-kaelthas-test?stringtype=unspecified
   username: postgres
   password: darth2020
 
-#plugin config
-DATA_HOME: ${user.home}/tiklab/${app.name}
-
-plugin:
-  path: ${DATA_HOME}/plugin
-
-#dfs config
-dfs:
-  server:
-    enabled: false
-    mode: server
-    port: 4000
-    datapath: ${DATA_HOME}/files
-  client:
-    url: 127.0.0.1:4000
-    bucket: ${app.name}
+postgresql:
+  embbed:
+    enable: false
+  database: tiklab_xmonitor
+  type: local
 
 #dcs config
 dcs:
@@ -48,61 +34,18 @@ dcs:
     group: g1
     database: dcs1
     expire: 7200
-#dcs config
-dss:
-  server:
-    enabled: false
-    mode: server
-    port: 6000
-    datapath: ${DATA_HOME}/index
-  client:
-    url: 127.0.0.1:6000
-    bucket: ${app.name}
-
-datapath: ${DATA_HOME}/caches
 
 
-postgresql:
-  embbed:
-    enable: false
-  database: tiklab_xmonitor
+
+# (local:本地登录  soular:统一登录)
+auth:
   type: local
+  soular:
+    address: "http://192.168.10.15:8080"
+  expire: 86400 # 过期时间，单位秒，默认1天
 
-#message:
-#  sms:
-#    enabled: true
 
-soular:
-  embbed:
-    enable: true
-  address: e.tiklab.net
-  web:
-    address: e.tiklab.net
-
-base:
+external:
   url: http://192.168.10.24:8080
-
-#homes
-homes:
-  address: http://192.168.10.7:8080
-
-#license
-licences:
-  path: ${APP_HOME}/licences
-
-#file
-file:
-  path: http://file.dev.tiklab.net
-
-
-
-
-
-
-
-
-
-
-
 
 

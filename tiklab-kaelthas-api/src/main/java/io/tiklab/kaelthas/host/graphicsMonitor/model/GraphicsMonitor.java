@@ -37,6 +37,8 @@ public class GraphicsMonitor {
      */
     private String graphicsName;
 
+
+
     public String getId() {
         return id;
     }

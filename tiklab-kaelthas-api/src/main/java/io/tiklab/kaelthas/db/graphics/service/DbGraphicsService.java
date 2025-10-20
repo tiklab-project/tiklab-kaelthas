@@ -27,7 +27,7 @@ public interface DbGraphicsService {
     List<String> findMonitorIds(String graphicsId);
 
     //根据dbId查询出图形列表
-    List<DbGraphics> findDbGraphicsList(String hostId);
+    List<DbGraphics> findDbGraphicsList(String dbId);
 
     void deleteByDbId(String dbId);
 }

@@ -7,6 +7,7 @@ import io.tiklab.kaelthas.host.history.service.HostHistoryService;
 import io.tiklab.rpc.common.context.RpcTenantHolder;
 import io.tiklab.kaelthas.host.host.service.HostService;
 import io.tiklab.kaelthas.host.trigger.service.TriggerService;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.SocketAddress;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 /**
  * 主机agent上报数据的接收
@@ -52,6 +52,7 @@ public class ServerSocketConnect {
 
     public final ExecutorService service = Executors.newCachedThreadPool();
 
+    public final Boolean execState = false;
 
     //创建一个线程,持续接收数据
     @Bean
@@ -60,7 +61,6 @@ public class ServerSocketConnect {
             ServerSocket serverSocket = new ServerSocket(9999);
             timeMap.put("time",System.currentTimeMillis());
             executorService.submit(() -> {
-
                 while (true) {
                     logger.info("开始执行agent监听，端口：9999");
                     Socket clientConnectSocket = serverSocket.accept();
@@ -69,16 +69,15 @@ public class ServerSocketConnect {
                             InputStream inputStream = clientConnectSocket.getInputStream();
                             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                             logger.info("客户端已连接，socket："+clientConnectSocket);
-
                             //不断读取客户端数据
                             String read;
                             while ((read = bufferedReader.readLine()) != null) {
-
                                 List<HostHistory> entityList = JSONArray.parseArray(read, HostHistory.class);
 
                                 if (entityList == null || entityList.isEmpty()) {
                                     return;
                                 }
+
 
                                 historyList.addAll(entityList);
 
@@ -88,7 +87,16 @@ public class ServerSocketConnect {
                                 long time = endTime-timeMap.get("time")  ;
 
                                 //当采集的数量大于1000条或者时间3分 添加数据库一次
-                                if (historyList.size() > BATCH_SIZE||time>=60000) {
+                                if ((historyList.size() > BATCH_SIZE||time>=60000)&& CollectionUtils.isNotEmpty(historyList)) {
+                                /*    // 根据 GatherTime 去重
+                                    List<HostHistory> hostHistories = historyList.stream()
+                                            .collect(Collectors.toMap(
+                                                    HostHistory::getGatherTime,  // 使用 GatherTime 作为键
+                                                    HostHistory -> HostHistory,  // 使用整个 Person 对象作为值
+                                                    (existing, replacement) -> existing  // 保留第一个出现的对象
+                                            ))
+                                            .values()
+                                            .stream().collect(Collectors.toList());*/
 
                                     List<HostHistory> histories = new ArrayList<>(historyList);
                                     historyList.clear();
@@ -102,6 +110,7 @@ public class ServerSocketConnect {
                             throw new SystemException(e);
                         }
                     });
+                    service.shutdown();
                 }
             });
         } catch (Exception e) {

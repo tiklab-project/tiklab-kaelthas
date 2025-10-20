@@ -6,6 +6,7 @@ import io.tiklab.kaelthas.db.agent.model.DbMonitorVo;
 import io.tiklab.kaelthas.db.agent.utils.AgentSqlUtil;
 import io.tiklab.kaelthas.db.history.model.DbHistory;
 import io.tiklab.kaelthas.db.history.service.DbHistoryService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +80,7 @@ public class PgsqlService {
         Long aLong = pgSqlStoreTime.get("time");
         long time = System.currentTimeMillis() - aLong;
         //定时上报数据 存储时间大于30条或者时间超过1分钟
-        if (histories.size() > 30||time>=60000) {
+        if ((histories.size() > 30||time>=50000)&& CollectionUtils.isNotEmpty(histories)) {
             List<DbHistory> DbHistoryVoList = new LinkedList<>(histories);
             dbHistoryService.insertForList(DbHistoryVoList);
             histories.clear();

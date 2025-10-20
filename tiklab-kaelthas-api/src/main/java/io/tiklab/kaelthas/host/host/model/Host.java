@@ -5,7 +5,7 @@ import io.tiklab.toolkit.beans.annotation.Mapper;
 import io.tiklab.toolkit.beans.annotation.Mapping;
 import io.tiklab.toolkit.beans.annotation.Mappings;
 import io.tiklab.toolkit.join.annotation.Join;
-import io.tiklab.toolkit.join.annotation.JoinQuery;
+import io.tiklab.toolkit.join.annotation.JoinField;
 import io.tiklab.kaelthas.host.graphics.model.Graphics;
 import io.tiklab.kaelthas.host.hostGroup.model.HostGroup;
 import io.tiklab.kaelthas.host.template.model.Template;
@@ -34,7 +34,7 @@ public class Host {
     @Mappings({
             @Mapping(source = "hostGroup.id", target = "hostGroupId")
     })
-    @JoinQuery(key = "id")
+    @JoinField(key = "id")
     private HostGroup hostGroup;
 
     //模板信息
@@ -52,6 +52,9 @@ public class Host {
 
     //告警数量
     private Integer alarmNum;
+
+    //图形数量
+    private Integer graphicsNum;
 
     //主机状态 1.已启用 2.未启用
     private Integer state;
@@ -88,6 +91,9 @@ public class Host {
 
     //分页参数
     private Page pageParam = new Page();
+
+
+    private String groupId;
 
     public String getMessage() {
         return message;
@@ -268,5 +274,21 @@ public class Host {
 
     public void setSeverityLevel(Integer severityLevel) {
         this.severityLevel = severityLevel;
+    }
+
+    public Integer getGraphicsNum() {
+        return graphicsNum;
+    }
+
+    public void setGraphicsNum(Integer graphicsNum) {
+        this.graphicsNum = graphicsNum;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 }

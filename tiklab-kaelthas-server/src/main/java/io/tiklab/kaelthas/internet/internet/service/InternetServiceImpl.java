@@ -1,6 +1,14 @@
 package io.tiklab.kaelthas.internet.internet.service;
 
 import io.tiklab.core.page.Pagination;
+import io.tiklab.kaelthas.alarm.model.Alarm;
+import io.tiklab.kaelthas.alarm.model.AlarmQuery;
+import io.tiklab.kaelthas.alarm.service.AlarmService;
+import io.tiklab.kaelthas.internet.internet.model.InternetOverviewQuery;
+import io.tiklab.kaelthas.internet.monitor.model.InternetMonitor;
+import io.tiklab.kaelthas.internet.monitor.model.InternetMonitorQuery;
+import io.tiklab.kaelthas.internet.trigger.model.InTrigger;
+import io.tiklab.kaelthas.internet.trigger.model.InTriggerQuery;
 import io.tiklab.kaelthas.util.ConversionDateUtil;
 import io.tiklab.kaelthas.internet.internet.dao.InternetDao;
 import io.tiklab.kaelthas.internet.internet.entity.InternetEntity;
@@ -16,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 网络监控信息存储表
@@ -41,6 +50,9 @@ public class InternetServiceImpl implements InternetService{
     @Autowired
     private InTriggerMediumService inTriggerMediumService;
 
+    @Autowired
+    private AlarmService alarmService;
+
     //网络监控的分页查询
     @Override
     public Pagination<Internet> findInternetPage(Internet internet) {
@@ -65,7 +77,7 @@ public class InternetServiceImpl implements InternetService{
         //查询出图形的ids
         try {
             List<InternetGraphics> graphicsList = internetGraphicsService.findGraphicsList(id);
-            List<String> stringList = graphicsList.stream().map(InternetGraphics::getId).toList();
+            List<String> stringList = graphicsList.stream().map(InternetGraphics::getId).collect(Collectors.toList());
 
             //根据图形的ids删除关联表中的信息
             inGraphicsMonitorService.deleteByGraphicsIds(stringList);
@@ -112,5 +124,28 @@ public class InternetServiceImpl implements InternetService{
     public List<Internet> findAll() {
         List<InternetEntity> entityList = internetDao.findAll();
         return BeanMapper.mapList(entityList,Internet.class);
+    }
+
+    @Override
+    public Internet findInternetGeneralize(String id) {
+        Internet internet = findInternetById(id);
+
+        //告警
+        List<Alarm> alarmList = alarmService.findAlarmList(new AlarmQuery().setHostId(id));
+        internet.setAlarmNum(alarmList.size());
+
+        //监控项
+        List<InternetMonitor> monitorList = internetMonitorService.findMonitorList(new InternetMonitorQuery().setInternetId(id));
+        internet.setMonitorNum(monitorList.size());
+
+        //触发器
+        List<InTrigger> triggerList = inTriggerService.findTriggerList(new InTriggerQuery().setInternetId(id));
+        internet.setTriggerNum(triggerList.size());
+
+        //图形
+        List<InternetGraphics> graphicsList = internetGraphicsService.findGraphicsList(id);
+        internet.setGraphicsNum(graphicsList.size());
+
+        return internet;
     }
 }
