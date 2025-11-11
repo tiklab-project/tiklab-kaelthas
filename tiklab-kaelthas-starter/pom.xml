@@ -12,127 +12,99 @@
     <name>${project.artifactId}</name>
 
     <dependencies>
-
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-core</artifactId>
-            <version>1.0.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-kaelthas-server</artifactId>
-            <version>1.0.2</version>
-        </dependency>
         <dependency>
             <groupId>io.tiklab</groupId>
             <artifactId>tiklab-toolkit-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-rpc-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-gateway-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-openapi-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-dcs-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-security-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
+            <version>${tiklab-toolkit.version}</version>
         </dependency>
         <dependency>
             <groupId>io.tiklab</groupId>
             <artifactId>tiklab-eam-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
+            <version>${tiklab-eam.version}</version>
         </dependency>
         <dependency>
             <groupId>io.tiklab</groupId>
             <artifactId>tiklab-user-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
+            <version>${tiklab-user.version}</version>
         </dependency>
         <dependency>
             <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-dsm-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
+            <artifactId>tiklab-message-spring-boot-starter</artifactId>
+            <version>${tiklab-message.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-privilege-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
+            <artifactId>tiklab-kaelthas-server</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
+
         <dependency>
             <groupId>io.tiklab</groupId>
             <artifactId>tiklab-licence-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
+            <version>${tiklab-licence.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-gateway-spring-boot-starter</artifactId>
+            <version>${tiklab-gateway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-rpc-spring-boot-starter</artifactId>
+            <version>${tiklab-rpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-dss-spring-boot-starter</artifactId>
+            <version>${tiklab-dss.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-dfs-spring-boot-starter</artifactId>
+            <version>${tiklab-dfs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-dcs-spring-boot-starter</artifactId>
+            <version>${tiklab-dcs.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-security-spring-boot-starter</artifactId>
+            <version>${tiklab-security.version}</version>
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <!--		<dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                    <version>2.0.5</version>
+                </dependency>-->
 
         <dependency>
             <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-product-api</artifactId>
-            <version>1.0.2</version>
+            <artifactId>tiklab-dsm-spring-boot-starter</artifactId>
+            <version>${tiklab-dsm.version}</version>
         </dependency>
         <dependency>
             <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-licence-cloud-api</artifactId>
-            <version>1.0.2</version>
+            <artifactId>tiklab-openapi-spring-boot-starter</artifactId>
+            <version>${tiklab-openapi.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-install-client</artifactId>
-            <version>1.0.2</version>
+            <artifactId>tiklab-postin-doclet</artifactId>
+            <version>${tiklab-postin-doclet-version}</version>
         </dependency>
 
         <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-user-dingding</artifactId>
-            <version>${tiklab-user-extension.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-user-ldap</artifactId>
-            <version>${tiklab-user-extension.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-user-wechat</artifactId>
-            <version>${tiklab-user-extension.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.tiklab</groupId>
-            <artifactId>tiklab-postin-client</artifactId>
-            <version>1.0.2</version>
-            <scope>compile</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
 
         <dependency>
@@ -145,6 +117,11 @@
             <groupId>io.tiklab</groupId>
             <artifactId>tiklab-postgresql-spring-boot-starter</artifactId>
             <version>${tiklab-postgresql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tiklab</groupId>
+            <artifactId>tiklab-install-client</artifactId>
+            <version>1.0.2</version>
         </dependency>
     </dependencies>
 

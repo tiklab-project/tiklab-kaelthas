@@ -35,6 +35,9 @@
         <tiklab-codegen.version>1.0.2</tiklab-codegen.version>
         <tiklab-gateway.version>1.0.2</tiklab-gateway.version>
         <tiklab-openapi.version>1.0.2</tiklab-openapi.version>
+        <tiklab-postin-doclet-version>1.0.2</tiklab-postin-doclet-version>
+        <tiklab-postin.version>1.0.2</tiklab-postin.version>
+
 
         <tiklab-user.version>1.0.2</tiklab-user.version>
         <tiklab-message.version>1.0.2</tiklab-message.version>

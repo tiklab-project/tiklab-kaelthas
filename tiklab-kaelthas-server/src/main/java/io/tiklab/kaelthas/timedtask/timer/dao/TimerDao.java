@@ -2,8 +2,6 @@ package io.tiklab.kaelthas.timedtask.timer.dao;
 
 import io.tiklab.dal.jdbc.JdbcTemplate;
 import io.tiklab.dal.jpa.JpaTemplate;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.lucene.util.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
